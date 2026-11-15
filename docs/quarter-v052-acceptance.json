@@ -1,0 +1,1835 @@
+{
+  "format": "metarescue.acceptance.v1",
+  "approved_date": "2026-11-11",
+  "execution_log": "quarter-v052-execution.md",
+  "requirements": [
+    {
+      "id": "B01",
+      "requirement": "Исходные хэши и dirty-состояние сохранены",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/baselines/20261110T224530481941Z/manifest.json"
+      ]
+    },
+    {
+      "id": "B02",
+      "requirement": "Оригиналы/v2/бенчмарки сохранены",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/baselines/20261110T224530481941Z/preservation-check-01.json"
+      ]
+    },
+    {
+      "id": "B03",
+      "requirement": "Рабочий журнал и handoff актуальны",
+      "status": "partial",
+      "evidence": [
+        "docs/quarter-v052-execution.md",
+        "docs/quarter-v052-handoff.md"
+      ]
+    },
+    {
+      "id": "W01",
+      "requirement": "Плотная связная композиция города",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v11-default-02/Screenshots/physics-smoke.png",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v20-irregular-first-01/city-verification.json",
+        "docs/city-v2-design.md"
+      ]
+    },
+    {
+      "id": "W02",
+      "requirement": "Четыре границы и логичные улицы",
+      "status": "partial",
+      "evidence": [
+        "environment/layout.py",
+        "unreal/MetaRescue/Source/MetaRescue/MRCity.cpp",
+        "D:/MetaRescue-output/checks/visual-grids/city-v22-350-variants-and-boundaries-03.png",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/outskirts-design-02-canonical-preflight.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/overhead-250m-r2/verification.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/overhead-350m-r2/verification.json"
+      ],
+      "scope_note": "На build73 два верхних ракурса показывают непрерывные выезды и разреженный внешний пояс без коллайдеров. Четыре наземные границы сняты на предыдущей ревизии. Повторный обзор максимума требуется."
+    },
+    {
+      "id": "W03",
+      "requirement": "Шесть конструктивных повреждений",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/visual-grids/city-v22-350-variants-and-boundaries-03.png"
+      ],
+      "scope_note": "Шесть вариантов построены, пять видны в обзорных кадрах. Кадр варианта 5 перекрыт соседней стеной."
+    },
+    {
+      "id": "W04",
+      "requirement": "Опора и устойчивость обломков",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/fault-support-readback-02/readback.json"
+      ],
+      "scope_note": "Сохранённая карта содержит 39 заземлённых обломков и пять поддерживаемых частей. Измерены точки опор и зазоры. Динамическая проверка устойчивости остаётся открыта."
+    },
+    {
+      "id": "W05",
+      "requirement": "Провал без скрытой коллизии",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/fault-support-readback-01/readback.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/fault-support-readback-02/readback.json"
+      ],
+      "scope_note": "После явного разделения визуальной поверхности и опоры 20 лучей и 10 сферических трасс внутри провала попадают ниже дороги, 8 контрольных лучей в дорогу на высоте 4 см. Нативный проезд и экспорт blocked-grid сверяются отдельно."
+    },
+    {
+      "id": "W06",
+      "requirement": "Пять состояний окон",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/visual-grids/windows-v22-df-06.png",
+        "D:/MetaRescue-output/checks/visual-grids/reflection-ab-07.png",
+        "D:/MetaRescue-output/checks/20261112T003525065868Z-window-sections.json",
+        "D:/MetaRescue-output/checks/city-sections-repair-01/verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-glazing-r4-11/city-verification.json"
+      ],
+      "scope_note": "Исправлена привязка material slot по source/render SectionInfoMap; все403 производных проверены,68 стекольных пересозданы новой редакцией.15 новых ракурсов пяти состояний без atlas на стекле. Дополнительная визуальная приёмка остальных вариантов интерьеров относится к W07."
+    },
+    {
+      "id": "W07",
+      "requirement": "Читаемые интерьеры и Lumen",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/readbacks/20261110T230633253116Z-quarter-v3.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-lumen-diagnostics-04/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-lumen-df-05/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-tunnel-components-14/city-verification.json"
+      ],
+      "scope_note": "Открытие SDF-проёмов и исправление материала стекла подтверждены сравнительными кадрами. В сборке52 функциональные PointLight сохраняются при инстансинге, тоннель освещён на реальном кадре14. Полный обзор остальных интерьеров остаётся."
+    },
+    {
+      "id": "W08",
+      "requirement": "Районы 25..150 по 10 м",
+      "status": "partial",
+      "evidence": [
+        "tests/test_city_layout.py",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v11-default-02/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v11-bulk-maximum-02/city-verification.json"
+      ]
+    },
+    {
+      "id": "W09",
+      "requirement": "База/доки/площадки под парк",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v11-default-02/city-verification.json"
+      ]
+    },
+    {
+      "id": "P01",
+      "requirement": "Внешний полный цикл спасения",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json"
+      ],
+      "scope": "Static laboratory mission: 1 aerial, 1 ground, 3 delivered through public HTTP; not the 450-run experiment."
+    },
+    {
+      "id": "P02",
+      "requirement": "Позы/груз при hold/замене/отказе",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-resources-02-power-loss/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-contest-01-events/verification.json",
+        "D:/MetaRescue-output/checks/standalone-17-handover-reserve-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-loaded-parked-bypass-after-03/verification.json",
+        "D:/MetaRescue-output/checks/standalone-22-precise-recovery-verification.json"
+      ],
+      "scope_note": "Hold проверен в core-native-04. В after-03 проезд с грузом завершился передачей при 0 контактов. В standalone-22 после отказа в 45 с второй носитель подтвердил, погрузил и доставил цель при 0 контактов."
+    },
+    {
+      "id": "P03",
+      "requirement": "Физический подход/рампа/масса/передача",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-03-nsga2/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-loaded-parked-bypass-after-03/verification.json",
+        "D:/MetaRescue-output/missions/standalone-18-static-r3-city22/manifest.json"
+      ],
+      "scope_note": "Подъём рампы и 320 кг в core-rescue-03, гружёный проезд и подтверждение базы в after-03, 3/3 на базе rev3 в standalone-18."
+    },
+    {
+      "id": "P04",
+      "requirement": "Торможение/встреча/перекрёсток/задний ход",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-city-07-dock-parking/verification.json",
+        "D:/MetaRescue-output/checks/standalone-17-handover-reserve-verification.json",
+        "D:/MetaRescue-output/checks/controller-motion-final/final-apron.json",
+        "D:/MetaRescue-output/checks/add09-native-20261113-04/verification.json",
+        "tests/test_traffic_recovery.py"
+      ],
+      "scope_note": "На build71 все четыре машины выехали, парковка возобновилась после уступания, оба ранее застрявших груза переданы. 0 контактов, итог time_limit 5/10. Полный повтор семи traffic-fixture остаётся P2. На новом двухмашинном fixture исправлены таймер новой команды и взаимный прогноз: hold155/release161,оба режима3/3,0contacts. Все семь traffic-fixture остаются в расширенной приёмке P1."
+    },
+    {
+      "id": "P05",
+      "requirement": "Взлёт/полёт/препятствие/hold/посадка",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-city-03-air-clearance/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-04/verification.json"
+      ],
+      "scope": "Physical takeoff/climb/hold verified, full obstacle and landing suite remains.",
+      "scope_note": "Высотное разъезжание подтверждено отдельным fixture. В UI04 двигались все три разведчика."
+    },
+    {
+      "id": "P06",
+      "requirement": "Парковка фургона",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v21-foliage-r3-05/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-max-render-08/city-verification.json"
+      ],
+      "scope_note": "Измерен проезд 6,50 м и ошибка конечной позиции 0 м в кинематическом режиме городского фургона."
+    },
+    {
+      "id": "P07",
+      "requirement": "Физические грязь/дорога/мелкая/глубокая вода",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-events-announced-zones-final01/verification.json"
+      ],
+      "scope_note": "Сравнительная физическая телеметрия покрытий. Остановка перед глубокой водой подтверждена в двух эпизодах."
+    },
+    {
+      "id": "P08",
+      "requirement": "Фактический расход и зарядка",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-resources-01-charging/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-resources-02-power-loss/verification.json",
+        "docs/core-resources.md"
+      ],
+      "scope_note": "Фактический расход и зарядка с балансом Wh, очередь и конечный запас проверены на нативных агентах."
+    },
+    {
+      "id": "E01",
+      "requirement": "Восемь отдельных событий v3",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "docs/core-events.md"
+      ],
+      "scope_note": "Восемь видов v3 применены в Unreal по отдельным записям. Фиксированный сценарий физической приёмки."
+    },
+    {
+      "id": "E02",
+      "requirement": "Профиль событий v0.5.2 / 80 с",
+      "status": "partial",
+      "evidence": [
+        "tests/test_event_tape.py",
+        "docs/core-events.md"
+      ],
+      "scope_note": "Профиль и 80 с реализованы в генераторе. Нативная приёмка случайных лент впереди."
+    },
+    {
+      "id": "E03",
+      "requirement": "Вероятности 0/100 и защита базы",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-baseline-01-fixed30-zero/verification.json",
+        "tests/test_event_tape.py",
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json"
+      ],
+      "scope_note": "Python проверил крайние вероятности и защиту базы. Нативная сравнительная серия впереди."
+    },
+    {
+      "id": "E04",
+      "requirement": "Spread/expiry/overlap",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-events-announced-zones-final01/verification.json"
+      ],
+      "scope_note": "Два повторения фиксированной ленты на build71 подтвердили распространение, минимум видимости 0,3224 при наложении и снятие пяти временных эффектов. В начальном наблюдении 220 объявленных зон и 0 измеренных поверхностей. Рендер проверяется отдельно."
+    },
+    {
+      "id": "E05",
+      "requirement": "Seed независимо от политики/рендера",
+      "status": "partial",
+      "evidence": [
+        "tests/test_event_tape.py",
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json"
+      ],
+      "scope_note": "Повтор ленты и допуски физических стартов проверены. Сопоставление политик и рендера впереди."
+    },
+    {
+      "id": "E06",
+      "requirement": "Поздняя цель без утечки",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-events-announced-zones-final01/verification.json"
+      ],
+      "scope_note": "Поздний человек появился в 12,375 с, обнаружен в 12,5 с и доставлен в знание в 12,7 с. Приватные записи отсутствовали в публичном журнале."
+    },
+    {
+      "id": "E07",
+      "requirement": "Все 14 нормативных типов возмущений",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-resources-02-power-loss/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-02-relay/verification.json",
+        "docs/core-radio.md",
+        "D:/MetaRescue-output/core-acceptance/core-contest-01-events/verification.json",
+        "docs/core-disturbances.md"
+      ],
+      "scope_note": "Нативный сценарий выдал все 14 типов с физическими эффектами и доставкой. Все девять времён начала и пять окончаний сверены."
+    },
+    {
+      "id": "H01",
+      "requirement": "Все endpoints Core 1.0",
+      "status": "verified",
+      "evidence": [
+        "unreal/MetaRescue/Source/MetaRescue/MRCoreRuntime.cpp",
+        "tests/test_controller_health.py",
+        "tests/test_core_interop.py",
+        "D:/MetaRescue-output/core-acceptance/core-public-interop-03/verification.json"
+      ],
+      "scope_note": "Семь маршрутов среды пройдены независимым клиентом. Health отдельного контроллера подтверждён в протокольном тесте."
+    },
+    {
+      "id": "H02",
+      "requirement": "Полные Observation/Decision/Response/capabilities",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/http.jsonl",
+        "D:/MetaRescue-output/checks/core-schema-journal-audit-01.json"
+      ],
+      "scope_note": "В архиве распакованной сборки сверены capabilities, Observation, 339 Decision, 339 StepResponse и close. Схемы объявленных параметров проверены как Draft 2020-12."
+    },
+    {
+      "id": "H03",
+      "requirement": "Строгий JSON и схемы",
+      "status": "verified",
+      "evidence": [
+        "contracts/protocol.py",
+        "tests/test_runtime_protocol.py",
+        "tests/test_environment_client.py",
+        "D:/MetaRescue-output/core-acceptance/defense-hold-build69/verification.json",
+        "D:/MetaRescue-output/checks/core-schema-journal-audit-01.json"
+      ],
+      "scope_note": "Нативная проверка отклонила повторяющийся ключ, boolean вместо координаты, устаревшее время и несовместимый повтор. Схемы и структура фактических записей сверены."
+    },
+    {
+      "id": "H04",
+      "requirement": "Idempotency/reset/close/terminal",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-public-interop-03/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-interop-build69/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-interop-persistent-final01/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-interop-20261113-01/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-interop-build76-20261113-02/verification.json"
+      ],
+      "scope_note": "На build71 независимый клиент подтвердил терминальный GET после close, смену seed, конкурентный повтор и восстановление исходной карты. Четыре архива прошли CRC/SHA до сигнала владельца, сервер завершился с exit 0."
+    },
+    {
+      "id": "H05",
+      "requirement": "Accepted/confirmed/cancel/late results",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/http.jsonl",
+        "D:/MetaRescue-output/core-acceptance/defense-scenarios-build69/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-03-lost-ack/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-scenarios-20261113-01/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-interop-build76-20261113-02/verification.json"
+      ],
+      "scope_note": "Различены принятие и доставленная роль, проверены отсроченное освобождение роли, отмена маршрута прошлой ревизии и unknown при потере последнего ACK."
+    },
+    {
+      "id": "H06",
+      "requirement": "Атомарные/независимые группы",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-hold-build69/verification.json"
+      ],
+      "scope_note": "Нативный mixed batch подтвердил атомарный отказ зависимых команд и частичный приём независимых."
+    },
+    {
+      "id": "H07",
+      "requirement": "Непрозрачные ID/нет обязательных частных расширений",
+      "status": "verified",
+      "evidence": [
+        "tests/test_core_interop.py",
+        "D:/MetaRescue-output/core-acceptance/core-public-interop-03/verification.json",
+        "D:/MetaRescue-output/checks/p0-root-after-custody-20261113-01.log",
+        "tests/test_portable_operations.py",
+        "docs/core-portable.md",
+        "D:/MetaRescue-output/checks/p0-public-operations-20261113-03/verification.json",
+        "D:/MetaRescue-output/checks/p0-public-native-20261113-03/verification.json",
+        "D:/MetaRescue-output/checks/p0-public-operations-root-20261113-04.log"
+      ],
+      "scope_note": "263/263; 11 регрессий переносимого профиля. Два эпизода штатного CLI на независимом публичном HTTP peer исполнили все 7 операций без авторских полей. Unreal77r4: отдельная публичная задача помощи по доставленной цели, inspect→move→deliver, один набор на 37,5с, ACK41с, stop45,5с с последующими keep, 0 контактов, exit0, CRC/SHA/freeze. Приёмочный адаптер и пределы отдельно описаны в docs/core-portable.md. Не заявляется выполнение произвольного неизвестного словаря миссии."
+    },
+    {
+      "id": "H08",
+      "requirement": "Часы 1 с/1-60/1-120",
+      "status": "partial",
+      "evidence": [
+        "unreal/MetaRescue/Source/MetaRescue/MRCoreRuntime.cpp",
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-clock-03-realtime/verification.json",
+        "docs/core-clock.md"
+      ],
+      "scope_note": "Часы, realtime, дробные ACK и terminal приняты. Диагностика физических подшагов требуется отдельно."
+    },
+    {
+      "id": "H09",
+      "requirement": "GET не меняет состояние/RNG/сеть",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-native-04-hold/verification.json",
+        "D:/MetaRescue-output/checks/p0-event-reads-20261113-01.json",
+        "D:/MetaRescue-output/core-acceptance/p0-event-reads-20261113-01/read-probes.json"
+      ],
+      "scope": "Ten GETs leave snapshot unchanged; concurrent/dynamic-event metamorphic checks remain.",
+      "scope_note": "Второй из двух одинаковых 53-шаговых нативных эпизодов получил 477 дополнительных GET. 159 чтений наблюдения оставили снимок неизменным. Последовательности обязательных Core-полей, событий, результатов и показателей совпали при согласованной замене генерируемых ID и epsilon 1e-6."
+    },
+    {
+      "id": "A01",
+      "requirement": "Чистое ядро NSGA-II с provenance",
+      "status": "verified",
+      "evidence": [
+        "controller/vendor/nsga2-origin.json",
+        "tests/test_nsga_origin.py",
+        "D:/MetaRescue-output/checks/optimization-parity-01.log"
+      ],
+      "scope": "Vendored bytes preserved; public problem evaluation and 3-seed optimizer parity checked."
+    },
+    {
+      "id": "A02",
+      "requirement": "Наземный A* по известной геометрии",
+      "status": "partial",
+      "evidence": [
+        "tests/test_navigation.py",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json",
+        "tests/test_observed_surfaces.py",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json",
+        "D:/MetaRescue-output/missions/standalone-06-irregular/irregular-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-city-01-tree-detour/verification.json"
+      ],
+      "scope_note": "Доставленные клетки вызвали реальный наземный объезд. Общие слои/уклоны и детальный квартал впереди."
+    },
+    {
+      "id": "A03",
+      "requirement": "Воздушные 3D-маршруты",
+      "status": "partial",
+      "evidence": [
+        "tests/test_navigation.py",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json"
+      ],
+      "scope": "3D routes used by native scout; extended obstacle/altitude traffic suite remains."
+    },
+    {
+      "id": "A04",
+      "requirement": "Непрерывное перепланирование от реальной позы",
+      "status": "partial",
+      "evidence": [
+        "tests/test_navigation.py",
+        "D:/MetaRescue-output/checks/optimization-parity-01.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-06-replan/verification.json",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-resources-02-power-loss/verification.json",
+        "D:/MetaRescue-output/checks/add09-native-20261113-04/verification.json",
+        "tests/test_traffic_recovery.py"
+      ],
+      "scope_note": "Сохранены поза и груз при естественном объезде. Проверены точка освобождения и повторное наблюдение при разрядке. На новом двухмашинном fixture исправлены таймер новой команды и взаимный прогноз: hold155/release161,оба режима3/3,0contacts. Все семь traffic-fixture остаются в расширенной приёмке P1."
+    },
+    {
+      "id": "A05",
+      "requirement": "Scout: покрытие/защита очереди/патруль",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-03-nsga2/verification.json"
+      ],
+      "scope_note": "Native NSGA-II x2: 1 scout/1 rescuer/3 deliveries, 299.9667 s, AI OFF. Full category/resource/failure/performance acceptance remains."
+    },
+    {
+      "id": "A06",
+      "requirement": "Rescue: назначения/занятость/ресурсы",
+      "status": "partial",
+      "evidence": [
+        "controller/optimization.py",
+        "D:/MetaRescue-output/checks/optimization-parity-01.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-03-nsga2/verification.json",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json",
+        "tests/test_resources.py"
+      ],
+      "scope_note": "Назначения и исполнение на двух NSGA-II, finite Wh учтены в постановке. Конкурсная автономная серия впереди."
+    },
+    {
+      "id": "A07",
+      "requirement": "Пять стратегий и три прогноза",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-03-nsga2/verification.json"
+      ],
+      "scope_note": "Native NSGA-II x2: 1 scout/1 rescuer/3 deliveries, 299.9667 s, AI OFF. Full category/resource/failure/performance acceptance remains."
+    },
+    {
+      "id": "A08",
+      "requirement": "Фронты/бюджеты/seed/резервации",
+      "status": "partial",
+      "evidence": [
+        "controller/optimization.py",
+        "D:/MetaRescue-output/checks/optimization-parity-01.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-03-nsga2/verification.json"
+      ],
+      "scope": "Finite JSON Pareto fronts, seeds and budgets implemented; runtime reservations/analytics remain.",
+      "scope_note": "Native NSGA-II x2: 1 scout/1 rescuer/3 deliveries, 299.9667 s, AI OFF. Full category/resource/failure/performance acceptance remains."
+    },
+    {
+      "id": "I01",
+      "requirement": "Global влияет на исполняемый план",
+      "status": "verified",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/checks/controller-motion-final/global-passing-smoke-native.json",
+        "D:\\MetaRescue-output\\checks\\global-queue-series-audit-20261113-01\\native-s1-05-o1.json"
+      ],
+      "scope_note": "Помимо patrol на S1-05-O1-dual-global подтверждена настоящая будущая очередь: Global144 сохранил три активные команды, гружёный носитель прошёл192,51м с тем же грузом. Новая цель person-4: pickup379,8 и handover477,9667. Итог миссии5/12/time_limit, контактов0; это подтверждение влияния, не превосходства над контролем."
+    },
+    {
+      "id": "I02",
+      "requirement": "Local каждого агента/4 решения/память",
+      "status": "partial",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "D:/MetaRescue-output/checks/controller-motion-final/local-r3-native.json",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json"
+      ],
+      "scope_note": "На build74 перед пожаром с грузом выполнены HOLD, DETOUR 220,02 м и передача того же пострадавшего. LIVE DETOUR проверен ранее. Масштабный парк и все четыре решения в нативном эпизоде впереди."
+    },
+    {
+      "id": "I03",
+      "requirement": "Асинхронность без остановки остальных",
+      "status": "partial",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-05-live-recovery/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-05-live-recovery/ai-causality.json",
+        "D:/MetaRescue-output/checks/controller-motion-final/local-r3-native.json"
+      ],
+      "scope_note": "В нативном MOCK вторая машина прошла 9,23 м за время ожидания ответа Local. Ранний LIVE public-only fixture: шесть попыток, пять ответов и одна транспортная ошибка, Global KEEP и Local DETOUR с грузом."
+    },
+    {
+      "id": "I04",
+      "requirement": "Строгие проверки/устаревание/полезность",
+      "status": "verified",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "D:/MetaRescue-output/missions/standalone-05-flooded-route/flood-verification.json",
+        "tests/test_observed_surfaces.py",
+        "tests/test_ai.py",
+        "tests/test_advisor.py",
+        "tests/test_ai_policy.py",
+        "D:/MetaRescue-output/checks/p0-root-build76-20261113-01.log",
+        "D:/MetaRescue-output/checks/controller-motion-final/local-r3-native.json"
+      ],
+      "scope_note": "Строгие schema/identity/version/TTL, неизвестные цели/геометрия/энергия, отсутствие действительных изменений, timeout/error/budget/OFF/MOCK fallback и ограниченность worker проверены тестами214/214. Local physical DETOUR с сохранённым грузом проверен отдельно; исход2/3 time_limit. Расширенное применение Global и новые LIVE/REPLAY остаются I02/I03/I06."
+    },
+    {
+      "id": "I05",
+      "requirement": "OFF/MOCK/error/timeout/budget fallback",
+      "status": "verified",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "tests/test_ai.py",
+        "tests/test_advisor.py",
+        "tests/test_ai_policy.py",
+        "D:/MetaRescue-output/checks/p0-root-build76-20261113-01.log",
+        "D:/MetaRescue-output/checks/controller-motion-final/local-r3-native.json"
+      ],
+      "scope_note": "Строгие schema/identity/version/TTL, неизвестные цели/геометрия/энергия, отсутствие действительных изменений, timeout/error/budget/OFF/MOCK fallback и ограниченность worker проверены тестами214/214. Local physical DETOUR с сохранённым грузом проверен отдельно; исход2/3 time_limit. Расширенное применение Global и новые LIVE/REPLAY остаются I02/I03/I06."
+    },
+    {
+      "id": "I06",
+      "requirement": "LIVE Global и Local подтверждены",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-05-live-recovery/verification.json"
+      ],
+      "scope_note": "LIVE public-only native fixture: 6 real attempts (5 responses, 1 transport error), Global KEEP/Local loaded DETOUR. Global plan influence and full contest scope are separate pending gates."
+    },
+    {
+      "id": "I07",
+      "requirement": "Общий реальный бюджет не выше 240",
+      "status": "verified",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-05-live-recovery/verification.json"
+      ],
+      "scope_note": "LIVE public-only native fixture: 6 real attempts (5 responses, 1 transport error), Global KEEP/Local loaded DETOUR. Global plan influence and full contest scope are separate pending gates."
+    },
+    {
+      "id": "I08",
+      "requirement": "Нет ключей в проекте/логах/пакете",
+      "status": "verified",
+      "evidence": [
+        "docs/ai-runtime.md",
+        "D:/MetaRescue-output/checks/root-before-native-ai-02.log",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-04-mock-recovery/verification.json",
+        "D:/MetaRescue-output/checks/secret-scan-api-accounting-01.json",
+        "D:/MetaRescue-output/releases/windows-verification-06/known-key-verification.json",
+        "D:/MetaRescue-output/releases/windows-verification-09-p0-add09-20261113/known-key-verification.json",
+        "D:\\MetaRescue-output\\releases\\windows-verification-10-p0-ports-20261113\\known-key-verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-closed-window-20261113-01\\known-key-verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-nested-benchmark-v02-known-key-20261113.json",
+        "D:\\MetaRescue-output\\checks\\p0-nested-benchmark-v03-known-key-20261113.json",
+        "D:\\MetaRescue-output\\checks\\p0-nested-asset-catalog-known-key-20261113.json"
+      ],
+      "scope_note": "Один известный настроенный ключ не найден в полной распаковке:6108 файлов,13gzip,136542 декодированные native-записи; исходные3вложенных ZIP проверены отдельно. AndroidFileServer security section удалён только в поставляемой копии. Неизвестные исторические ключи этим методом не исключаются; новый финальный пакет сканируется повторно."
+    },
+    {
+      "id": "C01",
+      "requirement": "8 категорий с испытаниями",
+      "status": "verified",
+      "evidence": [
+        "tests/test_competition_layout.py",
+        "D:/MetaRescue-output/core-acceptance/core-competition-03-annex-traction/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-04-services/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-06-build66-annex/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-07-build66-services/verification.json"
+      ],
+      "scope_note": "Восемь категорий представлены действиями. Три специальных мобильных тела прошли маршруты. Сенсор обнаружил цель, digital вычислил сумму, operator инициировал исполненное удержание. Общая спасательная миссия всех категорий проверяется отдельно."
+    },
+    {
+      "id": "C02",
+      "requirement": "Space как отдельное расширение",
+      "status": "verified",
+      "evidence": [
+        "docs/core-orbital.md",
+        "D:/MetaRescue-output/core-acceptance/core-competition-07-build66-services/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-08-orbital-render/verification.json",
+        "D:/MetaRescue-output/core-runs/638DCF7C45877125AAA4B2AC4B1D95BB/overview/overview-00008.png"
+      ],
+      "scope_note": "Паспорт, два нативных замера дыма с задержкой 0,45 с и метка орбитальной полосы в обзорном кадре подтверждены."
+    },
+    {
+      "id": "C03",
+      "requirement": "9 типов зон/геометрия/доступность",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-contest-01-events/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-03-annex-traction/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-05-radio-shadow/verification.json",
+        "D:/MetaRescue-output/checks/core-schema-journal-audit-01.json"
+      ],
+      "scope_note": "Семь начальных типов зон плюс динамические hazard/restricted. Нативные границы трёх сред и ограничение проверены. Выезд из low_connectivity изменил качество с 0,30 до 0,80."
+    },
+    {
+      "id": "C04",
+      "requirement": "Пять типов работающей инфраструктуры",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-resources-01-charging/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-02-relay/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-04-services/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json"
+      ],
+      "scope_note": "Зарядный узел, ретранслятор и принимающая база проверены отдельными физическими эпизодами. Сенсорный и вычислительный узлы подтвердили задачи в services."
+    },
+    {
+      "id": "C05",
+      "requirement": "Ограниченные ресурсы/резервы/зарядка",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-resources-01-charging/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-resources-02-power-loss/verification.json",
+        "tests/test_resources.py",
+        "D:/MetaRescue-output/checks/standalone-20-autonomous-charge-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-07-build66-services/verification.json",
+        "D:/MetaRescue-output/missions/standalone-12-library-coalition/competition-verification.json"
+      ],
+      "scope_note": "Подтверждены батареи, резерв, исчерпание ресурса, автоматические заряды и эвакуация, расход цифровых кредитов и передача трёх меднаборов с исчерпанием запаса."
+    },
+    {
+      "id": "C06",
+      "requirement": "Связь/потери/задержки/mesh/разделения",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-radio-02-relay/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-01-blackout/verification.json",
+        "docs/core-radio.md",
+        "D:/MetaRescue-output/core-acceptance/core-contest-01-events/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-03-lost-ack/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-04-public-events/verification.json"
+      ],
+      "scope_note": "Связь по положению, двухзвенная доставка, геометрический и принудительный разрыв, 100% потери и unknown для утраченного ACK проверены. Полный парк измеряется отдельно."
+    },
+    {
+      "id": "C07",
+      "requirement": "Пять исполнимых нормативных сценариев",
+      "status": "verified",
+      "evidence": [
+        "unreal/MetaRescue/Content/Scenario/core-scenarios-v1.json",
+        "controller/scenarios.py",
+        "tests/test_scenario_program.py",
+        "D:/MetaRescue-output/missions/standalone-10-contest-coalition/competition-verification.json",
+        "D:/MetaRescue-output/missions/standalone-11-coalition-failure/competition-verification.json",
+        "D:/MetaRescue-output/missions/standalone-12-library-coalition/competition-verification.json",
+        "D:/MetaRescue-output/missions/standalone-13-contest-static/manifest.json",
+        "D:/MetaRescue-output/checks/standalone-22-precise-recovery-verification.json",
+        "D:/MetaRescue-output/deliverables/2026-11-13-review-01/examples/five-scenario-chains.json",
+        "D:/MetaRescue-output/missions/defense-coalition-library-build69/competition-verification.json",
+        "D:/MetaRescue-output/checks/handoff-build69-summary-01.json"
+      ],
+      "scope_note": "Для пяти классов сохранены игровые оценки, решения, доставленные роли и исходы. Build69 связал переход в safe_degradation на 29 с с доставленной и исполненной командой hold на 29,60 с. Синтез подтверждён отдельным нативным эпизодом и повтором операций build69."
+    },
+    {
+      "id": "C08",
+      "requirement": "Вычислимые игровые модели пяти сценариев",
+      "status": "verified",
+      "evidence": [
+        "controller/scenarios.py",
+        "tests/test_scenario_program.py",
+        "docs/competition-runtime.md",
+        "D:/MetaRescue-output/deliverables/2026-11-13-review-01/examples/five-scenario-chains.json"
+      ],
+      "scope_note": "Для пяти классов сохранены вычисленные N, A, I, U, K, Θ и E с идентификатором входного наблюдения и принятым решением."
+    },
+    {
+      "id": "C09",
+      "requirement": "Семь содержательных операций",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-scenario-01-delayed-revision/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-scenario-04-build64/verification.json",
+        "D:/MetaRescue-output/core-acceptance/defense-scenarios-build69/verification.json",
+        "D:/MetaRescue-output/checks/annex-core-compatibility-01/archive-audit.json",
+        "D:/MetaRescue-output/checks/annex-core-compatibility-01/native-modify-final01.json",
+        "D:/MetaRescue-output/core-acceptance/p0-scenarios-20261113-01/verification.json"
+      ],
+      "scope_note": "Семь операций приняты средой. Журналы собственных CLI и UI содержат все семь исходящих операций. Свежий modify на build74 принят после доставленной задержки 4,2 с и увеличил интервал 2,8→5 с."
+    },
+    {
+      "id": "C10",
+      "requirement": "Новый исполнимый синтез/FSM",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-scenario-01-delayed-revision/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-scenario-02-team-actions/verification.json",
+        "D:/MetaRescue-output/missions/standalone-10-contest-coalition/competition-verification.json",
+        "D:/MetaRescue-output/missions/standalone-11-coalition-failure/competition-verification.json",
+        "tests/test_scenario_program.py",
+        "D:/MetaRescue-output/missions/defense-coalition-synthesis-final01/competition-verification.json"
+      ],
+      "scope_note": "На build71 синтезированная коалиция завершила сценарий на 40 с, три набора помощи доставлены на 38,6 с. Терминал миссии time_limit при 1/1 эвакуации. Прежнее свидетельство отказа тяги подтверждает безопасный выход."
+    },
+    {
+      "id": "C11",
+      "requirement": "AST/unknown/доверие/конфликты",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-scenario-03-predicates/verification.json",
+        "D:/MetaRescue-output/automation/20261112T001352462297Z/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-scenarios-20261113-01/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-disturbances-20261113-01/verification.json"
+      ],
+      "scope_note": "Проверены типизированные AST, отказ для неизвестного обязательного факта и bool вместо числа. Нативный противоречивый источник сохраняет исходную гипотезу до инспекции; решение учитывает confidence, источник, свежесть, задержку и противоречия. В сценарной FSM потерянное подтверждение приводит к ограниченному по сроку безопасному выходу."
+    },
+    {
+      "id": "C12",
+      "requirement": "Директивы оператора и автоматические эпизоды",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-competition-04-services/verification.json",
+        "D:/MetaRescue-output/missions/standalone-13-contest-static/manifest.json",
+        "D:/MetaRescue-output/checks/p0-operator-service-20261113-01.json",
+        "D:/MetaRescue-output/core-acceptance/p0-services-20261113-01/verification.json",
+        "docs/defense-p0-independent-2026-11-13.md",
+        "docs/core-operator.md",
+        "D:\\MetaRescue-output\\checks\\independent-p0-20261113\\operator-gap-reproduction.json",
+        "D:/MetaRescue-output/checks/p0-operator-build77-20261113-04/verification.json",
+        "D:/MetaRescue-output/automation/20261113T130623871980Z/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-operator-lifecycle77-20261113-03/verification.json",
+        "D:/MetaRescue-output/checks/p0-operator-main77-20261113-02/verification.json",
+        "D:/MetaRescue-output/checks/p0-operator-packaged11-20261113-01/verification.json",
+        "D:/MetaRescue-output/checks/p0-window11-20261113-01/verification.json",
+        "D:/MetaRescue-output/releases/windows-verification-11-p0-operator-20261113/verification.json"
+      ],
+      "scope_note": "Build77r4: полный объявленный операторский lifecycle (hold, приоритет, зона, сообщение, отмена, уточнение, подтверждение и запрос подтверждения). Native12 команд/15 доставленных ответов; груз сохраняется при безопасном hold, stale и чужой источник отклоняются. Штатный main+CLI9 команд/10 inbox, перепланирование. Распакованный Windows11 повторил main+CLI и UI pause/step/resume/stop/repeat, freeze/CRC/SHA/exit0. Отдельный GPU recovery1/1 на280,9667с; короткие lifecycle не объявляются спасательным success."
+    },
+    {
+      "id": "C13",
+      "requirement": "Фиксированный и локальный реактивный baseline",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-rescue-02-roads/verification.json",
+        "D:/MetaRescue-output/missions/standalone-07-local-reactive/manifest.json",
+        "D:/MetaRescue-output/checks/handoff-build69-summary-01.json",
+        "tests/test_baselines.py",
+        "D:/MetaRescue-output/checks/p0-required-20261113-01/analysis/comparison.json",
+        "D:\\MetaRescue-output\\checks\\p0-packaged-cases10-20261113-02\\verification.json"
+      ],
+      "scope_note": "Три политики одного распакованного candidate10 на одном мире/seed: NSGA-II×2 OFF и оба контроля завершили3/3 с0контактов. Прежняя прерванная попытка reactive01 сохранена и не засчитана. Одной карты недостаточно для статистического вывода."
+    },
+    {
+      "id": "U01",
+      "requirement": "Предстартовые настройки Unreal",
+      "status": "partial",
+      "evidence": [
+        "docs/product-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-01/verification.json"
+      ],
+      "scope_note": "Нативная форма1600x1000 реально задаёт парк/людей/события/ресурсы/сеть/NSGA/AI; ввод3целей и7/80-8/30 проверены. Предстартовая ошибка/максимальный ввод ещё не проверены черезUI."
+    },
+    {
+      "id": "U02",
+      "requirement": "Start/pause/step/stop/repeat/presets",
+      "status": "verified",
+      "evidence": [
+        "docs/product-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-01/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/first-episode-verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/repeat-verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-02/verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-window-20261113-03\\verification.json"
+      ],
+      "scope_note": "Оконный candidate10: подготовка0, шаг1, стабильная пауза, продолжение, пауза15, stop16,55, повтор0 в том же PID/SHA, stop0,2, close0. Два архива CRC/SHA; все1183 файла неизменны."
+    },
+    {
+      "id": "U03",
+      "requirement": "Инспектор/слои/сеть/коалиции",
+      "status": "verified",
+      "evidence": [
+        "docs/product-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-01/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-03/verification.json",
+        "D:/MetaRescue-output/automation/20261112T074053714791Z/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-04/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/paused-cargo.png",
+        "D:/MetaRescue-output/checks/product-ui-06/terminal.png",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/radio-paused.png",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/roles-paused.png",
+        "D:\\MetaRescue-output\\checks\\p0-window-20261113-03\\verification.json"
+      ],
+      "scope_note": "Candidate10: реальное окно подтвердило инспектор, командный и полный виды, радио, роли, текущие маршруты и пройденные цветные следы. Снимки входят в оконный отчёт."
+    },
+    {
+      "id": "U04",
+      "requirement": "Публичный/полный взгляд",
+      "status": "verified",
+      "evidence": [
+        "docs/product-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-03/verification.json",
+        "D:/MetaRescue-output/automation/20261112T074053714791Z/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-04/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-04/paused-invariance.json",
+        "D:/MetaRescue-output/checks/product-ui-06/team-knowledge.png",
+        "D:/MetaRescue-output/checks/product-ui-06/running-top.png",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-window-20261113-03\\verification.json"
+      ],
+      "scope_note": "Полный наблюдатель показывает физический мир, командный вид показывает объявленные зоны и доставленные сведения; переключение подтверждено в candidate10."
+    },
+    {
+      "id": "U05",
+      "requirement": "Все значимые события со сквозными ID",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "docs/native-journals.md",
+        "D:/MetaRescue-output/core-acceptance/core-contest-01-events/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-radio-04-public-events/verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-log-envelopes-20261113-01\\verification.json",
+        "D:\\MetaRescue-output\\checks\\analytics-browser-04\\verification.json"
+      ],
+      "scope_note": "Пять нативных эпизодов:19355 уникальных trace_id, все7 Core-операций, исходные связи команд и ролей; потерянных связей0. Сценарные переходы и web causal view отдельно проверены. Позднее операторское расширение получит отдельную трассу и приёмку."
+    },
+    {
+      "id": "U06",
+      "requirement": "10 Hz/секундные снимки/substep debug",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-clock-03-realtime/verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "D:/MetaRescue-output/checks/standalone-26-serialized-apron-verification.json"
+      ],
+      "scope_note": "7000 отсчётов телеметрии 10 Гц, снимки на каждой секунде 0–700 с и десять окон по 61 подшагу Core вокруг аномалий."
+    },
+    {
+      "id": "U07",
+      "requirement": "Потоковая запись/сжатие/ошибки записи",
+      "status": "verified",
+      "evidence": [
+        "docs/native-journals.md",
+        "D:/MetaRescue-output/core-acceptance/core-native-07-disk/verification.json",
+        "D:/MetaRescue-output/missions/standalone-03-disk/verification.json",
+        "tools/core_archive_check.py",
+        "D:/MetaRescue-output/checks/p0-archive-io-20261113-01/verification.json",
+        "D:/MetaRescue-output/core-acceptance/p0-archive-io-20261113-02/verification.json"
+      ],
+      "scope_note": "Поток/CRC/сжатие и реальный OS write failure проверены. Build76: step и exact retry500, Observationfailed/archive_io_failed, физика2с без продвижения, новыйstepотклонён, closeexit0, incomplete archive и строгий отказ читателя. Заполнение всего тома не выполнялось."
+    },
+    {
+      "id": "U08",
+      "requirement": "Web-фильтры/причинная трасса/replay",
+      "status": "verified",
+      "evidence": [
+        "docs/analytics-runtime.md",
+        "D:/MetaRescue-output/checks/analytics-browser-01/verification.json",
+        "D:/MetaRescue-output/checks/analytics-browser-04/verification.json",
+        "D:/MetaRescue-output/checks/product-package-E01/browser-v4-verification.json"
+      ],
+      "scope_note": "Поиск и причинные записи проверены в браузере. На новом индексе подтверждены replay, оба слоя теплокарты, десять окон и два точных подшага."
+    },
+    {
+      "id": "U09",
+      "requirement": "Графики/статистика/HV/IGD+/M1-M7",
+      "status": "partial",
+      "evidence": [
+        "docs/analytics-runtime.md",
+        "D:/MetaRescue-output/checks/analytics-http-02/verification.json",
+        "D:/MetaRescue-output/series/common-problems-01/pareto-comparison.json"
+      ]
+    },
+    {
+      "id": "U10",
+      "requirement": "Экспорт JSON/CSV/TXT/архив",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/analytics-http-02/verification.json",
+        "D:/MetaRescue-output/checks/analytics-http-03-build67/verification.json",
+        "D:/MetaRescue-output/checks/product-package-E01/http-relocated/verification.json"
+      ],
+      "scope_note": "JSON, CSV, TXT и ZIP сверены по хэшам. ZIP проходит testzip и содержит сырые публичные, физические и управляющие журналы."
+    },
+    {
+      "id": "V01",
+      "requirement": "Свежая сборка UE и Automation",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/build61-detailed.log",
+        "D:/MetaRescue-output/automation/20261112T081936231243Z/verification.json",
+        "D:/MetaRescue-output/checks/build69-defense.log",
+        "D:/MetaRescue-output/automation/20261112T141745494854Z/verification.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/build71/verification.json",
+        "D:/MetaRescue-output/automation/20261112T154025078334Z/verification.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/build74/verification.json",
+        "D:/MetaRescue-output/automation/20261112T162106929288Z/verification.json",
+        "D:/MetaRescue-output/checks/p0-required-20261113-01/automation.log",
+        "D:/MetaRescue-output/automation/20261112T233751738974Z/verification.json",
+        "D:/MetaRescue-output/checks/p0-operator-build77-20261113-04/verification.json",
+        "D:/MetaRescue-output/automation/20261113T130623871980Z/verification.json"
+      ],
+      "scope_note": "Актуальная77r4: сборка exit0/freeze и Automation14/14 по отчёту; Windows11 BuildCookRun принят. Старые результаты сохранены отдельно."
+    },
+    {
+      "id": "V02",
+      "requirement": "Blender/UE readback",
+      "status": "verified",
+      "evidence": [
+        "artifacts/3d-world/verified-library-v2/mechanized-blender-verification.json",
+        "D:/MetaRescue-output/checks/city-sections-repair-01/verification.json",
+        "D:/MetaRescue-output/competition-assets/prepared-02/unreal-import.json"
+      ],
+      "scope_note": "Blender проверил 26 оригиналов. UE прочитал 403 активные сетки и три импортированные конкурсные модели."
+    },
+    {
+      "id": "V03",
+      "requirement": "Python baseline и новые интеграционные тесты",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/root-ui-27.log",
+        "D:/MetaRescue-output/checks/v052-ui-preservation-03.log",
+        "D:/MetaRescue-output/checks/root-acceptance-26-candidate03.log",
+        "D:/MetaRescue-output/checks/regression-build67-v052.log",
+        "D:/MetaRescue-output/checks/regression-build67-v03.log",
+        "D:/MetaRescue-output/checks/regression-build67-unreal-tools.log",
+        "D:/MetaRescue-output/checks/root-acceptance-28-candidate06.log",
+        "D:/MetaRescue-output/checks/regression-build69-v052.log",
+        "D:/MetaRescue-output/checks/regression-build69-v03.log",
+        "D:/MetaRescue-output/checks/regression-build69-unreal-tools.log",
+        "D:/MetaRescue-output/checks/root-acceptance-29-v3-horizon.log",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/root-tests.log",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/bench-v052.log",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/bench-v03.log",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/unreal-tools.log",
+        "D:/MetaRescue-output/checks/p0-root-after-custody-20261113-01.log",
+        "D:/MetaRescue-output/checks/p0-acceptance-runners-20261113-01.log",
+        "D:/MetaRescue-output/checks/add09-root-20261113-03.log",
+        "D:/MetaRescue-output/checks/p0-root-port-20261113-01.log"
+      ],
+      "scope_note": "13 ноября основной набор прошёл 202/202, узкие проверки приёмочных драйверов 11/11. До этого на build75 прошли 55 тестов v0.5.2, 30 v0.3 и 10 инструментов UE."
+    },
+    {
+      "id": "V04",
+      "requirement": "Static delivery",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/standalone-17-handover-reserve-verification.json",
+        "D:/MetaRescue-output/missions/standalone-18-static-r3-city22/manifest.json",
+        "D:/MetaRescue-output/checks/p0-required-20261113-01/analysis/comparison.json",
+        "D:/MetaRescue-output/core-acceptance/p0-loaded-workflow-20261113-01/verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-packaged-cases10-20261113-02\\verification.json"
+      ],
+      "scope_note": "На одном SHA мира три packaged-политики дали3/3; отдельное packaged-восстановление после отказа дало1/1. Все терминальные архивы проверены, код обоих процессов0, freeze. Отдельный сложный workflow1000с дал3/3 на706,967с."
+    },
+    {
+      "id": "V05",
+      "requirement": "Три seed 480 + повтор + обычный performance",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "V06",
+      "requirement": "Legacy90",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "V07",
+      "requirement": "Независимая протокольная совместимость",
+      "status": "verified",
+      "evidence": [
+        "tests/test_core_interop.py",
+        "D:/MetaRescue-output/core-acceptance/core-public-interop-03/verification.json"
+      ],
+      "scope_note": "Проверены обе стороны с локальными независимыми эталонами, включая базовые поля, смену seed, ошибки, повтор, конкуренцию и close. Межкомандный M5 учитывается отдельно."
+    },
+    {
+      "id": "V08",
+      "requirement": "450 последовательных native runs",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/series/competition-design-02-r3/plan.json",
+        "tools/run_native_series.py",
+        "D:/MetaRescue-output/checks/series-preflight-r3-access-01.json",
+        "D:\\MetaRescue-output\\checks\\series-checkpoint-20261113T092617Z\\verification.json"
+      ],
+      "scope_note": "План02-r3, SHA92395633b0ed4a0d367e67415354f5a09bf4302861c5e85d5ea0c63e3be9567e; 30карт preflight. На2026-11-13T09:26:24.982361+00:00 завершено174/450. Manifest и терминальная физическая истина сверены; CRC/SHA потоков проверены runner каждого эпизода. Серия продолжается на прежнем runtime."
+    },
+    {
+      "id": "V09",
+      "requirement": "Максимум 150/48/40/600 в UE",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-city-02-max-motion/verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-max-render-08/city-verification.json"
+      ],
+      "scope_note": "Прежняя редакция мира 150×150/48+40/600 подтвердила короткое физическое движение 88 агентов и отдельный замер рендера. Длинная максимальная миссия остаётся."
+    },
+    {
+      "id": "V10",
+      "requirement": "60 FPS штатной сцены/профиль тяжёлых случаев",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-props-01/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-350-03/city-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-max-render-08/city-verification.json"
+      ],
+      "scope_note": "Короткие обзорные прогоны с припаркованным парком, полный обычный прогон миссии впереди."
+    },
+    {
+      "id": "V11",
+      "requirement": "Функциональная воспроизводимость с допусками",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/parallel-a-p0-regressions-01/saved-evidence-and-replay-preflight.json",
+        "D:/MetaRescue-output/checks/parallel-a-p0-regressions-01/replay-staging/integrated-verification.log",
+        "D:/MetaRescue-output/checks/p0-recovery-replay-20261113-01/verification.json",
+        "D:/MetaRescue-output/checks/p0-public-repeat-events-20261113-01.json",
+        "D:/MetaRescue-output/checks/p0-event-reads-20261113-01.json"
+      ],
+      "scope_note": "Физический повтор отказа и спасения воспроизвёл 281 шаг, handover, терминальный статус и 843 позы с нулевым расхождением. Для двух динамических повторов совпали все обязательные Core-ответы и решения в пределах epsilon 1e-6 после согласованной замены генерируемых ID. Один повтор включал дополнительные GET."
+    },
+    {
+      "id": "V12",
+      "requirement": "Реальные кадры/видео",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/deliverables/MetaEvolution-Rescue-review-2026-11-13.zip",
+        "D:/MetaRescue-output/missions/standalone-24-defense-overview/native-archive-verification.json",
+        "D:/MetaRescue-output/checks/visual-grids/defense-six-building-variants-01.jpg"
+      ],
+      "scope_note": "Приняты реальные обзорные кадры, крупный план передачи и ознакомительное видео. Итоговый скринкаст дополнит приёмку."
+    },
+    {
+      "id": "D01",
+      "requirement": "Одна команда запуска",
+      "status": "verified",
+      "evidence": [
+        "docs/windows-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-06/first-episode-verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-02/verification.json",
+        "D:\\MetaRescue-output\\checks\\p0-window-20261113-03\\verification.json"
+      ],
+      "scope_note": "Candidate10 после распаковки запускается одной командой; проверены подготовка, шаг, пауза, продолжение, безопасная остановка, повтор в том же PID и закрытие с кодом 0."
+    },
+    {
+      "id": "D02",
+      "requirement": "Windows-сборка и проверка пакета",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/releases/windows-candidate-06/build-manifest.json",
+        "D:/MetaRescue-output/releases/windows-verification-06/verification.json",
+        "D:/MetaRescue-output/releases/windows-verification-06/MetaEvolution-Rescue-Win64.zip",
+        "D:/MetaRescue-output/checks/product-ui-06/verification.json",
+        "D:/MetaRescue-output/releases/windows-candidate-07-v3-clock/build-manifest.json",
+        "D:/MetaRescue-output/releases/windows-verification-07-v3-clock/verification.json",
+        "D:/MetaRescue-output/releases/windows-candidate-08-p0-20261113/build-manifest.json",
+        "D:/MetaRescue-output/releases/windows-verification-08-p0-20261113/verification.json",
+        "D:/MetaRescue-output/checks/p0-window-20261113-01/verification.json",
+        "D:/MetaRescue-output/releases/windows-candidate-09-p0-add09-20261113/build-manifest.json",
+        "D:/MetaRescue-output/releases/windows-verification-09-p0-add09-20261113/verification.json",
+        "D:\\MetaRescue-output\\releases\\windows-verification-10-p0-ports-20261113\\verification.json"
+      ],
+      "scope_note": "Candidate10: 1183 файла SHA до/после запуска. Два независимых GPU-процесса завершили восстановление 1/1 на280,9667с с0контактов и кодами0. Native65 файлов совпадают с полным BuildCookRun09; restage меняет только два Python-файла владения портом."
+    },
+    {
+      "id": "D03",
+      "requirement": "Исходники/контрольные методы/зависимости",
+      "status": "verified",
+      "evidence": [
+        "D:\\MetaRescue-output\\checks\\p0-closed-window-20261113-01\\verification.json"
+      ],
+      "scope_note": "Полный закрытый candidate10-r2 распакован:6009 SHA, источник/документация/бенчмарки/контроли/зависимости; shipped Python прошёл226/226 и55/55. Windows1183 SHA после UI. Это поставка фиксированной ревизии10; текущий операторский патч ещё не входит в неё."
+    },
+    {
+      "id": "D04",
+      "requirement": "Записка ГОСТ19/ТЗ",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/deliverables/defense-working-01/note-layout-preview.pdf",
+        "D:\\MetaRescue-output\\checks\\p0-documents-20261113-01\\verification.json",
+        "D:\\MetaRescue-output\\deliverables\\defense-working-01\\materials-p0-10\\Пояснительная записка.pdf",
+        "D:/MetaRescue-output/checks/pz-final-20261113-01/verification.json",
+        "ПЗ/Пояснительная записка MetaEvolution Rescue 2026-11-13.prex",
+        "ПЗ/Пояснительная записка MetaEvolution Rescue 2026-11-13.pdf"
+      ],
+      "scope_note": "Редакция13.11:все21элемента§16,34страницы,16реальныхиллюстраций,3таблицы, текущиеоператорские/Windows/двусторонниеM5результаты и ограничения. PREXиPDFизодногоисточника, локальныйрендер, все34страницыпросмотрены. Результатыоставшейся450сериидополнитьвфинальнойредакции."
+    },
+    {
+      "id": "D05",
+      "requirement": "Эссе/приложения/формализации/протокол",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/deliverables/defense-working-01/essay.md",
+        "docs/stage-1-interaction.md",
+        "unreal/MetaRescue/Content/Scenario/core-scenarios-v1.json",
+        "D:\\MetaRescue-output\\checks\\p0-closed-window-20261113-01\\verification.json"
+      ],
+      "scope_note": "Эссе, приложения4с, игровые формализации и Core спецификация включены в закрытый комплект candidate10-r2 с проверенной распаковкой. Последующие результаты450 и нового оператора дополняются отдельно."
+    },
+    {
+      "id": "D06",
+      "requirement": "Примеры журналов и результаты серии",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "D07",
+      "requirement": "Происхождение ассетов/проверенный архив/ограничения",
+      "status": "partial",
+      "evidence": [
+        "D:\\MetaRescue-output\\checks\\p0-closed-window-20261113-01\\verification.json",
+        "D:\\MetaRescue-output\\deliverables\\MetaEvolution-Rescue-P0-2026-11-13-r2.verification.json"
+      ],
+      "scope_note": "Candidate10-r2:6009 SHA, распаковка,226+55тестов, stock Start и UI/повтор/закрытие0. Происхождение и лицензии включены;6 Fab raw-ассетов исключены из editable Source с перечнем и альтернативой, cooked используются в runtime. Финальный пакет после P0оператора и450 ещё впереди."
+    },
+    {
+      "id": "V3-G01",
+      "requirement": "Исходное состояние, дефекты «до», хэши",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/baselines/20261110T224530481941Z/manifest.json",
+        "artifacts/quarter-v3/baseline"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Исходные файлы, хэши и кадры сохранены. Итоговая пара одних и тех же ракурсов ещё формируется."
+    },
+    {
+      "id": "V3-G02",
+      "requirement": "26 исходных комплектов и v2 сохранены",
+      "status": "verified",
+      "evidence": [
+        "artifacts/quarter-v3/blender-verification.json",
+        "D:/MetaRescue-output/checks/defense-originals-hashes-01.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Все 26 оригинальных файлов повторно сверены с SHA-256 инвентаря. Производные v2 доступны в проекте и сохранённом readback."
+    },
+    {
+      "id": "V3-G03",
+      "requirement": "Основной масштаб, база/выезды/площадки/погрузка",
+      "status": "partial",
+      "evidence": [
+        "artifacts/3d-world/verified-library-v2/quarter-verification.json",
+        "D:/MetaRescue-output/checks/standalone-26-serialized-apron-verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Старый v2 стенд доставил трёх человек, текущий Core последовательно выпустил четыре машины. Свежий legacy static270 требует отдельного запуска."
+    },
+    {
+      "id": "V3-G04",
+      "requirement": "Связные кварталы, дворы, проходы, назначение пустых зон",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-horizon-buildings-10/city-verification.json",
+        "docs/city-v2-design.md"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Дворы, проезды и разные улицы прочитаны в генераторе и видны в нативном 350-метровом районе. Повтор старой фиксированной карты выполняется отдельно."
+    },
+    {
+      "id": "V3-G05",
+      "requirement": "Нет резких окончаний дорог",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-horizon-buildings-10/city-verification.json",
+        "docs/city-v2-design.md",
+        "D:/MetaRescue-output/checks/visual-grids/defense-four-city-boundaries-01.jpg"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Четыре продолжения улиц за рабочим районом просмотрены в нативном рендере 350 м."
+    },
+    {
+      "id": "V3-G06",
+      "requirement": "Гидранты/сенсоры/щиты логичны и не перекрывают полосы",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/series-preflight-r3-access-01.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-06-build66-annex/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Габариты базы учтены при проверке всех 30 карт. Конкурсные категории проехали в нативной среде. Старые дорожные сооружения требуют отдельного просмотра."
+    },
+    {
+      "id": "V3-G07",
+      "requirement": "Шесть конструктивно разных вариантов",
+      "status": "verified",
+      "evidence": [
+        "artifacts/quarter-v3/scene-verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-horizon-buildings-10/city-verification.json",
+        "D:/MetaRescue-output/checks/visual-grids/defense-six-building-variants-01.jpg",
+        "unreal/MetaRescue/Source/MetaRescue/MRDistrict.cpp"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Прочитаны шесть ветвей Apartment и их нативные кадры. Целое здание, локальная утрата фасада, вырез перекрытия и пролётов, потерянный этаж, высокая и низкая руины."
+    },
+    {
+      "id": "V3-G08",
+      "requirement": "Опора после поворота/масштаба; наклонные плиты устойчивы",
+      "status": "partial",
+      "evidence": [
+        "artifacts/quarter-v3/slab-contact-inspection.json",
+        "unreal/MetaRescue/Source/MetaRescue/MRDistrict.cpp"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "15 ориентаций прошли проверку четырёх опор и проекции центра масс. Нужны свежие физические кадры нагруженных плит."
+    },
+    {
+      "id": "V3-G09",
+      "requirement": "Разнообразная осыпь у соответствующих повреждений",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-G10",
+      "requirement": "Поддерживаемый участок до события, настоящий обвал",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-G11",
+      "requirement": "Настоящий провал без скрытой дорожной коллизии",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/fault-support-readback-02/readback.json"
+      ],
+      "scope_note": "На актуальной сохранённой карте 20 попаданий в кромку и 30 проб ниже уровня дороги. Открыты экспорт blocked-grid и физическое движение.",
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-G12",
+      "requirement": "Пять состояний стекла, реальные отверстия/осколки",
+      "status": "verified",
+      "evidence": [
+        "artifacts/quarter-v3/blender-verification.json",
+        "D:/MetaRescue-output/checks/city-sections-repair-01/verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-windows-bindings-09/city-verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Пять состояний на трёх размерах. Проверены активные секции материала, вид через отверстие, трещины и оставшиеся осколки на нативных кадрах."
+    },
+    {
+      "id": "V3-G13",
+      "requirement": "Отражения/тонирование/грязь/трещины/normal/roughness",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/checks/city-sections-repair-01/verification.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-windows-bindings-09/city-verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Секции стекла, маски, прозрачность и внешние кадры подтверждены. Итоговый осмотр отражений и материалов старой карты ещё нужен."
+    },
+    {
+      "id": "V3-G14",
+      "requirement": "Помещения: толщина, пол/потолок/перегородки,3модуля",
+      "status": "partial",
+      "evidence": [
+        "artifacts/quarter-v3/scenery-module-datum-inspection.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-windows-bindings-09/city-verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Проверены исходные модули и нативное освещение через исправленное стекло. Для старой карты нужен свежий сравнительный интерьер."
+    },
+    {
+      "id": "V3-E00",
+      "requirement": "Defaults12/12/10/14/14/15/12/20%, seed/горизонт единым блоком",
+      "status": "verified",
+      "evidence": [
+        "environment/config.py",
+        "tests/test_event_tape.py",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-baseline-01-fixed30-zero/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Восемь чисел v3, окно 30 с и seed/горизонт в едином манифесте. Профиль v0.5.2 проверяется отдельно на 80 с."
+    },
+    {
+      "id": "V3-E01",
+      "requirement": "Одна попытка каждого типа на район каждые30с",
+      "status": "partial",
+      "evidence": [
+        "tests/test_event_tape.py",
+        "D:/MetaRescue-output/checks/event-v3-horizon-after-01.log",
+        "D:/MetaRescue-output/core-acceptance/defense-v3-boundary-packaged-07/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Core Python дал восемь попыток на окно при 100%. Нативный повтор проверил fire/flood на 30, 60 и 90 с при горизонте 90,005 с. Все восемь типов старой карты проверяются отдельно."
+    },
+    {
+      "id": "V3-E02",
+      "requirement": "Seed не зависит от физики/эффектов/агентов",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E03",
+      "requirement": "Spreadfire/flood: два окна .72/.65",
+      "status": "partial",
+      "evidence": [
+        "environment/events.py",
+        "D:/MetaRescue-output/checks/event-v3-horizon-before-01.log",
+        "D:/MetaRescue-output/checks/event-v3-horizon-after-01.log",
+        "D:/MetaRescue-output/core-acceptance/defense-v3-boundary-packaged-07/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Исправлено сжатие стадий на 479,98 с. Две нативные ленты с +30/+60 совпали, одна стадия затопления исполнена в 90 с, стадии за горизонтом пропущены."
+    },
+    {
+      "id": "V3-E04",
+      "requirement": "Подходящие места и защищённая база",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E05",
+      "requirement": "Нули выключают все первичные/вторичные события и старые таймеры",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-baseline-01-fixed30-zero/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E06",
+      "requirement": "Отдельный явно обозначенный showcase",
+      "status": "partial",
+      "evidence": [
+        "artifacts/quarter-v3/showcase-first-160/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "В старом showcase исполнялись восемь типов. Свежий нативный скринкаст и итоговая визуальная проверка впереди."
+    },
+    {
+      "id": "V3-E10",
+      "requirement": "Обрушение: подготовленный фрагмент, крупные тела, ударная пыль и осыпь",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E11",
+      "requirement": "Пожар: многослойный огонь, дым, угли, мерцание света, копоть",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E12",
+      "requirement": "Вода: источник, рост площади/уровня, рябь, мокрая граница, пена",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E13",
+      "requirement": "Грязь: неоднородность, колеи, лужи, брызги; стоимость 2.25, реальная скорость и энергия",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E14",
+      "requirement": "Дорога: трещины, просадка, смещение фрагментов; проходимость, стоимость 1.90",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E15",
+      "requirement": "Дым: подъём, перенос, рассеивание; .52 на 90 с",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E16",
+      "requirement": "Плохая видимость: плавная завеса, .62 на 100 с; совместное перемножение",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E17",
+      "requirement": "Поздний человек: раскрытие/сигнал; наблюдение раньше получения точных координат",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-E18",
+      "requirement": "Частицы не владеют последствиями; bounds и дальность",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P01",
+      "requirement": "Силы/момент, лучевые опоры, груз и механизмы",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P02",
+      "requirement": "Габарит, тормозной путь, задний ход",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P03",
+      "requirement": "Перекрёсток, очередь, временное уступание отдельно от блокировки",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P04",
+      "requirement": "Дроны: размах роторов, эшелоны, пересечение на одной высоте, остановка у здания",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P05",
+      "requirement": "Посадка, остановка роторов",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P06",
+      "requirement": "Фургон проверяет свободное место и не проходит сквозь технику",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P07",
+      "requirement": "Блокировка сохраняет позу/груз/назначение; замена маршрута продолжает движение",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P08",
+      "requirement": "Уход временного препятствия разрешает продолжение",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-P09",
+      "requirement": "Энергия по реальному движению и поверхности; ожидание не создаёт путь",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I01",
+      "requirement": "Маршрут в метрах, command ID, hold/replace без телепортации",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I02",
+      "requirement": "Поза, скорость, состояние, груз, причина остановки",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I03",
+      "requirement": "Стоимость, глубина, видимость, ревизия",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I04",
+      "requirement": "Экспорт геометрии, единицы, границы",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I05",
+      "requirement": "Скрытая и будущая истина отделена от наблюдений",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-I06",
+      "requirement": "Диспетчер отключаем, Core Protocol не меняется, нового HTTP нет",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V01",
+      "requirement": "Сборка окончательной ревизии UE",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/build69-defense.log",
+        "D:/MetaRescue-output/automation/20261112T141745494854Z/verification.json",
+        "D:/MetaRescue-output/releases/windows-candidate-07-v3-clock/build-manifest.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Исходная build69 и нативная Win64-часть прошли сборку. Automation 11/11."
+    },
+    {
+      "id": "V3-V02",
+      "requirement": "Blender и проверка импортов",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/city-props/rescue-props-preparation-01/prepared-r2/blender-readback.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/import-city-props-r2-01/readback.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/readback-authored-quarter-02/readback.json",
+        "D:/MetaRescue-output/checks/defense-parallel-integration-01/import-effects-r3-02/verification.json"
+      ],
+      "scope_note": "Пять предметов прочитаны в Blender и UE, барьеры и балка проверены в карте. Визуальная перевозка носилок и cooked приёмка открыты.",
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V03",
+      "requirement": "Исходный v0.3: 30 тестов",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/regression-build67-v03.log"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "30 тестов исходного v0.3 на текущем checkout прошли."
+    },
+    {
+      "id": "V3-V04",
+      "requirement": "Контракт: 15 тестов",
+      "status": "verified",
+      "evidence": [
+        "artifacts/quarter-v3/acceptance-contract-tests.log",
+        "D:/MetaRescue-output/checks/root-acceptance-26-candidate03.log"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Исходный набор 15/15 и общий актуальный набор с контрактными проверками прошли."
+    },
+    {
+      "id": "V3-V05",
+      "requirement": "Приёмочные инструменты не скрывают ошибки",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/checks/regression-build67-unreal-tools.log",
+        "artifacts/quarter-v3/acceptance-native-audit-team01-team02.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "10 тестов приёмочных инструментов прошли. Старые ошибки финиша, контактов и freeze сохранены."
+    },
+    {
+      "id": "V3-V06",
+      "requirement": "0/100%, replay, распространение, окончание, наложение",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V07",
+      "requirement": "Статическая база с доставкой",
+      "status": "partial",
+      "evidence": [
+        "artifacts/3d-world/verified-library-v2/quarter-verification.json",
+        "D:/MetaRescue-output/missions/standalone-18-static-r3-city22/native-archive-verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Три доставки на v2 и 3/3 на новом Core. Fresh legacy static270 остаётся самостоятельной проверкой."
+    },
+    {
+      "id": "V3-V08",
+      "requirement": "Три случайных seed по 480 с",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V09",
+      "requirement": "60 FPS при 1600×1000 после прогрева; память, p95, тяжёлые случаи",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V10",
+      "requirement": "RescueDistrict сохранён и работает",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "V3-V11",
+      "requirement": "До/после, видео эффектов, телеметрия, настройки и интеграция",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/deliverables/MetaEvolution-Rescue-review-2026-11-13.zip",
+        "D:/MetaRescue-output/core-acceptance/core-competition-08-orbital-render/verification.json"
+      ],
+      "source": "quarter-v3-acceptance-matrix.md",
+      "scope_note": "Готовы обзорное видео отказа и передачи, данные миссии и орбитальный кадр. Нужен свежий монтаж эффектов v3."
+    },
+    {
+      "id": "V3-V12",
+      "requirement": "Итоговый diff, ограничения, отсутствие чужих потерь",
+      "status": "pending",
+      "evidence": [],
+      "source": "quarter-v3-acceptance-matrix.md"
+    },
+    {
+      "id": "ADD-01",
+      "requirement": "Реально просмотренные фото/видео катастроф: каталог 20–30 содержательных референсов до художественных правок",
+      "status": "verified",
+      "evidence": [
+        "docs/disaster-reference-study.md",
+        "docs/city-v2-design.md"
+      ],
+      "stage": 2,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "scope_note": "До художественных правок просмотрены 19 фото и два видео по восьми отобранным кадрам, плюс схема пользователя. Связь признаков с эффектами описана в каталоге."
+    },
+    {
+      "id": "ADD-02",
+      "requirement": "Нерегулярная связная планировка: разные направления/ширины, T-перекрёстки, дворы и физические проезды, новая версия 25..150",
+      "status": "verified",
+      "evidence": [
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v20-irregular-first-01/city-verification.json",
+        "D:/MetaRescue-output/missions/standalone-06-irregular/irregular-verification.json",
+        "tests/test_city_streets.py",
+        "D:/MetaRescue-output/checks/series-preflight-r3-access-01.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-horizon-buildings-10/Screenshots/quarter-overview.png",
+        "D:/MetaRescue-output/missions/standalone-18-static-r3-city22/native-archive-verification.json"
+      ],
+      "stage": 2,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "scope_note": "В нативном обзоре видны разная ширина и направления улиц, T-перекрёстки и дворы. Проверены связность 30 исходных карт, четыре выхода и маршруты доставки на нерегулярных картах."
+    },
+    {
+      "id": "ADD-03",
+      "requirement": "Плотный причинно разрушенный город: геометрия, тяжёлые завалы, инфраструктура, растительность, читаемая атмосфера",
+      "status": "partial",
+      "evidence": [
+        "docs/city-v2-design.md",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v21-foliage-r3-05/city-verification.json"
+      ],
+      "stage": 2,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11"
+    },
+    {
+      "id": "ADD-04",
+      "requirement": "Ограниченные физические вторичные обвалы с обновлением наблюдений и проходимости; без полной разрушаемости",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/core-acceptance/core-events-04-effects/verification.json",
+        "docs/core-events.md"
+      ],
+      "stage": 3,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "scope_note": "Три локальных физических тела, обновление наблюдений и воспроизводимый reset. Конструктивные детали и нагрузочная проверка впереди."
+    },
+    {
+      "id": "ADD-05",
+      "requirement": "Цветные фактически пройденные 3D-траектории: легенда/переключатель, bounded память, reset/pause/replay",
+      "status": "partial",
+      "evidence": [
+        "docs/product-runtime.md",
+        "D:/MetaRescue-output/checks/product-ui-03/verification.json",
+        "D:/MetaRescue-output/automation/20261112T074053714791Z/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-04/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/first-episode-verification.json"
+      ],
+      "stage": 7,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "scope_note": "В Windows-сборке видны разные фактические следы роботов и дронов. На паузе переключатель меняет 0/1657 сегментов при сохранённых состоянии и истории. Replay и длительный максимум впереди."
+    },
+    {
+      "id": "ADD-06",
+      "requirement": "Аудит всех 12 PolyHaven наборов и качественные производные/реальное размещение подходящих деревьев, стволов, пней и веток с native-проверками",
+      "status": "verified",
+      "stage": 2,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "evidence": [
+        "D:/MetaRescue-output/city-vegetation/20261111T214239637884Z/manifest.json",
+        "D:/MetaRescue-output/city-vegetation/20261111T214239637884Z/20261111T220859130984Z-unreal-import.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v21-foliage-r3-05/city-verification.json",
+        "D:/MetaRescue-output/core-acceptance/core-city-01-tree-detour/verification.json",
+        "docs/city-v2-design.md"
+      ],
+      "scope_note": "Просмотрены 12 оригиналов, семь подходящих моделей подготовлены и отрисованы. Физическое торможение и объезд ствола проверены по HTTP."
+    },
+    {
+      "id": "ADD-07",
+      "requirement": "Постоянный подробный API учёт: usage/cache/unknown, UTC/попытки/исходы/применение, тарифы Decimal, стоимость и cumulative/run JSON/CSV/TXT без двойного учёта replay",
+      "status": "partial",
+      "stage": 7,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "evidence": [
+        "docs/api-accounting.md",
+        "D:/MetaRescue-output/checks/api-accounting-03.log",
+        "D:/MetaRescue-output/api-accounting/ai-budget/recoveries/20261111T141138205805Z/proof.json",
+        "D:/MetaRescue-output/missions/standalone-02-accounting/verification.json",
+        "docs/analytics-runtime.md",
+        "D:/MetaRescue-output/checks/analytics-browser-01/verification.json",
+        "D:/MetaRescue-output/checks/product-ui-06/live-ledger-verification.json"
+      ],
+      "scope_note": "Общий счётчик, отчёт MOCK и web-представление проверены. Оконный LIVE добавил 7 успешных попыток с 29 291 токеном, общий счётчик 13/240. Повтор ответов с подтверждённой физической командой и отдельная сверка актуальной стоимости остаются в приёмке."
+    },
+    {
+      "id": "ADD-08",
+      "requirement": "Поиск действительно недостающих 3D-моделей с альтернативами, проверкой лицензии/хэшей и интеграцией в игру; source/derivative/placement/native evidence",
+      "status": "partial",
+      "stage": 2,
+      "source": "docs/additional-tasks.md",
+      "accepted_date": "2026-11-11",
+      "evidence": [
+        "docs/city-v2-design.md",
+        "D:/MetaRescue-output/city-props/covered-car/polyhaven/covered_car/source-manifest.json",
+        "D:/MetaRescue-output/city-props/covered-car/20261111T221540480233Z/20261111T221612761920Z-unreal-import.json",
+        "D:/MetaRescue-output/quarter-v3/runs/v052-city-v22-350-03/city-verification.json",
+        "D:/MetaRescue-output/competition-assets/source-20261112T092508764086Z/source-manifest.json",
+        "D:/MetaRescue-output/competition-assets/prepared-02/unreal-import.json",
+        "D:/MetaRescue-output/core-acceptance/core-competition-06-build66-annex/verification.json"
+      ],
+      "scope_note": "Covered Car размещён в городе. Husky, BlueBoat и BlueROV2 прошли подготовку, readback UE и движение в соответствующих средах. Свежий визуальный прогон трёх моделей ещё предстоит."
+    },
+    {
+      "id": "ADD-09",
+      "requirement": "Обоснованный метод из лекций в действующей миссии, математическая модель, проверка, измерение и объяснение для защиты",
+      "status": "verified",
+      "stage": 5,
+      "accepted_date": "2026-11-13",
+      "source": "docs/additional-tasks.md",
+      "evidence": [
+        "docs/lecture-assignment.md",
+        "tests/test_assignment.py",
+        "D:/MetaRescue-output/checks/add09-root-20261113-01.log",
+        "D:/MetaRescue-output/checks/add09-v052-20261113-01.log",
+        "D:/MetaRescue-output/checks/add09-lecture-study-01/overhead.json",
+        "D:/MetaRescue-output/checks/add09-native-20261113-04/verification.json",
+        "D:/MetaRescue-output/checks/add09-native-20261113-04/same-observation-comparison.json",
+        "D:/MetaRescue-output/checks/add09-root-20261113-03.log"
+      ],
+      "scope_note": "LP-назначение в явном optional initializer. На23с два назначения совпали с выбранным геномом, реальная миссия3/3. Парный исход одинаков438,9667с и0contacts; превосходство не заявляется. Default five policies preserved."
+    },
+    {
+      "id": "ADD10",
+      "requirement": "Две команды: cross-team v8/portable v9, реальные доказательства и записка PREX/PDF по референсам",
+      "status": "verified",
+      "evidence": [
+        "docs/additional-tasks.md",
+        "ПЗ/Пояснительная записка M5 новая 2026-11-13.pdf",
+        "controller_team2/cross-team2-controller-interop-v8.zip",
+        "controller_team2/metaroi-controller-portable-v9.zip",
+        "docs/cross-team2-final-2026-11-13.md",
+        "D:/MetaRescue-output/checks/m5-final-20261113-01/forward-v8/verification.json",
+        "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-rendered-123456-r2/interop-verification.json",
+        "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-123457/interop-verification.json",
+        "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-123458/interop-verification.json",
+        "D:/MetaRescue-output/checks/pz-final-20261113-01/verification.json"
+      ],
+      "scope_note": "Два направления на трёхseed проверены до23:59. Наш исходныйv8:5400принятых шагов, clean close,0нарушений, воздушная разведка/0спасённых; чужойv9:2/3,0/3,0/3 при time_limit480,0контактов. Отдельный мостv8.1 устранил10053,16/16; оригиналы сохранены. ПЗ34страницы/16изображений/3таблицы в PREX/PDF из одногоисточника; все34просмотрены. Это выполненные испытания с указанными исходами, не весьтурнир/универсальнаяпереносимость/успешнаячужаяэвакуация."
+    }
+  ],
+  "external_tournament": {
+    "status": "partial",
+    "report": "docs/cross-team2-final-2026-11-13.md",
+    "evidence": [
+      "D:/MetaRescue-output/checks/m5-final-20261113-01/forward-v8/verification.json",
+      "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-rendered-123456-r2/interop-verification.json",
+      "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-123457/interop-verification.json",
+      "D:/MetaRescue-output/checks/m5-final-20261113-01/native-v9-123458/interop-verification.json"
+    ],
+    "note": "Real supplied foreign code tested locally in both directions, three seeds each. Pythonv8 only public air survey (0 rescue). Nodev9 rescues2/3 on one world and0/3 on two; all time_limit. No agreed tournament Q or independently archived partner-machine report. Full tournament not claimed."
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "format": "metarescue.city-vegetation.v2.r3",
+  "preparation_manifest_sha256": "dcc7380ec9ada576007fced9aa6fd7343ae201d0db9d60e4ec0042dace904258",
+  "models": [
+    {
+      "id": "street_linden",
+      "asset": "tree_small_02",
+      "kind": "living_tree",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/Source/SM_street_linden_85e3c9392099.SM_street_linden_85e3c9392099",
+      "source_object": "tree_small_02_LOD1",
+      "source_sha256": "3c28e4ebded582d6539afeac7e5ccce6cb950830a94f1fe38135a45264145de5",
+      "fbx_sha256": "85e3c93920998c24fd2e7aa669450783e2b54a1ab3380b3eadd3741e95997d00",
+      "bounds_m": {
+        "min": [
+          -1.312243,
+          -1.373786,
+          0.0
+        ],
+        "max": [
+          1.61543,
+          2.928149,
+          4.577112
+        ]
+      },
+      "triangles": 71931,
+      "materials": [
+        {
+          "slot": "tree_small_02_branches",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_tree_small_02_branches_ad81e9311f.M_tree_small_02_branches_ad81e9311f",
+          "masked": false
+        },
+        {
+          "slot": "tree_small_02_leaves",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_tree_small_02_leaves_e6c1f19e60.M_tree_small_02_leaves_e6c1f19e60",
+          "masked": true
+        },
+        {
+          "slot": "tree_small_02_trunk",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_tree_small_02_trunk_b647aedbbc.M_tree_small_02_trunk_b647aedbbc",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "pine_sapling",
+      "asset": "pine_sapling_small",
+      "kind": "living_tree",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/Source/SM_pine_sapling_4f6c5dd798a4.SM_pine_sapling_4f6c5dd798a4",
+      "source_object": "pine_sapling_small_a",
+      "source_sha256": "be93e781626ac672e8e5c8b52953dd41db7c135cdec85abd5a8b2d9cae02966a",
+      "fbx_sha256": "4f6c5dd798a4365750a5b709cd4d41ac577e1e9744e88f8da4f737036d28f2f0",
+      "bounds_m": {
+        "min": [
+          -0.370309,
+          -0.368545,
+          0.0
+        ],
+        "max": [
+          0.417876,
+          0.358475,
+          1.299165
+        ]
+      },
+      "triangles": 36000,
+      "materials": [
+        {
+          "slot": "pine_sapling_small_bark",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_pine_sapling_small_bark_453849b7b8.M_pine_sapling_small_bark_453849b7b8",
+          "masked": false
+        },
+        {
+          "slot": "pine_sapling_small_twig",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_pine_sapling_small_twig_1672a134dc.M_pine_sapling_small_twig_1672a134dc",
+          "masked": true
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/pine_sapling_small",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fallen_trunk",
+      "asset": "dead_tree_trunk",
+      "kind": "fallen",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/SM_fallen_trunk_30dc8b59b060_opaque.SM_fallen_trunk_30dc8b59b060_opaque",
+      "source_object": "dead_tree_trunk",
+      "source_sha256": "1053bd17021eb3c0d2c23cc607823d05818bc4ccf25e537bd55888f9dfe671b2",
+      "fbx_sha256": "30dc8b59b060c7fe3ba3f0b20144888405d2334d5b5815023f7d5dfccf8987a5",
+      "bounds_m": {
+        "min": [
+          -1.525076,
+          -0.138611,
+          0.0
+        ],
+        "max": [
+          1.525076,
+          0.138611,
+          0.290114
+        ]
+      },
+      "triangles": 22000,
+      "materials": [
+        {
+          "slot": "dead_tree_trunk",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_dead_tree_trunk_1b797e6ff1.M_dead_tree_trunk_1b797e6ff1",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/dead_tree_trunk",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fallen_crown",
+      "asset": "dead_tree_trunk_02",
+      "kind": "fallen",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/SM_fallen_crown_b4aa0472b14a_opaque.SM_fallen_crown_b4aa0472b14a_opaque",
+      "source_object": "dead_tree_trunk_02_LOD2",
+      "source_sha256": "e88b4aaa4c66c033665f80f7c1d5e6e8bba343077811b30f4ce0f1485b503eac",
+      "fbx_sha256": "b4aa0472b14aee806544c83711ed2bf2e831e8f63ac7158db038c9e78f684adf",
+      "bounds_m": {
+        "min": [
+          -2.026202,
+          -0.528305,
+          0.0
+        ],
+        "max": [
+          2.026202,
+          0.528305,
+          1.055176
+        ]
+      },
+      "triangles": 20782,
+      "materials": [
+        {
+          "slot": "dead_tree_trunk_02",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_dead_tree_trunk_02_4961801215.M_dead_tree_trunk_02_4961801215",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "stump_low",
+      "asset": "tree_stump_01",
+      "kind": "stump",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/SM_stump_low_16e5c46d14be_opaque.SM_stump_low_16e5c46d14be_opaque",
+      "source_object": "tree_stump_01",
+      "source_sha256": "145c562079226ab56314b34c32fe5e6a205f28f4727d5f4b7fc9e7639e812bcd",
+      "fbx_sha256": "16e5c46d14be05154e87de7a06da78abd6bb674502dbd2503febc32dd9449338",
+      "bounds_m": {
+        "min": [
+          -0.712793,
+          -0.795094,
+          0.0
+        ],
+        "max": [
+          0.712793,
+          0.795094,
+          0.572259
+        ]
+      },
+      "triangles": 14499,
+      "materials": [
+        {
+          "slot": "tree_stump_01",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_tree_stump_01_5840e70ee3.M_tree_stump_01_5840e70ee3",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "stump_split",
+      "asset": "tree_stump_02",
+      "kind": "stump",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/SM_stump_split_bac67a616517_opaque.SM_stump_split_bac67a616517_opaque",
+      "source_object": "tree_stump_02",
+      "source_sha256": "48bb58c5e5c15c688e4f8be86272fcd5cb122347e960698c0a6a58887f84afe1",
+      "fbx_sha256": "bac67a616517acb993c2d34199b4e6a41c6421ab296bf2f1c2e5a27035cae25b",
+      "bounds_m": {
+        "min": [
+          -0.760929,
+          -0.696193,
+          0.0
+        ],
+        "max": [
+          0.760929,
+          0.696193,
+          0.52289
+        ]
+      },
+      "triangles": 16499,
+      "materials": [
+        {
+          "slot": "tree_stump_02",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_tree_stump_02_4d9d510acc.M_tree_stump_02_4d9d510acc",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/tree_stump_02",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "dry_branches",
+      "asset": "dry_branches_medium_01",
+      "kind": "branches",
+      "mesh": "/Game/RescueAssets/CityV2/VegetationR3/SM_dry_branches_9b8b2343c81e_opaque.SM_dry_branches_9b8b2343c81e_opaque",
+      "source_object": "dry_branches_medium_01_a",
+      "source_sha256": "0cb5b0623501dfbc3158db391574cf720815b40608d557922654ef19527359d2",
+      "fbx_sha256": "9b8b2343c81eedb0bdde15999f0bd0f1dce8072facb6ac889ff7ce66578cb821",
+      "bounds_m": {
+        "min": [
+          -0.161532,
+          -0.649576,
+          0.0
+        ],
+        "max": [
+          0.161532,
+          0.649576,
+          0.340985
+        ]
+      },
+      "triangles": 5933,
+      "materials": [
+        {
+          "slot": "dry_branches_medium_01",
+          "asset": "/Game/RescueAssets/CityV2/VegetationR3/Materials/M_dry_branches_medium_01_420506689c.M_dry_branches_medium_01_420506689c",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/dry_branches_medium_01",
+      "license": "CC0-1.0"
+    }
+  ]
+}

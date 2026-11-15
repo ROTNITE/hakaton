@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MetaRescue Benchmark · v0.3</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-symbol">M<span>R</span></div><div><strong>METARESCUE</strong><small>BENCHMARK · V0.3</small></div></div>
+  <div class="side-intro">ЭКСПЕРИМЕНТАЛЬНАЯ СРЕДА</div>
+  <h2>Условия испытания</h2>
+  <form id="settings">
+    <label for="seed">Seed генерации</label><input id="seed" name="seed" type="number" value="2026" min="0" max="100000000" required>
+    <label for="scenario">Сценарий карты</label>
+    <select id="scenario" name="scenario">
+      <option value="open">S1 · Открытая местность</option><option value="urban" selected>S2 · Разрушенный город</option>
+      <option value="clusters">S3 · Скопления людей</option><option value="scarce">S4 · Дефицит энергии</option>
+      <option value="uncertain">S5 · Неопределённость</option><option value="dynamic">S6 · Отказ эвакуатора</option>
+    </select>
+    <label for="map_size">Размер карты</label>
+    <select id="map_size" name="map_size"><option value="25" selected>25 × 25 · 250 м</option><option value="35">35 × 35 · 350 м</option><option value="45">45 × 45 · 450 м</option><option value="55">55 × 55 · 550 м</option><option value="65">65 × 65 · 650 м</option></select>
+    <div class="two-up">
+      <div><label for="people">Людей (3–80)</label><input id="people" name="people" type="number" min="3" max="80" value="16" required></div>
+      <div><label for="scouts">Дронов (1–10)</label><input id="scouts" name="scouts" type="number" min="1" max="10" value="3" required></div>
+    </div>
+    <label for="rescuers">Наземных эвакуаторов (1–12)</label><input id="rescuers" name="rescuers" type="number" min="1" max="12" value="4" required>
+    <div class="subheading">ВЕРОЯТНОСТИ СОБЫТИЙ</div>
+    <p class="hint">Каждый процент — вероятность возникновения события за каждые <b>30 модельных секунд</b>. 0% отключает тип события.</p>
+    <div id="prob-controls">
+      <div class="prob-row"><label for="collapse">Обрушение</label><output for="collapse">12%</output><input id="collapse" name="collapse" type="range" min="0" max="100" step="5" value="12"></div>
+      <div class="prob-row"><label for="fire">Пожар</label><output for="fire">12%</output><input id="fire" name="fire" type="range" min="0" max="100" step="5" value="12"></div>
+      <div class="prob-row"><label for="flood">Затопление</label><output for="flood">10%</output><input id="flood" name="flood" type="range" min="0" max="100" step="5" value="10"></div>
+      <div class="prob-row"><label for="mud">Грязь</label><output for="mud">14%</output><input id="mud" name="mud" type="range" min="0" max="100" step="5" value="14"></div>
+      <div class="prob-row"><label for="road_damage">Повреждение дороги</label><output for="road_damage">14%</output><input id="road_damage" name="road_damage" type="range" min="0" max="100" step="5" value="14"></div>
+      <div class="prob-row"><label for="smoke">Дым</label><output for="smoke">15%</output><input id="smoke" name="smoke" type="range" min="0" max="100" step="5" value="15"></div>
+      <div class="prob-row"><label for="low_visibility">Плохая видимость</label><output for="low_visibility">12%</output><input id="low_visibility" name="low_visibility" type="range" min="0" max="100" step="5" value="12"></div>
+      <div class="prob-row"><label for="new_target">Новый пострадавший</label><output for="new_target">20%</output><input id="new_target" name="new_target" type="range" min="0" max="100" step="5" value="20"></div>
+    </div>
+    <button id="new-run" class="primary" type="submit">↻ &nbsp; Создать испытание</button>
+    <p id="status" role="status" class="hint status">Подготовка симуляции…</p>
+  </form>
+  <div class="sidebar-foot">Данные моделирования синтетические. NSGA-II не гарантирует победу.</div>
+</aside>
+<main>
+  <header class="topbar"><div><span class="eyebrow">ИССЛЕДОВАНИЕ АЛГОРИТМОВ КООПЕРАЦИИ</span><h1>Поиск и эвакуация <em>в меняющейся среде</em></h1><p id="subtitle">Пять алгоритмов, общая карта, одинаковые события и ресурсы.</p></div><div class="version">LIVE SIMULATION <span>0.3</span></div></header>
+  <nav class="mode-nav" aria-label="Режимы"><a href="/mission" data-page="mission">01 &nbsp; Общая миссия</a><a href="/scout" data-page="scout">02 &nbsp; Разведка</a><a href="/rescue" data-page="rescue">03 &nbsp; Эвакуация</a></nav>
+  <section class="stats" id="stats"><div class="stat"><span>МОДЕЛЬНОЕ ВРЕМЯ</span><strong id="stat-time">0.0 с</strong><small id="stat-horizon">Лимит: 480 с</small></div><div class="stat"><span>ЛИДЕР ПО БАЛЛАМ</span><strong id="stat-leader">—</strong><small>По текущим результатам</small></div><div class="stat"><span>КОЛИЧЕСТВО ЦЕЛЕЙ</span><strong id="stat-targets">—</strong><small>Первоначальные + новые</small></div><div class="stat"><span>ВОЗМУЩЕНИЙ</span><strong id="stat-events">—</strong><small>Задано общим календарём</small></div></section>
+  <section class="playback card"><div class="playback-top"><h2>Ход испытания</h2><div class="actions"><button id="play-btn" type="button" class="light-btn">▶ Запустить</button><button id="step-btn" type="button" class="ghost-btn">+ 10 с</button><label class="speed">Скорость <select id="speed"><option value="2">0.5×</option><option value="6" selected>1×</option><option value="24">4×</option><option value="60">10×</option><option value="180">30×</option></select></label></div></div><div class="slider-line"><time id="clock">00:00</time><input type="range" id="time-slider" min="0" max="480" step="1" value="0" aria-label="Модельное время"><time id="end-clock">08:00</time></div><p class="hint">Синяя точка — дрон, оранжевая — эвакуатор, зелёная — обнаруженный человек. Новые сигналы обозначены на карте.</p></section>
+  <section><div class="section-head"><div><span class="eyebrow">СРАВНЕНИЕ В ОДИНАКОВЫХ УСЛОВИЯХ</span><h2 id="method-title">Пять стратегий общей миссии</h2></div><span id="scene-details" class="muted">25 × 25 · 2D</span></div><div id="panels" class="panels"></div></section>
+  <section class="analysis-grid">
+    <article class="card"><h2 id="chart-title">Спасённые по времени</h2><p class="section-description">Каждый алгоритм показан отдельно, с одинаковыми осями времени и количества людей.</p><div id="progress-chart" class="progress-stack"></div></article>
+    <article class="card"><h2>Календарь событий</h2><p class="section-description">Одинаковые изменения для всех алгоритмов. Выделены уже произошедшие.</p><div id="event-list" class="event-list"></div></article>
+  </section>
+  <section class="card summary"><div class="section-head"><div><span class="eyebrow">РЕЗУЛЬТАТЫ</span><h2>Сводная таблица и рейтинг</h2></div><span id="table-time" class="muted">На текущий момент</span></div><div class="table-scroll"><table id="results-table"></table></div><div id="score-method" class="formula"></div><p class="hint">Время окончания работы — последняя рассчитанная активность робота или дрона, а не подтверждение выполнения всех задач. «Рейс» — среднее время от выезда эвакуатора до доставки человека на базу. «Темп» — спасённых человек в минуту до последней доставки.</p></section>
+  <section class="footer-grid"><article class="card"><h2>Фронт Парето NSGA-II</h2><p class="section-description">Последний выполненный локальный поиск NSGA-II. Оси — прогнозируемые время и расход энергии; не итог всей миссии.</p><div id="pareto-chart"></div></article><article class="card"><h2>События и решения</h2><p class="section-description">Как изменялись маршруты и назначения у выбранного алгоритма.</p><label class="small-label" for="log-method">Алгоритм</label><select id="log-method"></select><div id="decision-log" class="decision-log"></div></article></section>
+  <div class="legend"><span><i class="swatch" style="background:#263b4b"></i>Земля</span><span><i class="swatch" style="background:#546478"></i>Здание</span><span><i class="swatch" style="background:#806958"></i>Завалы</span><span><i class="swatch" style="background:#1b5366"></i>Вода</span><span><i class="swatch" style="background:#c95050"></i>Обвал / огонь</span><span><i class="swatch" style="background:#297b9b"></i>Паводок</span><span><i class="swatch" style="background:#917551"></i>Грязь / дорога</span><span><i class="swatch" style="background:#9aabb9"></i>Дым / туман</span></div>
+  <footer>MetaRescue Benchmark · Offline Python simulation · Synthetic research prototype · v0.3</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Secret.env
+secret.env
+config.env
+*.log
+__pycache__/
+venv/*
+!venv/README.txt

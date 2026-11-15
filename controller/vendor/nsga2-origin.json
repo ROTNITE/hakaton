@@ -1,0 +1,9 @@
+{
+  "format": "metarescue.algorithm-origin.v1",
+  "source": "benchmarks/MetaRescue_Benchmark_v0_5_2/main part/nsga2.py",
+  "destination": "controller/vendor/nsga2_v052.py",
+  "sha256": "714da96ba5bd955809404af6476afa0bef0e59137954a973dff17dc98c7e4a12",
+  "modified": false,
+  "imported_at": "2026-11-11T09:39:45.541896+00:00",
+  "scope": "pure NSGA-II only; no World, sensors, event tape or private target data"
+}

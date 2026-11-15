@@ -1,0 +1,181 @@
+{
+  "format": "city-foliage-1",
+  "source_manifest": "D:\\MetaRescue-output\\city-foliage\\20261111T085803833469Z\\manifest.json",
+  "models": [
+    {
+      "variant": 0,
+      "height_m": 5.5,
+      "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_0_5b212a4dae9d_opaque.SM_StreetTree_0_5b212a4dae9d_opaque",
+      "geometry": {
+        "available": true,
+        "raw_geometry_sha1": "349F0D3297D849AE84B07BA384C36589F294CCF0",
+        "vertices": 1144,
+        "triangles": 2156,
+        "nanite_enabled": false,
+        "fallback_triangle_fraction": 1,
+        "fallback_target": "other",
+        "source_min_cm": [
+          -189.63690185546875,
+          -182.97412109375,
+          0
+        ],
+        "source_max_cm": [
+          188.75759887695312,
+          181.16091918945312,
+          550
+        ],
+        "build_scale": [
+          1,
+          1,
+          1
+        ],
+        "render_extent_cm": [
+          189.19725036621094,
+          182.06752014160156,
+          275
+        ],
+        "positive_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ],
+        "negative_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ]
+      },
+      "triangle_preservation": {
+        "verified": true,
+        "source_triangles": 2156,
+        "parts": [
+          {
+            "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_0_5b212a4dae9d_opaque.SM_StreetTree_0_5b212a4dae9d_opaque",
+            "kind": "opaque",
+            "triangles": 2156,
+            "nanite": true
+          }
+        ],
+        "check": "all source triangles, positions, normals, UV channels and material slots preserved exactly across parts"
+      },
+      "fbx_sha256": "5b212a4dae9dc840084eb2e5e0fe8c54293caf9cb7147388a2c8a19ebe458ad0"
+    },
+    {
+      "variant": 1,
+      "height_m": 6.5,
+      "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_1_caa8b8e9f8e0_opaque.SM_StreetTree_1_caa8b8e9f8e0_opaque",
+      "geometry": {
+        "available": true,
+        "raw_geometry_sha1": "4670C06FDA4EDD2296B8F4C3C209F0F019BF078D",
+        "vertices": 1144,
+        "triangles": 2156,
+        "nanite_enabled": false,
+        "fallback_triangle_fraction": 1,
+        "fallback_target": "other",
+        "source_min_cm": [
+          -178.77919006347656,
+          -191.88845825195312,
+          0
+        ],
+        "source_max_cm": [
+          192.5479278564453,
+          194.55862426757812,
+          650
+        ],
+        "build_scale": [
+          1,
+          1,
+          1
+        ],
+        "render_extent_cm": [
+          185.66355895996094,
+          193.22354125976562,
+          325
+        ],
+        "positive_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ],
+        "negative_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ]
+      },
+      "triangle_preservation": {
+        "verified": true,
+        "source_triangles": 2156,
+        "parts": [
+          {
+            "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_1_caa8b8e9f8e0_opaque.SM_StreetTree_1_caa8b8e9f8e0_opaque",
+            "kind": "opaque",
+            "triangles": 2156,
+            "nanite": true
+          }
+        ],
+        "check": "all source triangles, positions, normals, UV channels and material slots preserved exactly across parts"
+      },
+      "fbx_sha256": "caa8b8e9f8e0c67a27a64901fd3a9e2bccd73db68030b786b7f6c13cd3cfc4ce"
+    },
+    {
+      "variant": 2,
+      "height_m": 7.5,
+      "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_2_3a071df0caf9_opaque.SM_StreetTree_2_3a071df0caf9_opaque",
+      "geometry": {
+        "available": true,
+        "raw_geometry_sha1": "C64C8AC4D1EB22A6D8F2B47EAFA4FCF81298B88D",
+        "vertices": 1144,
+        "triangles": 2156,
+        "nanite_enabled": false,
+        "fallback_triangle_fraction": 1,
+        "fallback_target": "other",
+        "source_min_cm": [
+          -176.26968383789062,
+          -191.46383666992188,
+          0
+        ],
+        "source_max_cm": [
+          178.04788208007812,
+          197.09877014160156,
+          750
+        ],
+        "build_scale": [
+          1,
+          1,
+          1
+        ],
+        "render_extent_cm": [
+          177.15878295898438,
+          194.28130340576172,
+          375
+        ],
+        "positive_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ],
+        "negative_bounds_extension_cm": [
+          0,
+          0,
+          0
+        ]
+      },
+      "triangle_preservation": {
+        "verified": true,
+        "source_triangles": 2156,
+        "parts": [
+          {
+            "mesh": "/Game/RescueAssets/CityV1/Foliage/SM_StreetTree_2_3a071df0caf9_opaque.SM_StreetTree_2_3a071df0caf9_opaque",
+            "kind": "opaque",
+            "triangles": 2156,
+            "nanite": true
+          }
+        ],
+        "check": "all source triangles, positions, normals, UV channels and material slots preserved exactly across parts"
+      },
+      "fbx_sha256": "3a071df0caf91825b27e19cd3d281f23c2175adc6ad8401729a2dad27d166220"
+    }
+  ],
+  "native_render_verified": false
+}

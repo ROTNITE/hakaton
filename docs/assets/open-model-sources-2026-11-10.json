@@ -1,0 +1,3139 @@
+{
+  "checked_date": "2026-11-10",
+  "date_timezone": "Europe/Moscow",
+  "project": "MetaRescue",
+  "purpose": "Free downloadable models for reference assets 09-20 and additional environment props.",
+  "sources_of_truth": [
+    "Author/provider model metadata and public file manifests",
+    "Provider license pages",
+    "Author download pages"
+  ],
+  "limitations": [
+    "Formats and download flags are provider declarations, not a successful Unreal import.",
+    "Sketchfab archives require authentication; authenticated downloads were not tested.",
+    "Poly Haven HEAD checks validate model-file accessibility, not all texture dependencies or file integrity.",
+    "No complete model archives downloaded and no third-party model imported into the project."
+  ],
+  "sources": [
+    {
+      "provider": "Sketchfab",
+      "id": "f6e69df7b0a1473498e551a81a942d81",
+      "title": "Bricks Pile 02",
+      "page": "https://sketchfab.com/3d-models/bricks-pile-02-f6e69df7b0a1473498e551a81a942d81",
+      "author": "CrazyScans",
+      "author_profile": "https://sketchfab.com/RandomScan",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5488,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 3,
+          "size": 30504736,
+          "textureMaxResolution": 4096,
+          "faceCount": 5488,
+          "vertexCount": 2869
+        },
+        "gltf": {
+          "textureCount": 3,
+          "size": 30294441,
+          "textureMaxResolution": 4096,
+          "faceCount": 5488,
+          "vertexCount": 2869
+        },
+        "source": {
+          "textureCount": null,
+          "size": 45722798,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 3360145,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/f6e69df7b0a1473498e551a81a942d81",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=bricks+pile&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "33f84d01ec834d8c98c39ee7251f8ff4",
+      "title": "Construction steel beam",
+      "page": "https://sketchfab.com/3d-models/construction-steel-beam-33f84d01ec834d8c98c39ee7251f8ff4",
+      "author": "Cyril Demetrius",
+      "author_profile": "https://sketchfab.com/oyez",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 25956,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 9,
+          "size": 149783300,
+          "textureMaxResolution": 4096,
+          "faceCount": 25952,
+          "vertexCount": 15995
+        },
+        "gltf": {
+          "textureCount": 9,
+          "size": 148962385,
+          "textureMaxResolution": 4096,
+          "faceCount": 25952,
+          "vertexCount": 15995
+        },
+        "source": {
+          "textureCount": null,
+          "size": 143410828,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 19040024,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/33f84d01ec834d8c98c39ee7251f8ff4",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=beam&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "9fd19243e4fe4ddaaa627551477a9e27",
+      "title": "Large modular pack of Russian roads",
+      "page": "https://sketchfab.com/3d-models/large-modular-pack-of-russian-roads-9fd19243e4fe4ddaaa627551477a9e27",
+      "author": "Unka II",
+      "author_profile": "https://sketchfab.com/UnkaII",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 3405,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 19,
+          "size": 27470764,
+          "textureMaxResolution": 2048,
+          "faceCount": 3405,
+          "vertexCount": 5216
+        },
+        "gltf": {
+          "textureCount": 19,
+          "size": 26977014,
+          "textureMaxResolution": 2048,
+          "faceCount": 3405,
+          "vertexCount": 5216
+        },
+        "source": {
+          "textureCount": null,
+          "size": 27713728,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 13245004,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/9fd19243e4fe4ddaaa627551477a9e27",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=roads&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "4eb7fb5768644dbfae8aa7e09d165af4",
+      "title": "modular Container Houses Kit",
+      "page": "https://sketchfab.com/3d-models/modular-container-houses-kit-4eb7fb5768644dbfae8aa7e09d165af4",
+      "author": "Salah3D",
+      "author_profile": "https://sketchfab.com/abbasyounis214",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5776,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 3,
+          "size": 3651736,
+          "textureMaxResolution": 2048,
+          "faceCount": 5776,
+          "vertexCount": 9958
+        },
+        "gltf": {
+          "textureCount": 3,
+          "size": 2888462,
+          "textureMaxResolution": 2048,
+          "faceCount": 5776,
+          "vertexCount": 9958
+        },
+        "source": {
+          "textureCount": null,
+          "size": 8385620,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 1119419,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/4eb7fb5768644dbfae8aa7e09d165af4",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=modular+container&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "9e63c9aacf664a79ab4f9887cea6c74a",
+      "title": "Cellphone Antenna 5G 4G 3G",
+      "page": "https://sketchfab.com/3d-models/cellphone-antenna-5g-4g-3g-9e63c9aacf664a79ab4f9887cea6c74a",
+      "author": "JoelGodin",
+      "author_profile": "https://sketchfab.com/JoelGodin",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 35760,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 0,
+          "size": 1109036,
+          "textureMaxResolution": 0,
+          "faceCount": 35760,
+          "vertexCount": 20801
+        },
+        "gltf": {
+          "textureCount": 0,
+          "size": 518448,
+          "textureMaxResolution": 0,
+          "faceCount": 35760,
+          "vertexCount": 20801
+        },
+        "source": {
+          "textureCount": null,
+          "size": 914966,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 119913,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/9e63c9aacf664a79ab4f9887cea6c74a",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=cellphone+antenna&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "60c2ed77623149d7b45e1d58b7360cb1",
+      "title": "Low Poly Charging Station",
+      "page": "https://sketchfab.com/3d-models/low-poly-charging-station-60c2ed77623149d7b45e1d58b7360cb1",
+      "author": "vadzaecc",
+      "author_profile": "https://sketchfab.com/vadzaecc",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5562,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 8,
+          "size": 26162060,
+          "textureMaxResolution": 4096,
+          "faceCount": 5562,
+          "vertexCount": 5019
+        },
+        "gltf": {
+          "textureCount": 8,
+          "size": 25876547,
+          "textureMaxResolution": 4096,
+          "faceCount": 5562,
+          "vertexCount": 5019
+        },
+        "source": {
+          "textureCount": null,
+          "size": 84874815,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 4876564,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/60c2ed77623149d7b45e1d58b7360cb1",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=charging&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "cc324baf6dc548de965c3a47b87f1e27",
+      "title": "Camera With Tripod",
+      "page": "https://sketchfab.com/3d-models/camera-with-tripod-cc324baf6dc548de965c3a47b87f1e27",
+      "author": "FatWasHere",
+      "author_profile": "https://sketchfab.com/fathin880",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 22586,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 0,
+          "size": 1285412,
+          "textureMaxResolution": 0,
+          "faceCount": 22261,
+          "vertexCount": 31567
+        },
+        "gltf": {
+          "textureCount": 0,
+          "size": 368303,
+          "textureMaxResolution": 0,
+          "faceCount": 22261,
+          "vertexCount": 31567
+        },
+        "source": {
+          "textureCount": null,
+          "size": 1165576,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 793783,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/cc324baf6dc548de965c3a47b87f1e27",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=camera+with+tripod&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "23c7b0d12c2a4739bff7b2e94a0a1f47",
+      "title": "Free Streetlight",
+      "page": "https://sketchfab.com/3d-models/free-streetlight-23c7b0d12c2a4739bff7b2e94a0a1f47",
+      "author": "calp1",
+      "author_profile": "https://sketchfab.com/calp1",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5620,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 0,
+          "size": 170968,
+          "textureMaxResolution": 0,
+          "faceCount": 5458,
+          "vertexCount": 3164
+        },
+        "gltf": {
+          "textureCount": 0,
+          "size": 92403,
+          "textureMaxResolution": 0,
+          "faceCount": 5458,
+          "vertexCount": 3164
+        },
+        "source": {
+          "textureCount": null,
+          "size": 220646,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 88162,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/23c7b0d12c2a4739bff7b2e94a0a1f47",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=streetlight&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "2f6f5ca0d0514baeb9b511613f7f3227",
+      "title": "Pelican Case",
+      "page": "https://sketchfab.com/3d-models/pelican-case-2f6f5ca0d0514baeb9b511613f7f3227",
+      "author": "N8",
+      "author_profile": "https://sketchfab.com/nathanmlange",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5268,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 8,
+          "size": 19144420,
+          "textureMaxResolution": 2048,
+          "faceCount": 5268,
+          "vertexCount": 6466
+        },
+        "gltf": {
+          "textureCount": 8,
+          "size": 18659353,
+          "textureMaxResolution": 2048,
+          "faceCount": 5268,
+          "vertexCount": 6466
+        },
+        "source": {
+          "textureCount": null,
+          "size": 18373938,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 4609199,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/2f6f5ca0d0514baeb9b511613f7f3227",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=pelican&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "1061168f9ec345db81cffb81c17f3649",
+      "title": "Ambulance",
+      "page": "https://sketchfab.com/3d-models/ambulance-1061168f9ec345db81cffb81c17f3649",
+      "author": "RCC Design",
+      "author_profile": "https://sketchfab.com/rccdesign",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 11660,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 4,
+          "size": 6650592,
+          "textureMaxResolution": 2048,
+          "faceCount": 11658,
+          "vertexCount": 11383
+        },
+        "gltf": {
+          "textureCount": 4,
+          "size": 6183780,
+          "textureMaxResolution": 2048,
+          "faceCount": 11658,
+          "vertexCount": 11383
+        },
+        "source": {
+          "textureCount": null,
+          "size": 12442329,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 2233217,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/1061168f9ec345db81cffb81c17f3649",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=ambulance&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "5986d1487d9443b883d67b121c2c903c",
+      "title": "Rubble Pile - Photoscan (Optimized)",
+      "page": "https://sketchfab.com/3d-models/rubble-pile-photoscan-optimized-5986d1487d9443b883d67b121c2c903c",
+      "author": "Coozy",
+      "author_profile": "https://sketchfab.com/GameDevNick",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 60545,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 5,
+          "size": 25271740,
+          "textureMaxResolution": 2048,
+          "faceCount": 60545,
+          "vertexCount": 181635
+        },
+        "gltf": {
+          "textureCount": 5,
+          "size": 21171817,
+          "textureMaxResolution": 2048,
+          "faceCount": 60545,
+          "vertexCount": 181635
+        },
+        "source": {
+          "textureCount": null,
+          "size": 21796520,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 9543352,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/5986d1487d9443b883d67b121c2c903c",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=rubble&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "272744e1ba564051ad757d0ee7694423",
+      "title": "i beam",
+      "page": "https://sketchfab.com/3d-models/i-beam-272744e1ba564051ad757d0ee7694423",
+      "author": "3D mill",
+      "author_profile": "https://sketchfab.com/3dmillgamer",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 30,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 0,
+          "size": 5680,
+          "textureMaxResolution": 0,
+          "faceCount": 60,
+          "vertexCount": 88
+        },
+        "gltf": {
+          "textureCount": 0,
+          "size": 2474,
+          "textureMaxResolution": 0,
+          "faceCount": 60,
+          "vertexCount": 88
+        },
+        "source": {
+          "textureCount": null,
+          "size": 4795,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 5437,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/272744e1ba564051ad757d0ee7694423",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=i-beam&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed.",
+      "attribution_note": "The author description specifically requests credit to Kent Power."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "d839483bc2c04404a562c0d6947f5171",
+      "title": "Containers Cabins",
+      "page": "https://sketchfab.com/3d-models/containers-cabins-d839483bc2c04404a562c0d6947f5171",
+      "author": "ROGUE",
+      "author_profile": "https://sketchfab.com/ROGUEENGINEER",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 1128,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 1,
+          "size": 1091484,
+          "textureMaxResolution": 2048,
+          "faceCount": 1128,
+          "vertexCount": 1744
+        },
+        "gltf": {
+          "textureCount": 1,
+          "size": 994132,
+          "textureMaxResolution": 2048,
+          "faceCount": 1128,
+          "vertexCount": 1744
+        },
+        "source": {
+          "textureCount": null,
+          "size": 1121657,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 1045849,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/d839483bc2c04404a562c0d6947f5171",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=modular+container&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "86303d7c8cb442c2bcd138abe2b01c9f",
+      "title": "Rusted Antennas",
+      "page": "https://sketchfab.com/3d-models/rusted-antennas-86303d7c8cb442c2bcd138abe2b01c9f",
+      "author": "Blank2574",
+      "author_profile": "https://sketchfab.com/Blank2574",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 4152,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 1,
+          "size": 456988,
+          "textureMaxResolution": 512,
+          "faceCount": 4152,
+          "vertexCount": 4902
+        },
+        "gltf": {
+          "textureCount": 1,
+          "size": 289733,
+          "textureMaxResolution": 512,
+          "faceCount": 4152,
+          "vertexCount": 4902
+        },
+        "source": {
+          "textureCount": null,
+          "size": 479789,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 369245,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/86303d7c8cb442c2bcd138abe2b01c9f",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=antenna&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "fb6c29058ba246e3b5773cf1d7ef1c16",
+      "title": "Security Camera",
+      "page": "https://sketchfab.com/3d-models/security-camera-fb6c29058ba246e3b5773cf1d7ef1c16",
+      "author": "Terizmeh",
+      "author_profile": "https://sketchfab.com/Terizmeh",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 5724,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 4,
+          "size": 8447184,
+          "textureMaxResolution": 2048,
+          "faceCount": 5724,
+          "vertexCount": 4670
+        },
+        "gltf": {
+          "textureCount": 4,
+          "size": 8215217,
+          "textureMaxResolution": 2048,
+          "faceCount": 5724,
+          "vertexCount": 4670
+        },
+        "source": {
+          "textureCount": null,
+          "size": 8997389,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 4980097,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/fb6c29058ba246e3b5773cf1d7ef1c16",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=security+camera&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "00a463a37d0f4014936896f874310c80",
+      "title": "Leica Scanner",
+      "page": "https://sketchfab.com/3d-models/leica-scanner-00a463a37d0f4014936896f874310c80",
+      "author": "andrea.notarstefano",
+      "author_profile": "https://sketchfab.com/andrea.notarstefano",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 3646,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 4,
+          "size": 16206776,
+          "textureMaxResolution": 2048,
+          "faceCount": 7120,
+          "vertexCount": 5557
+        },
+        "gltf": {
+          "textureCount": 4,
+          "size": 15972490,
+          "textureMaxResolution": 2048,
+          "faceCount": 7120,
+          "vertexCount": 5557
+        },
+        "source": {
+          "textureCount": null,
+          "size": 16864061,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 5755505,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/00a463a37d0f4014936896f874310c80",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=leica+scanner&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed."
+    },
+    {
+      "provider": "Sketchfab",
+      "id": "8ff2a13f30914932a70c7950cfa58465",
+      "title": "Generic civil service vehicles pack",
+      "page": "https://sketchfab.com/3d-models/generic-civil-service-vehicles-pack-8ff2a13f30914932a70c7950cfa58465",
+      "author": "Comrade1280",
+      "author_profile": "https://sketchfab.com/comrade1280",
+      "license": "CC BY 4.0",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "is_downloadable": true,
+      "triangles_model_metadata": 92709,
+      "formats_confirmed": [
+        "glb",
+        "gltf",
+        "source",
+        "usdz"
+      ],
+      "archives": {
+        "glb": {
+          "textureCount": 50,
+          "size": 55961824,
+          "textureMaxResolution": 2048,
+          "faceCount": 92707,
+          "vertexCount": 100811
+        },
+        "gltf": {
+          "textureCount": 50,
+          "size": 52361960,
+          "textureMaxResolution": 2048,
+          "faceCount": 92707,
+          "vertexCount": 100811
+        },
+        "source": {
+          "textureCount": null,
+          "size": 46592982,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        },
+        "usdz": {
+          "textureCount": null,
+          "size": 5351889,
+          "textureMaxResolution": null,
+          "faceCount": null,
+          "vertexCount": null
+        }
+      },
+      "api_model": "https://api.sketchfab.com/v3/models/8ff2a13f30914932a70c7950cfa58465",
+      "api_search": "https://api.sketchfab.com/v3/search?type=models&q=civil+service+vehicles&downloadable=true",
+      "download_check": "Public metadata only; authenticated archive download not performed.",
+      "original_formats_listed_by_author": [
+        "3ds Max 2018",
+        "3DS",
+        "FBX",
+        "OBJ",
+        "DAE"
+      ]
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "concrete_road_barrier_02",
+      "title": "Concrete Road Barrier 02",
+      "page": "https://polyhaven.com/a/concrete_road_barrier_02",
+      "authors": {
+        "Amal Kumar": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 42578,
+      "lods_declared": true,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/concrete_road_barrier_02/concrete_road_barrier_02_2k.blend",
+          "file_bytes": 1682014,
+          "file_md5": "15ebb0444ac173167078aaecf35b0759",
+          "dependencies": [
+            {
+              "relative_path": "textures/concrete_road_barrier_02_disp_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/concrete_road_barrier_02/concrete_road_barrier_02_disp_2k.png",
+              "bytes": 5347949,
+              "md5": "9c5b8c1b672d6a9ddf0caaac36f590db"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_rough_2k.exr",
+              "bytes": 2295756,
+              "md5": "41277a976ee958b4dc328e1602c9572b"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_diff_2k.jpg",
+              "bytes": 2974035,
+              "md5": "b39e349603fa2bdc64728ad5905bee1f"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_nor_gl_2k.exr",
+              "bytes": 7462709,
+              "md5": "ce289c6de24db3b72a30030ce147dc9e"
+            }
+          ],
+          "bytes_with_dependencies": 19762463
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/concrete_road_barrier_02/concrete_road_barrier_02_2k.fbx",
+          "file_bytes": 1972364,
+          "file_md5": "0e98dc515611d340eeab812983f3a265",
+          "dependencies": [
+            {
+              "relative_path": "textures/concrete_road_barrier_02_disp_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/concrete_road_barrier_02/concrete_road_barrier_02_disp_2k.png",
+              "bytes": 5347949,
+              "md5": "9c5b8c1b672d6a9ddf0caaac36f590db"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_rough_2k.exr",
+              "bytes": 2295756,
+              "md5": "41277a976ee958b4dc328e1602c9572b"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_diff_2k.jpg",
+              "bytes": 2974035,
+              "md5": "b39e349603fa2bdc64728ad5905bee1f"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_nor_gl_2k.exr",
+              "bytes": 7462709,
+              "md5": "ce289c6de24db3b72a30030ce147dc9e"
+            }
+          ],
+          "bytes_with_dependencies": 20052813
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/concrete_road_barrier_02/concrete_road_barrier_02_2k.gltf",
+          "file_bytes": 2910,
+          "file_md5": "802d54cc112ac15170168285cf6d88c2",
+          "dependencies": [
+            {
+              "relative_path": "concrete_road_barrier_02.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/concrete_road_barrier_02/concrete_road_barrier_02.bin",
+              "bytes": 542900,
+              "md5": "205f6effdf30936bd1db4ea7d56e179c"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_diff_2k.jpg",
+              "bytes": 2974035,
+              "md5": "b39e349603fa2bdc64728ad5905bee1f"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_arm_2k.jpg",
+              "bytes": 2791052,
+              "md5": "e6f2c0fa9632e0ea2b4c4a0219cf7cf1"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_nor_gl_2k.jpg",
+              "bytes": 3521614,
+              "md5": "621cf841b3f1420ca2be331d0c739018"
+            }
+          ],
+          "bytes_with_dependencies": 9832511
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/concrete_road_barrier_02/concrete_road_barrier_02_2k.usdc",
+          "file_bytes": 1701019,
+          "file_md5": "8eaa7c9f71b410986b7cdd142833872e",
+          "dependencies": [
+            {
+              "relative_path": "textures/concrete_road_barrier_02_disp_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/concrete_road_barrier_02/concrete_road_barrier_02_disp_2k.png",
+              "bytes": 5347949,
+              "md5": "9c5b8c1b672d6a9ddf0caaac36f590db"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_rough_2k.exr",
+              "bytes": 2295756,
+              "md5": "41277a976ee958b4dc328e1602c9572b"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/concrete_road_barrier_02/concrete_road_barrier_02_diff_2k.jpg",
+              "bytes": 2974035,
+              "md5": "b39e349603fa2bdc64728ad5905bee1f"
+            },
+            {
+              "relative_path": "textures/concrete_road_barrier_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/concrete_road_barrier_02/concrete_road_barrier_02_nor_gl_2k.exr",
+              "bytes": 7462709,
+              "md5": "ce289c6de24db3b72a30030ce147dc9e"
+            }
+          ],
+          "bytes_with_dependencies": 19781468
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/concrete_road_barrier_02",
+      "api_files": "https://api.polyhaven.com/files/concrete_road_barrier_02",
+      "head_check_fbx_2k": {
+        "id": "concrete_road_barrier_02",
+        "http": 200,
+        "content_length": "1972364",
+        "expected": 1972364
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "modular_chainlink_fence",
+      "title": "Modular Chainlink Fence",
+      "page": "https://polyhaven.com/a/modular_chainlink_fence",
+      "authors": {
+        "James Ray Cock": "All",
+        "Amal Kumar": "Fence Wire Material"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 89232,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modular_chainlink_fence/modular_chainlink_fence_2k.blend",
+          "file_bytes": 1901647,
+          "file_md5": "171478b579a8b925e007886191d136d2",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_diff_2k.png",
+              "bytes": 2480771,
+              "md5": "e48c8e3250a354803b70e84363833a9a"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_diff_2k.png",
+              "bytes": 16051889,
+              "md5": "5b9ee6d81f2854e7e27ea49e561e2823"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_rough_2k.png",
+              "bytes": 218908,
+              "md5": "b83edc4051bd7dad7a7ae36067c516e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_rough_2k.png",
+              "bytes": 4979890,
+              "md5": "03b8252698491408a8307dca6f87e7e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "bytes": 14418566,
+              "md5": "e27195516dd9b89acce64d38afaba77d"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_alpha_2k.png",
+              "bytes": 285570,
+              "md5": "0cc3c41a73de007a876f3907bcaefc30"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_metal_2k.png",
+              "bytes": 515400,
+              "md5": "e2f78543f84832a72f08cc78dc3b0152"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "bytes": 6713975,
+              "md5": "42050a6d93b864cb23b4f456ddb36477"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_metal_2k.png",
+              "bytes": 255542,
+              "md5": "ef834feb525d33b76dd691e4a025fde5"
+            }
+          ],
+          "bytes_with_dependencies": 47822158
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/modular_chainlink_fence/modular_chainlink_fence_2k.fbx",
+          "file_bytes": 2210012,
+          "file_md5": "568b0eb5552e38c1ee347f242fae6837",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_diff_2k.png",
+              "bytes": 2480771,
+              "md5": "e48c8e3250a354803b70e84363833a9a"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_diff_2k.png",
+              "bytes": 16051889,
+              "md5": "5b9ee6d81f2854e7e27ea49e561e2823"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_rough_2k.png",
+              "bytes": 218908,
+              "md5": "b83edc4051bd7dad7a7ae36067c516e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_rough_2k.png",
+              "bytes": 4979890,
+              "md5": "03b8252698491408a8307dca6f87e7e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "bytes": 14418566,
+              "md5": "e27195516dd9b89acce64d38afaba77d"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_alpha_2k.png",
+              "bytes": 285570,
+              "md5": "0cc3c41a73de007a876f3907bcaefc30"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_metal_2k.png",
+              "bytes": 515400,
+              "md5": "e2f78543f84832a72f08cc78dc3b0152"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "bytes": 6713975,
+              "md5": "42050a6d93b864cb23b4f456ddb36477"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_metal_2k.png",
+              "bytes": 255542,
+              "md5": "ef834feb525d33b76dd691e4a025fde5"
+            }
+          ],
+          "bytes_with_dependencies": 48130523
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/modular_chainlink_fence/modular_chainlink_fence_2k.gltf",
+          "file_bytes": 41838,
+          "file_md5": "f81323a83d2ae1e7b99a3ec156aa8da5",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_wire_nor_gl_2k.jpg",
+              "bytes": 1882329,
+              "md5": "ba604a876a3b0ef5af11fd49b1482ee4"
+            },
+            {
+              "relative_path": "modular_chainlink_fence.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_chainlink_fence/modular_chainlink_fence.bin",
+              "bytes": 3168016,
+              "md5": "953d32ee509142cf2ceb1e6b278b2430"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_wire_arm_2k.jpg",
+              "bytes": 2082073,
+              "md5": "de230984104a87345c4aa8e78111f1e2"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_posts_arm_2k.jpg",
+              "bytes": 3004035,
+              "md5": "21a14ec9e416a3606a808139d0639c80"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_wire_diff_2k.jpg",
+              "bytes": 1746959,
+              "md5": "4d99da51818311cff741329a3cbc912c"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_posts_diff_2k.jpg",
+              "bytes": 2425889,
+              "md5": "e474fe890146a4c48e8497b238efe4f0"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_chainlink_fence/modular_chainlink_fence_posts_nor_gl_2k.jpg",
+              "bytes": 1869713,
+              "md5": "4b4b4d3d4d61d9e27141f5ffe2abe872"
+            }
+          ],
+          "bytes_with_dependencies": 16220852
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/modular_chainlink_fence/modular_chainlink_fence_2k.usdc",
+          "file_bytes": 4351167,
+          "file_md5": "19f4f3b37de607bac39fcf3816d7900d",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_diff_2k.png",
+              "bytes": 2480771,
+              "md5": "e48c8e3250a354803b70e84363833a9a"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_diff_2k.png",
+              "bytes": 16051889,
+              "md5": "5b9ee6d81f2854e7e27ea49e561e2823"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_rough_2k.png",
+              "bytes": 218908,
+              "md5": "b83edc4051bd7dad7a7ae36067c516e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_rough_2k.png",
+              "bytes": 4979890,
+              "md5": "03b8252698491408a8307dca6f87e7e6"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_nor_gl_2k.png",
+              "bytes": 14418566,
+              "md5": "e27195516dd9b89acce64d38afaba77d"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_alpha_2k.png",
+              "bytes": 285570,
+              "md5": "0cc3c41a73de007a876f3907bcaefc30"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_metal_2k.png",
+              "bytes": 515400,
+              "md5": "e2f78543f84832a72f08cc78dc3b0152"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_wire_nor_gl_2k.png",
+              "bytes": 6713975,
+              "md5": "42050a6d93b864cb23b4f456ddb36477"
+            },
+            {
+              "relative_path": "textures/modular_chainlink_fence_posts_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_chainlink_fence/modular_chainlink_fence_posts_metal_2k.png",
+              "bytes": 255542,
+              "md5": "ef834feb525d33b76dd691e4a025fde5"
+            }
+          ],
+          "bytes_with_dependencies": 50271678
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/modular_chainlink_fence",
+      "api_files": "https://api.polyhaven.com/files/modular_chainlink_fence",
+      "head_check_fbx_2k": {
+        "id": "modular_chainlink_fence",
+        "http": 200,
+        "content_length": "2210012",
+        "expected": 2210012
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "medical_box",
+      "title": "Medical Box",
+      "page": "https://polyhaven.com/a/medical_box",
+      "authors": {
+        "Ulan Cabanilla": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 3718,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/medical_box/medical_box_2k.blend",
+          "file_bytes": 194462,
+          "file_md5": "10e6c0e7a5130bc1b2852375bb28d9ba",
+          "dependencies": [
+            {
+              "relative_path": "textures/medical_box_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_diff_2k.jpg",
+              "bytes": 2536442,
+              "md5": "00935657710a6bea894aefc4fd0d5880"
+            },
+            {
+              "relative_path": "textures/medical_box_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_metal_2k.exr",
+              "bytes": 1729037,
+              "md5": "2f6bc75a6778d8b99dd8991d3d5518c7"
+            },
+            {
+              "relative_path": "textures/medical_box_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_nor_gl_2k.exr",
+              "bytes": 2870839,
+              "md5": "08712ff6c627c28126036c0245fc0ec1"
+            },
+            {
+              "relative_path": "textures/medical_box_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_rough_2k.exr",
+              "bytes": 2856351,
+              "md5": "d4d9c9d259fca986b025be666e8d0f37"
+            }
+          ],
+          "bytes_with_dependencies": 10187131
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/medical_box/medical_box_2k.fbx",
+          "file_bytes": 139628,
+          "file_md5": "ee53f20b2d733545ee4ccf33f65e7efe",
+          "dependencies": [
+            {
+              "relative_path": "textures/medical_box_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_diff_2k.jpg",
+              "bytes": 2536442,
+              "md5": "00935657710a6bea894aefc4fd0d5880"
+            },
+            {
+              "relative_path": "textures/medical_box_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_metal_2k.exr",
+              "bytes": 1729037,
+              "md5": "2f6bc75a6778d8b99dd8991d3d5518c7"
+            },
+            {
+              "relative_path": "textures/medical_box_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_nor_gl_2k.exr",
+              "bytes": 2870839,
+              "md5": "08712ff6c627c28126036c0245fc0ec1"
+            },
+            {
+              "relative_path": "textures/medical_box_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_rough_2k.exr",
+              "bytes": 2856351,
+              "md5": "d4d9c9d259fca986b025be666e8d0f37"
+            }
+          ],
+          "bytes_with_dependencies": 10132297
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/medical_box/medical_box_2k.gltf",
+          "file_bytes": 8820,
+          "file_md5": "8fd7e39fb292b12609086ceb225d4e1b",
+          "dependencies": [
+            {
+              "relative_path": "textures/medical_box_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_nor_gl_2k.jpg",
+              "bytes": 1368602,
+              "md5": "c71f1e5581bbd4ffca91f7f3924e0470"
+            },
+            {
+              "relative_path": "textures/medical_box_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_diff_2k.jpg",
+              "bytes": 2536442,
+              "md5": "00935657710a6bea894aefc4fd0d5880"
+            },
+            {
+              "relative_path": "textures/medical_box_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_arm_2k.jpg",
+              "bytes": 2981163,
+              "md5": "0ef56767c433c7b58961d2f9d05f2a13"
+            },
+            {
+              "relative_path": "medical_box.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/medical_box/medical_box.bin",
+              "bytes": 127972,
+              "md5": "22d04371779d87a0e65ee97c4ad7389c"
+            }
+          ],
+          "bytes_with_dependencies": 7022999
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/medical_box/medical_box_2k.usdc",
+          "file_bytes": 167483,
+          "file_md5": "8b02bd1e69a7009c830e1e70eb696df2",
+          "dependencies": [
+            {
+              "relative_path": "textures/medical_box_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/medical_box/medical_box_diff_2k.jpg",
+              "bytes": 2536442,
+              "md5": "00935657710a6bea894aefc4fd0d5880"
+            },
+            {
+              "relative_path": "textures/medical_box_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_metal_2k.exr",
+              "bytes": 1729037,
+              "md5": "2f6bc75a6778d8b99dd8991d3d5518c7"
+            },
+            {
+              "relative_path": "textures/medical_box_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_nor_gl_2k.exr",
+              "bytes": 2870839,
+              "md5": "08712ff6c627c28126036c0245fc0ec1"
+            },
+            {
+              "relative_path": "textures/medical_box_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/medical_box/medical_box_rough_2k.exr",
+              "bytes": 2856351,
+              "md5": "d4d9c9d259fca986b025be666e8d0f37"
+            }
+          ],
+          "bytes_with_dependencies": 10160152
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/medical_box",
+      "api_files": "https://api.polyhaven.com/files/medical_box",
+      "head_check_fbx_2k": {
+        "id": "medical_box",
+        "http": 200,
+        "content_length": "139628",
+        "expected": 139628
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "portable_generator",
+      "title": "Portable Generator",
+      "page": "https://polyhaven.com/a/portable_generator",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 26419,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/portable_generator/portable_generator_2k.blend",
+          "file_bytes": 789698,
+          "file_md5": "e53a845bccebcbff0a3e4b1560633d80",
+          "dependencies": [
+            {
+              "relative_path": "textures/portable_generator_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_alpha_2k.png",
+              "bytes": 236005,
+              "md5": "7612d27b4e32a7a08fbe7dee164b51fd"
+            },
+            {
+              "relative_path": "textures/portable_generator_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_diff_2k.jpg",
+              "bytes": 2680935,
+              "md5": "a7c86c8dc782d1b2c0b8b8a5d8fac475"
+            },
+            {
+              "relative_path": "textures/portable_generator_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_metal_2k.exr",
+              "bytes": 2548414,
+              "md5": "9b2a535f50a3a463f93446ce4953f2c6"
+            },
+            {
+              "relative_path": "textures/portable_generator_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_nor_gl_2k.exr",
+              "bytes": 6515763,
+              "md5": "e0c387fe46bd0a5a1251f17c974df211"
+            },
+            {
+              "relative_path": "textures/portable_generator_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_rough_2k.exr",
+              "bytes": 2731790,
+              "md5": "7dfb8a3218a92ac5fa336498681d2245"
+            },
+            {
+              "relative_path": "textures/portable_generator_spec_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_spec_2k.png",
+              "bytes": 60657,
+              "md5": "bd2d29f16b387489e5bbacd0d61d01c5"
+            }
+          ],
+          "bytes_with_dependencies": 15563262
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/portable_generator/portable_generator_2k.fbx",
+          "file_bytes": 873900,
+          "file_md5": "e8f354652440959025ee15068fba9aa2",
+          "dependencies": [
+            {
+              "relative_path": "textures/portable_generator_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_alpha_2k.png",
+              "bytes": 236005,
+              "md5": "7612d27b4e32a7a08fbe7dee164b51fd"
+            },
+            {
+              "relative_path": "textures/portable_generator_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_diff_2k.jpg",
+              "bytes": 2680935,
+              "md5": "a7c86c8dc782d1b2c0b8b8a5d8fac475"
+            },
+            {
+              "relative_path": "textures/portable_generator_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_metal_2k.exr",
+              "bytes": 2548414,
+              "md5": "9b2a535f50a3a463f93446ce4953f2c6"
+            },
+            {
+              "relative_path": "textures/portable_generator_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_nor_gl_2k.exr",
+              "bytes": 6515763,
+              "md5": "e0c387fe46bd0a5a1251f17c974df211"
+            },
+            {
+              "relative_path": "textures/portable_generator_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_rough_2k.exr",
+              "bytes": 2731790,
+              "md5": "7dfb8a3218a92ac5fa336498681d2245"
+            },
+            {
+              "relative_path": "textures/portable_generator_spec_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_spec_2k.png",
+              "bytes": 60657,
+              "md5": "bd2d29f16b387489e5bbacd0d61d01c5"
+            }
+          ],
+          "bytes_with_dependencies": 15647464
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/portable_generator/portable_generator_2k.gltf",
+          "file_bytes": 10130,
+          "file_md5": "e0a17eab37e83f0600dec32999399772",
+          "dependencies": [
+            {
+              "relative_path": "textures/portable_generator_spec_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_spec_2k.jpg",
+              "bytes": 74594,
+              "md5": "6f57fd3e89e82613979385cf33e073f4"
+            },
+            {
+              "relative_path": "textures/portable_generator_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_nor_gl_2k.jpg",
+              "bytes": 2936023,
+              "md5": "9c173a6846c880da41a9151e61f1ef18"
+            },
+            {
+              "relative_path": "textures/portable_generator_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_diff_2k.jpg",
+              "bytes": 2680935,
+              "md5": "a7c86c8dc782d1b2c0b8b8a5d8fac475"
+            },
+            {
+              "relative_path": "textures/portable_generator_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_arm_2k.jpg",
+              "bytes": 3133944,
+              "md5": "52eb05725b6cf9b7b8bd0d8891c084f6"
+            },
+            {
+              "relative_path": "portable_generator.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/portable_generator/portable_generator.bin",
+              "bytes": 939572,
+              "md5": "81b2f4c4c6d0b0d7388ae9aa1123563a"
+            }
+          ],
+          "bytes_with_dependencies": 9775198
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/portable_generator/portable_generator_2k.usdc",
+          "file_bytes": 1351566,
+          "file_md5": "69c53821d4cbe313dacd0a9305170d70",
+          "dependencies": [
+            {
+              "relative_path": "textures/portable_generator_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_alpha_2k.png",
+              "bytes": 236005,
+              "md5": "7612d27b4e32a7a08fbe7dee164b51fd"
+            },
+            {
+              "relative_path": "textures/portable_generator_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/portable_generator/portable_generator_diff_2k.jpg",
+              "bytes": 2680935,
+              "md5": "a7c86c8dc782d1b2c0b8b8a5d8fac475"
+            },
+            {
+              "relative_path": "textures/portable_generator_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_metal_2k.exr",
+              "bytes": 2548414,
+              "md5": "9b2a535f50a3a463f93446ce4953f2c6"
+            },
+            {
+              "relative_path": "textures/portable_generator_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_nor_gl_2k.exr",
+              "bytes": 6515763,
+              "md5": "e0c387fe46bd0a5a1251f17c974df211"
+            },
+            {
+              "relative_path": "textures/portable_generator_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/portable_generator/portable_generator_rough_2k.exr",
+              "bytes": 2731790,
+              "md5": "7dfb8a3218a92ac5fa336498681d2245"
+            },
+            {
+              "relative_path": "textures/portable_generator_spec_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/portable_generator/portable_generator_spec_2k.png",
+              "bytes": 60657,
+              "md5": "bd2d29f16b387489e5bbacd0d61d01c5"
+            }
+          ],
+          "bytes_with_dependencies": 16125130
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/portable_generator",
+      "api_files": "https://api.polyhaven.com/files/portable_generator",
+      "head_check_fbx_2k": {
+        "id": "portable_generator",
+        "http": 200,
+        "content_length": "873900",
+        "expected": 873900
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "modular_electric_cables",
+      "title": "Modular Electric Cables",
+      "page": "https://polyhaven.com/a/modular_electric_cables",
+      "authors": {
+        "Kuutti Siitonen": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 42078,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modular_electric_cables/modular_electric_cables_2k.blend",
+          "file_bytes": 903622,
+          "file_md5": "c35c7d45507d2be3c301ef944c1b0573",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_diff_2k.png",
+              "bytes": 17529946,
+              "md5": "f743bd09552b3b2cfa9a43fa8cc0a280"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_nor_gl_2k.png",
+              "bytes": 17846948,
+              "md5": "bfd704674b6202d8b21a36b99421a662"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_rough_2k.png",
+              "bytes": 5883553,
+              "md5": "3e78646d5e1b57ae55aee136bbda9bc9"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_diff_2k.jpg",
+              "bytes": 1628766,
+              "md5": "dd06b628c4680404173c0a11289e5adf"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_metal_2k.exr",
+              "bytes": 172272,
+              "md5": "b6d125d719254270a596cd179250dfa5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_nor_gl_2k.exr",
+              "bytes": 7981910,
+              "md5": "169c4edbec72658c2a2f1cb75ac5fad5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_rough_2k.exr",
+              "bytes": 2272480,
+              "md5": "b1612b9b788657466626a65a90e3cf7d"
+            }
+          ],
+          "bytes_with_dependencies": 54219497
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/modular_electric_cables/modular_electric_cables_2k.fbx",
+          "file_bytes": 1257932,
+          "file_md5": "eeeedc2109148f5030a8a67adf7a8423",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_diff_2k.png",
+              "bytes": 17529946,
+              "md5": "f743bd09552b3b2cfa9a43fa8cc0a280"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_nor_gl_2k.png",
+              "bytes": 17846948,
+              "md5": "bfd704674b6202d8b21a36b99421a662"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_rough_2k.png",
+              "bytes": 5883553,
+              "md5": "3e78646d5e1b57ae55aee136bbda9bc9"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_diff_2k.jpg",
+              "bytes": 1628766,
+              "md5": "dd06b628c4680404173c0a11289e5adf"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_metal_2k.exr",
+              "bytes": 172272,
+              "md5": "b6d125d719254270a596cd179250dfa5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_nor_gl_2k.exr",
+              "bytes": 7981910,
+              "md5": "169c4edbec72658c2a2f1cb75ac5fad5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_rough_2k.exr",
+              "bytes": 2272480,
+              "md5": "b1612b9b788657466626a65a90e3cf7d"
+            }
+          ],
+          "bytes_with_dependencies": 54573807
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/modular_electric_cables/modular_electric_cables_2k.gltf",
+          "file_bytes": 82607,
+          "file_md5": "f2142760a00c34109c50b8407cd9e656",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_electric_cables_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_nor_gl_2k.jpg",
+              "bytes": 3532531,
+              "md5": "6eeac85eb146c27ee0737a28925dbdae"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_diff_2k.jpg",
+              "bytes": 1628766,
+              "md5": "dd06b628c4680404173c0a11289e5adf"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_arm_2k.jpg",
+              "bytes": 2679133,
+              "md5": "7195e2938ab35a74fbce0c999b6e211f"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_boxes_nor_gl_2k.jpg",
+              "bytes": 2707023,
+              "md5": "0dece50fce1d1764bb1cb4f8c2d59fd9"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_boxes_diff_2k.jpg",
+              "bytes": 2327515,
+              "md5": "5d5a194eebee6ab8dcd45b71328734d4"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_boxes_arm_2k.jpg",
+              "bytes": 3140374,
+              "md5": "02a8a4eb52d7e35aaa659e205b74573e"
+            },
+            {
+              "relative_path": "modular_electric_cables.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/modular_electric_cables/modular_electric_cables.bin",
+              "bytes": 1563316,
+              "md5": "1444b0e21d201c344a99e86937bbe5fc"
+            }
+          ],
+          "bytes_with_dependencies": 17661265
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/modular_electric_cables/modular_electric_cables_2k.usdc",
+          "file_bytes": 2125534,
+          "file_md5": "c05746e098193cea449fb3b620b11f79",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_diff_2k.png",
+              "bytes": 17529946,
+              "md5": "f743bd09552b3b2cfa9a43fa8cc0a280"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_nor_gl_2k.png",
+              "bytes": 17846948,
+              "md5": "bfd704674b6202d8b21a36b99421a662"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_boxes_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_electric_cables/modular_electric_cables_boxes_rough_2k.png",
+              "bytes": 5883553,
+              "md5": "3e78646d5e1b57ae55aee136bbda9bc9"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_electric_cables/modular_electric_cables_diff_2k.jpg",
+              "bytes": 1628766,
+              "md5": "dd06b628c4680404173c0a11289e5adf"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_metal_2k.exr",
+              "bytes": 172272,
+              "md5": "b6d125d719254270a596cd179250dfa5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_nor_gl_2k.exr",
+              "bytes": 7981910,
+              "md5": "169c4edbec72658c2a2f1cb75ac5fad5"
+            },
+            {
+              "relative_path": "textures/modular_electric_cables_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/modular_electric_cables/modular_electric_cables_rough_2k.exr",
+              "bytes": 2272480,
+              "md5": "b1612b9b788657466626a65a90e3cf7d"
+            }
+          ],
+          "bytes_with_dependencies": 55441409
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/modular_electric_cables",
+      "api_files": "https://api.polyhaven.com/files/modular_electric_cables",
+      "head_check_fbx_2k": {
+        "id": "modular_electric_cables",
+        "http": 200,
+        "content_length": "1257932",
+        "expected": 1257932
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "fire_hydrant",
+      "title": "Fire Hydrant",
+      "page": "https://polyhaven.com/a/fire_hydrant",
+      "authors": {
+        "Gonçalo Felício": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 86316,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/fire_hydrant/fire_hydrant_2k.blend",
+          "file_bytes": 2121232,
+          "file_md5": "f10d36412d1141e89d3262285b1d6bc7",
+          "dependencies": [
+            {
+              "relative_path": "textures/fire_hydrant_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_rough_2k.exr",
+              "bytes": 1974220,
+              "md5": "9f4fc6d88aa17335474bfbcf769246ad"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_diff_2k.png",
+              "bytes": 22770195,
+              "md5": "93ca8b9a949331661ee0a8e6f1e34d4e"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_diff_2k.jpg",
+              "bytes": 2012585,
+              "md5": "2baa646929446dd229c1859ec3923de0"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_metal_2k.png",
+              "bytes": 11394657,
+              "md5": "e27d221acaedc02562d5cda46b2546bf"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_nor_gl_2k.png",
+              "bytes": 21642382,
+              "md5": "404794f8555201c4931501efdd4794c2"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_metal_2k.exr",
+              "bytes": 2865559,
+              "md5": "0e22e263f8c2b9148b7e2ea5607dc02a"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_rough_2k.png",
+              "bytes": 13821598,
+              "md5": "e1d7b2d426a1bf5bf46745dbd130ad50"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_nor_gl_2k.exr",
+              "bytes": 3940547,
+              "md5": "6e1da5c8774ae72cb38a178d26f2b0f2"
+            }
+          ],
+          "bytes_with_dependencies": 82542975
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/fire_hydrant/fire_hydrant_2k.fbx",
+          "file_bytes": 2678220,
+          "file_md5": "2fcab67a3536b6426e3ba08add39e367",
+          "dependencies": [
+            {
+              "relative_path": "textures/fire_hydrant_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_rough_2k.exr",
+              "bytes": 1974220,
+              "md5": "9f4fc6d88aa17335474bfbcf769246ad"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_diff_2k.png",
+              "bytes": 22770195,
+              "md5": "93ca8b9a949331661ee0a8e6f1e34d4e"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_diff_2k.jpg",
+              "bytes": 2012585,
+              "md5": "2baa646929446dd229c1859ec3923de0"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_metal_2k.png",
+              "bytes": 11394657,
+              "md5": "e27d221acaedc02562d5cda46b2546bf"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_nor_gl_2k.png",
+              "bytes": 21642382,
+              "md5": "404794f8555201c4931501efdd4794c2"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_metal_2k.exr",
+              "bytes": 2865559,
+              "md5": "0e22e263f8c2b9148b7e2ea5607dc02a"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_rough_2k.png",
+              "bytes": 13821598,
+              "md5": "e1d7b2d426a1bf5bf46745dbd130ad50"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_nor_gl_2k.exr",
+              "bytes": 3940547,
+              "md5": "6e1da5c8774ae72cb38a178d26f2b0f2"
+            }
+          ],
+          "bytes_with_dependencies": 83099963
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/fire_hydrant/fire_hydrant_2k.gltf",
+          "file_bytes": 20926,
+          "file_md5": "1b90a8106f3d5827016a9e792eddab4d",
+          "dependencies": [
+            {
+              "relative_path": "textures/fire_hydrant_aged_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_aged_nor_gl_2k.jpg",
+              "bytes": 2097229,
+              "md5": "c81733bb9a71d3cd59681b1ec422432d"
+            },
+            {
+              "relative_path": "fire_hydrant.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fire_hydrant/fire_hydrant.bin",
+              "bytes": 1928772,
+              "md5": "636cd237cd1c9a793e3fc3edbf7f6a15"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_arm_2k.jpg",
+              "bytes": 2322663,
+              "md5": "254425b57f8d70f3410d3cc5a27a25f3"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_diff_2k.jpg",
+              "bytes": 2012585,
+              "md5": "2baa646929446dd229c1859ec3923de0"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_nor_gl_2k.jpg",
+              "bytes": 1847102,
+              "md5": "44a25b6356f63335369af805d65b899d"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_aged_arm_2k.jpg",
+              "bytes": 2268350,
+              "md5": "9af5c05ceced3edee35dcda0a0f69b1c"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_aged_diff_2k.jpg",
+              "bytes": 2191944,
+              "md5": "6de3683836cd0e6a39fdc58df2d61bf0"
+            }
+          ],
+          "bytes_with_dependencies": 14689571
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/fire_hydrant/fire_hydrant_2k.usdc",
+          "file_bytes": 2073397,
+          "file_md5": "356b9ac9498626bef17cca1020608a4f",
+          "dependencies": [
+            {
+              "relative_path": "textures/fire_hydrant_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_rough_2k.exr",
+              "bytes": 1974220,
+              "md5": "9f4fc6d88aa17335474bfbcf769246ad"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_diff_2k.png",
+              "bytes": 22770195,
+              "md5": "93ca8b9a949331661ee0a8e6f1e34d4e"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/fire_hydrant/fire_hydrant_diff_2k.jpg",
+              "bytes": 2012585,
+              "md5": "2baa646929446dd229c1859ec3923de0"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_metal_2k.png",
+              "bytes": 11394657,
+              "md5": "e27d221acaedc02562d5cda46b2546bf"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_nor_gl_2k.png",
+              "bytes": 21642382,
+              "md5": "404794f8555201c4931501efdd4794c2"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_metal_2k.exr",
+              "bytes": 2865559,
+              "md5": "0e22e263f8c2b9148b7e2ea5607dc02a"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_aged_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fire_hydrant/fire_hydrant_aged_rough_2k.png",
+              "bytes": 13821598,
+              "md5": "e1d7b2d426a1bf5bf46745dbd130ad50"
+            },
+            {
+              "relative_path": "textures/fire_hydrant_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/fire_hydrant/fire_hydrant_nor_gl_2k.exr",
+              "bytes": 3940547,
+              "md5": "6e1da5c8774ae72cb38a178d26f2b0f2"
+            }
+          ],
+          "bytes_with_dependencies": 82495140
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/fire_hydrant",
+      "api_files": "https://api.polyhaven.com/files/fire_hydrant",
+      "head_check_fbx_2k": {
+        "id": "fire_hydrant",
+        "http": 200,
+        "content_length": "2678220",
+        "expected": 2678220
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "water_manhole_cover",
+      "title": "Water Manhole Cover",
+      "page": "https://polyhaven.com/a/water_manhole_cover",
+      "authors": {
+        "Raunox": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 6301,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/water_manhole_cover/water_manhole_cover_2k.blend",
+          "file_bytes": 270520,
+          "file_md5": "516c8cd721d8aada9edd7f56ba8a43ad",
+          "dependencies": [
+            {
+              "relative_path": "textures/water_manhole_cover_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_rough_2k.exr",
+              "bytes": 2809536,
+              "md5": "ab763f6feb234f25b1d9fe84455d4d29"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_nor_gl_2k.exr",
+              "bytes": 8475483,
+              "md5": "c59e8080033e27ead502a794fefcd985"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_diff_2k.jpg",
+              "bytes": 1519932,
+              "md5": "d8ac01165bd42c4ab8b5f320286b1815"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_metal_2k.exr",
+              "bytes": 4024586,
+              "md5": "32ab87a09862b8e024c497d74c482d2a"
+            }
+          ],
+          "bytes_with_dependencies": 17100057
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/water_manhole_cover/water_manhole_cover_2k.fbx",
+          "file_bytes": 201180,
+          "file_md5": "137fbbd8d4aada244c98a6cab07c0b91",
+          "dependencies": [
+            {
+              "relative_path": "textures/water_manhole_cover_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_rough_2k.exr",
+              "bytes": 2809536,
+              "md5": "ab763f6feb234f25b1d9fe84455d4d29"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_nor_gl_2k.exr",
+              "bytes": 8475483,
+              "md5": "c59e8080033e27ead502a794fefcd985"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_diff_2k.jpg",
+              "bytes": 1519932,
+              "md5": "d8ac01165bd42c4ab8b5f320286b1815"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_metal_2k.exr",
+              "bytes": 4024586,
+              "md5": "32ab87a09862b8e024c497d74c482d2a"
+            }
+          ],
+          "bytes_with_dependencies": 17030717
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/water_manhole_cover/water_manhole_cover_2k.gltf",
+          "file_bytes": 4253,
+          "file_md5": "c399dbfad92d8c15a4b00af20c4cbbb8",
+          "dependencies": [
+            {
+              "relative_path": "textures/water_manhole_cover_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_nor_gl_2k.jpg",
+              "bytes": 4062229,
+              "md5": "43f2e6e27fa22ceaa5889491a80864bc"
+            },
+            {
+              "relative_path": "water_manhole_cover.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/water_manhole_cover/water_manhole_cover.bin",
+              "bytes": 202320,
+              "md5": "5262562d69ba05d21228aec9f5b0306d"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_diff_2k.jpg",
+              "bytes": 1519932,
+              "md5": "d8ac01165bd42c4ab8b5f320286b1815"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_arm_2k.jpg",
+              "bytes": 2167214,
+              "md5": "5eec60f9588ad9343e629f7c33c57ded"
+            }
+          ],
+          "bytes_with_dependencies": 7955948
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/water_manhole_cover/water_manhole_cover_2k.usdc",
+          "file_bytes": 317278,
+          "file_md5": "da1eb33dcbfa4af5c37175853eca6c2a",
+          "dependencies": [
+            {
+              "relative_path": "textures/water_manhole_cover_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_rough_2k.exr",
+              "bytes": 2809536,
+              "md5": "ab763f6feb234f25b1d9fe84455d4d29"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_nor_gl_2k.exr",
+              "bytes": 8475483,
+              "md5": "c59e8080033e27ead502a794fefcd985"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/water_manhole_cover/water_manhole_cover_diff_2k.jpg",
+              "bytes": 1519932,
+              "md5": "d8ac01165bd42c4ab8b5f320286b1815"
+            },
+            {
+              "relative_path": "textures/water_manhole_cover_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/water_manhole_cover/water_manhole_cover_metal_2k.exr",
+              "bytes": 4024586,
+              "md5": "32ab87a09862b8e024c497d74c482d2a"
+            }
+          ],
+          "bytes_with_dependencies": 17146815
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/water_manhole_cover",
+      "api_files": "https://api.polyhaven.com/files/water_manhole_cover",
+      "head_check_fbx_2k": {
+        "id": "water_manhole_cover",
+        "http": 200,
+        "content_length": "201180",
+        "expected": 201180
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "modular_industrial_pipes_01",
+      "title": "Modular Industrial Pipes 01",
+      "page": "https://polyhaven.com/a/modular_industrial_pipes_01",
+      "authors": {
+        "Jorge Camacho": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 12340,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_2k.blend",
+          "file_bytes": 392563,
+          "file_md5": "e7e9a16fb363c269beee69c504523eae",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_rough_2k.png",
+              "bytes": 2241068,
+              "md5": "b3e4929ca10564f422ea9b85927e0b1e"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "bytes": 5880490,
+              "md5": "790f6f93def454c95cf1475b9ecf929d"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_rough_2k.png",
+              "bytes": 2384750,
+              "md5": "cb74bda666cd3619601106af63d506ce"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_diff_2k.png",
+              "bytes": 4527371,
+              "md5": "9e3ad4f6f92e68e0ea2b0e3190e74322"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_diff_2k.png",
+              "bytes": 4203967,
+              "md5": "8157a4d5d0453bb137ec7c453d5fca7a"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "bytes": 5669294,
+              "md5": "a5552f89e85610626906c146f063a10c"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_metal_2k.png",
+              "bytes": 1796022,
+              "md5": "14a86ed5638b66cb9e3a85d21d3ff44b"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_metal_2k.png",
+              "bytes": 1754285,
+              "md5": "ab460ece7bb87edd299ba89bd773afc6"
+            }
+          ],
+          "bytes_with_dependencies": 28849810
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_2k.fbx",
+          "file_bytes": 399820,
+          "file_md5": "34e9cea8f1b60d4a0f9bdddb98ecc170",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_rough_2k.png",
+              "bytes": 2241068,
+              "md5": "b3e4929ca10564f422ea9b85927e0b1e"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "bytes": 5880490,
+              "md5": "790f6f93def454c95cf1475b9ecf929d"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_rough_2k.png",
+              "bytes": 2384750,
+              "md5": "cb74bda666cd3619601106af63d506ce"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_diff_2k.png",
+              "bytes": 4527371,
+              "md5": "9e3ad4f6f92e68e0ea2b0e3190e74322"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_diff_2k.png",
+              "bytes": 4203967,
+              "md5": "8157a4d5d0453bb137ec7c453d5fca7a"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "bytes": 5669294,
+              "md5": "a5552f89e85610626906c146f063a10c"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_metal_2k.png",
+              "bytes": 1796022,
+              "md5": "14a86ed5638b66cb9e3a85d21d3ff44b"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_metal_2k.png",
+              "bytes": 1754285,
+              "md5": "ab460ece7bb87edd299ba89bd773afc6"
+            }
+          ],
+          "bytes_with_dependencies": 28857067
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_2k.gltf",
+          "file_bytes": 15014,
+          "file_md5": "bbebab7237a94e81b515705590912085",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_nor_gl_2k.jpg",
+              "bytes": 2788490,
+              "md5": "99560301689fdf0a73c11c556b6d1007"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_arm_2k.jpg",
+              "bytes": 3197008,
+              "md5": "d08cbdc8251a683bd13e4a8647c18b3d"
+            },
+            {
+              "relative_path": "modular_industrial_pipes_01.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_industrial_pipes_01/modular_industrial_pipes_01.bin",
+              "bytes": 515160,
+              "md5": "a18d063dc719e19b9c20d2f8c0a8bec4"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_nor_gl_2k.jpg",
+              "bytes": 2840017,
+              "md5": "abdd30e0897de12a41860d242f395ab2"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_arm_2k.jpg",
+              "bytes": 3302784,
+              "md5": "4f158e99ce400d82fd73f598cbf3581d"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_diff_2k.jpg",
+              "bytes": 2024502,
+              "md5": "eb892cae76bb2ddee13128c365f3b61e"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_diff_2k.jpg",
+              "bytes": 1934173,
+              "md5": "a0e9a3734c94e78233be0e594b193d37"
+            }
+          ],
+          "bytes_with_dependencies": 16617148
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_2k.usdc",
+          "file_bytes": 628155,
+          "file_md5": "9aa8e9ae43070deac991a07e2d696ce1",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_rough_2k.png",
+              "bytes": 2241068,
+              "md5": "b3e4929ca10564f422ea9b85927e0b1e"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_nor_gl_2k.png",
+              "bytes": 5880490,
+              "md5": "790f6f93def454c95cf1475b9ecf929d"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_rough_2k.png",
+              "bytes": 2384750,
+              "md5": "cb74bda666cd3619601106af63d506ce"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_diff_2k.png",
+              "bytes": 4527371,
+              "md5": "9e3ad4f6f92e68e0ea2b0e3190e74322"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_diff_2k.png",
+              "bytes": 4203967,
+              "md5": "8157a4d5d0453bb137ec7c453d5fca7a"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_nor_gl_2k.png",
+              "bytes": 5669294,
+              "md5": "a5552f89e85610626906c146f063a10c"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group02_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group02_metal_2k.png",
+              "bytes": 1796022,
+              "md5": "14a86ed5638b66cb9e3a85d21d3ff44b"
+            },
+            {
+              "relative_path": "textures/modular_industrial_pipes_01_group01_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_industrial_pipes_01/modular_industrial_pipes_01_group01_metal_2k.png",
+              "bytes": 1754285,
+              "md5": "ab460ece7bb87edd299ba89bd773afc6"
+            }
+          ],
+          "bytes_with_dependencies": 29085402
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/modular_industrial_pipes_01",
+      "api_files": "https://api.polyhaven.com/files/modular_industrial_pipes_01",
+      "head_check_fbx_2k": {
+        "id": "modular_industrial_pipes_01",
+        "http": 200,
+        "content_length": "399820",
+        "expected": 399820
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "utility_box_02",
+      "title": "Utility Box 02",
+      "page": "https://polyhaven.com/a/utility_box_02",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 6268,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/utility_box_02/utility_box_02_2k.blend",
+          "file_bytes": 265699,
+          "file_md5": "6508ae11b348f341520f2dc0d5f469da",
+          "dependencies": [
+            {
+              "relative_path": "textures/utility_box_02_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_metal_2k.exr",
+              "bytes": 2364444,
+              "md5": "2d8ec3e6810f86cdbf97cae59d561956"
+            },
+            {
+              "relative_path": "textures/utility_box_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_nor_gl_2k.exr",
+              "bytes": 5480890,
+              "md5": "e634d932448e713f8f23be01a0f28886"
+            },
+            {
+              "relative_path": "textures/utility_box_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_rough_2k.exr",
+              "bytes": 3743031,
+              "md5": "d647623cbda306bdfd651e11b0ee11bb"
+            },
+            {
+              "relative_path": "textures/utility_box_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_diff_2k.jpg",
+              "bytes": 1960930,
+              "md5": "626957b9988afe66fa14ebc53bfcc86c"
+            }
+          ],
+          "bytes_with_dependencies": 13814994
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/utility_box_02/utility_box_02_2k.fbx",
+          "file_bytes": 187484,
+          "file_md5": "d35508711798803cf571bc6323e6a8eb",
+          "dependencies": [
+            {
+              "relative_path": "textures/utility_box_02_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_metal_2k.exr",
+              "bytes": 2364444,
+              "md5": "2d8ec3e6810f86cdbf97cae59d561956"
+            },
+            {
+              "relative_path": "textures/utility_box_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_nor_gl_2k.exr",
+              "bytes": 5480890,
+              "md5": "e634d932448e713f8f23be01a0f28886"
+            },
+            {
+              "relative_path": "textures/utility_box_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_rough_2k.exr",
+              "bytes": 3743031,
+              "md5": "d647623cbda306bdfd651e11b0ee11bb"
+            },
+            {
+              "relative_path": "textures/utility_box_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_diff_2k.jpg",
+              "bytes": 1960930,
+              "md5": "626957b9988afe66fa14ebc53bfcc86c"
+            }
+          ],
+          "bytes_with_dependencies": 13736779
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/utility_box_02/utility_box_02_2k.gltf",
+          "file_bytes": 2764,
+          "file_md5": "b0765b82f8626dfa4655dd8d623a6ab2",
+          "dependencies": [
+            {
+              "relative_path": "utility_box_02.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/utility_box_02/utility_box_02.bin",
+              "bytes": 199784,
+              "md5": "bff3e7d9375d8c5ea5723ad007e45258"
+            },
+            {
+              "relative_path": "textures/utility_box_02_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_nor_gl_2k.jpg",
+              "bytes": 2335447,
+              "md5": "cdf769cbc11505fcd2c9bc46a13842f1"
+            },
+            {
+              "relative_path": "textures/utility_box_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_diff_2k.jpg",
+              "bytes": 1960930,
+              "md5": "626957b9988afe66fa14ebc53bfcc86c"
+            },
+            {
+              "relative_path": "textures/utility_box_02_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_arm_2k.jpg",
+              "bytes": 2598114,
+              "md5": "bbc7d0d06e8c1c3500d99fa772e64a5d"
+            }
+          ],
+          "bytes_with_dependencies": 7097039
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/utility_box_02/utility_box_02_2k.usdc",
+          "file_bytes": 325393,
+          "file_md5": "2778dd1f8051fd1f5c627211ad690ae3",
+          "dependencies": [
+            {
+              "relative_path": "textures/utility_box_02_metal_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_metal_2k.exr",
+              "bytes": 2364444,
+              "md5": "2d8ec3e6810f86cdbf97cae59d561956"
+            },
+            {
+              "relative_path": "textures/utility_box_02_nor_gl_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_nor_gl_2k.exr",
+              "bytes": 5480890,
+              "md5": "e634d932448e713f8f23be01a0f28886"
+            },
+            {
+              "relative_path": "textures/utility_box_02_rough_2k.exr",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/utility_box_02/utility_box_02_rough_2k.exr",
+              "bytes": 3743031,
+              "md5": "d647623cbda306bdfd651e11b0ee11bb"
+            },
+            {
+              "relative_path": "textures/utility_box_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/utility_box_02/utility_box_02_diff_2k.jpg",
+              "bytes": 1960930,
+              "md5": "626957b9988afe66fa14ebc53bfcc86c"
+            }
+          ],
+          "bytes_with_dependencies": 13874688
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/utility_box_02",
+      "api_files": "https://api.polyhaven.com/files/utility_box_02",
+      "head_check_fbx_2k": {
+        "id": "utility_box_02",
+        "http": 200,
+        "content_length": "187484",
+        "expected": 187484
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Poly Haven",
+      "id": "modular_urban_apartments_facade",
+      "title": "Modular Urban Apartments Facade",
+      "page": "https://polyhaven.com/a/modular_urban_apartments_facade",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "license": "CC0 1.0",
+      "license_url": "https://polyhaven.com/license",
+      "triangles_model_metadata": 118215,
+      "lods_declared": false,
+      "formats_confirmed": [
+        "blend",
+        "fbx",
+        "gltf",
+        "usd"
+      ],
+      "2k_files_with_dependencies": {
+        "blend": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_2k.blend",
+          "file_bytes": 1599741,
+          "file_md5": "d5d9439763737600f52973afefacfd23",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "bytes": 6447911,
+              "md5": "9370fa5b2e779d2021f703abfd461ec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_diff_2k.png",
+              "bytes": 15101409,
+              "md5": "6f0cfe4493c6fcdb2529f46458c2de5d"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "bytes": 15608021,
+              "md5": "4dd20f26af53f6797ef3f1eff0f45baa"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_rough_2k.png",
+              "bytes": 4713661,
+              "md5": "816c66734694a5574c0cb27a4983630e"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "bytes": 12815000,
+              "md5": "2768810cb8646fc56045b9ade203d57a"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "bytes": 21827162,
+              "md5": "f5fe3d1eb4cd86330e8a661c856bee5c"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "bytes": 6817580,
+              "md5": "de060566f45c4dce91412f8914a1c892"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "bytes": 23951306,
+              "md5": "022d71fcf992c6360e9461bcf01e0347"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_metal_2k.png",
+              "bytes": 41686,
+              "md5": "a13e2432461a0969e37af2988d2597f9"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "bytes": 7017154,
+              "md5": "94b09d23596f854d7ba12ea47c0ca101"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "bytes": 20967115,
+              "md5": "9de5ef30b7eab0324e9cc7b904c5a443"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "bytes": 199493,
+              "md5": "a07870c940eca06dec5366fe65612686"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "bytes": 20637317,
+              "md5": "0ab3615dab5c3821ed7d3c1ada31eec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "bytes": 20644061,
+              "md5": "edc2e48bce929bf835c7766be1432316"
+            }
+          ],
+          "bytes_with_dependencies": 178388617
+        },
+        "fbx": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_2k.fbx",
+          "file_bytes": 4938428,
+          "file_md5": "d1f00d77e50bfab1a70e47dcd353dab1",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "bytes": 6447911,
+              "md5": "9370fa5b2e779d2021f703abfd461ec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_diff_2k.png",
+              "bytes": 15101409,
+              "md5": "6f0cfe4493c6fcdb2529f46458c2de5d"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "bytes": 15608021,
+              "md5": "4dd20f26af53f6797ef3f1eff0f45baa"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_rough_2k.png",
+              "bytes": 4713661,
+              "md5": "816c66734694a5574c0cb27a4983630e"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "bytes": 12815000,
+              "md5": "2768810cb8646fc56045b9ade203d57a"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "bytes": 21827162,
+              "md5": "f5fe3d1eb4cd86330e8a661c856bee5c"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "bytes": 6817580,
+              "md5": "de060566f45c4dce91412f8914a1c892"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "bytes": 23951306,
+              "md5": "022d71fcf992c6360e9461bcf01e0347"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_metal_2k.png",
+              "bytes": 41686,
+              "md5": "a13e2432461a0969e37af2988d2597f9"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "bytes": 7017154,
+              "md5": "94b09d23596f854d7ba12ea47c0ca101"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "bytes": 20967115,
+              "md5": "9de5ef30b7eab0324e9cc7b904c5a443"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "bytes": 199493,
+              "md5": "a07870c940eca06dec5366fe65612686"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "bytes": 20637317,
+              "md5": "0ab3615dab5c3821ed7d3c1ada31eec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "bytes": 20644061,
+              "md5": "edc2e48bce929bf835c7766be1432316"
+            }
+          ],
+          "bytes_with_dependencies": 181727304
+        },
+        "gltf": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_2k.gltf",
+          "file_bytes": 270799,
+          "file_md5": "1ce22fcd5537779fcfbf941f6375a8a7",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_arm_2k.jpg",
+              "bytes": 2559719,
+              "md5": "7a0024112f4038c16466e2c45c22e7db"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_diff_2k.jpg",
+              "bytes": 1991640,
+              "md5": "9d0ab416e8b446f85181531805b6a3a7"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_diff_2k.jpg",
+              "bytes": 2238064,
+              "md5": "719453e638edda0c75a98b56f03b8d25"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_nor_gl_2k.jpg",
+              "bytes": 3427345,
+              "md5": "80031f2f13f19bf23f4953ecaa0ecdd6"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_diff_2k.jpg",
+              "bytes": 2198191,
+              "md5": "609c1fc3cbccfb481ac700e2a678b9ae"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_nor_gl_2k.jpg",
+              "bytes": 4895944,
+              "md5": "7d45cd5c65ac1bfe04626f11a5ac2436"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_arm_2k.jpg",
+              "bytes": 2352206,
+              "md5": "f01279c252016feebe255da56d03e459"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_arm_2k.jpg",
+              "bytes": 2887047,
+              "md5": "129bac48a9995c901103d3ce6159b630"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_diff_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_diff_2k.jpg",
+              "bytes": 2013153,
+              "md5": "e52fdfcb5694cabffc38bc8de8af623d"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_nor_gl_2k.jpg",
+              "bytes": 3610799,
+              "md5": "8f6ca282e1c154b95468f59e99ada317"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_nor_gl_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_nor_gl_2k.jpg",
+              "bytes": 2064585,
+              "md5": "bcac084cb8270eea360a6ca596ea80ba"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_arm_2k.jpg",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_arm_2k.jpg",
+              "bytes": 2748860,
+              "md5": "35e430dbb5fba6ec02c463d1b384a80a"
+            },
+            {
+              "relative_path": "modular_urban_apartments_facade.bin",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_urban_apartments_facade/modular_urban_apartments_facade.bin",
+              "bytes": 8168772,
+              "md5": "e54b1de59041da0f44db64efb8bda8f6"
+            }
+          ],
+          "bytes_with_dependencies": 41427124
+        },
+        "usd": {
+          "file_url": "https://dl.polyhaven.org/file/ph-assets/Models/usd/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_2k.usdc",
+          "file_bytes": 41733746,
+          "file_md5": "758425310f7147f49154a2de7e1653c7",
+          "dependencies": [
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_rough_2k.png",
+              "bytes": 6447911,
+              "md5": "9370fa5b2e779d2021f703abfd461ec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_diff_2k.png",
+              "bytes": 15101409,
+              "md5": "6f0cfe4493c6fcdb2529f46458c2de5d"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_diff_2k.png",
+              "bytes": 15608021,
+              "md5": "4dd20f26af53f6797ef3f1eff0f45baa"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_rough_2k.png",
+              "bytes": 4713661,
+              "md5": "816c66734694a5574c0cb27a4983630e"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_nor_gl_2k.png",
+              "bytes": 12815000,
+              "md5": "2768810cb8646fc56045b9ade203d57a"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_diff_2k.png",
+              "bytes": 21827162,
+              "md5": "f5fe3d1eb4cd86330e8a661c856bee5c"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_rough_2k.png",
+              "bytes": 6817580,
+              "md5": "de060566f45c4dce91412f8914a1c892"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_nor_gl_2k.png",
+              "bytes": 23951306,
+              "md5": "022d71fcf992c6360e9461bcf01e0347"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_metal_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_metal_2k.png",
+              "bytes": 41686,
+              "md5": "a13e2432461a0969e37af2988d2597f9"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_rough_2k.png",
+              "bytes": 7017154,
+              "md5": "94b09d23596f854d7ba12ea47c0ca101"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_plaster_diff_2k.png",
+              "bytes": 20967115,
+              "md5": "9de5ef30b7eab0324e9cc7b904c5a443"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_objects_alpha_2k.png",
+              "bytes": 199493,
+              "md5": "a07870c940eca06dec5366fe65612686"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_01_nor_gl_2k.png",
+              "bytes": 20637317,
+              "md5": "0ab3615dab5c3821ed7d3c1ada31eec8"
+            },
+            {
+              "relative_path": "textures/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/modular_urban_apartments_facade/modular_urban_apartments_facade_trim_02_nor_gl_2k.png",
+              "bytes": 20644061,
+              "md5": "edc2e48bce929bf835c7766be1432316"
+            }
+          ],
+          "bytes_with_dependencies": 218522622
+        }
+      },
+      "api_info": "https://api.polyhaven.com/info/modular_urban_apartments_facade",
+      "api_files": "https://api.polyhaven.com/files/modular_urban_apartments_facade",
+      "head_check_fbx_2k": {
+        "id": "modular_urban_apartments_facade",
+        "http": 200,
+        "content_length": "4938428",
+        "expected": 4938428
+      },
+      "download_check": "HTTP HEAD only; model and texture contents not downloaded."
+    },
+    {
+      "provider": "Quaternius",
+      "title": "Modular Streets Pack",
+      "author": "Quaternius",
+      "page": "https://quaternius.com/packs/modularstreets.html",
+      "license": "CC0 1.0",
+      "formats_listed_by_author": [
+        "Blend",
+        "FBX",
+        "OBJ"
+      ],
+      "model_count_listed_by_author": 25,
+      "download_check": "Author page lists Download; archive not downloaded."
+    },
+    {
+      "provider": "itch.io",
+      "title": "3D Apocalyptic Building / City (CC0)",
+      "author": "Majadroid",
+      "page": "https://majadroid.itch.io/3d-apocalyptic-building-city-cc0",
+      "license": "CC0 1.0",
+      "formats_listed_by_author": [
+        "Blend"
+      ],
+      "model_count_description": "Seven skyscraper ruins plus billboards and wreckage.",
+      "download_archive_listed": "LowPoly-Apocalyptic-Buildings-By-Majadroid.zip",
+      "download_size_listed": "36 MB",
+      "download_check": "Author page and free download form inspected; archive not downloaded."
+    }
+  ]
+}

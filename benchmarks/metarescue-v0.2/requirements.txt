@@ -1,0 +1,3 @@
+# Required external packages: NONE.
+# Core NSGA-II, A*, server, simulator and web UI run on Python 3.10+ standard library.
+# For optional OR-Tools CP-SAT benchmark, see requirements-optional.txt.

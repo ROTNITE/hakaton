@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09111f">
+  <title>MetaRescue Benchmark — интерактивная лаборатория</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="/mission"><span class="brand-mark">✳</span><span><strong>META<span class="brand-accent">RESCUE</span></strong><small>BENCHMARK LABORATORY</small></span></a>
+    <div class="nav-caption">ЭКСПЕРИМЕНТЫ</div>
+    <nav class="main-nav" aria-label="Разделы лаборатории">
+      <a href="/mission" data-mode="mission"><span class="nav-glyph">⬡</span><span>01 · Три архитектуры</span></a>
+    </nav>
+    <div class="aside-separator"></div>
+    <div class="nav-caption">УСЛОВИЯ ТЕСТА</div>
+    <form id="scenario-form" class="scenario-controls">
+      <label for="seed">Начальное значение (seed)</label>
+      <input id="seed" name="seed" type="number" value="2026" min="0" max="999999999" required>
+      <label for="scenario">Тип бенчмарка</label>
+      <select id="scenario" name="scenario">
+        <option value="open">S1 · Открытая местность</option>
+        <option value="urban" selected>S2 · Разрушенный город</option>
+        <option value="clusters">S3 · Скопления людей</option>
+        <option value="scarce">S4 · Энергозатратный рельеф</option>
+        <option value="uncertain">S5 · Ошибки наблюдения</option>
+        <option value="dynamic">S6 · Отказ эвакуатора</option>
+      </select>
+      <label for="map-size">Размер карты (клеток на сторону)</label>
+      <select id="map-size" name="map_size">
+        <option value="25" selected>25 × 25 · 250 × 250 м</option>
+        <option value="35">35 × 35 · 350 × 350 м</option>
+        <option value="45">45 × 45 · 450 × 450 м</option>
+        <option value="55">55 × 55 · 550 × 550 м</option>
+        <option value="65">65 × 65 · 650 × 650 м</option>
+        <option value="75">75 × 75 · 750 × 750 м</option>
+        <option value="100">100 × 100 · 1000 × 1000 м</option>
+        <option value="125">125 × 125 · 1250 × 1250 м</option>
+        <option value="150">150 × 150 · 1500 × 1500 м</option>
+      </select>
+      <label for="people">Количество пострадавших (3–600)</label>
+      <input id="people" name="people" type="number" min="3" max="600" step="1" value="16" required>
+      <label for="scouts">Количество дронов-разведчиков (1–48)</label>
+      <input id="scouts" name="scouts" type="number" min="1" max="48" step="1" value="3" required>
+      <label for="rescuers">Количество роботов-эвакуаторов (1–40)</label>
+      <input id="rescuers" name="rescuers" type="number" min="1" max="40" step="1" value="4" required>
+      <div class="event-probabilities">
+        <div class="event-title"><span>ДИНАМИКА СРЕДЫ</span><button type="button" id="events-zero" class="event-utility">Все 0%</button></div>
+        <p class="event-intro">Вероятность появления события в каждом интервале ~80 модельных секунд. Одинаковые события для всех методов.</p>
+        <div class="prob-line"><label for="p-collapse">🧱 Обрушение</label><output for="p-collapse" id="p-collapse-out">20%</output><input type="range" id="p-collapse" min="0" max="100" step="5" value="20"></div>
+        <div class="prob-line"><label for="p-fire">🔥 Пожар</label><output for="p-fire" id="p-fire-out">18%</output><input type="range" id="p-fire" min="0" max="100" step="1" value="18"></div>
+        <div class="prob-line"><label for="p-flood">🌊 Затопление</label><output for="p-flood" id="p-flood-out">12%</output><input type="range" id="p-flood" min="0" max="100" step="1" value="12"></div>
+        <div class="prob-line"><label for="p-mud">🟤 Грязь</label><output for="p-mud" id="p-mud-out">25%</output><input type="range" id="p-mud" min="0" max="100" step="5" value="25"></div>
+        <div class="prob-line"><label for="p-road_damage">🛣 Повреждение дороги</label><output for="p-road_damage" id="p-road_damage-out">23%</output><input type="range" id="p-road_damage" min="0" max="100" step="1" value="23"></div>
+        <div class="prob-line"><label for="p-smoke">🌫 Дым и видимость</label><output for="p-smoke" id="p-smoke-out">28%</output><input type="range" id="p-smoke" min="0" max="100" step="1" value="28"></div>
+        <div class="prob-line"><label for="p-appearance">📣 Новый пострадавший</label><output for="p-appearance" id="p-appearance-out">30%</output><input type="range" id="p-appearance" min="0" max="100" step="5" value="30"></div>
+      </div>
+      <div class="ai-controls">
+        <div class="event-title">DEEPSEEK · AI CONTROL</div>
+        <p class="event-intro">В режиме LIVE — реальные запросы с ключом только на сервере. MOCK — лишь тестовая имитация; OFF — отказоустойчивый резерв. Без ключа LIVE не отправляет запросы.</p>
+        <label for="ai-mode">Режим работы AI</label>
+        <select id="ai-mode"><option value="live" selected>LIVE · DeepSeek API</option><option value="mock">MOCK · тест без API</option><option value="off">OFF · без AI</option></select>
+        <label for="ai-calls">Лимит вызовов на вариант</label>
+        <input id="ai-calls" type="number" min="0" max="1600" value="240">
+        <label for="local-timeout">Local AI · тайм-аут, с</label>
+        <input id="local-timeout" type="number" min="0.5" max="30" step="0.5" value="3">
+        <label for="global-timeout">Global AI · тайм-аут, с</label>
+        <input id="global-timeout" type="number" min="0.5" max="60" step="0.5" value="6">
+        <p id="ai-connection" class="ai-connection">Проверка подключения…</p>
+      </div>
+      <p class="scenario-hint">Размер карты масштабирует длительность миссии. Запас батареи не ограничен, расход каждого робота учитывается в Wh. До 150 × 150, 48 дронов, 40 эвакуаторов, 600 человек. Предельные конфигурации значительно тяжелее обычных.</p>
+      <button id="new-run" class="primary-btn" type="submit">▶ СТАРТ · Запустить сравнение</button>
+    </form>
+    <div class="sidebar-bottom"><span class="online-dot"></span> Работает локально<br><span class="small-muted">К DeepSeek обращается только сервер в LIVE</span></div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <div class="breadcrumb"><span>Лаборатория</span><span class="chev">/</span><span id="crumb-page">Разведка</span></div>
+      <div class="top-right"><span class="system-tag">NSGA-II ×2 + DEEPSEEK</span><span class="version-tag">v0.5.2</span></div>
+    </header>
+    <div class="content">
+      <section class="hero">
+        <div class="eyebrow"><span class="eyebrow-pulse"></span> ИНТЕРАКТИВНОЕ МОДЕЛИРОВАНИЕ</div>
+        <h1 id="page-title">Сравнение алгоритмов разведки</h1>
+        <p id="page-subtitle">Одни и те же условия. Разные способы планирования. Измеримые результаты.</p>
+      </section>
+      <section class="overview" aria-label="Сводные показатели">
+        <article class="overview-box"><div class="overview-label" id="stat-a-label">Модельное время</div><strong id="stat-a">0.0 с</strong><span class="overview-extra">Доступна ручная перемотка</span></article>
+        <article class="overview-box"><div class="overview-label" id="stat-b-label">Лучший результат</div><strong id="stat-b">—</strong><span class="overview-extra" id="stat-b-caption">По текущим наблюдениям</span></article>
+        <article class="overview-box"><div class="overview-label" id="stat-c-label">Проверяемые методы</div><strong id="stat-c">3</strong><span class="overview-extra">Одна карта и seed</span></article>
+        <article class="overview-box"><div class="overview-label">Пострадавшие в сценарии</div><strong id="stat-d">16</strong><span class="overview-extra">Скрыты от разведчиков</span></article>
+      </section>
+      <section class="control-card" aria-label="Управление симуляцией">
+        <div class="play-row">
+          <button type="button" id="play-btn" class="play-btn" title="Воспроизведение / пауза" aria-label="Воспроизведение / пауза">▶</button>
+          <button type="button" id="step-btn" class="icon-btn" title="Шаг +5 модельных секунд" aria-label="Шаг +5 секунд">⏭</button>
+          <button type="button" id="reset-btn" class="icon-btn" title="В начало" aria-label="В начало">↺</button>
+          <span class="time-count" id="time-label">00:00 <em>/ 08:00</em></span>
+          <div class="control-space"></div>
+          <label class="speed-label" for="speed">СКОРОСТЬ</label>
+          <select id="speed" class="speed-select"><option value="1">1×</option><option value="4">4×</option><option value="12" selected>12×</option><option value="30">30×</option><option value="60">60×</option></select>
+        </div>
+        <input type="range" id="time-slider" class="time-slider" min="0" max="480" step="1" value="0" aria-label="Модельное время">
+        <div class="timeline-meta"><span>0 с · СТАРТ</span><span id="end-time-label">480 с · ЗАВЕРШЕНИЕ</span></div>
+      </section>
+      <section class="experiment-section">
+        <div class="section-heading"><div><span class="section-kicker">LIVE COMPARISON</span><h2 id="panels-heading">Параллельные прогоны</h2></div><span class="comparison-badge">Синхронизированное время</span></div>
+        <div class="knowledge-controls"><label for="knowledge-mode">Отображение карты:</label><select id="knowledge-mode"><option value="known" selected>Известно агентам</option><option value="truth">Истинная карта · аудит</option></select></div>
+        <div class="terrain-legend" aria-label="Легенда событий">
+          <span><i style="background:#e5685b"></i> Завалы</span><span><i style="background:#ff8d3e"></i> Пожар</span><span><i style="background:#2998d4"></i> Вода</span><span><i style="background:#906d44"></i> Грязь</span><span><i style="background:#dec067"></i> Дороги</span><span><i style="background:#b0b9c5"></i> Дым</span><span>◆ Звуковой сигнал (не точные координаты)</span>
+        </div>
+        <div id="panels" class="panels-grid"></div>
+      </section>
+      <section class="analytics-section">
+        <div class="section-heading"><div><span class="section-kicker">METRICS & ANALYTICS</span><h2>Объективное сравнение</h2></div><button id="export-btn" class="export-btn">↓ Скачать результаты JSON</button></div>
+        <div class="analysis-grid">
+          <article class="analysis-card"><h3 id="progress-title">Обнаружено по времени</h3><p>Отдельная линия для каждого алгоритма. Масштаб и временной курсор одинаковы для честного сравнения.</p><div id="progress-chart" class="chart-holder progress-chart"></div></article>
+          <article class="analysis-card"><h3>Фронт Парето NSGA-II</h3><p id="pareto-description">Компромиссы между целевыми функциями реального NSGA-II.</p><div id="pareto-chart" class="chart-holder"></div></article>
+        </div>
+        <article class="results-card"><div class="results-title"><h3>Сводная таблица и рейтинг</h3><span id="table-status">Показатели на текущий момент · рейтинг по текущему прогрессу</span></div><div class="table-wrap"><table id="results-table"></table></div><p class="score-method" id="score-method"></p><p class="table-note">«События среды» — одинаковые физические изменения для всех трёх архитектур. «Прерывания» — число вынужденных перепланирований текущих спасательных рейсов. «Время окончания» — момент последнего действия алгоритма в пределах времени симуляции, не обязательно завершение всех задач. «Последняя доставка» — момент, когда последний человек был доставлен. «Рейс, с/чел» — средняя продолжительность выполненных рейсов от отправления до доставки; «темп» — доставок на минуту от старта миссии. Баллы — внутренний сравнительный индекс, не официальный балл хакатона.</p></article>
+      </section>
+      <section class="explainer"><div class="explainer-icon">i</div><div><strong>О методологии</strong><p id="notes">Алгоритмы получают одинаковое наблюдаемое состояние. Все планировщики исполняют маршруты в одной физической модели.</p><p class="footnote">Это исследовательский 2D-прототип для сравнения алгоритмов, не готовая нормативная 3D-среда «Метарой 1.0». Время расчёта измеряется на компьютере, где запущен сервер. Время симуляции — модельное.</p></div></section>
+      <section class="audit-inspector" aria-label="Журнал принятых решений">
+        <div class="section-heading"><div><span class="section-kicker">AI / NSGA-II TRACE</span><h2>Журнал событий и решений</h2></div>
+          <label for="audit-variant">Вариант: <select id="audit-variant"><option value="base">A · NSGA-II ×2</option><option value="global_ai">B · Global AI</option><option value="global_local_ai" selected>C · Global + Local AI</option></select></label></div>
+        <p class="audit-help">Наблюдения, запросы AI, валидатор и изменения плана до текущего модельного времени. Нажмите на запись, чтобы раскрыть исходный JSON.</p>
+        <div id="audit-feed" class="audit-feed">Журнал появится после расчёта.</div>
+      </section>
+      <section class="full-audit-card" aria-label="Полный журнал эксперимента">
+        <div><h2>Полный журнал эксперимента</h2><p>Все решения, входные запросы и видимые ответы DeepSeek, сообщения, проверки, каждый сегмент перемещения и <strong>полная ASCII-карта каждой модельной секунды для всех трёх вариантов</strong>. Экспорт TXT может занимать сотни мегабайт на карте 150×150.</p><p>Внутренние скрытые рассуждения модели недоступны; сохраняются её структурированные объяснения и reason_codes.</p></div>
+        <button id="export-logs-btn" class="primary-btn" type="button">↓ ВЗЯТЬ ПОЛНЫЕ ЛОГИ · TXT</button>
+      </section>
+      <footer>MetaRescue Benchmark v0.5.2 · DeepSeek API только в LIVE-режиме</footer>
+    </div>
+  </main>
+</div>
+<div id="overlay" class="overlay hidden"><div class="spinner"></div><h3>Выполняются эксперименты</h3><p>Расчёт маршрутов, недоминируемая сортировка, подготовка трасс…</p></div>
+<div id="toast" class="toast" aria-live="polite"></div>
+</body>
+</html>

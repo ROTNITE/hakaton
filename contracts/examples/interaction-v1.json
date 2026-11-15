@@ -1,0 +1,4280 @@
+{
+  "fixture_version": "1.1",
+  "purpose": "Authored wire examples, not executed simulation output.",
+  "branch_semantics": "Only reset/select/step_response is one linked illustrative exchange. Other decisions are independent branches from their named observation.",
+  "environment_health": {
+    "protocol_version": "1.0",
+    "component": "environment",
+    "status": "ready",
+    "environment_id": "metaevolution_environment",
+    "capabilities_url": "/v1/environment/capabilities"
+  },
+  "controller_health": {
+    "protocol_version": "1.0",
+    "component": "controller",
+    "status": "ready",
+    "controller_id": "metaevolution_controller",
+    "supported_operations": [
+      "keep",
+      "select",
+      "switch",
+      "modify",
+      "compose",
+      "synthesize",
+      "safe_stop"
+    ]
+  },
+  "capabilities": {
+    "protocol_version": "1.0",
+    "environment_id": "metaevolution_environment",
+    "profile": {
+      "id": "metaevolution",
+      "version": "1.0",
+      "document_revision": "1.1"
+    },
+    "agent_kinds": [
+      "aerial",
+      "ground",
+      "underground",
+      "surface_water",
+      "underwater",
+      "infrastructure",
+      "digital",
+      "operator"
+    ],
+    "supported_actions": {
+      "move": {
+        "required_capabilities": [
+          "move"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "target"
+          ],
+          "properties": {
+            "target": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "observe": {
+        "required_capabilities": [
+          "sense"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "radius"
+          ],
+          "properties": {
+            "radius": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "inspect": {
+        "required_capabilities": [
+          "inspect"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "target_id"
+          ],
+          "properties": {
+            "target_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "deliver": {
+        "required_capabilities": [
+          "deliver"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "target_id",
+            "resource_id",
+            "amount"
+          ],
+          "properties": {
+            "target_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resource_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "relay": {
+        "required_capabilities": [
+          "relay"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "send_message": {
+        "required_capabilities": [
+          "communicate"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "recipient_id",
+            "payload"
+          ],
+          "properties": {
+            "recipient_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "payload": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "hold": {
+        "required_capabilities": [
+          "move"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [],
+          "properties": {},
+          "additionalProperties": true
+        }
+      },
+      "charge": {
+        "required_capabilities": [
+          "charge"
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "required": [
+            "station_id"
+          ],
+          "properties": {
+            "station_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "scenario_ids": [
+      "coverage_search",
+      "priority_response",
+      "temporary_coalition",
+      "safe_degradation",
+      "coordination_reconfiguration"
+    ],
+    "zone_types": [
+      "land",
+      "water",
+      "air",
+      "underground",
+      "obstacle",
+      "hazard",
+      "restricted",
+      "low_connectivity",
+      "infrastructure"
+    ],
+    "infrastructure_kinds": [
+      "relay",
+      "charging_station",
+      "sensor_node",
+      "base_station",
+      "compute_node"
+    ],
+    "predicate_operators": [
+      "and",
+      "or",
+      "not",
+      "eq",
+      "ne",
+      "lt",
+      "le",
+      "gt",
+      "ge",
+      "exists",
+      "in",
+      "all",
+      "any",
+      "count",
+      "sum"
+    ],
+    "event_types": [
+      "agent_failure",
+      "agent_degradation",
+      "infrastructure_failure",
+      "connectivity_loss",
+      "mission_priority_change",
+      "operator_directive",
+      "hazard_appeared",
+      "restricted_zone_appeared",
+      "resource_shortage",
+      "target_detected",
+      "target_state_changed",
+      "contradictory_information",
+      "stale_information",
+      "environment_change"
+    ],
+    "constraint_kinds": [
+      "energy_reserve"
+    ],
+    "extensions": [
+      "metaevolution.profile.v1",
+      "metaevolution.freshness.v1",
+      "metaevolution.actions.v1",
+      "metaevolution.execution.v1",
+      "metaevolution.plan_acknowledgements.v1",
+      "metaevolution.command_groups.v1",
+      "metaevolution.step_deduplication.v1",
+      "metaevolution.reset_deduplication.v1"
+    ],
+    "time_model": {
+      "external_step": 1.0,
+      "maximum_internal_step": 0.1,
+      "epsilon_time": 1e-09
+    },
+    "limits": {
+      "request_bytes": 2097152,
+      "commands_per_step": 256,
+      "pending_commands_per_agent": 32,
+      "delivery_ttl": 5.0,
+      "autonomy_timeout": 10.0,
+      "ast_depth": 16,
+      "ast_nodes": 256,
+      "fsm_states": 16,
+      "fsm_transitions": 64
+    },
+    "supported_scenarios": {
+      "coverage_search": {
+        "roles": [
+          {
+            "id": "scout",
+            "required_capabilities": [
+              "sense"
+            ]
+          },
+          {
+            "id": "relay",
+            "required_capabilities": [
+              "relay"
+            ]
+          }
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "observation_interval": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [],
+          "additionalProperties": true
+        }
+      },
+      "priority_response": {
+        "roles": [
+          {
+            "id": "executor",
+            "required_capabilities": [
+              "deliver"
+            ]
+          },
+          {
+            "id": "relay",
+            "required_capabilities": [
+              "relay"
+            ]
+          }
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "target_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "target_id"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "temporary_coalition": {
+        "roles": [
+          {
+            "id": "scout",
+            "required_capabilities": [
+              "sense"
+            ]
+          },
+          {
+            "id": "relay",
+            "required_capabilities": [
+              "relay"
+            ]
+          },
+          {
+            "id": "executor",
+            "required_capabilities": [
+              "deliver"
+            ]
+          }
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": true
+        }
+      },
+      "safe_degradation": {
+        "roles": [
+          {
+            "id": "safe_holder",
+            "required_capabilities": [
+              "move"
+            ]
+          },
+          {
+            "id": "returning_agent",
+            "required_capabilities": [
+              "move"
+            ]
+          }
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": true
+        }
+      },
+      "coordination_reconfiguration": {
+        "roles": [
+          {
+            "id": "coordinator",
+            "required_capabilities": [
+              "communicate"
+            ]
+          },
+          {
+            "id": "relay",
+            "required_capabilities": [
+              "relay"
+            ]
+          }
+        ],
+        "parameters_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": true
+        }
+      }
+    }
+  },
+  "reset_request": {
+    "protocol_version": "1.0",
+    "request_id": "reset_001",
+    "seed": 123456,
+    "mission": {
+      "id": "search_and_rescue",
+      "parameters": {}
+    }
+  },
+  "reset_response": {
+    "protocol_version": "1.0",
+    "request_id": "reset_001",
+    "episode_id": "episode_01",
+    "time": 0.0,
+    "status": "running",
+    "observation": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "request_id": "reset_001",
+      "time": 0.0,
+      "mission": {
+        "id": "search_and_rescue",
+        "objectives": [
+          {
+            "id": "search_01",
+            "type": "search",
+            "priority": 0.7,
+            "status": "active",
+            "region_id": "land_01",
+            "required_capabilities": [
+              "sense"
+            ],
+            "success_conditions": {
+              "coverage_fraction_at_least": 0.8
+            }
+          }
+        ],
+        "priorities": [
+          "search",
+          "confirm",
+          "deliver"
+        ],
+        "directives": [],
+        "constraints": [],
+        "status": "active",
+        "termination": {
+          "time_limit": 180.0
+        }
+      },
+      "agents": [
+        {
+          "id": "robot_a",
+          "kind": "aerial",
+          "position": [
+            5.0,
+            5.0,
+            10.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "sense",
+            "inspect",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.9,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "observe",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/observe/parameters_schema"
+            },
+            {
+              "action": "inspect",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/inspect/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            }
+          },
+          "sensors": {
+            "maximum_radius": 15.0
+          }
+        },
+        {
+          "id": "robot_b",
+          "kind": "ground",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "deliver",
+            "charge",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.8,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            },
+            "medical_kits": {
+              "id": "medical_kits",
+              "value": 1.0,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "deliver",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/deliver/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            },
+            {
+              "action": "charge",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/charge/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            }
+          },
+          "inventory": {
+            "medical_kits": {
+              "count": 2,
+              "capacity": 2,
+              "unit": "kit"
+            }
+          }
+        },
+        {
+          "id": "robot_c",
+          "kind": "ground",
+          "position": [
+            10.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.85,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_c",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_c"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            }
+          }
+        }
+      ],
+      "infrastructure": [
+        {
+          "id": "relay_01",
+          "kind": "relay",
+          "position": [
+            15.0,
+            15.0,
+            5.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "relay"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "charger_01",
+          "kind": "charging_station",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "charge"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "sensor_01",
+          "kind": "sensor_node",
+          "position": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "sense"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "base_01",
+          "kind": "base_station",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "communicate"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        }
+      ],
+      "targets": [],
+      "zones": [
+        {
+          "id": "land_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              100.0,
+              100.0,
+              0.0
+            ]
+          },
+          "type": "land",
+          "access": {
+            "allowed_kinds": [
+              "ground"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        },
+        {
+          "id": "air_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              100.0,
+              100.0,
+              30.0
+            ]
+          },
+          "type": "air",
+          "access": {
+            "allowed_kinds": [
+              "aerial"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        }
+      ],
+      "network": {
+        "connectivity_score": 1.0,
+        "partition_count": 1,
+        "reachable_agent_ratio": 1.0,
+        "average_link_quality": 0.95,
+        "mesh_available": true,
+        "known_links": []
+      },
+      "events": [],
+      "constraints": [],
+      "metrics": {
+        "known_coverage_ratio": 0.0,
+        "known_delivery_completed": false
+      },
+      "observation_quality": {
+        "global_completeness": 1.0,
+        "maximum_delay": 0.0,
+        "stale_data_ratio": 0.0,
+        "contradiction_count": 0,
+        "unknown_state_ratio": 0.0
+      },
+      "metaevolution": {
+        "plan": {
+          "plan_revision": 0,
+          "accepted_configuration": {
+            "scenario_ids": [],
+            "parameters": {},
+            "role_assignments": {}
+          },
+          "agent_acknowledgements": {}
+        }
+      }
+    }
+  },
+  "observations": {
+    "initial": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "request_id": "reset_001",
+      "time": 0.0,
+      "mission": {
+        "id": "search_and_rescue",
+        "objectives": [
+          {
+            "id": "search_01",
+            "type": "search",
+            "priority": 0.7,
+            "status": "active",
+            "region_id": "land_01",
+            "required_capabilities": [
+              "sense"
+            ],
+            "success_conditions": {
+              "coverage_fraction_at_least": 0.8
+            }
+          }
+        ],
+        "priorities": [
+          "search",
+          "confirm",
+          "deliver"
+        ],
+        "directives": [],
+        "constraints": [],
+        "status": "active",
+        "termination": {
+          "time_limit": 180.0
+        }
+      },
+      "agents": [
+        {
+          "id": "robot_a",
+          "kind": "aerial",
+          "position": [
+            5.0,
+            5.0,
+            10.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "sense",
+            "inspect",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.9,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "observe",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/observe/parameters_schema"
+            },
+            {
+              "action": "inspect",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/inspect/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_a",
+              "state": "current"
+            }
+          },
+          "sensors": {
+            "maximum_radius": 15.0
+          }
+        },
+        {
+          "id": "robot_b",
+          "kind": "ground",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "deliver",
+            "charge",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.8,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            },
+            "medical_kits": {
+              "id": "medical_kits",
+              "value": 1.0,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "deliver",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/deliver/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            },
+            {
+              "action": "charge",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/charge/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_b",
+              "state": "current"
+            }
+          },
+          "inventory": {
+            "medical_kits": {
+              "count": 2,
+              "capacity": 2,
+              "unit": "kit"
+            }
+          }
+        },
+        {
+          "id": "robot_c",
+          "kind": "ground",
+          "position": [
+            10.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.85,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_c",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_c"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 0.0,
+              "received_at": 0.0,
+              "source_id": "robot_c",
+              "state": "current"
+            }
+          }
+        }
+      ],
+      "infrastructure": [
+        {
+          "id": "relay_01",
+          "kind": "relay",
+          "position": [
+            15.0,
+            15.0,
+            5.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "relay"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "charger_01",
+          "kind": "charging_station",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "charge"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "sensor_01",
+          "kind": "sensor_node",
+          "position": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "sense"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "base_01",
+          "kind": "base_station",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "communicate"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        }
+      ],
+      "targets": [],
+      "zones": [
+        {
+          "id": "land_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              100.0,
+              100.0,
+              0.0
+            ]
+          },
+          "type": "land",
+          "access": {
+            "allowed_kinds": [
+              "ground"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        },
+        {
+          "id": "air_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              100.0,
+              100.0,
+              30.0
+            ]
+          },
+          "type": "air",
+          "access": {
+            "allowed_kinds": [
+              "aerial"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        }
+      ],
+      "network": {
+        "connectivity_score": 1.0,
+        "partition_count": 1,
+        "reachable_agent_ratio": 1.0,
+        "average_link_quality": 0.95,
+        "mesh_available": true,
+        "known_links": []
+      },
+      "events": [],
+      "constraints": [],
+      "metrics": {
+        "known_coverage_ratio": 0.0,
+        "known_delivery_completed": false
+      },
+      "observation_quality": {
+        "global_completeness": 1.0,
+        "maximum_delay": 0.0,
+        "stale_data_ratio": 0.0,
+        "contradiction_count": 0,
+        "unknown_state_ratio": 0.0
+      },
+      "metaevolution": {
+        "plan": {
+          "plan_revision": 0,
+          "accepted_configuration": {
+            "scenario_ids": [],
+            "parameters": {},
+            "role_assignments": {}
+          },
+          "agent_acknowledgements": {}
+        }
+      }
+    },
+    "after_select": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "request_id": "step_select",
+      "time": 1.0,
+      "mission": {
+        "id": "search_and_rescue",
+        "objectives": [
+          {
+            "id": "search_01",
+            "type": "search",
+            "priority": 0.7,
+            "status": "active",
+            "region_id": "land_01",
+            "required_capabilities": [
+              "sense"
+            ],
+            "success_conditions": {
+              "coverage_fraction_at_least": 0.8
+            }
+          }
+        ],
+        "priorities": [
+          "search",
+          "confirm",
+          "deliver"
+        ],
+        "directives": [],
+        "constraints": [],
+        "status": "active",
+        "termination": {
+          "time_limit": 180.0
+        }
+      },
+      "agents": [
+        {
+          "id": "robot_a",
+          "kind": "aerial",
+          "position": [
+            5.0,
+            5.0,
+            10.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "sense",
+            "inspect",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.89,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": "scout",
+          "scenario_ids": [
+            "coverage_search"
+          ],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "observe",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/observe/parameters_schema"
+            },
+            {
+              "action": "inspect",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/inspect/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            }
+          },
+          "sensors": {
+            "maximum_radius": 15.0
+          }
+        },
+        {
+          "id": "robot_b",
+          "kind": "ground",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "deliver",
+            "charge",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.8,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            },
+            "medical_kits": {
+              "id": "medical_kits",
+              "value": 1.0,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "deliver",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/deliver/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            },
+            {
+              "action": "charge",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/charge/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            }
+          },
+          "inventory": {
+            "medical_kits": {
+              "count": 2,
+              "capacity": 2,
+              "unit": "kit"
+            }
+          }
+        },
+        {
+          "id": "robot_c",
+          "kind": "ground",
+          "position": [
+            10.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.85,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_c",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_c"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            }
+          }
+        }
+      ],
+      "infrastructure": [
+        {
+          "id": "relay_01",
+          "kind": "relay",
+          "position": [
+            15.0,
+            15.0,
+            5.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "relay"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "charger_01",
+          "kind": "charging_station",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "charge"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "sensor_01",
+          "kind": "sensor_node",
+          "position": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "sense"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "base_01",
+          "kind": "base_station",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "communicate"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        }
+      ],
+      "targets": [
+        {
+          "id": "target_01",
+          "kind": "possible_victim",
+          "status": "suspected",
+          "position": null,
+          "region_id": "land_01",
+          "confidence": 0.7,
+          "source_id": "robot_a",
+          "observed_at": 1.0
+        }
+      ],
+      "zones": [
+        {
+          "id": "land_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              100.0,
+              100.0,
+              0.0
+            ]
+          },
+          "type": "land",
+          "access": {
+            "allowed_kinds": [
+              "ground"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        },
+        {
+          "id": "air_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              100.0,
+              100.0,
+              30.0
+            ]
+          },
+          "type": "air",
+          "access": {
+            "allowed_kinds": [
+              "aerial"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        }
+      ],
+      "network": {
+        "connectivity_score": 1.0,
+        "partition_count": 1,
+        "reachable_agent_ratio": 1.0,
+        "average_link_quality": 0.95,
+        "mesh_available": true,
+        "known_links": []
+      },
+      "events": [
+        {
+          "id": "event_001",
+          "type": "target_detected",
+          "time": 1.0,
+          "source": "robot_a",
+          "targets": [
+            "target_01"
+          ],
+          "parameters": {
+            "kind": "possible_victim"
+          },
+          "confidence": 0.7,
+          "status": "new"
+        }
+      ],
+      "constraints": [],
+      "metrics": {
+        "known_coverage_ratio": 0.01,
+        "known_delivery_completed": false
+      },
+      "observation_quality": {
+        "global_completeness": 1.0,
+        "maximum_delay": 0.0,
+        "stale_data_ratio": 0.0,
+        "contradiction_count": 0,
+        "unknown_state_ratio": 0.0
+      },
+      "metaevolution": {
+        "plan": {
+          "plan_revision": 1,
+          "accepted_configuration": {
+            "scenario_ids": [
+              "coverage_search"
+            ],
+            "parameters": {},
+            "role_assignments": {
+              "robot_a": "scout"
+            }
+          },
+          "agent_acknowledgements": {
+            "robot_a": {
+              "plan_revision": 1,
+              "status": "confirmed"
+            }
+          }
+        }
+      }
+    },
+    "confirmed_target": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "request_id": "observation_confirmed",
+      "time": 14.0,
+      "mission": {
+        "id": "search_and_rescue",
+        "objectives": [
+          {
+            "id": "search_01",
+            "type": "search",
+            "priority": 0.7,
+            "status": "active",
+            "region_id": "land_01",
+            "required_capabilities": [
+              "sense"
+            ],
+            "success_conditions": {
+              "coverage_fraction_at_least": 0.8
+            }
+          },
+          {
+            "id": "deliver_01",
+            "type": "deliver",
+            "priority": 1.0,
+            "status": "pending",
+            "target_id": "target_01",
+            "required_capabilities": [
+              "deliver"
+            ],
+            "success_conditions": {
+              "resource_id": "medical_kits",
+              "amount_at_least": 1
+            }
+          }
+        ],
+        "priorities": [
+          "search",
+          "confirm",
+          "deliver"
+        ],
+        "directives": [],
+        "constraints": [],
+        "status": "active",
+        "termination": {
+          "time_limit": 180.0
+        }
+      },
+      "agents": [
+        {
+          "id": "robot_a",
+          "kind": "aerial",
+          "position": [
+            5.0,
+            5.0,
+            10.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "sense",
+            "inspect",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.89,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": "scout",
+          "scenario_ids": [
+            "coverage_search"
+          ],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "observe",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/observe/parameters_schema"
+            },
+            {
+              "action": "inspect",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/inspect/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_a",
+              "state": "current"
+            }
+          },
+          "sensors": {
+            "maximum_radius": 15.0
+          }
+        },
+        {
+          "id": "robot_b",
+          "kind": "ground",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "deliver",
+            "charge",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.8,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            },
+            "medical_kits": {
+              "id": "medical_kits",
+              "value": 1.0,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "deliver",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/deliver/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            },
+            {
+              "action": "charge",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/charge/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_b",
+              "state": "current"
+            }
+          },
+          "inventory": {
+            "medical_kits": {
+              "count": 2,
+              "capacity": 2,
+              "unit": "kit"
+            }
+          }
+        },
+        {
+          "id": "robot_c",
+          "kind": "ground",
+          "position": [
+            10.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.85,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_c",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_c"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 14.0,
+              "received_at": 14.0,
+              "source_id": "robot_c",
+              "state": "current"
+            }
+          }
+        }
+      ],
+      "infrastructure": [
+        {
+          "id": "relay_01",
+          "kind": "relay",
+          "position": [
+            15.0,
+            15.0,
+            5.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "relay"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "charger_01",
+          "kind": "charging_station",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "charge"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "sensor_01",
+          "kind": "sensor_node",
+          "position": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "sense"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "base_01",
+          "kind": "base_station",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "communicate"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        }
+      ],
+      "targets": [
+        {
+          "id": "target_01",
+          "kind": "possible_victim",
+          "status": "confirmed",
+          "position": [
+            10.0,
+            10.0,
+            0.0
+          ],
+          "region_id": "land_01",
+          "confidence": 0.95,
+          "source_id": "robot_a",
+          "observed_at": 14.0
+        }
+      ],
+      "zones": [
+        {
+          "id": "land_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              100.0,
+              100.0,
+              0.0
+            ]
+          },
+          "type": "land",
+          "access": {
+            "allowed_kinds": [
+              "ground"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        },
+        {
+          "id": "air_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              100.0,
+              100.0,
+              30.0
+            ]
+          },
+          "type": "air",
+          "access": {
+            "allowed_kinds": [
+              "aerial"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        }
+      ],
+      "network": {
+        "connectivity_score": 1.0,
+        "partition_count": 1,
+        "reachable_agent_ratio": 1.0,
+        "average_link_quality": 0.95,
+        "mesh_available": true,
+        "known_links": []
+      },
+      "events": [
+        {
+          "id": "event_014",
+          "type": "target_state_changed",
+          "time": 14.0,
+          "source": "robot_a",
+          "targets": [
+            "target_01"
+          ],
+          "parameters": {
+            "status": "confirmed"
+          },
+          "confidence": 0.95,
+          "status": "new"
+        }
+      ],
+      "constraints": [],
+      "metrics": {
+        "known_coverage_ratio": 0.01,
+        "known_delivery_completed": false
+      },
+      "observation_quality": {
+        "global_completeness": 1.0,
+        "maximum_delay": 0.0,
+        "stale_data_ratio": 0.0,
+        "contradiction_count": 0,
+        "unknown_state_ratio": 0.0
+      },
+      "metaevolution": {
+        "plan": {
+          "plan_revision": 1,
+          "accepted_configuration": {
+            "scenario_ids": [
+              "coverage_search"
+            ],
+            "parameters": {},
+            "role_assignments": {
+              "robot_a": "scout"
+            }
+          },
+          "agent_acknowledgements": {
+            "robot_a": {
+              "plan_revision": 1,
+              "status": "confirmed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "decisions": {
+    "select": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_select",
+      "request_id": "step_select",
+      "time": 0.0,
+      "operation": "select",
+      "previous_configuration": {
+        "scenario_ids": [],
+        "parameters": {},
+        "role_assignments": {}
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "coverage_search",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "scout"
+      },
+      "commands": [
+        {
+          "agent_id": "robot_a",
+          "action": "observe",
+          "parameters": {
+            "radius": 15.0
+          }
+        }
+      ],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "reset_001"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      }
+    },
+    "keep": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_keep",
+      "request_id": "step_keep",
+      "time": 1.0,
+      "operation": "keep",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "coverage_search",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "scout"
+      },
+      "commands": [],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "step_select"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      }
+    },
+    "modify": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_modify",
+      "request_id": "step_modify",
+      "time": 14.0,
+      "operation": "modify",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {
+          "observation_interval": 2.0
+        },
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "coverage_search",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "scout"
+      },
+      "commands": [],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "observation_confirmed"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      }
+    },
+    "switch": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_switch",
+      "request_id": "step_switch",
+      "time": 14.0,
+      "operation": "switch",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "priority_response"
+        ],
+        "parameters": {
+          "target_id": "target_01"
+        },
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "priority_response",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_b": "executor"
+      },
+      "commands": [
+        {
+          "agent_id": "robot_b",
+          "action": "move",
+          "parameters": {
+            "target": [
+              10.0,
+              10.0,
+              0.0
+            ]
+          }
+        }
+      ],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "observation_confirmed"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      }
+    },
+    "compose": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_compose",
+      "request_id": "step_compose",
+      "time": 14.0,
+      "operation": "compose",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "coverage_search",
+          "priority_response"
+        ],
+        "parameters": {
+          "by_scenario": {
+            "coverage_search": {},
+            "priority_response": {
+              "target_id": "target_01"
+            }
+          },
+          "disjoint_agent_assignments": true
+        },
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "coverage_search",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "scout",
+        "robot_b": "executor",
+        "robot_c": "relay"
+      },
+      "commands": [],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "observation_confirmed"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      },
+      "metaevolution": {
+        "scenario_participants": {
+          "coverage_search": [
+            "robot_a",
+            "robot_c"
+          ],
+          "priority_response": [
+            "robot_b"
+          ]
+        }
+      }
+    },
+    "synthesize": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_synthesize",
+      "request_id": "step_synthesize",
+      "time": 14.0,
+      "operation": "synthesize",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "synth_relay_01"
+        ],
+        "parameters": {
+          "relay_position": [
+            8.0,
+            8.0,
+            10.0
+          ],
+          "target_position": [
+            10.0,
+            10.0,
+            0.0
+          ],
+          "target_id": "target_01",
+          "resource_id": "medical_kits",
+          "amount": 1
+        },
+        "synthesized_scenario": {
+          "id": "synth_relay_01",
+          "version": "1.0",
+          "title": "Relay-supported priority response",
+          "game_model": {
+            "class": "coalition",
+            "players": [
+              "relay",
+              "executor"
+            ],
+            "strategies": {
+              "relay": [
+                "position_and_relay",
+                "hold"
+              ],
+              "executor": [
+                "approach_and_deliver",
+                "hold"
+              ]
+            },
+            "information_structure": "partial",
+            "information_sources": [
+              "public_observation",
+              "delivered_command_results"
+            ],
+            "utilities": {
+              "relay": "rescue_team_value_v1",
+              "executor": "rescue_team_value_v1"
+            },
+            "utility_definition": {
+              "id": "rescue_team_value_v1",
+              "expression": "w_progress * P - w_resources * C + w_connectivity * L - w_uncertainty * Q",
+              "domain": "publicly estimated finite candidate configurations; normalized features; fixed weights for comparison"
+            },
+            "constraints_ref": "scenario_and_environment_hard_constraints",
+            "uncertainty": [
+              "delivery_delay",
+              "resource_estimation",
+              "observation_confidence"
+            ],
+            "stability_criterion": "non_decreasing_estimated_team_value_for_allowed_feasible_changes"
+          },
+          "applicability": {
+            "entry": [
+              {
+                "op": "eq",
+                "left": {
+                  "path": "network.mesh_available"
+                },
+                "right": {
+                  "value": true
+                }
+              }
+            ],
+            "continuation": [
+              {
+                "op": "eq",
+                "left": {
+                  "path": "mission.status"
+                },
+                "right": {
+                  "value": "active"
+                }
+              }
+            ],
+            "exit": [
+              {
+                "op": "eq",
+                "left": {
+                  "path": "metrics.known_delivery_completed"
+                },
+                "right": {
+                  "value": true
+                }
+              }
+            ],
+            "emergency_exit": [
+              {
+                "op": "eq",
+                "left": {
+                  "path": "mission.status"
+                },
+                "right": {
+                  "value": "failed"
+                }
+              }
+            ]
+          },
+          "roles": [
+            {
+              "id": "relay",
+              "required_capabilities": [
+                "move",
+                "relay"
+              ],
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "id": "executor",
+              "required_capabilities": [
+                "move",
+                "deliver"
+              ],
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "objectives": [
+            {
+              "id": "restore_and_deliver",
+              "type": "deliver",
+              "target_parameter": "target_id",
+              "success_conditions": {
+                "phase": "deliver_aid",
+                "execution_status": "completed"
+              }
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            },
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "allowed_actions": [
+            "move",
+            "relay",
+            "deliver",
+            "hold"
+          ],
+          "transition_targets": [
+            "safe_degradation"
+          ],
+          "metrics": [
+            "known_delivery_completed"
+          ],
+          "parameter_schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "required": [
+              "relay_position",
+              "target_position",
+              "target_id",
+              "resource_id",
+              "amount"
+            ],
+            "properties": {
+              "relay_position": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "target_position": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "target_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resource_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "amount": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": true
+          },
+          "execution_rules": {
+            "grammar": "metaevolution.fsm.v1",
+            "initial_state": "position_relay",
+            "deadline_seconds": 90.0,
+            "states": [
+              {
+                "id": "position_relay",
+                "commands": [
+                  {
+                    "role": "relay",
+                    "action": "move",
+                    "parameters": {
+                      "target": {
+                        "parameter": "relay_position"
+                      }
+                    }
+                  }
+                ],
+                "transition": {
+                  "success_when": {
+                    "op": "eq",
+                    "left": {
+                      "path": "execution.phase_commands_completed"
+                    },
+                    "right": {
+                      "value": true
+                    }
+                  },
+                  "on_success": "enable_relay",
+                  "on_failure": "fallback"
+                },
+                "timeout": {
+                  "seconds": 15.0,
+                  "on_timeout": "fallback"
+                }
+              },
+              {
+                "id": "enable_relay",
+                "commands": [
+                  {
+                    "role": "relay",
+                    "action": "relay",
+                    "parameters": {
+                      "enabled": true
+                    }
+                  }
+                ],
+                "transition": {
+                  "success_when": {
+                    "op": "eq",
+                    "left": {
+                      "path": "execution.phase_commands_completed"
+                    },
+                    "right": {
+                      "value": true
+                    }
+                  },
+                  "on_success": "wait_channel",
+                  "on_failure": "fallback"
+                },
+                "timeout": {
+                  "seconds": 5.0,
+                  "on_timeout": "fallback"
+                }
+              },
+              {
+                "id": "wait_channel",
+                "commands": [],
+                "transition": {
+                  "success_when": {
+                    "op": "eq",
+                    "left": {
+                      "path": "execution.command_channels.executor"
+                    },
+                    "right": {
+                      "value": true
+                    }
+                  },
+                  "on_success": "approach_target",
+                  "on_failure": "fallback"
+                },
+                "timeout": {
+                  "seconds": 10.0,
+                  "on_timeout": "fallback"
+                }
+              },
+              {
+                "id": "approach_target",
+                "commands": [
+                  {
+                    "role": "executor",
+                    "action": "move",
+                    "parameters": {
+                      "target": {
+                        "parameter": "target_position"
+                      }
+                    }
+                  }
+                ],
+                "transition": {
+                  "success_when": {
+                    "op": "eq",
+                    "left": {
+                      "path": "execution.phase_commands_completed"
+                    },
+                    "right": {
+                      "value": true
+                    }
+                  },
+                  "on_success": "deliver_aid",
+                  "on_failure": "fallback"
+                },
+                "timeout": {
+                  "seconds": 15.0,
+                  "on_timeout": "fallback"
+                }
+              },
+              {
+                "id": "deliver_aid",
+                "commands": [
+                  {
+                    "role": "executor",
+                    "action": "deliver",
+                    "parameters": {
+                      "target_id": {
+                        "parameter": "target_id"
+                      },
+                      "resource_id": {
+                        "parameter": "resource_id"
+                      },
+                      "amount": {
+                        "parameter": "amount"
+                      }
+                    }
+                  }
+                ],
+                "transition": {
+                  "success_when": {
+                    "op": "eq",
+                    "left": {
+                      "path": "execution.phase_commands_completed"
+                    },
+                    "right": {
+                      "value": true
+                    }
+                  },
+                  "on_success": "done",
+                  "on_failure": "fallback"
+                },
+                "timeout": {
+                  "seconds": 10.0,
+                  "on_timeout": "fallback"
+                }
+              },
+              {
+                "id": "done",
+                "outcome": "success"
+              },
+              {
+                "id": "fallback",
+                "outcome": "safe_degradation"
+              }
+            ]
+          }
+        }
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "synth_relay_01",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "relay",
+        "robot_b": "executor"
+      },
+      "commands": [],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "observation_confirmed"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "execute_selected_plan"
+        ],
+        "confidence": 0.8
+      }
+    },
+    "safe_stop": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "decision_id": "decision_safe_stop",
+      "request_id": "step_safe_stop",
+      "time": 14.0,
+      "operation": "safe_stop",
+      "previous_configuration": {
+        "scenario_ids": [
+          "coverage_search"
+        ],
+        "parameters": {},
+        "role_assignments": {
+          "robot_a": "scout"
+        }
+      },
+      "selected_configuration": {
+        "scenario_ids": [
+          "safe_degradation"
+        ],
+        "parameters": {},
+        "synthesized_scenario": null
+      },
+      "candidate_evaluations": [
+        {
+          "scenario_id": "safe_degradation",
+          "applicable": true,
+          "utility": 0.75,
+          "risk": 0.05,
+          "selected": true
+        }
+      ],
+      "role_assignments": {
+        "robot_a": "safe_holder",
+        "robot_b": "safe_holder",
+        "robot_c": "safe_holder"
+      },
+      "commands": [
+        {
+          "agent_id": "robot_a",
+          "action": "hold",
+          "parameters": {}
+        },
+        {
+          "agent_id": "robot_b",
+          "action": "hold",
+          "parameters": {}
+        },
+        {
+          "agent_id": "robot_c",
+          "action": "hold",
+          "parameters": {}
+        }
+      ],
+      "constraint_checks": [
+        {
+          "constraint_id": "energy_reserve_robot_a",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_b",
+          "status": "passed"
+        },
+        {
+          "constraint_id": "energy_reserve_robot_c",
+          "status": "passed"
+        }
+      ],
+      "explanation": {
+        "observation_refs": [
+          "observation_confirmed"
+        ],
+        "reason_codes": [
+          "illustrative_contract_example"
+        ],
+        "expected_effects": [
+          "bounded_safe_holding_if_physically_feasible"
+        ],
+        "confidence": 0.8
+      },
+      "metaevolution": {
+        "command_groups": [
+          {
+            "id": "safe_holding",
+            "command_indices": [
+              0,
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "decision_contexts": {
+    "select": "initial",
+    "keep": "after_select",
+    "modify": "confirmed_target",
+    "switch": "confirmed_target",
+    "compose": "confirmed_target",
+    "synthesize": "confirmed_target",
+    "safe_stop": "confirmed_target"
+  },
+  "step_response": {
+    "protocol_version": "1.0",
+    "request_id": "step_select",
+    "episode_id": "episode_01",
+    "time": 1.0,
+    "status": "running",
+    "command_results": [
+      {
+        "decision_id": "decision_select",
+        "command_index": 0,
+        "agent_id": "robot_a",
+        "action": "observe",
+        "validation_status": "accepted",
+        "delivery_status": "delivered",
+        "execution_status": "completed",
+        "reason_code": null,
+        "updated_at": 1.0
+      }
+    ],
+    "events": [
+      {
+        "id": "event_001",
+        "type": "target_detected",
+        "time": 1.0,
+        "source": "robot_a",
+        "targets": [
+          "target_01"
+        ],
+        "parameters": {
+          "kind": "possible_victim"
+        },
+        "confidence": 0.7,
+        "status": "new"
+      }
+    ],
+    "metrics": {
+      "known_coverage_ratio": 0.01,
+      "known_delivery_completed": false
+    },
+    "observation": {
+      "protocol_version": "1.0",
+      "episode_id": "episode_01",
+      "request_id": "step_select",
+      "time": 1.0,
+      "mission": {
+        "id": "search_and_rescue",
+        "objectives": [
+          {
+            "id": "search_01",
+            "type": "search",
+            "priority": 0.7,
+            "status": "active",
+            "region_id": "land_01",
+            "required_capabilities": [
+              "sense"
+            ],
+            "success_conditions": {
+              "coverage_fraction_at_least": 0.8
+            }
+          }
+        ],
+        "priorities": [
+          "search",
+          "confirm",
+          "deliver"
+        ],
+        "directives": [],
+        "constraints": [],
+        "status": "active",
+        "termination": {
+          "time_limit": 180.0
+        }
+      },
+      "agents": [
+        {
+          "id": "robot_a",
+          "kind": "aerial",
+          "position": [
+            5.0,
+            5.0,
+            10.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "sense",
+            "inspect",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.89,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": "scout",
+          "scenario_ids": [
+            "coverage_search"
+          ],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "observe",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/observe/parameters_schema"
+            },
+            {
+              "action": "inspect",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/inspect/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_a",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_a"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_a",
+              "state": "current"
+            }
+          },
+          "sensors": {
+            "maximum_radius": 15.0
+          }
+        },
+        {
+          "id": "robot_b",
+          "kind": "ground",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "deliver",
+            "charge",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.8,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            },
+            "medical_kits": {
+              "id": "medical_kits",
+              "value": 1.0,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "deliver",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/deliver/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            },
+            {
+              "action": "charge",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/charge/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_b",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_b"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_b",
+              "state": "current"
+            }
+          },
+          "inventory": {
+            "medical_kits": {
+              "count": 2,
+              "capacity": 2,
+              "unit": "kit"
+            }
+          }
+        },
+        {
+          "id": "robot_c",
+          "kind": "ground",
+          "position": [
+            10.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "move",
+            "relay",
+            "communicate"
+          ],
+          "resources": {
+            "energy": {
+              "id": "energy",
+              "value": 0.85,
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "unit": "normalized"
+            }
+          },
+          "communication": {
+            "connected": true,
+            "quality": 0.95
+          },
+          "role": null,
+          "scenario_ids": [],
+          "available_actions": [
+            {
+              "action": "move",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/move/parameters_schema"
+            },
+            {
+              "action": "relay",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/relay/parameters_schema"
+            },
+            {
+              "action": "send_message",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/send_message/parameters_schema"
+            },
+            {
+              "action": "hold",
+              "parameters_schema_ref": "/v1/environment/capabilities#/supported_actions/hold/parameters_schema"
+            }
+          ],
+          "constraints": [
+            {
+              "id": "energy_reserve_robot_c",
+              "scope": {
+                "kind": "agent",
+                "agent_id": "robot_c"
+              },
+              "severity": "hard",
+              "predicate": {
+                "op": "ge",
+                "left": {
+                  "path": "resources.energy.value"
+                },
+                "right": {
+                  "value": 0.15
+                }
+              },
+              "reason_code": "MINIMUM_ENERGY_RESERVE"
+            }
+          ],
+          "freshness": {
+            "position": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "resources": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "role": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            },
+            "communication": {
+              "observed_at": 1.0,
+              "received_at": 1.0,
+              "source_id": "robot_c",
+              "state": "current"
+            }
+          }
+        }
+      ],
+      "infrastructure": [
+        {
+          "id": "relay_01",
+          "kind": "relay",
+          "position": [
+            15.0,
+            15.0,
+            5.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "relay"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "charger_01",
+          "kind": "charging_station",
+          "position": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "charge"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "sensor_01",
+          "kind": "sensor_node",
+          "position": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "sense"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        },
+        {
+          "id": "base_01",
+          "kind": "base_station",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "status": "active",
+          "capabilities": [
+            "communicate"
+          ],
+          "resources": {},
+          "communication": {
+            "connected": true
+          },
+          "constraints": []
+        }
+      ],
+      "targets": [
+        {
+          "id": "target_01",
+          "kind": "possible_victim",
+          "status": "suspected",
+          "position": null,
+          "region_id": "land_01",
+          "confidence": 0.7,
+          "source_id": "robot_a",
+          "observed_at": 1.0
+        }
+      ],
+      "zones": [
+        {
+          "id": "land_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              100.0,
+              100.0,
+              0.0
+            ]
+          },
+          "type": "land",
+          "access": {
+            "allowed_kinds": [
+              "ground"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        },
+        {
+          "id": "air_01",
+          "geometry": {
+            "type": "box",
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              100.0,
+              100.0,
+              30.0
+            ]
+          },
+          "type": "air",
+          "access": {
+            "allowed_kinds": [
+              "aerial"
+            ]
+          },
+          "risk": 0.0,
+          "cost": {
+            "energy_multiplier": 1.0
+          },
+          "communication": {
+            "attenuation": 1.0
+          },
+          "constraints": []
+        }
+      ],
+      "network": {
+        "connectivity_score": 1.0,
+        "partition_count": 1,
+        "reachable_agent_ratio": 1.0,
+        "average_link_quality": 0.95,
+        "mesh_available": true,
+        "known_links": []
+      },
+      "events": [
+        {
+          "id": "event_001",
+          "type": "target_detected",
+          "time": 1.0,
+          "source": "robot_a",
+          "targets": [
+            "target_01"
+          ],
+          "parameters": {
+            "kind": "possible_victim"
+          },
+          "confidence": 0.7,
+          "status": "new"
+        }
+      ],
+      "constraints": [],
+      "metrics": {
+        "known_coverage_ratio": 0.01,
+        "known_delivery_completed": false
+      },
+      "observation_quality": {
+        "global_completeness": 1.0,
+        "maximum_delay": 0.0,
+        "stale_data_ratio": 0.0,
+        "contradiction_count": 0,
+        "unknown_state_ratio": 0.0
+      },
+      "metaevolution": {
+        "plan": {
+          "plan_revision": 1,
+          "accepted_configuration": {
+            "scenario_ids": [
+              "coverage_search"
+            ],
+            "parameters": {},
+            "role_assignments": {
+              "robot_a": "scout"
+            }
+          },
+          "agent_acknowledgements": {
+            "robot_a": {
+              "plan_revision": 1,
+              "status": "confirmed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "asynchronous_results": {
+    "description": "Independent delayed-delivery branch of decision_select; not additional outcomes of step_response.",
+    "initial_queued": {
+      "decision_id": "decision_select",
+      "command_index": 0,
+      "agent_id": "robot_a",
+      "action": "observe",
+      "validation_status": "accepted",
+      "delivery_status": "queued",
+      "execution_status": "not_started",
+      "reason_code": null,
+      "updated_at": 0.0
+    },
+    "acknowledgement_unknown": {
+      "decision_id": "decision_select",
+      "command_index": 0,
+      "agent_id": "robot_a",
+      "action": "observe",
+      "validation_status": "accepted",
+      "delivery_status": "unknown",
+      "execution_status": "unknown",
+      "reason_code": "ACKNOWLEDGEMENT_NOT_RECEIVED",
+      "updated_at": 1.0
+    },
+    "later_public_result": {
+      "decision_id": "decision_select",
+      "command_index": 0,
+      "agent_id": "robot_a",
+      "action": "observe",
+      "validation_status": "accepted",
+      "delivery_status": "delivered",
+      "execution_status": "completed",
+      "reason_code": null,
+      "updated_at": 2.0
+    }
+  },
+  "error_response": {
+    "protocol_version": "1.0",
+    "request_id": "step_unavailable",
+    "episode_id": "episode_01",
+    "error": {
+      "code": "INVALID_COMMAND",
+      "message": "Action move is unavailable for robot_b",
+      "details": {
+        "agent_id": "robot_b",
+        "action": "move",
+        "reason_code": "COMMAND_CHANNEL_UNAVAILABLE"
+      }
+    }
+  },
+  "close_request": {
+    "protocol_version": "1.0",
+    "request_id": "close_001",
+    "episode_id": "episode_01"
+  },
+  "close_response": {
+    "protocol_version": "1.0",
+    "request_id": "close_001",
+    "episode_id": "episode_01",
+    "time": 14.0,
+    "status": "failed",
+    "closed": true,
+    "reason_code": "closed_by_client"
+  },
+  "logs_response": {
+    "protocol_version": "1.0",
+    "request_id": "logs_001",
+    "episode_id": "episode_01",
+    "records": [
+      {
+        "trace_id": "trace_select",
+        "episode_id": "episode_01",
+        "decision_id": "decision_select",
+        "request_id": "step_select",
+        "time": 0.0,
+        "record_type": "decision",
+        "payload": {
+          "protocol_version": "1.0",
+          "episode_id": "episode_01",
+          "decision_id": "decision_select",
+          "request_id": "step_select",
+          "time": 0.0,
+          "operation": "select",
+          "previous_configuration": {
+            "scenario_ids": [],
+            "parameters": {},
+            "role_assignments": {}
+          },
+          "selected_configuration": {
+            "scenario_ids": [
+              "coverage_search"
+            ],
+            "parameters": {},
+            "synthesized_scenario": null
+          },
+          "candidate_evaluations": [
+            {
+              "scenario_id": "coverage_search",
+              "applicable": true,
+              "utility": 0.75,
+              "risk": 0.05,
+              "selected": true
+            }
+          ],
+          "role_assignments": {
+            "robot_a": "scout"
+          },
+          "commands": [
+            {
+              "agent_id": "robot_a",
+              "action": "observe",
+              "parameters": {
+                "radius": 15.0
+              }
+            }
+          ],
+          "constraint_checks": [
+            {
+              "constraint_id": "energy_reserve_robot_a",
+              "status": "passed"
+            },
+            {
+              "constraint_id": "energy_reserve_robot_b",
+              "status": "passed"
+            },
+            {
+              "constraint_id": "energy_reserve_robot_c",
+              "status": "passed"
+            }
+          ],
+          "explanation": {
+            "observation_refs": [
+              "reset_001"
+            ],
+            "reason_codes": [
+              "illustrative_contract_example"
+            ],
+            "expected_effects": [
+              "execute_selected_plan"
+            ],
+            "confidence": 0.8
+          }
+        }
+      }
+    ],
+    "next_cursor": null
+  }
+}

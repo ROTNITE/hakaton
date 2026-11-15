@@ -1,0 +1,177 @@
+{
+  "format": "metarescue.scenarios.v1",
+  "scenarios": [
+    {
+      "id": "coverage_search",
+      "version": "1.0",
+      "title": "Coverage search and evacuation",
+      "game_model": {
+        "class": "team",
+        "players": ["scout", "rescuer"],
+        "strategies": {"scout": ["survey_sector", "patrol", "inspect"], "rescuer": ["evacuate", "reserve", "charge"]},
+        "information_sources": ["delivered_poses", "confirmed_targets", "announced_map", "delivered_coverage"],
+        "utilities": {"scout": "coverage_progress_v1", "rescuer": "confirmed_rescue_value_v1"},
+        "constraints_ref": "scenario_and_environment_hard_constraints",
+        "uncertainty": ["sensor_confidence", "delivery_delay", "route_cost"],
+        "stability_criterion": "feasible_pareto_schedule_with_unfinished_sectors_retained"
+      },
+      "applicability": {
+        "entry": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "continuation": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "completed"}}],
+        "emergency_exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "failed"}}]
+      },
+      "roles": [
+        {"id": "scout", "required_capabilities": ["move", "sense"], "minimum": 0, "maximum": 48},
+        {"id": "rescuer", "required_capabilities": ["move", "carry"], "minimum": 0, "maximum": 40}
+      ],
+      "objectives": [{"id": "survey_and_rescue", "type": "search_and_evacuate"}],
+      "constraints": [{"id": "mission_active", "scope": {"kind": "observation"}, "severity": "hard", "predicate": {"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}, "reason_code": "MISSION_TERMINAL"}],
+      "allowed_actions": ["move", "hold", "observe", "inspect", "follow_route", "pickup", "handover", "charge"],
+      "transition_targets": ["priority_response", "temporary_coalition", "safe_degradation", "coordination_reconfiguration"],
+      "compatible_with": ["priority_response", "temporary_coalition", "coordination_reconfiguration"],
+      "metrics": ["covered_sectors", "confirmed_evacuations", "energy_wh"],
+      "parameter_schema": {"type": "object", "properties": {"observation_interval": {"type": "number", "minimum": 1, "maximum": 15}}, "additionalProperties": false}
+    },
+    {
+      "id": "priority_response",
+      "version": "1.0",
+      "title": "Priority task",
+      "game_model": {
+        "class": "team",
+        "players": ["executor", "rescuer"],
+        "strategies": {"executor": ["approach", "deliver", "hold"], "rescuer": ["evacuate_priority", "finish_cargo"]},
+        "information_sources": ["confirmed_target", "delivered_resources", "published_routes"],
+        "utilities": {"executor": "priority_delivery_v1", "rescuer": "confirmed_rescue_value_v1"},
+        "constraints_ref": "scenario_and_environment_hard_constraints",
+        "uncertainty": ["target_confidence", "delivery_delay", "battery_reserve"],
+        "stability_criterion": "no_loss_in_feasible_rescues_then_minimum_weighted_completion"
+      },
+      "applicability": {
+        "entry": [{"op": "any", "items": {"path": "targets"}, "var": "target", "where": {"op": "eq", "left": {"path": "$target.status"}, "right": {"value": "confirmed"}}}],
+        "continuation": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "completed"}}],
+        "emergency_exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "failed"}}]
+      },
+      "roles": [
+        {"id": "executor", "required_capabilities": ["move", "deliver"], "minimum": 0, "maximum": 40},
+        {"id": "rescuer", "required_capabilities": ["move", "carry"], "minimum": 0, "maximum": 40}
+      ],
+      "objectives": [{"id": "priority_task", "type": "priority_response", "target_parameter": "target_id"}],
+      "constraints": [{"id": "target_known", "scope": {"kind": "observation"}, "severity": "hard", "predicate": {"op": "gt", "left": {"op": "count", "items": {"path": "targets"}, "var": "target"}, "right": {"value": 0}}, "reason_code": "UNKNOWN_PRIORITY_TARGET"}],
+      "allowed_actions": ["move", "hold", "observe", "inspect", "deliver", "follow_route", "pickup", "handover", "charge"],
+      "transition_targets": ["coverage_search", "temporary_coalition", "safe_degradation", "coordination_reconfiguration"],
+      "compatible_with": ["coverage_search"],
+      "metrics": ["priority_saved", "weighted_completion", "aid_delivered"],
+      "parameter_schema": {"type": "object", "required": ["target_id"], "properties": {"target_id": {"type": "string", "minLength": 1}}, "additionalProperties": false}
+    },
+    {
+      "id": "temporary_coalition",
+      "version": "1.0",
+      "title": "Temporary relay coalition",
+      "game_model": {
+        "class": "coalition",
+        "players": ["relay", "executor"],
+        "strategies": {"relay": ["position_and_relay", "hold"], "executor": ["wait_for_channel", "approach_and_deliver"]},
+        "information_sources": ["delivered_links", "confirmed_targets", "acknowledged_commands"],
+        "utilities": {"relay": "restored_channel_value_v1", "executor": "priority_delivery_v1"},
+        "constraints_ref": "scenario_and_environment_hard_constraints",
+        "uncertainty": ["line_of_sight", "packet_loss", "delivery_delay"],
+        "stability_criterion": "feasible_channel_gain_then_minimum_repositioning_cost"
+      },
+      "applicability": {
+        "entry": [{"op": "any", "items": {"path": "agents"}, "var": "agent", "where": {"op": "in", "left": {"value": "relay"}, "right": {"path": "$agent.capabilities"}}}],
+        "continuation": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "completed"}}],
+        "emergency_exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "failed"}}]
+      },
+      "roles": [
+        {"id": "relay", "required_capabilities": ["move", "relay"], "minimum": 1, "maximum": 1},
+        {"id": "executor", "required_capabilities": ["move", "deliver"], "minimum": 1, "maximum": 1}
+      ],
+      "objectives": [{"id": "restore_channel", "type": "restore_connectivity"}, {"id": "serve_target", "type": "deliver", "target_parameter": "target_id"}],
+      "constraints": [{"id": "mission_active", "scope": {"kind": "observation"}, "severity": "hard", "predicate": {"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}, "reason_code": "MISSION_TERMINAL"}],
+      "allowed_actions": ["move", "follow_route", "hold", "relay", "send_message", "deliver"],
+      "transition_targets": ["coverage_search", "safe_degradation", "coordination_reconfiguration"],
+      "compatible_with": ["coverage_search"],
+      "metrics": ["reachable_agent_ratio", "restoration_time", "aid_delivered"],
+      "parameter_schema": {
+        "type": "object",
+        "required": ["relay_position", "target_position", "target_id", "resource_id", "amount"],
+        "properties": {
+          "relay_position": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "target_position": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "target_id": {"type": "string", "minLength": 1},
+          "resource_id": {"type": "string", "minLength": 1},
+          "amount": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "id": "safe_degradation",
+      "version": "1.0",
+      "title": "Safe degradation",
+      "game_model": {
+        "class": "safety",
+        "players": ["safe_holder", "rescuer"],
+        "strategies": {"safe_holder": ["hold", "return_when_feasible"], "rescuer": ["finish_cargo", "hold_with_cargo"]},
+        "information_sources": ["delivered_stop_reason", "delivered_cargo", "radio_freshness"],
+        "utilities": {"safe_holder": "bounded_risk_v1", "rescuer": "cargo_preservation_v1"},
+        "constraints_ref": "scenario_and_environment_hard_constraints",
+        "uncertainty": ["outdated_pose", "unacknowledged_commands", "hazard_growth"],
+        "stability_criterion": "minimum_physical_risk_then_maximum_retained_safe_work"
+      },
+      "applicability": {
+        "entry": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "continuation": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "safe_stopped"}}],
+        "emergency_exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "failed"}}]
+      },
+      "roles": [
+        {"id": "safe_holder", "required_capabilities": ["move"], "minimum": 0, "maximum": 88},
+        {"id": "rescuer", "required_capabilities": ["move", "carry"], "minimum": 0, "maximum": 40}
+      ],
+      "objectives": [{"id": "guard_people_and_vehicles", "type": "retain_safe_state"}],
+      "constraints": [{"id": "mission_active", "scope": {"kind": "observation"}, "severity": "hard", "predicate": {"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}, "reason_code": "MISSION_TERMINAL"}],
+      "allowed_actions": ["hold", "follow_route", "handover", "charge"],
+      "transition_targets": ["coverage_search", "coordination_reconfiguration"],
+      "compatible_with": [],
+      "metrics": ["confirmed_safe_holds", "retained_cargo", "restoration_time"],
+      "parameter_schema": {"type": "object", "properties": {}, "additionalProperties": false}
+    },
+    {
+      "id": "coordination_reconfiguration",
+      "version": "1.0",
+      "title": "Coordination reconfiguration",
+      "game_model": {
+        "class": "team",
+        "players": ["scout", "rescuer", "relay"],
+        "strategies": {"scout": ["take_unfinished_sectors", "continue"], "rescuer": ["take_waiting_targets", "finish_cargo"], "relay": ["replace_relay", "continue"]},
+        "information_sources": ["delivered_failure", "confirmed_role_revision", "public_task_queue", "validated_strategy_forecast"],
+        "utilities": {"scout": "restored_capability_v1", "rescuer": "confirmed_rescue_value_v1", "relay": "restored_channel_value_v1"},
+        "constraints_ref": "scenario_and_environment_hard_constraints",
+        "uncertainty": ["replacement_delay", "remaining_energy", "stale_role"],
+        "stability_criterion": "positive_capability_or_forecast_gain_after_switching_cost"
+      },
+      "applicability": {
+        "entry": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "continuation": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}],
+        "exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "completed"}}],
+        "emergency_exit": [{"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "failed"}}]
+      },
+      "roles": [
+        {"id": "scout", "required_capabilities": ["move", "sense"], "minimum": 0, "maximum": 48},
+        {"id": "rescuer", "required_capabilities": ["move", "carry"], "minimum": 0, "maximum": 40},
+        {"id": "relay", "required_capabilities": ["move", "relay"], "minimum": 0, "maximum": 8}
+      ],
+      "objectives": [{"id": "restore_assignment", "type": "restore_capability"}],
+      "constraints": [{"id": "mission_active", "scope": {"kind": "observation"}, "severity": "hard", "predicate": {"op": "eq", "left": {"path": "mission.status"}, "right": {"value": "active"}}, "reason_code": "MISSION_TERMINAL"}],
+      "allowed_actions": ["move", "hold", "observe", "inspect", "relay", "follow_route", "pickup", "handover", "charge"],
+      "transition_targets": ["coverage_search", "priority_response", "temporary_coalition", "safe_degradation"],
+      "compatible_with": ["coverage_search"],
+      "metrics": ["restored_roles", "unfinished_sectors_reassigned", "confirmed_evacuations"],
+      "parameter_schema": {"type": "object", "properties": {}, "additionalProperties": false}
+    }
+  ]
+}

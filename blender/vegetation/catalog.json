@@ -1,0 +1,1007 @@
+{
+  "retrieved_utc": "2026-11-11T09:08:22.236146+00:00",
+  "license": "CC0-1.0",
+  "license_url": "https://polyhaven.com/license",
+  "texture_resolution": "2k",
+  "unreal_import_verified": false,
+  "assets": [
+    {
+      "id": "tree_small_02",
+      "name": "Tree Small 02",
+      "purpose_ru": "Лиственное дерево: основной кандидат для дворов и тротуаров.",
+      "source_url": "https://polyhaven.com/a/tree_small_02",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "source_polycount": 4652585,
+      "files": [
+        {
+          "path": "polyhaven/tree_small_02/tree_small_02_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/tree_small_02/tree_small_02_2k.blend",
+          "bytes": 63805237,
+          "sha256": "3c28e4ebded582d6539afeac7e5ccce6cb950830a94f1fe38135a45264145de5",
+          "md5": "275e188d4703c819877e803317b592c1"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_branch_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_branch_diff_2k.png",
+          "bytes": 2714537,
+          "sha256": "553d0cdbc12b63be3bd85756713f95bec5cdf8cc57dae74d3f19d8df13ac126c",
+          "md5": "d2ef708e997a1c7fe0cb200f071f12dc"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_branch_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_branch_nor_gl_2k.png",
+          "bytes": 15596069,
+          "sha256": "a8aa5f945a5977d82111f1f397a525acb8103d108d86bf09087be4d7d1f976d6",
+          "md5": "6f35092dfd9b83419cd5e315b6715e87"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_branch_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_branch_rough_2k.png",
+          "bytes": 835917,
+          "sha256": "2acfc7ebd7269e65917d0535c463bcf4adf44627b3c34f528e2b1623cb2a5b9c",
+          "md5": "9850c2d4ac13de854135e854dbd89b75"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/tree_small_02/tree_small_02_diff_2k.jpg",
+          "bytes": 3170612,
+          "sha256": "4ab3210b6ec6bb1181145500bca71d1c1f81ead6baaa8600f5979c2cec50c6a4",
+          "md5": "ff4d82640b7e0daaec0b71bfc1cef76c"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_leaves_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_leaves_alpha_2k.png",
+          "bytes": 636661,
+          "sha256": "566484c7047ce67af5a4435c1e4da2b773578d73f83ae45dfad0fd442df7b9d5",
+          "md5": "4d94de8e4677e92ce6d812871f9cf541"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_leaves_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_leaves_diff_2k.png",
+          "bytes": 7729923,
+          "sha256": "da46f05805bbc3b608051b66ee9e2b3705108de3c897ea998ab98e0360dc2b72",
+          "md5": "02180efde7be35883f91d5b1dccd42a8"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_leaves_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_leaves_nor_gl_2k.png",
+          "bytes": 18978122,
+          "sha256": "01c79158aa9287cc5db2d1c660a578de9d0a1a522877f9ca40c5be6b36bdc7bf",
+          "md5": "a885502e1381a3aee02fdaebf71d71f1"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_leaves_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/tree_small_02/tree_small_02_leaves_rough_2k.png",
+          "bytes": 2953248,
+          "sha256": "5e7fee2eb56afa1265178bb2bf9267dba12c95149d9e2068adfc1ebf2d44d082",
+          "md5": "1b06e94155066c11a720f339e1934173"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_small_02/tree_small_02_nor_gl_2k.exr",
+          "bytes": 9058409,
+          "sha256": "2cba0db5ecc512414822d21f508a7d9df05716e28cec3e185c694ff6e36fd6ce",
+          "md5": "fe8712ad5e02029d09c17c32daff6a03"
+        },
+        {
+          "path": "polyhaven/tree_small_02/textures/tree_small_02_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_small_02/tree_small_02_rough_2k.exr",
+          "bytes": 3573742,
+          "sha256": "486cda88e05f1fa0d63a49122b016287d61683921cf60fa465dd0bd53114b092",
+          "md5": "904fcc1121dcccf4fac98687c5fe6d3d"
+        },
+        {
+          "path": "polyhaven/tree_small_02/tree_small_02_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/tree_small_02/tree_small_02_2k.fbx",
+          "bytes": 75487180,
+          "sha256": "14d6d0754b79a442254795663c4e5ffa1f679e54562f48b21ab0bbc78858724d",
+          "md5": "f034912ea38c6f1e91a9bab740f86a29"
+        }
+      ]
+    },
+    {
+      "id": "fir_tree_01",
+      "name": "Fir Tree 01",
+      "purpose_ru": "Взрослые пихты: сквер, периферия квартала; тяжёлый исходник.",
+      "source_url": "https://polyhaven.com/a/fir_tree_01",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "source_polycount": 7853731,
+      "files": [
+        {
+          "path": "polyhaven/fir_tree_01/fir_tree_01_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/fir_tree_01/fir_tree_01_2k.blend",
+          "bytes": 218986513,
+          "sha256": "6c816b5fa29e8c9c08d0f6836e501cd59ab4efb84653b594701540f1d55eae69",
+          "md5": "5fd1ecb935006b6a3cb75c3cecbf95e0"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_bark_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_bark_diff_2k.png",
+          "bytes": 22203773,
+          "sha256": "733bfdd255dd468886a68487d5ddc990384ce92f10646af92076e86d789f79b9",
+          "md5": "0a8464460b3df69009f9d5d8b1cb5093"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_bark_disp_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_bark_disp_2k.png",
+          "bytes": 5850817,
+          "sha256": "1248d2c6990840fb51d041054b85bd173994feb1d5368dec0b527825f75c40f8",
+          "md5": "2d07fc2e8c1bd5475f63c24c3d82d420"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_bark_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_bark_nor_gl_2k.png",
+          "bytes": 22422527,
+          "sha256": "32940b0be3a6f9ce10ec9579d2057fac2e7b639f279a37f623467ec12a58e836",
+          "md5": "4a249448a15a27f2cc2645287dc65bf7"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_bark_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_bark_rough_2k.png",
+          "bytes": 6980724,
+          "sha256": "246a070e5af82648545b5b0adc6b3a784f98bd99db00e403a514cbdd1489cf38",
+          "md5": "0201b06fa2bbfa6676c4de2d69eb185f"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_a_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_a_diff_2k.png",
+          "bytes": 18529439,
+          "sha256": "5913b7176d9bebb50e5c85bf3aaf8d49d6aee5ff2d6620037b3a18298c397e7f",
+          "md5": "e04069ce3a3c73b059e46a101b3263f0"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_a_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_a_nor_gl_2k.png",
+          "bytes": 16308667,
+          "sha256": "108acc38dc02a664f7d4d97f1e0792782ce9b4c998348b9fc6301ca003af4809",
+          "md5": "2dcf41e05b6fd7ddfe2a77e024fb2844"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_a_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_a_rough_2k.png",
+          "bytes": 5959672,
+          "sha256": "85ce09c3f6464b84ce3f5a0d8615c2e863ec0172b42531897633c42333984bf5",
+          "md5": "d59b461fbdc8400d261358d4d6941b02"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_b_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_b_diff_2k.png",
+          "bytes": 17855979,
+          "sha256": "c075d3be47279820f3b56ec905eaa6dc064006930fd1a9a0db0aa246305a739c",
+          "md5": "6b3dcce9e9c71a058b06f48426c017b5"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_b_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_b_nor_gl_2k.png",
+          "bytes": 15603340,
+          "sha256": "483384cf2a79f0818a2d7da02b2c03609d485df8f709a6b7960f0b5604f53403",
+          "md5": "0c89b51bf9b04c9ebb1ff103b6740012"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_b_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_b_rough_2k.png",
+          "bytes": 5739927,
+          "sha256": "aadb282423c2332e0f36ed1c293ecb02c209f72747e40e8f92bc661496c039ce",
+          "md5": "05e46fc259929f61fcdb297c06025dd4"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_c_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_c_diff_2k.png",
+          "bytes": 19043152,
+          "sha256": "8a8a832d3180c27f36fbf0411641abc843ddf32a79dbd9c07b26a6223d8eea28",
+          "md5": "0be4ada975b943e2c537f199509f685b"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_c_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_c_nor_gl_2k.png",
+          "bytes": 16876318,
+          "sha256": "95d58799892fa855dd03f5e908db6d5ceaf0227eb4f2e2b99077913ad0b06269",
+          "md5": "3e5406f9b6f3d4018ace7c1b0d8958f1"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_trunk_c_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_trunk_c_rough_2k.png",
+          "bytes": 6224900,
+          "sha256": "9617b077a6b453c724dd94bad9faa8efdc4d8e85f62c29f0e236814214d948fb",
+          "md5": "e8f71b60c5f81a8382cd6c06153307e5"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_twig_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_twig_alpha_2k.png",
+          "bytes": 996187,
+          "sha256": "6eecd1cf1e059488be2a41d15bb3c8cb3d844765ed11be8087e6e02acd58b181",
+          "md5": "1d93929d869e5539ec245ae3eddb7243"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_twig_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_twig_diff_2k.png",
+          "bytes": 11740724,
+          "sha256": "b6d450d21b2ceddfcc78e2e2cc7c492f0a20df6d89c57281c6cd0ca525d01700",
+          "md5": "bd7f5c680f105a4c78a64fe8722f3aba"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_twig_mask_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_twig_mask_2k.png",
+          "bytes": 4852003,
+          "sha256": "3c43e3ec0de7b9898e11198927fce96bcacb10e007ac9f6546f7e14d7bc121bd",
+          "md5": "9954526c3f6fa25e2544bc235c421bec"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_twig_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_twig_nor_gl_2k.png",
+          "bytes": 5650048,
+          "sha256": "03f6a70cebfe684ba61d84a6abbfab078a6a252ec52f6bbe8fcdb87de62add0a",
+          "md5": "2db997b7951e2931cd05ded39e0e62c5"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/textures/fir_tree_01_twig_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_tree_01/fir_tree_01_twig_rough_2k.png",
+          "bytes": 3825796,
+          "sha256": "3215a92d9b4f2cb088a5215a27a526b00c68a91691c4b5298b2b6e41e2cd9101",
+          "md5": "cf7f3790c492130fc6dc3d045eba5f80"
+        },
+        {
+          "path": "polyhaven/fir_tree_01/fir_tree_01_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/fir_tree_01/fir_tree_01_2k.fbx",
+          "bytes": 249300492,
+          "sha256": "942a1376289e9f8bc75458f0d2f4d5b8570a012a8d78c0ad51de4e1ec6490907",
+          "md5": "3712fee7385479902dd55444797d52e1"
+        }
+      ]
+    },
+    {
+      "id": "pine_tree_01",
+      "name": "Pine Tree 01",
+      "purpose_ru": "Взрослые сосны: сквер, периферия; тяжёлый исходник.",
+      "source_url": "https://polyhaven.com/a/pine_tree_01",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "source_polycount": 17427094,
+      "files": [
+        {
+          "path": "polyhaven/pine_tree_01/pine_tree_01_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/pine_tree_01/pine_tree_01_2k.blend",
+          "bytes": 570739671,
+          "sha256": "788d5839aa1d256c20e50adc53ae830b35511d8bb2bc7c16d110dcfc0037651e",
+          "md5": "ec743e4c7605318bf17c8f13820c2321"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_bark_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_bark_diff_2k.png",
+          "bytes": 21914708,
+          "sha256": "334e2775d30fd9085ee67dc93c135de577f4213f5aa2a4e4ca5c992246338f3a",
+          "md5": "431f3c4e40e4349527cf1c2fe2ebe6fc"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_bark_disp_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_bark_disp_2k.png",
+          "bytes": 6162156,
+          "sha256": "ef3e36ca7993276608f9a1ac5bd08d70986b515b9d8c81c6e700e36369930ecc",
+          "md5": "97db9324b179d11c271c1bcc57ae7dfa"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_bark_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_bark_nor_gl_2k.png",
+          "bytes": 21747048,
+          "sha256": "c0ea7c6c7624661f4b7fee87c8275999504d9a1f42d5b666a7a84e0c8902ce38",
+          "md5": "d658980d981ea8df2da1d005d5dea805"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_bark_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_bark_rough_2k.png",
+          "bytes": 9821164,
+          "sha256": "23bd2ea7f94f2885cc0980dfe87e87ba2bc11b31ecfc03d23479bdf222b808d6",
+          "md5": "f6ed4cd584b4bf2fda17d221d529b369"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_a_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_a_diff_2k.png",
+          "bytes": 18529439,
+          "sha256": "5913b7176d9bebb50e5c85bf3aaf8d49d6aee5ff2d6620037b3a18298c397e7f",
+          "md5": "e04069ce3a3c73b059e46a101b3263f0"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_a_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_a_nor_gl_2k.png",
+          "bytes": 16308667,
+          "sha256": "108acc38dc02a664f7d4d97f1e0792782ce9b4c998348b9fc6301ca003af4809",
+          "md5": "2dcf41e05b6fd7ddfe2a77e024fb2844"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_a_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_a_rough_2k.png",
+          "bytes": 5959672,
+          "sha256": "85ce09c3f6464b84ce3f5a0d8615c2e863ec0172b42531897633c42333984bf5",
+          "md5": "d59b461fbdc8400d261358d4d6941b02"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_b_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_b_diff_2k.png",
+          "bytes": 17855979,
+          "sha256": "c075d3be47279820f3b56ec905eaa6dc064006930fd1a9a0db0aa246305a739c",
+          "md5": "6b3dcce9e9c71a058b06f48426c017b5"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_b_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_b_nor_gl_2k.png",
+          "bytes": 15603340,
+          "sha256": "483384cf2a79f0818a2d7da02b2c03609d485df8f709a6b7960f0b5604f53403",
+          "md5": "0c89b51bf9b04c9ebb1ff103b6740012"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_b_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_b_rough_2k.png",
+          "bytes": 5739927,
+          "sha256": "aadb282423c2332e0f36ed1c293ecb02c209f72747e40e8f92bc661496c039ce",
+          "md5": "05e46fc259929f61fcdb297c06025dd4"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_c_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_c_diff_2k.png",
+          "bytes": 19043152,
+          "sha256": "8a8a832d3180c27f36fbf0411641abc843ddf32a79dbd9c07b26a6223d8eea28",
+          "md5": "0be4ada975b943e2c537f199509f685b"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_c_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_c_nor_gl_2k.png",
+          "bytes": 16876318,
+          "sha256": "95d58799892fa855dd03f5e908db6d5ceaf0227eb4f2e2b99077913ad0b06269",
+          "md5": "3e5406f9b6f3d4018ace7c1b0d8958f1"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_trunk_c_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_trunk_c_rough_2k.png",
+          "bytes": 6224900,
+          "sha256": "9617b077a6b453c724dd94bad9faa8efdc4d8e85f62c29f0e236814214d948fb",
+          "md5": "e8f71b60c5f81a8382cd6c06153307e5"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_twig_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_twig_alpha_2k.png",
+          "bytes": 814656,
+          "sha256": "1e5a1fe741f4cb731a3f537589db62a1cbcd380775e44d13f1b88b9e717df56b",
+          "md5": "85f9f62d98dc35cce642895d75f79fa6"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_twig_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_twig_diff_2k.png",
+          "bytes": 10070495,
+          "sha256": "68b4476c8a4272d51aafdfea3805d24984f3a64c22b4794ceea87317b380eb33",
+          "md5": "7e331929a726605fc99af8b82253d100"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_twig_mask_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_twig_mask_2k.png",
+          "bytes": 496869,
+          "sha256": "db4e57228bc62dd7a484e1a79a79620474ca52de5974859646e234de60f107ba",
+          "md5": "82a76608dc673c96048f3e7d52246f19"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_twig_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_twig_nor_gl_2k.png",
+          "bytes": 9430327,
+          "sha256": "546a19689795dd28a48f041ae5a4ff4c6273648b2e0d32d40df6b48cdc122b99",
+          "md5": "3ebdf235873ec43c44528a0efcbd8892"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/textures/pine_tree_01_twig_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_tree_01/pine_tree_01_twig_rough_2k.png",
+          "bytes": 4106318,
+          "sha256": "c10b8c98b159162a07de51ac809237a62bdc39de2ca659cfcf06a57eebf162d2",
+          "md5": "6f2b474081a4196ce90cc71ceb01bb96"
+        },
+        {
+          "path": "polyhaven/pine_tree_01/pine_tree_01_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/pine_tree_01/pine_tree_01_2k.fbx",
+          "bytes": 648483964,
+          "sha256": "86e0c04376c192a7c6a421eaed6b0f8ecd383a6be5053a0e520965e80f36ff6b",
+          "md5": "0deccab915302b394e32efdec5ef5987"
+        }
+      ]
+    },
+    {
+      "id": "pine_sapling_small",
+      "name": "Pine Sapling Small",
+      "purpose_ru": "Молодые сосны: небольшие посадки во дворах.",
+      "source_url": "https://polyhaven.com/a/pine_sapling_small",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "source_polycount": 398144,
+      "files": [
+        {
+          "path": "polyhaven/pine_sapling_small/pine_sapling_small_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/pine_sapling_small/pine_sapling_small_2k.blend",
+          "bytes": 11966664,
+          "sha256": "be93e781626ac672e8e5c8b52953dd41db7c135cdec85abd5a8b2d9cae02966a",
+          "md5": "d3ae98867bd2aa3662fcbaacaf435c70"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_twig_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_twig_alpha_2k.png",
+          "bytes": 334535,
+          "sha256": "0d471fe538f67d85fb5d4d19b02ad88a5c31b18f83bdb5b9c40eb2f3e16e98f6",
+          "md5": "90189603eb9fb879a097d726cfff43e1"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_bark_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_bark_nor_gl_2k.png",
+          "bytes": 21747048,
+          "sha256": "c0ea7c6c7624661f4b7fee87c8275999504d9a1f42d5b666a7a84e0c8902ce38",
+          "md5": "d658980d981ea8df2da1d005d5dea805"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_bark_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_bark_rough_2k.png",
+          "bytes": 9821164,
+          "sha256": "23bd2ea7f94f2885cc0980dfe87e87ba2bc11b31ecfc03d23479bdf222b808d6",
+          "md5": "f6ed4cd584b4bf2fda17d221d529b369"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_twig_mask_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_twig_mask_2k.png",
+          "bytes": 318955,
+          "sha256": "b78c1d3d7d0d476fe31126a57771c542e52631e8b2c21e13cd03f82a204a5cce",
+          "md5": "20c45eb7b75fe1b49dc2e381d97b0b35"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_bark_disp_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_bark_disp_2k.png",
+          "bytes": 6162156,
+          "sha256": "ef3e36ca7993276608f9a1ac5bd08d70986b515b9d8c81c6e700e36369930ecc",
+          "md5": "97db9324b179d11c271c1bcc57ae7dfa"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_twig_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_twig_nor_gl_2k.png",
+          "bytes": 7992986,
+          "sha256": "3fb18392a0e6b7d215e5bd364c0d5dc88bd91a861de77891a9ac3a247e847c2d",
+          "md5": "6635790f845ca2beae433e43db1400be"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_bark_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_bark_diff_2k.png",
+          "bytes": 21914708,
+          "sha256": "334e2775d30fd9085ee67dc93c135de577f4213f5aa2a4e4ca5c992246338f3a",
+          "md5": "431f3c4e40e4349527cf1c2fe2ebe6fc"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_twig_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_twig_rough_2k.png",
+          "bytes": 2287334,
+          "sha256": "e389042d1afa490e264012f6e07ad09c91664039d2fac3baf82cc540dfe9a53d",
+          "md5": "2c1897f0a6804d6424e1bbd2156c07a4"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/textures/pine_sapling_small_twig_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_sapling_small/pine_sapling_small_twig_diff_2k.png",
+          "bytes": 7495830,
+          "sha256": "a0ba87b057f2dcf13f1b3daeaff34bb9d43a44ad2605b245172d4c3fab2d3883",
+          "md5": "3450655521818c3e78e15aa191a539f5"
+        },
+        {
+          "path": "polyhaven/pine_sapling_small/pine_sapling_small_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/pine_sapling_small/pine_sapling_small_2k.fbx",
+          "bytes": 16125980,
+          "sha256": "3792470538045d01476503e345fb51d2fcc9b6572960679d248093b2f0b26581",
+          "md5": "d026d23ccdfe6b11f0c1cd0f1e10ce1a"
+        }
+      ]
+    },
+    {
+      "id": "fir_sapling",
+      "name": "Fir Sapling",
+      "purpose_ru": "Молодые пихты: небольшие посадки и варианты силуэта.",
+      "source_url": "https://polyhaven.com/a/fir_sapling",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "source_polycount": 433021,
+      "files": [
+        {
+          "path": "polyhaven/fir_sapling/fir_sapling_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/fir_sapling/fir_sapling_2k.blend",
+          "bytes": 12383763,
+          "sha256": "80e41096cffc50caf229e6f1bb7d35cc3de82c9b026945b52f7c5cebe6451985",
+          "md5": "1c6965973941396a885d18a07d1439ad"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_twigs_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_twigs_rough_2k.png",
+          "bytes": 1274278,
+          "sha256": "10e867fc55e3a7bd1d1985e401c756ccbd09a90279ef4971694bd18b9dee11f6",
+          "md5": "9661ae2e0405e617d1e540ea96abe87c"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_branches_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_branches_rough_2k.png",
+          "bytes": 6980878,
+          "sha256": "f3902daf0f6551ddae136e85813ec8dbb2002465c60e354584c24bde60a8bc00",
+          "md5": "c20183f25d719eebe1655fb38a8a1072"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_twigs_mask_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_twigs_mask_2k.png",
+          "bytes": 325618,
+          "sha256": "3cd721adce888cfcdedba7a2f242cfbc9ba387cbbcf83f06af22f0df3f616e54",
+          "md5": "256a0a51971db5e7c718c749e7058ea2"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_branches_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_branches_nor_gl_2k.png",
+          "bytes": 22422632,
+          "sha256": "8ae1681d48a1ab3ff6486c9abc0fd155ed848f86bcb2c60894b2b72828d062d5",
+          "md5": "dcddf8603a1d87152a2b8ee46448f3ac"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_twigs_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_twigs_alpha_2k.png",
+          "bytes": 267841,
+          "sha256": "c26331c7e53e911c49e587c6108c1b97f63fa6bc86c9d090cee3e9892783bf08",
+          "md5": "811064f646754026bdcdcdcfe5368abb"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_branches_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_branches_diff_2k.png",
+          "bytes": 22203878,
+          "sha256": "8f16ccb2fa6e4684150aa5bf61a21f38199413915843be8952a4192c9312658d",
+          "md5": "6c57d094dc3608db85da37edc918345c"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_twigs_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_twigs_diff_2k.png",
+          "bytes": 3875485,
+          "sha256": "bd08bb493bdb4168b2eed8470ad861ca97f98d36a66a6afcc383976403ee989e",
+          "md5": "209b3ff0462955b1995c9786bc97c0c7"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_branches_disp_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_branches_disp_2k.png",
+          "bytes": 5850922,
+          "sha256": "2d2b6e0c3837d20df174cad2d703939f55b4961437f0a5ed9b8a06c2c926d731",
+          "md5": "547504251db3320fe10d7214175e1de3"
+        },
+        {
+          "path": "polyhaven/fir_sapling/textures/fir_sapling_twigs_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling/fir_sapling_twigs_nor_gl_2k.png",
+          "bytes": 4463733,
+          "sha256": "d225c2e9f10f5836fb478e8503dd8ff4cfebea578aad8f725cd040bb924c3715",
+          "md5": "a5017084724171c843ab3f5cc5d135cf"
+        },
+        {
+          "path": "polyhaven/fir_sapling/fir_sapling_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/fir_sapling/fir_sapling_2k.fbx",
+          "bytes": 19037468,
+          "sha256": "8a4f891d16b938daa755d2637447237e72a561eace6a8f8e5d81a27ab139f543",
+          "md5": "5cdb18d23c8f59aa442cb0d501f56012"
+        }
+      ]
+    },
+    {
+      "id": "fir_sapling_medium",
+      "name": "Fir Sapling Medium",
+      "purpose_ru": "Средняя пихта: переход между молодыми и взрослыми деревьями.",
+      "source_url": "https://polyhaven.com/a/fir_sapling_medium",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "source_polycount": 2308249,
+      "files": [
+        {
+          "path": "polyhaven/fir_sapling_medium/fir_sapling_medium_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/fir_sapling_medium/fir_sapling_medium_2k.blend",
+          "bytes": 41801517,
+          "sha256": "37066f18c0d2e8d801e9441f6dad3182a03a32b039eae46ac5df32049c92d17b",
+          "md5": "016908e2a0bbd13e0a33c5cec0d2c3b3"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_branches_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_branches_diff_2k.png",
+          "bytes": 22203773,
+          "sha256": "733bfdd255dd468886a68487d5ddc990384ce92f10646af92076e86d789f79b9",
+          "md5": "0a8464460b3df69009f9d5d8b1cb5093"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_branches_disp_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_branches_disp_2k.png",
+          "bytes": 5850817,
+          "sha256": "1248d2c6990840fb51d041054b85bd173994feb1d5368dec0b527825f75c40f8",
+          "md5": "2d07fc2e8c1bd5475f63c24c3d82d420"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_branches_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_branches_nor_gl_2k.png",
+          "bytes": 22422527,
+          "sha256": "32940b0be3a6f9ce10ec9579d2057fac2e7b639f279a37f623467ec12a58e836",
+          "md5": "4a249448a15a27f2cc2645287dc65bf7"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_branches_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_branches_rough_2k.png",
+          "bytes": 6980724,
+          "sha256": "246a070e5af82648545b5b0adc6b3a784f98bd99db00e403a514cbdd1489cf38",
+          "md5": "0201b06fa2bbfa6676c4de2d69eb185f"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_twigs_alpha_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_twigs_alpha_2k.png",
+          "bytes": 996187,
+          "sha256": "6eecd1cf1e059488be2a41d15bb3c8cb3d844765ed11be8087e6e02acd58b181",
+          "md5": "1d93929d869e5539ec245ae3eddb7243"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_twigs_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_twigs_diff_2k.png",
+          "bytes": 5625379,
+          "sha256": "013b359c023bf3b879ef472e0949c7cc1d048162cf3c26e76ed0a5a599098c69",
+          "md5": "480a9dfa4b42d36cfdb9cc1dba0aa493"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_twigs_mask_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_twigs_mask_2k.png",
+          "bytes": 4852003,
+          "sha256": "3c43e3ec0de7b9898e11198927fce96bcacb10e007ac9f6546f7e14d7bc121bd",
+          "md5": "9954526c3f6fa25e2544bc235c421bec"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_twigs_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_twigs_nor_gl_2k.png",
+          "bytes": 5650048,
+          "sha256": "03f6a70cebfe684ba61d84a6abbfab078a6a252ec52f6bbe8fcdb87de62add0a",
+          "md5": "2db997b7951e2931cd05ded39e0e62c5"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/textures/fir_sapling_medium_twigs_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/fir_sapling_medium/fir_sapling_medium_twigs_rough_2k.png",
+          "bytes": 3825796,
+          "sha256": "3215a92d9b4f2cb088a5215a27a526b00c68a91691c4b5298b2b6e41e2cd9101",
+          "md5": "cf7f3790c492130fc6dc3d045eba5f80"
+        },
+        {
+          "path": "polyhaven/fir_sapling_medium/fir_sapling_medium_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/fir_sapling_medium/fir_sapling_medium_2k.fbx",
+          "bytes": 51634508,
+          "sha256": "48082e441dbfd664510936aa05aa8ddd30c5edaef8dd0582abc3f5b4e8bd7a32",
+          "md5": "488e0c522e667ee3e0d4c914c485d992"
+        }
+      ]
+    },
+    {
+      "id": "tree_stump_01",
+      "name": "Tree Stump 01",
+      "purpose_ru": "Низкий неровный пень с корнями: остаток повреждённого дерева.",
+      "source_url": "https://polyhaven.com/a/tree_stump_01",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "source_polycount": 41046,
+      "files": [
+        {
+          "path": "polyhaven/tree_stump_01/tree_stump_01_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/tree_stump_01/tree_stump_01_2k.blend",
+          "bytes": 1861200,
+          "sha256": "145c562079226ab56314b34c32fe5e6a205f28f4727d5f4b7fc9e7639e812bcd",
+          "md5": "bda50cb7434ec926e2d502b5b600404d"
+        },
+        {
+          "path": "polyhaven/tree_stump_01/textures/tree_stump_01_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/tree_stump_01/tree_stump_01_diff_2k.jpg",
+          "bytes": 3189746,
+          "sha256": "77d5238bc40168bcff0833dcf6510aecea4a2b6746968fed7879c5ca7864e6f5",
+          "md5": "5e061f6985b34f3c36824e63473ed1c9"
+        },
+        {
+          "path": "polyhaven/tree_stump_01/textures/tree_stump_01_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_stump_01/tree_stump_01_nor_gl_2k.exr",
+          "bytes": 8915869,
+          "sha256": "c808512bb1ae42b46824946b5ac2059bc40efe703ee4cb8e1b6430fd3ea03003",
+          "md5": "7b56926530773124826b16bc25a9abd7"
+        },
+        {
+          "path": "polyhaven/tree_stump_01/textures/tree_stump_01_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_stump_01/tree_stump_01_rough_2k.exr",
+          "bytes": 3649215,
+          "sha256": "42a51ee8ac39d52c358688d723f9b15ad4802493b79f8bac508aa133b85b6e22",
+          "md5": "9df722437fb0e4e2e2c98dd1932efca3"
+        },
+        {
+          "path": "polyhaven/tree_stump_01/tree_stump_01_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/tree_stump_01/tree_stump_01_2k.fbx",
+          "bytes": 2871228,
+          "sha256": "01182ea4466625445172d9f977461005914ece6b8c547713ce4f9738c296aa9a",
+          "md5": "cd5a41cb0c5346d50b3fff371c9f0be9"
+        }
+      ]
+    },
+    {
+      "id": "tree_stump_02",
+      "name": "Tree Stump 02",
+      "purpose_ru": "Другой пень с корнями: вариативность разрушений.",
+      "source_url": "https://polyhaven.com/a/tree_stump_02",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "source_polycount": 62345,
+      "files": [
+        {
+          "path": "polyhaven/tree_stump_02/tree_stump_02_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/tree_stump_02/tree_stump_02_2k.blend",
+          "bytes": 2851039,
+          "sha256": "48bb58c5e5c15c688e4f8be86272fcd5cb122347e960698c0a6a58887f84afe1",
+          "md5": "c5c08dfdea2077dcf5af1045483e5ff2"
+        },
+        {
+          "path": "polyhaven/tree_stump_02/textures/tree_stump_02_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/tree_stump_02/tree_stump_02_diff_2k.jpg",
+          "bytes": 3435356,
+          "sha256": "8078862e35578a8f7ea1e82072cb7e6f5d7f137290c2d0da6c783b3080a782b0",
+          "md5": "278b1dadd4a5dd61142e09f7c9139dd2"
+        },
+        {
+          "path": "polyhaven/tree_stump_02/textures/tree_stump_02_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_stump_02/tree_stump_02_nor_gl_2k.exr",
+          "bytes": 10119788,
+          "sha256": "bd7d1e181a74454bb2e8320b2e305ddcc171b684e8e02a2a08ab9008f1efda11",
+          "md5": "6fd072f99da6450866c298bf89126ee8"
+        },
+        {
+          "path": "polyhaven/tree_stump_02/textures/tree_stump_02_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/tree_stump_02/tree_stump_02_rough_2k.exr",
+          "bytes": 4119428,
+          "sha256": "9c9d96fb6dff0fde66d7f4ab8456c94001d0f4703fd3e345621380a4f6da287a",
+          "md5": "3faa92ea0e10c0b93f27f02009ee2e44"
+        },
+        {
+          "path": "polyhaven/tree_stump_02/tree_stump_02_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/tree_stump_02/tree_stump_02_2k.fbx",
+          "bytes": 4439452,
+          "sha256": "6d291e6ad6ddcee45cd32c8572b80698bcd0042ff17bebcd062c40adc389d52c",
+          "md5": "8bc5f57ef499939ef7affef2365d5722"
+        }
+      ]
+    },
+    {
+      "id": "dead_tree_trunk",
+      "name": "Dead Tree Trunk",
+      "purpose_ru": "Поваленный ствол с обломанными концами: преграда на дороге.",
+      "source_url": "https://polyhaven.com/a/dead_tree_trunk",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "source_polycount": 101802,
+      "files": [
+        {
+          "path": "polyhaven/dead_tree_trunk/dead_tree_trunk_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/dead_tree_trunk/dead_tree_trunk_2k.blend",
+          "bytes": 4790671,
+          "sha256": "1053bd17021eb3c0d2c23cc607823d05818bc4ccf25e537bd55888f9dfe671b2",
+          "md5": "a26a8ba1d16c3685541515eb02834cb8"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk/textures/dead_tree_trunk_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dead_tree_trunk/dead_tree_trunk_diff_2k.jpg",
+          "bytes": 2580084,
+          "sha256": "57b3f04a2b9b1017abfefbbca1b5d4f5421960fefd964a0b9dd4036be4d58d0c",
+          "md5": "c75e5dc80be2e5d4bc873db388e2093c"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk/textures/dead_tree_trunk_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dead_tree_trunk/dead_tree_trunk_nor_gl_2k.exr",
+          "bytes": 7943845,
+          "sha256": "ca76a95d5b2b8340b4d485cc98eceda8d49422fe96fd15bed02929f329eb3ec7",
+          "md5": "9ffa45c901d47b0de86da4da962811c8"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk/textures/dead_tree_trunk_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dead_tree_trunk/dead_tree_trunk_rough_2k.exr",
+          "bytes": 3944387,
+          "sha256": "f72ac7b64b3c2c5fc82aabace676fd328e05d2902f9e3e8602821b67a4dd6b66",
+          "md5": "bb73f71a7b73e667f62d1564fa8ae400"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk/dead_tree_trunk_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/dead_tree_trunk/dead_tree_trunk_2k.fbx",
+          "bytes": 7165372,
+          "sha256": "faefb06c0f7912eea7afb092960545e7a8b5ef49d78675b5c16df72a83e03204",
+          "md5": "3bc30e3a62655b67193b1889f3c9a2c7"
+        }
+      ]
+    },
+    {
+      "id": "dead_tree_trunk_02",
+      "name": "Dead Tree Trunk 02",
+      "purpose_ru": "Крупный сломанный ствол: завал в парке или дворе.",
+      "source_url": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "authors": {
+        "Jenelle van Heerden": "Photography",
+        "Rico Cilliers": "processing"
+      },
+      "source_polycount": 155864,
+      "files": [
+        {
+          "path": "polyhaven/dead_tree_trunk_02/dead_tree_trunk_02_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/dead_tree_trunk_02/dead_tree_trunk_02_2k.blend",
+          "bytes": 5754548,
+          "sha256": "e88b4aaa4c66c033665f80f7c1d5e6e8bba343077811b30f4ce0f1485b503eac",
+          "md5": "35979851ffd4058b515d9fb8805e654b"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk_02/textures/dead_tree_trunk_02_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dead_tree_trunk_02/dead_tree_trunk_02_rough_2k.exr",
+          "bytes": 1671348,
+          "sha256": "f26ea9ee02227c0c58c0508979554d245d9a0503e185cc42a2e8b97c40ee3451",
+          "md5": "a3736ba5f4cac32c5f9d191c1c80445a"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk_02/textures/dead_tree_trunk_02_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dead_tree_trunk_02/dead_tree_trunk_02_nor_gl_2k.exr",
+          "bytes": 9841126,
+          "sha256": "3ed2e850c1ef0ad7130c96c004a605097a97575cd928d23ed214d0fc26c4de24",
+          "md5": "b50d1aa8ccff0cb9acd5a45d5a69ac8d"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk_02/textures/dead_tree_trunk_02_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dead_tree_trunk_02/dead_tree_trunk_02_diff_2k.jpg",
+          "bytes": 3484654,
+          "sha256": "d5b928c12885249e5a5fbe13619ac9693a67f6196137cc9eadedd5a6b90a87de",
+          "md5": "016bd2d6b12a49c130ffd1a34c0e50e9"
+        },
+        {
+          "path": "polyhaven/dead_tree_trunk_02/dead_tree_trunk_02_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/dead_tree_trunk_02/dead_tree_trunk_02_2k.fbx",
+          "bytes": 6606124,
+          "sha256": "ad7c39dee0157626351174237e1af4a42e55227fcf554c69ae365d391b343a1d",
+          "md5": "92925d8aebfcd1c8531c06e7c5ed6aa0"
+        }
+      ]
+    },
+    {
+      "id": "dry_branches_medium_01",
+      "name": "Dry Branches Medium 01",
+      "purpose_ru": "Сломанные сухие ветки: мелкий древесный мусор.",
+      "source_url": "https://polyhaven.com/a/dry_branches_medium_01",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "source_polycount": 16803,
+      "files": [
+        {
+          "path": "polyhaven/dry_branches_medium_01/dry_branches_medium_01_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/dry_branches_medium_01/dry_branches_medium_01_2k.blend",
+          "bytes": 768242,
+          "sha256": "0cb5b0623501dfbc3158db391574cf720815b40608d557922654ef19527359d2",
+          "md5": "f4c0a03db888da02f815b763549a40e3"
+        },
+        {
+          "path": "polyhaven/dry_branches_medium_01/textures/dry_branches_medium_01_diff_2k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dry_branches_medium_01/dry_branches_medium_01_diff_2k.jpg",
+          "bytes": 2815859,
+          "sha256": "dcabdd1c0c4d801f5c0ce6376f42daba2a632a5433ea679d38bf4e44e5b4ead2",
+          "md5": "5f7ca4d25884545bd9b2063e43c0595c"
+        },
+        {
+          "path": "polyhaven/dry_branches_medium_01/textures/dry_branches_medium_01_rough_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dry_branches_medium_01/dry_branches_medium_01_rough_2k.exr",
+          "bytes": 3874550,
+          "sha256": "f7bfa4b67e9102435002f26b3d567112c68fc7291e193874e955b00bfeb022f5",
+          "md5": "68b882ec82f84954e480c171088e824e"
+        },
+        {
+          "path": "polyhaven/dry_branches_medium_01/textures/dry_branches_medium_01_nor_gl_2k.exr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dry_branches_medium_01/dry_branches_medium_01_nor_gl_2k.exr",
+          "bytes": 9155024,
+          "sha256": "b1bf8cc8aaf648367ddd71b641e32e8e2ce2cf8376171d11e4b5f6c62b2c13b8",
+          "md5": "ee6cecccd08ea3ef85422c35c7a531a3"
+        },
+        {
+          "path": "polyhaven/dry_branches_medium_01/dry_branches_medium_01_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/dry_branches_medium_01/dry_branches_medium_01_2k.fbx",
+          "bytes": 699532,
+          "sha256": "87e952118178e9e4b821ec73acc1e48ae7326a1f80e0c5bbb719d4cd953ebb3a",
+          "md5": "d2c86db2fe63c54f9d88ca8d3df80606"
+        }
+      ]
+    },
+    {
+      "id": "pine_roots",
+      "name": "Pine Roots",
+      "purpose_ru": "Открытые корни: край повреждённой клумбы/грунта; не готовый выворотень.",
+      "source_url": "https://polyhaven.com/a/pine_roots",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "source_polycount": 162693,
+      "files": [
+        {
+          "path": "polyhaven/pine_roots/pine_roots_2k.blend",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/pine_roots/pine_roots_2k.blend",
+          "bytes": 8416952,
+          "sha256": "c1fac77bb91e0ccfead9d8d9459050f0cacc1607be97e41fd08c2f44de09cdad",
+          "md5": "7229d7fe663dab9b9bbaa5b366d25c29"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_a_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_a_diff_2k.png",
+          "bytes": 19685832,
+          "sha256": "9078ad9a27be349ec433d52f5e1a2bc86798003b0f6ed4550cd193194f7ec220",
+          "md5": "1f4628f4de03f36a871e429d8529453c"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_a_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_a_nor_gl_2k.png",
+          "bytes": 22104744,
+          "sha256": "0fc639b61567bd7d783b791b7550c42975ea806fef57006f6feb0dd9026f7344",
+          "md5": "45e5a3e9984e6c422c681bc22d168d28"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_b_diff_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_b_diff_2k.png",
+          "bytes": 19911830,
+          "sha256": "e52c38c29ccc658aca0e322ec907f08a71e446b200f45d17d5226a4130efdcdb",
+          "md5": "66fae1c5d2281832e122f0945abdedef"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_a_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_a_rough_2k.png",
+          "bytes": 6522326,
+          "sha256": "a3d514b09f541aaddeeb4e9d45bdbaf9ec842aabc4e91f1706d9490e837c1fee",
+          "md5": "77159ac5ac246e0c760fbe133c907164"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_b_rough_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_b_rough_2k.png",
+          "bytes": 6670896,
+          "sha256": "6362d699540f61d4541e88e2f7a2cf1a8acf309f4f73c5856e5bf30f642d585e",
+          "md5": "9ee0f4fcf19344cdb0cf7400ef8454ac"
+        },
+        {
+          "path": "polyhaven/pine_roots/textures/pine_roots_b_nor_gl_2k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/pine_roots/pine_roots_b_nor_gl_2k.png",
+          "bytes": 22079908,
+          "sha256": "53d4be452e1c008657e47a320c897f5a933a3a1dae627f567bf4f466e9a623e5",
+          "md5": "1a23646d2b409f60d89416063370eabb"
+        },
+        {
+          "path": "polyhaven/pine_roots/pine_roots_2k.fbx",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/fbx/2k/pine_roots/pine_roots_2k.fbx",
+          "bytes": 11175852,
+          "sha256": "0e01ec9694d227863e7fc9bb69fcacf8136d9675b2d72db9eb7bb97445df5ef8",
+          "md5": "0be3484d0d5b202f6d10105880c259f0"
+        }
+      ]
+    }
+  ],
+  "supplements": [
+    {
+      "id": "abandoned_hopper_terminal_02",
+      "source_url": "https://polyhaven.com/a/abandoned_hopper_terminal_02",
+      "authors": {
+        "Sergej Majboroda": "All"
+      },
+      "license": "CC0-1.0",
+      "purpose": "Original branches World background; local companion only",
+      "files": [
+        {
+          "path": "extras/abandoned_hopper_terminal_02_1k.hdr",
+          "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/abandoned_hopper_terminal_02_1k.hdr",
+          "bytes": 1755301,
+          "sha256": "0aa221014ad9000f227ab4970ac291b85af7e52d6ca025e30c504088c28fda82",
+          "md5": "edbc324a695c25394896edaa64bac082"
+        }
+      ]
+    }
+  ],
+  "file_count": 119,
+  "bytes": 2917387888
+}

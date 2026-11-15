@@ -1,0 +1,789 @@
+{
+  "mode": "rescue",
+  "config": {
+    "width": 48,
+    "height": 40,
+    "people": 24,
+    "drones": 3,
+    "robots": 4,
+    "seed": 42,
+    "horizon": 360,
+    "density": 0.12,
+    "radius": 5,
+    "robot_energy": 300.0,
+    "drone_energy": 180.0,
+    "population": 24,
+    "generations": 8,
+    "scout_policy": "coverage"
+  },
+  "requested": 5,
+  "completed": 5,
+  "cancelled": false,
+  "elapsed_seconds": 3.982461100036744,
+  "metadata": {
+    "version": "0.1.0",
+    "python": "3.14.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+    "clock": "perf_counter",
+    "units": "model seconds / abstract energy",
+    "score": "100*(count + 0.49*mean(1-completion/H) + 0.24*max(0,1-energy/(3*fleet_capacity)))/(people+0.73); zero if count=0"
+  },
+  "rows": [
+    {
+      "seed": 42,
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.995260663507109,
+      "energy": 1791.9532894105628,
+      "energy_ground": 1326.7401901912322,
+      "energy_drone": 465.21309921933056,
+      "energy_per_person": 111.99708058816017,
+      "mean_response": 143.15087775356662,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 339.5855487384053,
+      "score": 66.43791381235533,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 32,
+        "evaluations": 32,
+        "mean_ms": 0.02031250187428668,
+        "max_ms": 0.041199964471161366,
+        "total_ms": 0.6500000599771738
+      }
+    },
+    {
+      "seed": 42,
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.995260663507109,
+      "energy": 1795.217366837787,
+      "energy_ground": 1330.0042676184564,
+      "energy_drone": 465.21309921933056,
+      "energy_per_person": 112.20108542736169,
+      "mean_response": 144.40895907691768,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 339.5855487384053,
+      "score": 66.4314146103337,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 35,
+        "evaluations": 35,
+        "mean_ms": 0.018097140959330967,
+        "max_ms": 0.03700004890561104,
+        "total_ms": 0.6333999335765839
+      }
+    },
+    {
+      "seed": 42,
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.995260663507109,
+      "energy": 1794.7767327398944,
+      "energy_ground": 1329.5636335205638,
+      "energy_drone": 465.21309921933056,
+      "energy_per_person": 112.1735457962434,
+      "mean_response": 145.3006214260363,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 328.6440521092616,
+      "score": 66.42461096376144,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 40,
+        "evaluations": 2088,
+        "mean_ms": 1.1141925031552091,
+        "max_ms": 3.728099982254207,
+        "total_ms": 44.567700126208365
+      }
+    },
+    {
+      "seed": 42,
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.995260663507109,
+      "energy": 1794.7767327398965,
+      "energy_ground": 1329.5636335205659,
+      "energy_drone": 465.21309921933056,
+      "energy_per_person": 112.17354579624353,
+      "mean_response": 144.6756214260363,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 324.5855487384053,
+      "score": 66.42805089277255,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 36,
+        "evaluations": 3615,
+        "mean_ms": 16.64467500005331,
+        "max_ms": 18.738900020252913,
+        "total_ms": 599.2083000019193
+      }
+    },
+    {
+      "seed": 43,
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.9218934911242603,
+      "energy": 1568.9268268701112,
+      "energy_ground": 1219.242456381954,
+      "energy_drone": 349.684370488157,
+      "energy_per_person": 98.05792667938195,
+      "mean_response": 123.84739523887684,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 333.563568096943,
+      "score": 66.61305559545306,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 38,
+        "evaluations": 38,
+        "mean_ms": 0.016826321370899677,
+        "max_ms": 0.04329998046159744,
+        "total_ms": 0.6394002120941877
+      }
+    },
+    {
+      "seed": 43,
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.9218934911242603,
+      "energy": 1511.7109122429506,
+      "energy_ground": 1162.0265417547935,
+      "energy_drone": 349.684370488157,
+      "energy_per_person": 94.48193201518441,
+      "mean_response": 124.49070598402702,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 313.86471093396057,
+      "score": 66.62066822597475,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 40,
+        "evaluations": 40,
+        "mean_ms": 0.016252498608082533,
+        "max_ms": 0.03739999374374747,
+        "total_ms": 0.6500999443233013
+      }
+    },
+    {
+      "seed": 43,
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "found": 24,
+      "rescued": 17,
+      "expired": 7,
+      "coverage": 0.9218934911242603,
+      "energy": 1638.2014537744558,
+      "energy_ground": 1288.5170832862989,
+      "energy_drone": 349.684370488157,
+      "energy_per_person": 96.3647913984974,
+      "mean_response": 133.4359225844636,
+      "seconds_per_person": 20.352941176470587,
+      "people_per_minute": 2.947976878612717,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 323.86471093396057,
+      "score": 70.59080571452897,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 34,
+        "evaluations": 1455,
+        "mean_ms": 1.0218411745667897,
+        "max_ms": 3.5678999847732484,
+        "total_ms": 34.742599935270846
+      }
+    },
+    {
+      "seed": 43,
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "found": 24,
+      "rescued": 17,
+      "expired": 7,
+      "coverage": 0.9218934911242603,
+      "energy": 1684.2046284481712,
+      "energy_ground": 1334.5202579600143,
+      "energy_drone": 349.684370488157,
+      "energy_per_person": 99.07086049695124,
+      "mean_response": 136.45864906023482,
+      "seconds_per_person": 20.352941176470587,
+      "people_per_minute": 2.947976878612717,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 333.563568096943,
+      "score": 70.5632690022808,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 38,
+        "evaluations": 3330,
+        "mean_ms": 11.432692105269158,
+        "max_ms": 18.615700013469905,
+        "total_ms": 434.442300000228
+      }
+    },
+    {
+      "seed": 44,
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.9745562130177515,
+      "energy": 1703.9819027479161,
+      "energy_ground": 1332.3235915441228,
+      "energy_drone": 371.65831120379335,
+      "energy_per_person": 106.49886892174476,
+      "mean_response": 133.2475826795612,
+      "seconds_per_person": 21.5,
+      "people_per_minute": 2.7906976744186047,
+      "finished_at": 344,
+      "all_completed_at": null,
+      "last_completed_at": 343.7072909440352,
+      "score": 66.52666333733998,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 21,
+        "evaluations": 21,
+        "mean_ms": 0.02341904854845433,
+        "max_ms": 0.04069996066391468,
+        "total_ms": 0.49180001951754093
+      }
+    },
+    {
+      "seed": 44,
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.9745562130177515,
+      "energy": 1613.5715578282698,
+      "energy_ground": 1241.9132466244764,
+      "energy_drone": 371.65831120379335,
+      "energy_per_person": 107.57143718855131,
+      "mean_response": 137.55107059976245,
+      "seconds_per_person": 23.066666666666666,
+      "people_per_minute": 2.601156069364162,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 335.6393521063903,
+      "score": 62.47899257279506,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 43,
+        "evaluations": 43,
+        "mean_ms": 0.015809304936420777,
+        "max_ms": 0.0350000336766243,
+        "total_ms": 0.6798001122660935
+      }
+    },
+    {
+      "seed": 44,
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.9745562130177515,
+      "energy": 1621.8382218233455,
+      "energy_ground": 1250.1799106195522,
+      "energy_drone": 371.65831120379335,
+      "energy_per_person": 101.3648888639591,
+      "mean_response": 131.23168612390722,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 340.6393521063903,
+      "score": 66.55741633200019,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 45,
+        "evaluations": 1637,
+        "mean_ms": 0.7761711099495491,
+        "max_ms": 3.479100007098168,
+        "total_ms": 34.92769994772971
+      }
+    },
+    {
+      "seed": 44,
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.9745562130177515,
+      "energy": 1453.550627852753,
+      "energy_ground": 1081.8923166489596,
+      "energy_drone": 371.65831120379335,
+      "energy_per_person": 96.90337519018354,
+      "mean_response": 118.62447022333882,
+      "seconds_per_person": 23.066666666666666,
+      "people_per_minute": 2.601156069364162,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 340.6393521063903,
+      "score": 62.61383018725752,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 44,
+        "evaluations": 4384,
+        "mean_ms": 13.623513634560037,
+        "max_ms": 18.784700019750744,
+        "total_ms": 599.4345999206416
+      }
+    },
+    {
+      "seed": 45,
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.931320307874482,
+      "energy": 1746.269846434705,
+      "energy_ground": 1389.6341182421747,
+      "energy_drone": 356.6357281925301,
+      "energy_per_person": 109.14186540216906,
+      "mean_response": 141.73915487669788,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 344.6606260408393,
+      "score": 66.48376044437529,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 35,
+        "evaluations": 35,
+        "mean_ms": 0.025625718158802817,
+        "max_ms": 0.04310003714635968,
+        "total_ms": 0.8969001355580986
+      }
+    },
+    {
+      "seed": 45,
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.931320307874482,
+      "energy": 1561.3608663915156,
+      "energy_ground": 1204.7251381989856,
+      "energy_drone": 356.6357281925301,
+      "energy_per_person": 104.09072442610105,
+      "mean_response": 130.33850405470713,
+      "seconds_per_person": 23.066666666666666,
+      "people_per_minute": 2.601156069364162,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 331.03793546941495,
+      "score": 62.543348744285545,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 41,
+        "evaluations": 41,
+        "mean_ms": 0.029068289710799368,
+        "max_ms": 0.11229998199269176,
+        "total_ms": 1.191799878142774
+      }
+    },
+    {
+      "seed": 45,
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.931320307874482,
+      "energy": 1712.803487903354,
+      "energy_ground": 1356.1677597108237,
+      "energy_drone": 356.6357281925301,
+      "energy_per_person": 107.05021799395962,
+      "mean_response": 140.9680116788404,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 324.6606260408393,
+      "score": 66.49551663176872,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 32,
+        "evaluations": 1451,
+        "mean_ms": 1.3818968764098827,
+        "max_ms": 3.609399951528758,
+        "total_ms": 44.220700045116246
+      }
+    },
+    {
+      "seed": 45,
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "found": 24,
+      "rescued": 16,
+      "expired": 8,
+      "coverage": 0.931320307874482,
+      "energy": 1739.0205067331085,
+      "energy_ground": 1382.3847785405785,
+      "energy_drone": 356.6357281925301,
+      "energy_per_person": 108.68878167081928,
+      "mean_response": 141.53609930625254,
+      "seconds_per_person": 21.625,
+      "people_per_minute": 2.7745664739884393,
+      "finished_at": 346,
+      "all_completed_at": null,
+      "last_completed_at": 334.6606260408393,
+      "score": 66.48089391699561,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 38,
+        "evaluations": 4999,
+        "mean_ms": 24.877215787694837,
+        "max_ms": 39.90299999713898,
+        "total_ms": 945.3341999324039
+      }
+    },
+    {
+      "seed": 46,
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "found": 24,
+      "rescued": 14,
+      "expired": 10,
+      "coverage": 0.9603550295857988,
+      "energy": 1458.5043182951313,
+      "energy_ground": 1108.2032555000415,
+      "energy_drone": 350.3010627950899,
+      "energy_per_person": 104.17887987822367,
+      "mean_response": 126.62906315904965,
+      "seconds_per_person": 21.214285714285715,
+      "people_per_minute": 2.8282828282828283,
+      "finished_at": 297,
+      "all_completed_at": null,
+      "last_completed_at": 296.1681892178281,
+      "score": 58.53610378669254,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 32,
+        "evaluations": 32,
+        "mean_ms": 0.048850000894162804,
+        "max_ms": 0.4029999836347997,
+        "total_ms": 1.5632000286132097
+      }
+    },
+    {
+      "seed": 46,
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.9603550295857988,
+      "energy": 1478.1698546414984,
+      "energy_ground": 1127.8687918464086,
+      "energy_drone": 350.3010627950899,
+      "energy_per_person": 98.5446569760999,
+      "mean_response": 133.84300907835515,
+      "seconds_per_person": 21.533333333333335,
+      "people_per_minute": 2.7863777089783284,
+      "finished_at": 323,
+      "all_completed_at": null,
+      "last_completed_at": 281.6352486413823,
+      "score": 62.5403524646393,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 36,
+        "evaluations": 36,
+        "mean_ms": 0.03198055330560439,
+        "max_ms": 0.06880000000819564,
+        "total_ms": 1.151299919001758
+      }
+    },
+    {
+      "seed": 46,
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.9603550295857988,
+      "energy": 1525.1374614898937,
+      "energy_ground": 1174.8363986948038,
+      "energy_drone": 350.3010627950899,
+      "energy_per_person": 101.67583076599291,
+      "mean_response": 137.3691893885268,
+      "seconds_per_person": 20.133333333333333,
+      "people_per_minute": 2.980132450331126,
+      "finished_at": 302,
+      "all_completed_at": null,
+      "last_completed_at": 301.1681892178281,
+      "score": 62.50973599314766,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 32,
+        "evaluations": 1989,
+        "mean_ms": 2.8545312579808524,
+        "max_ms": 8.840100024826825,
+        "total_ms": 91.34500025538728
+      }
+    },
+    {
+      "seed": 46,
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "found": 24,
+      "rescued": 15,
+      "expired": 9,
+      "coverage": 0.9603550295857988,
+      "energy": 1478.1698546414968,
+      "energy_ground": 1127.868791846407,
+      "energy_drone": 350.3010627950899,
+      "energy_per_person": 98.54465697609979,
+      "mean_response": 133.1763424116885,
+      "seconds_per_person": 21.533333333333335,
+      "people_per_minute": 2.7863777089783284,
+      "finished_at": 323,
+      "all_completed_at": null,
+      "last_completed_at": 266.6352486413823,
+      "score": 62.54402172225114,
+      "status": "no_tasks_remaining",
+      "planning": {
+        "calls": 35,
+        "evaluations": 4067,
+        "mean_ms": 24.96595428591328,
+        "max_ms": 40.678400022443384,
+        "total_ms": 873.8084000069648
+      }
+    }
+  ],
+  "summary": [
+    {
+      "algorithm": "local",
+      "label": "Локальный поиск",
+      "n": 5,
+      "wins": 3.0,
+      "win_rate": 0.6,
+      "rescued": {
+        "mean": 16,
+        "sd": 0.7071067811865476,
+        "n": 5
+      },
+      "score": {
+        "mean": 66.5156171270414,
+        "sd": 2.8576510899546097,
+        "n": 5
+      },
+      "energy": {
+        "mean": 1658.5514715461886,
+        "sd": 101.31866446259342,
+        "n": 5
+      },
+      "finished_at": {
+        "mean": 337.2,
+        "sd": 19.677398201998148,
+        "n": 5
+      },
+      "seconds_per_person": {
+        "mean": 21.072254901960783,
+        "sd": 0.7608494230022731,
+        "n": 5
+      },
+      "mean_response": {
+        "mean": 137.66108624035488,
+        "sd": 5.669494052768636,
+        "n": 5
+      },
+      "planning_ms": {
+        "mean": 1.4297265844124567,
+        "sd": 0.8254427692139252
+      }
+    },
+    {
+      "algorithm": "nsga2",
+      "label": "NSGA-II",
+      "n": 5,
+      "wins": 1.0,
+      "win_rate": 0.2,
+      "rescued": {
+        "mean": 15.8,
+        "sd": 0.8366600265340756,
+        "n": 5
+      },
+      "score": {
+        "mean": 65.72601314431152,
+        "sd": 3.3268791075471076,
+        "n": 5
+      },
+      "energy": {
+        "mean": 1629.9444700830852,
+        "sd": 155.04978461680204,
+        "n": 5
+      },
+      "finished_at": {
+        "mean": 341.4,
+        "sd": 10.285912696499032,
+        "n": 5
+      },
+      "seconds_per_person": {
+        "mean": 21.640588235294118,
+        "sd": 0.9622531164767232,
+        "n": 5
+      },
+      "mean_response": {
+        "mean": 134.8942364855102,
+        "sd": 10.122915514598898,
+        "n": 5
+      },
+      "planning_ms": {
+        "mean": 18.308810162698126,
+        "sd": 6.313950214952224
+      }
+    },
+    {
+      "algorithm": "nearest",
+      "label": "Ближайший человек",
+      "n": 5,
+      "wins": 1.0,
+      "win_rate": 0.2,
+      "rescued": {
+        "mean": 15.6,
+        "sd": 0.8944271909999159,
+        "n": 5
+      },
+      "score": {
+        "mean": 64.91949939524324,
+        "sd": 3.569010472359074,
+        "n": 5
+      },
+      "energy": {
+        "mean": 1653.9272367516853,
+        "sd": 137.3854114360114,
+        "n": 5
+      },
+      "finished_at": {
+        "mean": 335.8,
+        "sd": 21.70714168194422,
+        "n": 5
+      },
+      "seconds_per_person": {
+        "mean": 21.517857142857142,
+        "sd": 0.17812444056482102,
+        "n": 5
+      },
+      "mean_response": {
+        "mean": 133.72281474155045,
+        "sd": 8.677861901149447,
+        "n": 5
+      },
+      "planning_ms": {
+        "mean": 0.02700671816932126,
+        "sd": 0.012652673090230018
+      }
+    },
+    {
+      "algorithm": "deadline",
+      "label": "Сначала срочные",
+      "n": 5,
+      "wins": 0.0,
+      "win_rate": 0.0,
+      "rescued": {
+        "mean": 15.4,
+        "sd": 0.5477225575051661,
+        "n": 5
+      },
+      "score": {
+        "mean": 64.12295532360567,
+        "sd": 2.1948779181217946,
+        "n": 5
+      },
+      "energy": {
+        "mean": 1592.0061115884043,
+        "sd": 124.60440022160118,
+        "n": 5
+      },
+      "finished_at": {
+        "mean": 341.4,
+        "sd": 10.285912696499032,
+        "n": 5
+      },
+      "seconds_per_person": {
+        "mean": 22.183333333333334,
+        "sd": 0.8072372293473856,
+        "n": 5
+      },
+      "mean_response": {
+        "mean": 134.1264497587539,
+        "sd": 7.495572945931057,
+        "n": 5
+      },
+      "planning_ms": {
+        "mean": 0.022241557504047608,
+        "sd": 0.0076790494186234366
+      }
+    }
+  ],
+  "paired_nsga2": [
+    {
+      "against": "nearest",
+      "mean_score_difference": 0.8065137490682815,
+      "bootstrap_95": [
+        -1.569651733342036,
+        3.182679231478599
+      ],
+      "n": 5
+    },
+    {
+      "against": "deadline",
+      "mean_score_difference": 1.6030578207058526,
+      "bootstrap_95": [
+        0.027089738912765428,
+        3.17902590249894
+      ],
+      "n": 5
+    },
+    {
+      "against": "local",
+      "mean_score_difference": -0.7896039827298708,
+      "bootstrap_95": [
+        -2.370971043493012,
+        0.01575208081467707
+      ],
+      "n": 5
+    }
+  ]
+}

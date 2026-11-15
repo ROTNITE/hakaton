@@ -1,0 +1,188 @@
+{
+  "selected_sheets": 20,
+  "reference_views": 60,
+  "prompt_files": 41,
+  "generator": "built-in image_gen",
+  "assets": [
+    {
+      "id": "01-rescue-rover",
+      "image": "images/01-rescue-rover.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1828323,
+      "sha256": "a357fb6495cc89db6813da1d2a4085963f132d05e8f3ed53479015143354a698",
+      "views": 3
+    },
+    {
+      "id": "02-scout-drone",
+      "image": "images/02-scout-drone.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1791357,
+      "sha256": "00318e140c927ccf016543a68c7fbc34f218acc71134b79f42a80bdfbae53209",
+      "views": 3
+    },
+    {
+      "id": "03-rescue-stretcher",
+      "image": "images/03-rescue-stretcher-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1775268,
+      "sha256": "cd4591683270a78ce11564c307f3ed88d16a300251c37de0e636b1145dda347c",
+      "views": 3
+    },
+    {
+      "id": "04-training-mannequin",
+      "image": "images/04-training-mannequin.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1728927,
+      "sha256": "34a95ca3d98cad24d7361d7829ebc7ff88c36bd31fb4156874dcd46acfc15bf0",
+      "views": 3
+    },
+    {
+      "id": "05-damaged-building",
+      "image": "images/05-damaged-building.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2161468,
+      "sha256": "21283f55f1232e813b391346460d398ec1588846712fdc601596c8399866374f",
+      "views": 3
+    },
+    {
+      "id": "06-window-wall",
+      "image": "images/06-window-wall.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2410496,
+      "sha256": "f092bf1ced13f4e0d5474cb9be82a2f7f0bbfd65ee4f3c6ddbc0383efe736d28",
+      "views": 3
+    },
+    {
+      "id": "07-doorway-wall",
+      "image": "images/07-doorway-wall.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2274773,
+      "sha256": "1d1a85387f87b4ac6bfe40b045a7a8bf1269ff86e3c5f0dc549b5c2e4fed9517",
+      "views": 3
+    },
+    {
+      "id": "08-concrete-slab",
+      "image": "images/08-concrete-slab.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1832265,
+      "sha256": "b474fd4cad70dc481e9965a7fe0754e0e323579086bfc96e390a54a7bd7f605e",
+      "views": 3
+    },
+    {
+      "id": "09-brick-rubble-pile",
+      "image": "images/09-brick-rubble-pile.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1796499,
+      "sha256": "8e6af11cc6eb0197d635a5fd6984c99c5635acdfa670ac13bf3e68263fe498e8",
+      "views": 3
+    },
+    {
+      "id": "10-bent-steel-beam",
+      "image": "images/10-bent-steel-beam.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1425976,
+      "sha256": "8ad607dbac7cb588809d2d03c47152f10e404a4f6ebd03d61a5eb481ea28fd05",
+      "views": 3
+    },
+    {
+      "id": "11-road-section",
+      "image": "images/11-road-section.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1410517,
+      "sha256": "0a3d0e01b523c6895915fa2a535682ed462c3006343109cc8a242207d8b3d522",
+      "views": 3
+    },
+    {
+      "id": "12-medical-container",
+      "image": "images/12-medical-container.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1660305,
+      "sha256": "d600fe67a345c89edebf977133c1ac8137e44189e7f02ceb56f1f72b5a0d1653",
+      "views": 3
+    },
+    {
+      "id": "13-relay-mast",
+      "image": "images/13-relay-mast.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1704727,
+      "sha256": "74efdcda3d1a0ef23cfe94618d729775c01912c3f4340506eae457f34dd30da3",
+      "views": 3
+    },
+    {
+      "id": "14-docking-station",
+      "image": "images/14-docking-station.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1601671,
+      "sha256": "03f9f9c55459b7d3441748655102fee0f1d0cb3fbec3bb29fd7128bd21b23454",
+      "views": 3
+    },
+    {
+      "id": "15-sensor-node",
+      "image": "images/15-sensor-node.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1874571,
+      "sha256": "4fabe8d7491120dbe3820f345297daf3ec3151e7fc16ce436be14deed3cb6c88",
+      "views": 3
+    },
+    {
+      "id": "16-road-barrier",
+      "image": "images/16-road-barrier.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1934383,
+      "sha256": "2b56d43a9ac0cf52991ac243cdb070096a15ff0eb7bad86ba58259c918195ec3",
+      "views": 3
+    },
+    {
+      "id": "17-street-lamp",
+      "image": "images/17-street-lamp.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1611729,
+      "sha256": "5fd7de27d51231e9e4e698db254da76a084c823f0d41fd1750f51d1fcdcb786c",
+      "views": 3
+    },
+    {
+      "id": "18-fence-section",
+      "image": "images/18-fence-section.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1623731,
+      "sha256": "c0360ed9a70988faa62e1e95ff02e940078a53deb4b68ae725baf1f5d87fc304",
+      "views": 3
+    },
+    {
+      "id": "19-equipment-crate",
+      "image": "images/19-equipment-crate.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1901002,
+      "sha256": "f6a693a6d62328c330724a79a9b37a4eff3d2d47aa97305e7e5ad0a48dd2af09",
+      "views": 3
+    },
+    {
+      "id": "20-medical-van",
+      "image": "images/20-medical-van.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1893159,
+      "sha256": "0d154be9f080044b984722ebc77a3b8b81d79e3c6917d7527f4b69e0324fc262",
+      "views": 3
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#141b19">
+  <title>MetaRescue · Аналитика</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M<span>R</span></span><span>MetaRescue<small>Аналитика миссий</small></span></a>
+    <div class="run-heading"><h2>Сохранённые запуски</h2><button id="refresh" class="icon-button" title="Обновить список" aria-label="Обновить список">↻</button></div>
+    <label class="search"><span aria-hidden="true">⌕</span><input id="run-search" type="search" placeholder="Имя или политика" aria-label="Найти запуск"></label>
+    <div id="run-list" class="run-list" aria-label="Выбор запуска"></div>
+    <div class="sidebar-footer"><span class="connection-dot"></span>Локальные архивы<span id="run-count"></span></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div><div class="eyebrow">АРХИВ ИСПЫТАНИЙ</div><h1 id="run-name">Выберите запуск</h1></div>
+      <div class="top-actions"><span id="run-status" class="status">Ожидание</span>
+        <details class="export-menu"><summary>Экспорт <span aria-hidden="true">↗</span></summary><div>
+          <a data-export="json">JSON</a><a data-export="csv">CSV</a><a data-export="txt">TXT</a><a data-export="zip">Полный архив ZIP</a>
+        </div></details>
+      </div>
+    </header>
+    <div class="navigation" role="tablist" aria-label="Раздел аналитики">
+      <button class="active" data-tab="overview" role="tab" aria-selected="true">Миссия</button>
+      <button data-tab="journal" role="tab" aria-selected="false">Журнал решений</button>
+      <button data-tab="compare" role="tab" aria-selected="false">Сравнение</button>
+      <button data-tab="ai" role="tab" aria-selected="false">AI и оптимизация</button>
+    </div>
+    <div id="notice" class="notice" role="status">Откройте сохранённый запуск в списке слева.</div>
+    <section id="overview" class="tab-panel">
+      <div id="metrics" class="metrics"></div>
+      <div class="mission-grid">
+        <section class="panel map-panel">
+          <div class="panel-heading"><div><h2>Ход миссии</h2><span id="sample-basis" class="muted"></span></div>
+            <label class="view-select" for="basis">Данные<select id="basis" aria-label="Данные"><option value="public">Знания команды</option><option value="truth">Полный наблюдатель</option></select></label>
+          </div>
+          <div class="map-wrap"><canvas id="map" aria-label="Карта и записанные траектории агентов"></canvas><div id="map-legend" class="map-legend"></div></div>
+          <div class="layer-controls">
+            <label><input type="checkbox" id="layer-buildings" checked>Здания</label>
+            <label><input type="checkbox" id="layer-trails" checked>Траектории</label>
+            <label><input type="checkbox" id="layer-targets" checked>Пострадавшие</label>
+            <label><input type="checkbox" id="layer-hazards" checked>Опасности</label>
+            <label><input type="checkbox" id="layer-network">Связь</label>
+            <label for="heat-layer">Теплокарта<select id="heat-layer"><option value="off">Выкл.</option><option value="presence">Плотность поз</option><option value="radio">Слабая связь</option></select></label>
+          </div>
+          <output id="heat-basis" class="map-detail muted" hidden></output>
+          <div class="timeline">
+            <button id="play" class="play" aria-label="Воспроизвести запись">▶</button>
+            <div class="scrubber"><label for="time">Время эпизода <output id="time-value">0,0 с</output></label><input id="time" type="range" min="0" max="0" step="1" value="0"></div>
+            <span id="time-end" class="mono">—</span>
+          </div>
+          <details id="substeps" class="map-detail" hidden>
+            <summary>Подшаги вокруг остановок и отказов</summary>
+            <label for="substep-window">Аномалия</label><select id="substep-window"></select>
+            <label for="substep-time">Отсчёт Core</label><input type="range" id="substep-time" min="0" max="0" step="1" value="0">
+            <output id="substep-value" class="mono" aria-live="polite"></output>
+          </details>
+        </section>
+        <section class="panel inspector">
+          <div class="panel-heading"><h2>Агент</h2><select id="agent" aria-label="Выбрать агента"></select></div>
+          <div id="agent-details" class="agent-details">Публичные сведения появятся после загрузки записи.</div>
+          <button id="agent-log" class="secondary">Открыть связанные записи ↗</button>
+          <hr><h3>Приёмка</h3><div id="acceptance" class="acceptance"></div>
+        </section>
+      </div>
+      <section class="panel chart-panel"><div class="panel-heading"><h2>Результат во времени</h2><div class="chart-key"><span class="key-found">Обнаружено</span><span class="key-rescued">Эвакуировано</span><span class="key-energy">Расход Wh</span></div></div><canvas id="progress" aria-label="Наблюдаемые обнаружения, эвакуации и энергия"></canvas></section>
+      <section class="panel"><div class="panel-heading"><h2>Конкурсные показатели</h2><span class="muted">Аудит сохранённого эпизода</span></div><div id="competition-metrics" class="competition-grid"></div></section>
+    </section>
+    <section id="journal" class="tab-panel" hidden>
+      <section class="panel">
+        <div class="panel-heading"><h2>Журнал</h2><span id="record-count" class="muted"></span></div>
+        <form id="log-filter" class="filterbar">
+          <input id="log-query" type="search" placeholder="Агент, цель, команда, trace ID или причина" aria-label="Текст поиска">
+          <select id="log-stream" aria-label="Поток"><option value="">Все потоки</option><option value="public">Публичный</option><option value="controller">Контроллер</option><option value="truth">Истина среды</option></select>
+          <input id="log-kind" placeholder="Тип записи" aria-label="Тип записи"><button class="primary" type="submit">Найти</button>
+        </form>
+        <div class="journal-grid"><div><div id="records" class="records"></div><button id="more-records" class="secondary">Ещё записи</button></div><div class="record-inspector"><div class="detail-heading"><h3>Содержимое записи</h3><button id="copy-record" class="icon-button" title="Копировать JSON" aria-label="Копировать JSON">⧉</button></div><pre id="record-detail">Выберите запись.</pre><div id="causal-links" class="causal-links"></div></div></div>
+      </section>
+    </section>
+    <section id="compare" class="tab-panel" hidden>
+      <section class="panel"><div class="panel-heading"><h2>Сопоставление запусков</h2><button id="compare-load" class="primary">Сравнить выбранные</button></div><p class="muted">Отметьте запуски в списке. Разности рассчитываются при одинаковом хэше исходного мира.</p><div id="comparison"></div><canvas id="comparison-chart" aria-label="Сравнение эвакуаций"></canvas></section>
+    </section>
+    <section id="ai" class="tab-panel" hidden>
+      <div class="analysis-grid"><section class="panel"><div class="panel-heading"><h2>Планирование и AI</h2></div><div id="ai-metrics" class="agent-details"></div><div id="usage"></div></section>
+      <section class="panel"><div class="panel-heading"><h2>Фронты Парето</h2><select id="front-select" aria-label="Контрольная постановка"></select></div><canvas id="pareto" aria-label="Фронт одного раунда планирования"></canvas><div id="front-detail" class="muted"></div><div id="front-table" class="table-wrap"></div></section></div>
+    </section>
+    <footer><span>MetaEvolution Rescue</span><span id="archive-id" class="mono"></span></footer>
+  </main>
+</body>
+</html>

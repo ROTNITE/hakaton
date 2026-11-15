@@ -1,0 +1,881 @@
+{
+  "format": "city-materials-v1-nanite-hism",
+  "replacements": {
+    "/Game/MaterialsCity/City_Leaves.City_Leaves": "/Game/MaterialsCity/City_Leaves.City_Leaves",
+    "/Game/MaterialsCity/City_Bark.City_Bark": "/Game/MaterialsCity/City_Bark.City_Bark",
+    "/Game/MaterialsCity/City_Soil.City_Soil": "/Game/MaterialsCity/City_Soil.City_Soil",
+    "/Engine/EngineMaterials/DefaultMaterial.DefaultMaterial": "/Game/MaterialsCity/Imported/DefaultMaterial_28f7f65aa70f3d86.DefaultMaterial_28f7f65aa70f3d86",
+    "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial": "/Game/MaterialsCity/Imported/WorldGridMaterial_929d2a0c78b94671.WorldGridMaterial_929d2a0c78b94671",
+    "/Game/MaterialsV3/Instances/MI_Asphalt_258abf09bd8b.MI_Asphalt_258abf09bd8b": "/Game/MaterialsCity/Imported/MI_Asphalt_258abf09bd8b_239a65b676e550df.MI_Asphalt_258abf09bd8b_239a65b676e550df",
+    "/Game/MaterialsV3/Instances/M_RescueSurface_3833fd29eef5.M_RescueSurface_3833fd29eef5": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+    "/Game/MaterialsV3/Instances/MI_Blue_5238cc41fd38.MI_Blue_5238cc41fd38": "/Game/MaterialsCity/Imported/MI_Blue_5238cc41fd38_42fbad5f700410d6.MI_Blue_5238cc41fd38_42fbad5f700410d6",
+    "/Game/MaterialsV3/Instances/MI_Brick_55dfcc04c9ca.MI_Brick_55dfcc04c9ca": "/Game/MaterialsCity/Imported/MI_Brick_55dfcc04c9ca_f035c45cfad864fb.MI_Brick_55dfcc04c9ca_f035c45cfad864fb",
+    "/Game/MaterialsV3/Instances/MI_Concrete_cf2ddefcfb4f.MI_Concrete_cf2ddefcfb4f": "/Game/MaterialsCity/Imported/MI_Concrete_cf2ddefcfb4f_e36e1a83f9500543.MI_Concrete_cf2ddefcfb4f_e36e1a83f9500543",
+    "/Game/MaterialsV3/Instances/MI_CyanGlow_62a3f115c945.MI_CyanGlow_62a3f115c945": "/Game/MaterialsCity/Imported/MI_CyanGlow_62a3f115c945_87d64368cc348623.MI_CyanGlow_62a3f115c945_87d64368cc348623",
+    "/Game/MaterialsV3/Instances/MI_Dark_2070d16fdba0.MI_Dark_2070d16fdba0": "/Game/MaterialsCity/Imported/MI_Dark_2070d16fdba0_b6959825c1a3d642.MI_Dark_2070d16fdba0_b6959825c1a3d642",
+    "/Game/MaterialsV3/Instances/MI_Equipment_c080c5275c5e.MI_Equipment_c080c5275c5e": "/Game/MaterialsCity/Imported/MI_Equipment_c080c5275c5e_7046edc3da4551a0.MI_Equipment_c080c5275c5e_7046edc3da4551a0",
+    "/Game/MaterialsV3/Instances/MI_Ground_115d3e081352.MI_Ground_115d3e081352": "/Game/MaterialsCity/Imported/MI_Ground_115d3e081352_0ed0c3defb50eb35.MI_Ground_115d3e081352_0ed0c3defb50eb35",
+    "/Game/MaterialsV3/Instances/MI_Metal_358633bb0090.MI_Metal_358633bb0090": "/Game/MaterialsCity/Imported/MI_Metal_358633bb0090_fcac57359713ffba.MI_Metal_358633bb0090_fcac57359713ffba",
+    "/Game/MaterialsV3/Instances/MI_Mud_9dfa86a26fb9.MI_Mud_9dfa86a26fb9": "/Game/MaterialsCity/Imported/MI_Mud_9dfa86a26fb9_e1e36b4595ebf15e.MI_Mud_9dfa86a26fb9_e1e36b4595ebf15e",
+    "/Game/MaterialsV3/Instances/MI_Orange_15ba2b022b2a.MI_Orange_15ba2b022b2a": "/Game/MaterialsCity/Imported/MI_Orange_15ba2b022b2a_ba24017519ad06df.MI_Orange_15ba2b022b2a_ba24017519ad06df",
+    "/Game/MaterialsV3/Instances/MI_Paint_8edcddfe0195.MI_Paint_8edcddfe0195": "/Game/MaterialsCity/Imported/MI_Paint_8edcddfe0195_ab33cb14646fe1bc.MI_Paint_8edcddfe0195_ab33cb14646fe1bc",
+    "/Game/MaterialsV3/Instances/MI_Plaster_71e442b1be62.MI_Plaster_71e442b1be62": "/Game/MaterialsCity/Imported/MI_Plaster_71e442b1be62_921d7044e4e39af9.MI_Plaster_71e442b1be62_921d7044e4e39af9",
+    "/Game/MaterialsV3/Instances/MI_Red_91d22f6e3ebe.MI_Red_91d22f6e3ebe": "/Game/MaterialsCity/Imported/MI_Red_91d22f6e3ebe_cd4a51cadfdf9cd3.MI_Red_91d22f6e3ebe_cd4a51cadfdf9cd3",
+    "/Game/MaterialsV3/Instances/MI_Rotor_39490abc786c.MI_Rotor_39490abc786c": "/Game/MaterialsCity/Imported/MI_Rotor_39490abc786c_5e7c06da05853c31.MI_Rotor_39490abc786c_5e7c06da05853c31",
+    "/Game/MaterialsV3/Instances/MI_Rubber_8ce3b7ee0a8d.MI_Rubber_8ce3b7ee0a8d": "/Game/MaterialsCity/Imported/MI_Rubber_8ce3b7ee0a8d_176d2757c409dea2.MI_Rubber_8ce3b7ee0a8d_176d2757c409dea2",
+    "/Game/MaterialsV3/Instances/MI_Rust_100a4fbc60c2.MI_Rust_100a4fbc60c2": "/Game/MaterialsCity/Imported/MI_Rust_100a4fbc60c2_56ef63f93ea54b05.MI_Rust_100a4fbc60c2_56ef63f93ea54b05",
+    "/Game/MaterialsV3/Instances/MI_Teal_0ae273aee9f9.MI_Teal_0ae273aee9f9": "/Game/MaterialsCity/Imported/MI_Teal_0ae273aee9f9_2df55be1768b279b.MI_Teal_0ae273aee9f9_2df55be1768b279b",
+    "/Game/MaterialsV3/Instances/MI_Water_5473431a1ecc.MI_Water_5473431a1ecc": "/Game/MaterialsCity/Imported/MI_Water_5473431a1ecc_85d3fd2b1e00b48b.MI_Water_5473431a1ecc_85d3fd2b1e00b48b",
+    "/Game/MaterialsV3/Instances/MI_WhiteGlow_8555cfc793b0.MI_WhiteGlow_8555cfc793b0": "/Game/MaterialsCity/Imported/MI_WhiteGlow_8555cfc793b0_fb70359fa04ddad1.MI_WhiteGlow_8555cfc793b0_fb70359fa04ddad1",
+    "/Game/MaterialsV3/Instances/MI_White_5aeea7d0f6d8.MI_White_5aeea7d0f6d8": "/Game/MaterialsCity/Imported/MI_White_5aeea7d0f6d8_84ecf7de43f67208.MI_White_5aeea7d0f6d8_84ecf7de43f67208",
+    "/Game/MaterialsV3/Instances/MI_Zone_dd3ef6cb02ee.MI_Zone_dd3ef6cb02ee": "/Game/MaterialsCity/Imported/MI_Zone_dd3ef6cb02ee_39edf9e553737e61.MI_Zone_dd3ef6cb02ee_39edf9e553737e61",
+    "/Game/MaterialsV3/Instances/M_Building_Baked_0abf7704466f.M_Building_Baked_0abf7704466f": "/Game/MaterialsCity/Imported/M_Building_Baked_0abf7704466f_123edeeb41a9b0bd.M_Building_Baked_0abf7704466f_123edeeb41a9b0bd",
+    "/Game/MaterialsV3/Instances/M_Building_Baked_a9aebfc32ef9.M_Building_Baked_a9aebfc32ef9": "/Game/MaterialsCity/Imported/M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d.M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d",
+    "/Game/MaterialsV3/Instances/M_Case_Baked_71031f961f89.M_Case_Baked_71031f961f89": "/Game/MaterialsCity/Imported/M_Case_Baked_71031f961f89_52fee2bf414b2acf.M_Case_Baked_71031f961f89_52fee2bf414b2acf",
+    "/Game/MaterialsV3/Instances/M_Dock_Baked_a80369aeebd1.M_Dock_Baked_a80369aeebd1": "/Game/MaterialsCity/Imported/M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d.M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d",
+    "/Game/MaterialsV3/Instances/M_Doorway_Baked_b439496fe656.M_Doorway_Baked_b439496fe656": "/Game/MaterialsCity/Imported/M_Doorway_Baked_b439496fe656_72727d5615e7898c.M_Doorway_Baked_b439496fe656_72727d5615e7898c",
+    "/Game/MaterialsV3/Instances/M_Drone_Baked_0df862c350a3.M_Drone_Baked_0df862c350a3": "/Game/MaterialsCity/Imported/M_Drone_Baked_0df862c350a3_1ad02e56d6f13911.M_Drone_Baked_0df862c350a3_1ad02e56d6f13911",
+    "/Game/MaterialsV3/Instances/M_GlassV3_broken_0671f98c69c1.M_GlassV3_broken_0671f98c69c1": "/Game/MaterialsCity/Imported/M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36.M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36",
+    "/Game/MaterialsV3/Instances/M_GlassV3_clean_288ff6545fe4.M_GlassV3_clean_288ff6545fe4": "/Game/MaterialsCity/Imported/M_GlassV3_clean_288ff6545fe4_79afde2317d59669.M_GlassV3_clean_288ff6545fe4_79afde2317d59669",
+    "/Game/MaterialsV3/Instances/M_GlassV3_cracked_e63a3029212d.M_GlassV3_cracked_e63a3029212d": "/Game/MaterialsCity/Imported/M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9.M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9",
+    "/Game/MaterialsV3/Instances/M_GlassV3_dirty_b3058adcf794.M_GlassV3_dirty_b3058adcf794": "/Game/MaterialsCity/Imported/M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb.M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb",
+    "/Game/MaterialsV3/Instances/M_MannequinStatic_Baked_c0abf908e1e1.M_MannequinStatic_Baked_c0abf908e1e1": "/Game/MaterialsCity/Imported/M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e.M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e",
+    "/Game/MaterialsV3/Instances/M_Medical_Baked_489ecd037f48.M_Medical_Baked_489ecd037f48": "/Game/MaterialsCity/Imported/M_Medical_Baked_489ecd037f48_05115c4a70db4650.M_Medical_Baked_489ecd037f48_05115c4a70db4650",
+    "/Game/MaterialsV3/Instances/M_QuarterAsphalt_598f5ad04b4f.M_QuarterAsphalt_598f5ad04b4f": "/Game/MaterialsCity/Imported/M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b.M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b",
+    "/Game/MaterialsV3/Instances/M_QuarterInterior_18929f5ca474.M_QuarterInterior_18929f5ca474": "/Game/MaterialsCity/Imported/M_QuarterInterior_18929f5ca474_89dea7e120e8db31.M_QuarterInterior_18929f5ca474_89dea7e120e8db31",
+    "/Game/MaterialsV3/Instances/M_QuarterMud_112ca2ef6a13.M_QuarterMud_112ca2ef6a13": "/Game/MaterialsCity/Imported/M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa.M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa",
+    "/Game/MaterialsV3/Instances/M_QuarterPaving_6b16aa029683.M_QuarterPaving_6b16aa029683": "/Game/MaterialsCity/Imported/M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d.M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d",
+    "/Game/MaterialsV3/Instances/M_QuarterWater_b129d6649541.M_QuarterWater_b129d6649541": "/Game/MaterialsCity/Imported/M_QuarterWater_b129d6649541_72a55a84ff77c54b.M_QuarterWater_b129d6649541_72a55a84ff77c54b",
+    "/Game/MaterialsV3/Instances/M_Relay_Baked_f7eb341f6101.M_Relay_Baked_f7eb341f6101": "/Game/MaterialsCity/Imported/M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120.M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120",
+    "/Game/MaterialsV3/Instances/M_Rig_CaseInterior_46d7b558cce5.M_Rig_CaseInterior_46d7b558cce5": "/Game/MaterialsCity/Imported/M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d.M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d",
+    "/Game/MaterialsV3/Instances/M_Rig_MedicalInterior_0d6712017233.M_Rig_MedicalInterior_0d6712017233": "/Game/MaterialsCity/Imported/M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515.M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515",
+    "/Game/MaterialsV3/Instances/M_Rig_Metal_2232a81a3127.M_Rig_Metal_2232a81a3127": "/Game/MaterialsCity/Imported/M_Rig_Metal_2232a81a3127_8a3224072ffe40d1.M_Rig_Metal_2232a81a3127_8a3224072ffe40d1",
+    "/Game/MaterialsV3/Instances/M_Rig_Metal_e28dd1a94b06.M_Rig_Metal_e28dd1a94b06": "/Game/MaterialsCity/Imported/M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e.M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e",
+    "/Game/MaterialsV3/Instances/M_Rig_Rubber_858944e487ef.M_Rig_Rubber_858944e487ef": "/Game/MaterialsCity/Imported/M_Rig_Rubber_858944e487ef_db5827b51b710205.M_Rig_Rubber_858944e487ef_db5827b51b710205",
+    "/Game/MaterialsV3/Instances/M_Rig_Rubber_d55eb50f84a4.M_Rig_Rubber_d55eb50f84a4": "/Game/MaterialsCity/Imported/M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94.M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94",
+    "/Game/MaterialsV3/Instances/M_Rig_Seat_64ece631bf78.M_Rig_Seat_64ece631bf78": "/Game/MaterialsCity/Imported/M_Rig_Seat_64ece631bf78_944e02bd39c4719a.M_Rig_Seat_64ece631bf78_944e02bd39c4719a",
+    "/Game/MaterialsV3/Instances/M_Rig_Track_1895be59cc98.M_Rig_Track_1895be59cc98": "/Game/MaterialsCity/Imported/M_Rig_Track_1895be59cc98_b233fcc77858e2ca.M_Rig_Track_1895be59cc98_b233fcc77858e2ca",
+    "/Game/MaterialsV3/Instances/M_Rig_VanInterior_d8c8da8571fd.M_Rig_VanInterior_d8c8da8571fd": "/Game/MaterialsCity/Imported/M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f.M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f",
+    "/Game/MaterialsV3/Instances/M_Rig_VanPaint_fbdfb93392d7.M_Rig_VanPaint_fbdfb93392d7": "/Game/MaterialsCity/Imported/M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c.M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c",
+    "/Game/MaterialsV3/Instances/M_Rig_VanStripe_47f65fa5e25d.M_Rig_VanStripe_47f65fa5e25d": "/Game/MaterialsCity/Imported/M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b.M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b",
+    "/Game/MaterialsV3/Instances/M_Rig_WindowFrame_a9289b6de0e0.M_Rig_WindowFrame_a9289b6de0e0": "/Game/MaterialsCity/Imported/M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08.M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08",
+    "/Game/MaterialsV3/Instances/M_RotorBlur_ec9dac971d80.M_RotorBlur_ec9dac971d80": "/Game/MaterialsCity/Imported/M_RotorBlur_ec9dac971d80_b3648cacc59ddc82.M_RotorBlur_ec9dac971d80_b3648cacc59ddc82",
+    "/Game/MaterialsV3/Instances/M_Rover_Baked_cff2367133f3.M_Rover_Baked_cff2367133f3": "/Game/MaterialsCity/Imported/M_Rover_Baked_cff2367133f3_e144b36d8f6442ba.M_Rover_Baked_cff2367133f3_e144b36d8f6442ba",
+    "/Game/MaterialsV3/Instances/M_Rubble_Baked_a8233dca15e1.M_Rubble_Baked_a8233dca15e1": "/Game/MaterialsCity/Imported/M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931.M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931",
+    "/Game/MaterialsV3/Instances/M_Sensor_Baked_bb7e711dc5c0.M_Sensor_Baked_bb7e711dc5c0": "/Game/MaterialsCity/Imported/M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf.M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf",
+    "/Game/MaterialsV3/Instances/M_Slab_Baked_dec69e2e9fec.M_Slab_Baked_dec69e2e9fec": "/Game/MaterialsCity/Imported/M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9.M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9",
+    "/Game/MaterialsV3/Instances/M_Streetlight_Lens_d413f6c6941b.M_Streetlight_Lens_d413f6c6941b": "/Game/MaterialsCity/Imported/M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9.M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9",
+    "/Game/MaterialsV3/Instances/M_Streetlight_Metal_c293116b2c99.M_Streetlight_Metal_c293116b2c99": "/Game/MaterialsCity/Imported/M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781.M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781",
+    "/Game/MaterialsV3/Instances/M_Stretcher_Baked_a43bd5937a81.M_Stretcher_Baked_a43bd5937a81": "/Game/MaterialsCity/Imported/M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0.M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0",
+    "/Game/MaterialsV3/Instances/M_V3Foam_6cd544240d6e.M_V3Foam_6cd544240d6e": "/Game/MaterialsCity/Imported/M_V3Foam_6cd544240d6e_88d2d669d2c92b76.M_V3Foam_6cd544240d6e_88d2d669d2c92b76",
+    "/Game/MaterialsV3/Instances/M_V3RoadDamage_632206a833bb.M_V3RoadDamage_632206a833bb": "/Game/MaterialsCity/Imported/M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195.M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195",
+    "/Game/MaterialsV3/Instances/M_V3Soot_30f68b8d1e39.M_V3Soot_30f68b8d1e39": "/Game/MaterialsCity/Imported/M_V3Soot_30f68b8d1e39_d04c743883c82a81.M_V3Soot_30f68b8d1e39_d04c743883c82a81",
+    "/Game/MaterialsV3/Instances/M_V3WetEdge_ca02a49dc32a.M_V3WetEdge_ca02a49dc32a": "/Game/MaterialsCity/Imported/M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf.M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf",
+    "/Game/MaterialsV3/Instances/M_V3_Brick_a76fe407e140.M_V3_Brick_a76fe407e140": "/Game/MaterialsCity/Imported/M_V3_Brick_a76fe407e140_c04e076df3aa5e34.M_V3_Brick_a76fe407e140_c04e076df3aa5e34",
+    "/Game/MaterialsV3/Instances/M_V3_Concrete_a9abac37c1aa.M_V3_Concrete_a9abac37c1aa": "/Game/MaterialsCity/Imported/M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c.M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c",
+    "/Game/MaterialsV3/Instances/M_V3_Fabric_8f24cc17beed.M_V3_Fabric_8f24cc17beed": "/Game/MaterialsCity/Imported/M_V3_Fabric_8f24cc17beed_a3f325e4626ae751.M_V3_Fabric_8f24cc17beed_a3f325e4626ae751",
+    "/Game/MaterialsV3/Instances/M_V3_Plaster_5c2af8d066a0.M_V3_Plaster_5c2af8d066a0": "/Game/MaterialsCity/Imported/M_V3_Plaster_5c2af8d066a0_e75a75943d404596.M_V3_Plaster_5c2af8d066a0_e75a75943d404596",
+    "/Game/MaterialsV3/Instances/M_V3_Rust_a30692ea894b.M_V3_Rust_a30692ea894b": "/Game/MaterialsCity/Imported/M_V3_Rust_a30692ea894b_9324459fb4a21f90.M_V3_Rust_a30692ea894b_9324459fb4a21f90",
+    "/Game/MaterialsV3/Instances/M_V3_Wood_7e9462b7abc3.M_V3_Wood_7e9462b7abc3": "/Game/MaterialsCity/Imported/M_V3_Wood_7e9462b7abc3_a300e40cf727e554.M_V3_Wood_7e9462b7abc3_a300e40cf727e554",
+    "/Game/MaterialsV3/Instances/M_Van_Baked_98c415e28453.M_Van_Baked_98c415e28453": "/Game/MaterialsCity/Imported/M_Van_Baked_98c415e28453_801a6f76e7a44f77.M_Van_Baked_98c415e28453_801a6f76e7a44f77",
+    "/Game/MaterialsV3/Instances/M_WindowWall_Baked_7e1e555b0e4e.M_WindowWall_Baked_7e1e555b0e4e": "/Game/MaterialsCity/Imported/M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40.M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40",
+    "/Game/MaterialsV3/Instances/Material_0_06f848ab0777.Material_0_06f848ab0777": "/Game/MaterialsCity/Imported/Material_0_06f848ab0777_7c99ca17a010d8a0.Material_0_06f848ab0777_7c99ca17a010d8a0",
+    "/Game/MaterialsV3/Instances/concrete_road_barrier_02_b71f04d55ee1.concrete_road_barrier_02_b71f04d55ee1": "/Game/MaterialsCity/Imported/concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755.concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755",
+    "/Game/MaterialsV3/Instances/fire_hydrant_aged_0dd777672e6d.fire_hydrant_aged_0dd777672e6d": "/Game/MaterialsCity/Imported/fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a.fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a",
+    "/Game/MaterialsV3/Instances/fire_hydrant_c1ab7f10c13e.fire_hydrant_c1ab7f10c13e": "/Game/MaterialsCity/Imported/fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d.fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d",
+    "/Game/MaterialsV3/Instances/modular_chainlink_fence_posts_f11ca5b3a299.modular_chainlink_fence_posts_f11ca5b3a299": "/Game/MaterialsCity/Imported/modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23.modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23",
+    "/Game/MaterialsV3/Instances/modular_chainlink_fence_wire_af802f247031.modular_chainlink_fence_wire_af802f247031": "/Game/MaterialsCity/Imported/modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67.modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67",
+    "/Game/MaterialsV3/Instances/modular_electric_cables_97af39637f1f.modular_electric_cables_97af39637f1f": "/Game/MaterialsCity/Imported/modular_electric_cables_97af39637f1f_e95aca4c1a8714c5.modular_electric_cables_97af39637f1f_e95aca4c1a8714c5",
+    "/Game/MaterialsV3/Instances/modular_electric_cables_boxes_b5871051dd22.modular_electric_cables_boxes_b5871051dd22": "/Game/MaterialsCity/Imported/modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0.modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0",
+    "/Game/MaterialsV3/Instances/modular_industrial_pipes_01_group01_d46c14599dcb.modular_industrial_pipes_01_group01_d46c14599dcb": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2.modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2",
+    "/Game/MaterialsV3/Instances/modular_industrial_pipes_01_group02_2e26a787176b.modular_industrial_pipes_01_group02_2e26a787176b": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2.modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_objects_78644ed69519.modular_urban_apartments_facade_objects_78644ed69519": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0.modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_objects_f45c2b00a7e0.modular_urban_apartments_facade_objects_f45c2b00a7e0": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa.modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_plaster_a6679bf250ba.modular_urban_apartments_facade_plaster_a6679bf250ba": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126.modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_01_790304f5fa4f.modular_urban_apartments_facade_trim_01_790304f5fa4f": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d.modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_01_a2fa8ddb30a2.modular_urban_apartments_facade_trim_01_a2fa8ddb30a2": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51.modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51",
+    "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_02_344b2dce9bad.modular_urban_apartments_facade_trim_02_344b2dce9bad": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd.modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd",
+    "/Game/MaterialsV3/Instances/portable_generator_72b57c2bde8c.portable_generator_72b57c2bde8c": "/Game/MaterialsCity/Imported/portable_generator_72b57c2bde8c_668e427700022ff7.portable_generator_72b57c2bde8c_668e427700022ff7",
+    "/Game/MaterialsV3/Instances/utility_box_02_7603189f95ca.utility_box_02_7603189f95ca": "/Game/MaterialsCity/Imported/utility_box_02_7603189f95ca_c25bf4f1f568b457.utility_box_02_7603189f95ca_c25bf4f1f568b457",
+    "/Game/MaterialsV3/Instances/water_manhole_cover_7eb04274d7d5.water_manhole_cover_7eb04274d7d5": "/Game/MaterialsCity/Imported/water_manhole_cover_7eb04274d7d5_995e8eb3894d574d.water_manhole_cover_7eb04274d7d5_995e8eb3894d574d"
+  },
+  "checks": [
+    {
+      "source": "/Game/MaterialsCity/City_Leaves.City_Leaves",
+      "derived": "/Game/MaterialsCity/City_Leaves.City_Leaves",
+      "base": "/Game/MaterialsCity/City_Leaves.City_Leaves",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsCity/City_Bark.City_Bark",
+      "derived": "/Game/MaterialsCity/City_Bark.City_Bark",
+      "base": "/Game/MaterialsCity/City_Bark.City_Bark",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsCity/City_Soil.City_Soil",
+      "derived": "/Game/MaterialsCity/City_Soil.City_Soil",
+      "base": "/Game/MaterialsCity/City_Soil.City_Soil",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Engine/EngineMaterials/DefaultMaterial.DefaultMaterial",
+      "derived": "/Game/MaterialsCity/Imported/DefaultMaterial_28f7f65aa70f3d86.DefaultMaterial_28f7f65aa70f3d86",
+      "base": "/Game/MaterialsCity/Imported/DefaultMaterial_28f7f65aa70f3d86.DefaultMaterial_28f7f65aa70f3d86",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+      "derived": "/Game/MaterialsCity/Imported/WorldGridMaterial_929d2a0c78b94671.WorldGridMaterial_929d2a0c78b94671",
+      "base": "/Game/MaterialsCity/Imported/WorldGridMaterial_929d2a0c78b94671.WorldGridMaterial_929d2a0c78b94671",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Asphalt_258abf09bd8b.MI_Asphalt_258abf09bd8b",
+      "derived": "/Game/MaterialsCity/Imported/MI_Asphalt_258abf09bd8b_239a65b676e550df.MI_Asphalt_258abf09bd8b_239a65b676e550df",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_RescueSurface_3833fd29eef5.M_RescueSurface_3833fd29eef5",
+      "derived": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Blue_5238cc41fd38.MI_Blue_5238cc41fd38",
+      "derived": "/Game/MaterialsCity/Imported/MI_Blue_5238cc41fd38_42fbad5f700410d6.MI_Blue_5238cc41fd38_42fbad5f700410d6",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Brick_55dfcc04c9ca.MI_Brick_55dfcc04c9ca",
+      "derived": "/Game/MaterialsCity/Imported/MI_Brick_55dfcc04c9ca_f035c45cfad864fb.MI_Brick_55dfcc04c9ca_f035c45cfad864fb",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Concrete_cf2ddefcfb4f.MI_Concrete_cf2ddefcfb4f",
+      "derived": "/Game/MaterialsCity/Imported/MI_Concrete_cf2ddefcfb4f_e36e1a83f9500543.MI_Concrete_cf2ddefcfb4f_e36e1a83f9500543",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_CyanGlow_62a3f115c945.MI_CyanGlow_62a3f115c945",
+      "derived": "/Game/MaterialsCity/Imported/MI_CyanGlow_62a3f115c945_87d64368cc348623.MI_CyanGlow_62a3f115c945_87d64368cc348623",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Dark_2070d16fdba0.MI_Dark_2070d16fdba0",
+      "derived": "/Game/MaterialsCity/Imported/MI_Dark_2070d16fdba0_b6959825c1a3d642.MI_Dark_2070d16fdba0_b6959825c1a3d642",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Equipment_c080c5275c5e.MI_Equipment_c080c5275c5e",
+      "derived": "/Game/MaterialsCity/Imported/MI_Equipment_c080c5275c5e_7046edc3da4551a0.MI_Equipment_c080c5275c5e_7046edc3da4551a0",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Ground_115d3e081352.MI_Ground_115d3e081352",
+      "derived": "/Game/MaterialsCity/Imported/MI_Ground_115d3e081352_0ed0c3defb50eb35.MI_Ground_115d3e081352_0ed0c3defb50eb35",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Metal_358633bb0090.MI_Metal_358633bb0090",
+      "derived": "/Game/MaterialsCity/Imported/MI_Metal_358633bb0090_fcac57359713ffba.MI_Metal_358633bb0090_fcac57359713ffba",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Mud_9dfa86a26fb9.MI_Mud_9dfa86a26fb9",
+      "derived": "/Game/MaterialsCity/Imported/MI_Mud_9dfa86a26fb9_e1e36b4595ebf15e.MI_Mud_9dfa86a26fb9_e1e36b4595ebf15e",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Orange_15ba2b022b2a.MI_Orange_15ba2b022b2a",
+      "derived": "/Game/MaterialsCity/Imported/MI_Orange_15ba2b022b2a_ba24017519ad06df.MI_Orange_15ba2b022b2a_ba24017519ad06df",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Paint_8edcddfe0195.MI_Paint_8edcddfe0195",
+      "derived": "/Game/MaterialsCity/Imported/MI_Paint_8edcddfe0195_ab33cb14646fe1bc.MI_Paint_8edcddfe0195_ab33cb14646fe1bc",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Plaster_71e442b1be62.MI_Plaster_71e442b1be62",
+      "derived": "/Game/MaterialsCity/Imported/MI_Plaster_71e442b1be62_921d7044e4e39af9.MI_Plaster_71e442b1be62_921d7044e4e39af9",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Red_91d22f6e3ebe.MI_Red_91d22f6e3ebe",
+      "derived": "/Game/MaterialsCity/Imported/MI_Red_91d22f6e3ebe_cd4a51cadfdf9cd3.MI_Red_91d22f6e3ebe_cd4a51cadfdf9cd3",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Rotor_39490abc786c.MI_Rotor_39490abc786c",
+      "derived": "/Game/MaterialsCity/Imported/MI_Rotor_39490abc786c_5e7c06da05853c31.MI_Rotor_39490abc786c_5e7c06da05853c31",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Rubber_8ce3b7ee0a8d.MI_Rubber_8ce3b7ee0a8d",
+      "derived": "/Game/MaterialsCity/Imported/MI_Rubber_8ce3b7ee0a8d_176d2757c409dea2.MI_Rubber_8ce3b7ee0a8d_176d2757c409dea2",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Rust_100a4fbc60c2.MI_Rust_100a4fbc60c2",
+      "derived": "/Game/MaterialsCity/Imported/MI_Rust_100a4fbc60c2_56ef63f93ea54b05.MI_Rust_100a4fbc60c2_56ef63f93ea54b05",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Teal_0ae273aee9f9.MI_Teal_0ae273aee9f9",
+      "derived": "/Game/MaterialsCity/Imported/MI_Teal_0ae273aee9f9_2df55be1768b279b.MI_Teal_0ae273aee9f9_2df55be1768b279b",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Water_5473431a1ecc.MI_Water_5473431a1ecc",
+      "derived": "/Game/MaterialsCity/Imported/MI_Water_5473431a1ecc_85d3fd2b1e00b48b.MI_Water_5473431a1ecc_85d3fd2b1e00b48b",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_WhiteGlow_8555cfc793b0.MI_WhiteGlow_8555cfc793b0",
+      "derived": "/Game/MaterialsCity/Imported/MI_WhiteGlow_8555cfc793b0_fb70359fa04ddad1.MI_WhiteGlow_8555cfc793b0_fb70359fa04ddad1",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_White_5aeea7d0f6d8.MI_White_5aeea7d0f6d8",
+      "derived": "/Game/MaterialsCity/Imported/MI_White_5aeea7d0f6d8_84ecf7de43f67208.MI_White_5aeea7d0f6d8_84ecf7de43f67208",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/MI_Zone_dd3ef6cb02ee.MI_Zone_dd3ef6cb02ee",
+      "derived": "/Game/MaterialsCity/Imported/MI_Zone_dd3ef6cb02ee_39edf9e553737e61.MI_Zone_dd3ef6cb02ee_39edf9e553737e61",
+      "base": "/Game/MaterialsCity/Imported/M_RescueSurface_3833fd29eef5_f011e8344d811e31.M_RescueSurface_3833fd29eef5_f011e8344d811e31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Building_Baked_0abf7704466f.M_Building_Baked_0abf7704466f",
+      "derived": "/Game/MaterialsCity/Imported/M_Building_Baked_0abf7704466f_123edeeb41a9b0bd.M_Building_Baked_0abf7704466f_123edeeb41a9b0bd",
+      "base": "/Game/MaterialsCity/Imported/M_Building_Baked_0abf7704466f_123edeeb41a9b0bd.M_Building_Baked_0abf7704466f_123edeeb41a9b0bd",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Building_Baked_a9aebfc32ef9.M_Building_Baked_a9aebfc32ef9",
+      "derived": "/Game/MaterialsCity/Imported/M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d.M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d",
+      "base": "/Game/MaterialsCity/Imported/M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d.M_Building_Baked_a9aebfc32ef9_9bdf56c917437f5d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Case_Baked_71031f961f89.M_Case_Baked_71031f961f89",
+      "derived": "/Game/MaterialsCity/Imported/M_Case_Baked_71031f961f89_52fee2bf414b2acf.M_Case_Baked_71031f961f89_52fee2bf414b2acf",
+      "base": "/Game/MaterialsCity/Imported/M_Case_Baked_71031f961f89_52fee2bf414b2acf.M_Case_Baked_71031f961f89_52fee2bf414b2acf",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Dock_Baked_a80369aeebd1.M_Dock_Baked_a80369aeebd1",
+      "derived": "/Game/MaterialsCity/Imported/M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d.M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d",
+      "base": "/Game/MaterialsCity/Imported/M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d.M_Dock_Baked_a80369aeebd1_f6f44d16fac2462d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Doorway_Baked_b439496fe656.M_Doorway_Baked_b439496fe656",
+      "derived": "/Game/MaterialsCity/Imported/M_Doorway_Baked_b439496fe656_72727d5615e7898c.M_Doorway_Baked_b439496fe656_72727d5615e7898c",
+      "base": "/Game/MaterialsCity/Imported/M_Doorway_Baked_b439496fe656_72727d5615e7898c.M_Doorway_Baked_b439496fe656_72727d5615e7898c",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Drone_Baked_0df862c350a3.M_Drone_Baked_0df862c350a3",
+      "derived": "/Game/MaterialsCity/Imported/M_Drone_Baked_0df862c350a3_1ad02e56d6f13911.M_Drone_Baked_0df862c350a3_1ad02e56d6f13911",
+      "base": "/Game/MaterialsCity/Imported/M_Drone_Baked_0df862c350a3_1ad02e56d6f13911.M_Drone_Baked_0df862c350a3_1ad02e56d6f13911",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_GlassV3_broken_0671f98c69c1.M_GlassV3_broken_0671f98c69c1",
+      "derived": "/Game/MaterialsCity/Imported/M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36.M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36",
+      "base": "/Game/MaterialsCity/Imported/M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36.M_GlassV3_broken_0671f98c69c1_690e3cedc9f7de36",
+      "opaque": false,
+      "instancing": true,
+      "nanite": false
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_GlassV3_clean_288ff6545fe4.M_GlassV3_clean_288ff6545fe4",
+      "derived": "/Game/MaterialsCity/Imported/M_GlassV3_clean_288ff6545fe4_79afde2317d59669.M_GlassV3_clean_288ff6545fe4_79afde2317d59669",
+      "base": "/Game/MaterialsCity/Imported/M_GlassV3_clean_288ff6545fe4_79afde2317d59669.M_GlassV3_clean_288ff6545fe4_79afde2317d59669",
+      "opaque": false,
+      "instancing": true,
+      "nanite": false
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_GlassV3_cracked_e63a3029212d.M_GlassV3_cracked_e63a3029212d",
+      "derived": "/Game/MaterialsCity/Imported/M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9.M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9",
+      "base": "/Game/MaterialsCity/Imported/M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9.M_GlassV3_cracked_e63a3029212d_a15fc98eea2bf4c9",
+      "opaque": false,
+      "instancing": true,
+      "nanite": false
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_GlassV3_dirty_b3058adcf794.M_GlassV3_dirty_b3058adcf794",
+      "derived": "/Game/MaterialsCity/Imported/M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb.M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb",
+      "base": "/Game/MaterialsCity/Imported/M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb.M_GlassV3_dirty_b3058adcf794_b3303c8d659136bb",
+      "opaque": false,
+      "instancing": true,
+      "nanite": false
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_MannequinStatic_Baked_c0abf908e1e1.M_MannequinStatic_Baked_c0abf908e1e1",
+      "derived": "/Game/MaterialsCity/Imported/M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e.M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e",
+      "base": "/Game/MaterialsCity/Imported/M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e.M_MannequinStatic_Baked_c0abf908e1e1_0a9f37eb8bb1898e",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Medical_Baked_489ecd037f48.M_Medical_Baked_489ecd037f48",
+      "derived": "/Game/MaterialsCity/Imported/M_Medical_Baked_489ecd037f48_05115c4a70db4650.M_Medical_Baked_489ecd037f48_05115c4a70db4650",
+      "base": "/Game/MaterialsCity/Imported/M_Medical_Baked_489ecd037f48_05115c4a70db4650.M_Medical_Baked_489ecd037f48_05115c4a70db4650",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_QuarterAsphalt_598f5ad04b4f.M_QuarterAsphalt_598f5ad04b4f",
+      "derived": "/Game/MaterialsCity/Imported/M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b.M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b",
+      "base": "/Game/MaterialsCity/Imported/M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b.M_QuarterAsphalt_598f5ad04b4f_2c781c4bdcfc8b5b",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_QuarterInterior_18929f5ca474.M_QuarterInterior_18929f5ca474",
+      "derived": "/Game/MaterialsCity/Imported/M_QuarterInterior_18929f5ca474_89dea7e120e8db31.M_QuarterInterior_18929f5ca474_89dea7e120e8db31",
+      "base": "/Game/MaterialsCity/Imported/M_QuarterInterior_18929f5ca474_89dea7e120e8db31.M_QuarterInterior_18929f5ca474_89dea7e120e8db31",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_QuarterMud_112ca2ef6a13.M_QuarterMud_112ca2ef6a13",
+      "derived": "/Game/MaterialsCity/Imported/M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa.M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa",
+      "base": "/Game/MaterialsCity/Imported/M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa.M_QuarterMud_112ca2ef6a13_f1ba7ca806d189aa",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_QuarterPaving_6b16aa029683.M_QuarterPaving_6b16aa029683",
+      "derived": "/Game/MaterialsCity/Imported/M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d.M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d",
+      "base": "/Game/MaterialsCity/Imported/M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d.M_QuarterPaving_6b16aa029683_a1be68a3b6e8928d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_QuarterWater_b129d6649541.M_QuarterWater_b129d6649541",
+      "derived": "/Game/MaterialsCity/Imported/M_QuarterWater_b129d6649541_72a55a84ff77c54b.M_QuarterWater_b129d6649541_72a55a84ff77c54b",
+      "base": "/Game/MaterialsCity/Imported/M_QuarterWater_b129d6649541_72a55a84ff77c54b.M_QuarterWater_b129d6649541_72a55a84ff77c54b",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Relay_Baked_f7eb341f6101.M_Relay_Baked_f7eb341f6101",
+      "derived": "/Game/MaterialsCity/Imported/M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120.M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120",
+      "base": "/Game/MaterialsCity/Imported/M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120.M_Relay_Baked_f7eb341f6101_c6d3f81c3a201120",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_CaseInterior_46d7b558cce5.M_Rig_CaseInterior_46d7b558cce5",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d.M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d.M_Rig_CaseInterior_46d7b558cce5_e79375ff3131db9d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_MedicalInterior_0d6712017233.M_Rig_MedicalInterior_0d6712017233",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515.M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515.M_Rig_MedicalInterior_0d6712017233_3b86cbc597787515",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Metal_2232a81a3127.M_Rig_Metal_2232a81a3127",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Metal_2232a81a3127_8a3224072ffe40d1.M_Rig_Metal_2232a81a3127_8a3224072ffe40d1",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Metal_2232a81a3127_8a3224072ffe40d1.M_Rig_Metal_2232a81a3127_8a3224072ffe40d1",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Metal_e28dd1a94b06.M_Rig_Metal_e28dd1a94b06",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e.M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e.M_Rig_Metal_e28dd1a94b06_8694ef1ee3faf54e",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Rubber_858944e487ef.M_Rig_Rubber_858944e487ef",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Rubber_858944e487ef_db5827b51b710205.M_Rig_Rubber_858944e487ef_db5827b51b710205",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Rubber_858944e487ef_db5827b51b710205.M_Rig_Rubber_858944e487ef_db5827b51b710205",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Rubber_d55eb50f84a4.M_Rig_Rubber_d55eb50f84a4",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94.M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94.M_Rig_Rubber_d55eb50f84a4_e6b6d7f378cead94",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Seat_64ece631bf78.M_Rig_Seat_64ece631bf78",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Seat_64ece631bf78_944e02bd39c4719a.M_Rig_Seat_64ece631bf78_944e02bd39c4719a",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Seat_64ece631bf78_944e02bd39c4719a.M_Rig_Seat_64ece631bf78_944e02bd39c4719a",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_Track_1895be59cc98.M_Rig_Track_1895be59cc98",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_Track_1895be59cc98_b233fcc77858e2ca.M_Rig_Track_1895be59cc98_b233fcc77858e2ca",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_Track_1895be59cc98_b233fcc77858e2ca.M_Rig_Track_1895be59cc98_b233fcc77858e2ca",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_VanInterior_d8c8da8571fd.M_Rig_VanInterior_d8c8da8571fd",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f.M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f.M_Rig_VanInterior_d8c8da8571fd_a893a1acd788039f",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_VanPaint_fbdfb93392d7.M_Rig_VanPaint_fbdfb93392d7",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c.M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c.M_Rig_VanPaint_fbdfb93392d7_dd2a8ebc698bff4c",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_VanStripe_47f65fa5e25d.M_Rig_VanStripe_47f65fa5e25d",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b.M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b.M_Rig_VanStripe_47f65fa5e25d_f340977225e6ea6b",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rig_WindowFrame_a9289b6de0e0.M_Rig_WindowFrame_a9289b6de0e0",
+      "derived": "/Game/MaterialsCity/Imported/M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08.M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08",
+      "base": "/Game/MaterialsCity/Imported/M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08.M_Rig_WindowFrame_a9289b6de0e0_8b6b0a3ced03aa08",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_RotorBlur_ec9dac971d80.M_RotorBlur_ec9dac971d80",
+      "derived": "/Game/MaterialsCity/Imported/M_RotorBlur_ec9dac971d80_b3648cacc59ddc82.M_RotorBlur_ec9dac971d80_b3648cacc59ddc82",
+      "base": "/Game/MaterialsCity/Imported/M_RotorBlur_ec9dac971d80_b3648cacc59ddc82.M_RotorBlur_ec9dac971d80_b3648cacc59ddc82",
+      "opaque": false,
+      "instancing": true,
+      "nanite": false
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rover_Baked_cff2367133f3.M_Rover_Baked_cff2367133f3",
+      "derived": "/Game/MaterialsCity/Imported/M_Rover_Baked_cff2367133f3_e144b36d8f6442ba.M_Rover_Baked_cff2367133f3_e144b36d8f6442ba",
+      "base": "/Game/MaterialsCity/Imported/M_Rover_Baked_cff2367133f3_e144b36d8f6442ba.M_Rover_Baked_cff2367133f3_e144b36d8f6442ba",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Rubble_Baked_a8233dca15e1.M_Rubble_Baked_a8233dca15e1",
+      "derived": "/Game/MaterialsCity/Imported/M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931.M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931",
+      "base": "/Game/MaterialsCity/Imported/M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931.M_Rubble_Baked_a8233dca15e1_d2bc5d2704390931",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Sensor_Baked_bb7e711dc5c0.M_Sensor_Baked_bb7e711dc5c0",
+      "derived": "/Game/MaterialsCity/Imported/M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf.M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf",
+      "base": "/Game/MaterialsCity/Imported/M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf.M_Sensor_Baked_bb7e711dc5c0_72fa9d9ac06d9cdf",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Slab_Baked_dec69e2e9fec.M_Slab_Baked_dec69e2e9fec",
+      "derived": "/Game/MaterialsCity/Imported/M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9.M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9",
+      "base": "/Game/MaterialsCity/Imported/M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9.M_Slab_Baked_dec69e2e9fec_493e4b0744222bf9",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Streetlight_Lens_d413f6c6941b.M_Streetlight_Lens_d413f6c6941b",
+      "derived": "/Game/MaterialsCity/Imported/M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9.M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9",
+      "base": "/Game/MaterialsCity/Imported/M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9.M_Streetlight_Lens_d413f6c6941b_9f5b2540e47a8de9",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Streetlight_Metal_c293116b2c99.M_Streetlight_Metal_c293116b2c99",
+      "derived": "/Game/MaterialsCity/Imported/M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781.M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781",
+      "base": "/Game/MaterialsCity/Imported/M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781.M_Streetlight_Metal_c293116b2c99_e01baa7a29a74781",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Stretcher_Baked_a43bd5937a81.M_Stretcher_Baked_a43bd5937a81",
+      "derived": "/Game/MaterialsCity/Imported/M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0.M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0",
+      "base": "/Game/MaterialsCity/Imported/M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0.M_Stretcher_Baked_a43bd5937a81_59510e4c9acf6aa0",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3Foam_6cd544240d6e.M_V3Foam_6cd544240d6e",
+      "derived": "/Game/MaterialsCity/Imported/M_V3Foam_6cd544240d6e_88d2d669d2c92b76.M_V3Foam_6cd544240d6e_88d2d669d2c92b76",
+      "base": "/Game/MaterialsCity/Imported/M_V3Foam_6cd544240d6e_88d2d669d2c92b76.M_V3Foam_6cd544240d6e_88d2d669d2c92b76",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3RoadDamage_632206a833bb.M_V3RoadDamage_632206a833bb",
+      "derived": "/Game/MaterialsCity/Imported/M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195.M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195",
+      "base": "/Game/MaterialsCity/Imported/M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195.M_V3RoadDamage_632206a833bb_c4ca2a0f5ff7f195",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3Soot_30f68b8d1e39.M_V3Soot_30f68b8d1e39",
+      "derived": "/Game/MaterialsCity/Imported/M_V3Soot_30f68b8d1e39_d04c743883c82a81.M_V3Soot_30f68b8d1e39_d04c743883c82a81",
+      "base": "/Game/MaterialsCity/Imported/M_V3Soot_30f68b8d1e39_d04c743883c82a81.M_V3Soot_30f68b8d1e39_d04c743883c82a81",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3WetEdge_ca02a49dc32a.M_V3WetEdge_ca02a49dc32a",
+      "derived": "/Game/MaterialsCity/Imported/M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf.M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf",
+      "base": "/Game/MaterialsCity/Imported/M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf.M_V3WetEdge_ca02a49dc32a_fd50773fbd47edbf",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Brick_a76fe407e140.M_V3_Brick_a76fe407e140",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Brick_a76fe407e140_c04e076df3aa5e34.M_V3_Brick_a76fe407e140_c04e076df3aa5e34",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Brick_a76fe407e140_c04e076df3aa5e34.M_V3_Brick_a76fe407e140_c04e076df3aa5e34",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Concrete_a9abac37c1aa.M_V3_Concrete_a9abac37c1aa",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c.M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c.M_V3_Concrete_a9abac37c1aa_ff6e2a02473f308c",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Fabric_8f24cc17beed.M_V3_Fabric_8f24cc17beed",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Fabric_8f24cc17beed_a3f325e4626ae751.M_V3_Fabric_8f24cc17beed_a3f325e4626ae751",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Fabric_8f24cc17beed_a3f325e4626ae751.M_V3_Fabric_8f24cc17beed_a3f325e4626ae751",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Plaster_5c2af8d066a0.M_V3_Plaster_5c2af8d066a0",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Plaster_5c2af8d066a0_e75a75943d404596.M_V3_Plaster_5c2af8d066a0_e75a75943d404596",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Plaster_5c2af8d066a0_e75a75943d404596.M_V3_Plaster_5c2af8d066a0_e75a75943d404596",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Rust_a30692ea894b.M_V3_Rust_a30692ea894b",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Rust_a30692ea894b_9324459fb4a21f90.M_V3_Rust_a30692ea894b_9324459fb4a21f90",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Rust_a30692ea894b_9324459fb4a21f90.M_V3_Rust_a30692ea894b_9324459fb4a21f90",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_V3_Wood_7e9462b7abc3.M_V3_Wood_7e9462b7abc3",
+      "derived": "/Game/MaterialsCity/Imported/M_V3_Wood_7e9462b7abc3_a300e40cf727e554.M_V3_Wood_7e9462b7abc3_a300e40cf727e554",
+      "base": "/Game/MaterialsCity/Imported/M_V3_Wood_7e9462b7abc3_a300e40cf727e554.M_V3_Wood_7e9462b7abc3_a300e40cf727e554",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_Van_Baked_98c415e28453.M_Van_Baked_98c415e28453",
+      "derived": "/Game/MaterialsCity/Imported/M_Van_Baked_98c415e28453_801a6f76e7a44f77.M_Van_Baked_98c415e28453_801a6f76e7a44f77",
+      "base": "/Game/MaterialsCity/Imported/M_Van_Baked_98c415e28453_801a6f76e7a44f77.M_Van_Baked_98c415e28453_801a6f76e7a44f77",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/M_WindowWall_Baked_7e1e555b0e4e.M_WindowWall_Baked_7e1e555b0e4e",
+      "derived": "/Game/MaterialsCity/Imported/M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40.M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40",
+      "base": "/Game/MaterialsCity/Imported/M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40.M_WindowWall_Baked_7e1e555b0e4e_a742e38d52254f40",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/Material_0_06f848ab0777.Material_0_06f848ab0777",
+      "derived": "/Game/MaterialsCity/Imported/Material_0_06f848ab0777_7c99ca17a010d8a0.Material_0_06f848ab0777_7c99ca17a010d8a0",
+      "base": "/Game/MaterialsCity/Imported/Material_0_06f848ab0777_7c99ca17a010d8a0.Material_0_06f848ab0777_7c99ca17a010d8a0",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/concrete_road_barrier_02_b71f04d55ee1.concrete_road_barrier_02_b71f04d55ee1",
+      "derived": "/Game/MaterialsCity/Imported/concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755.concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755",
+      "base": "/Game/MaterialsCity/Imported/concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755.concrete_road_barrier_02_b71f04d55ee1_3bb0fdd1f2b30755",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/fire_hydrant_aged_0dd777672e6d.fire_hydrant_aged_0dd777672e6d",
+      "derived": "/Game/MaterialsCity/Imported/fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a.fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a",
+      "base": "/Game/MaterialsCity/Imported/fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a.fire_hydrant_aged_0dd777672e6d_4dceb6ca9566d33a",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/fire_hydrant_c1ab7f10c13e.fire_hydrant_c1ab7f10c13e",
+      "derived": "/Game/MaterialsCity/Imported/fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d.fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d",
+      "base": "/Game/MaterialsCity/Imported/fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d.fire_hydrant_c1ab7f10c13e_b0f2687f0327d68d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_chainlink_fence_posts_f11ca5b3a299.modular_chainlink_fence_posts_f11ca5b3a299",
+      "derived": "/Game/MaterialsCity/Imported/modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23.modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23",
+      "base": "/Game/MaterialsCity/Imported/modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23.modular_chainlink_fence_posts_f11ca5b3a299_c2720f32ba3d0b23",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_chainlink_fence_wire_af802f247031.modular_chainlink_fence_wire_af802f247031",
+      "derived": "/Game/MaterialsCity/Imported/modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67.modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67",
+      "base": "/Game/MaterialsCity/Imported/modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67.modular_chainlink_fence_wire_af802f247031_d996894fe2f5df67",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_electric_cables_97af39637f1f.modular_electric_cables_97af39637f1f",
+      "derived": "/Game/MaterialsCity/Imported/modular_electric_cables_97af39637f1f_e95aca4c1a8714c5.modular_electric_cables_97af39637f1f_e95aca4c1a8714c5",
+      "base": "/Game/MaterialsCity/Imported/modular_electric_cables_97af39637f1f_e95aca4c1a8714c5.modular_electric_cables_97af39637f1f_e95aca4c1a8714c5",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_electric_cables_boxes_b5871051dd22.modular_electric_cables_boxes_b5871051dd22",
+      "derived": "/Game/MaterialsCity/Imported/modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0.modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0",
+      "base": "/Game/MaterialsCity/Imported/modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0.modular_electric_cables_boxes_b5871051dd22_df793e2514e35fc0",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_industrial_pipes_01_group01_d46c14599dcb.modular_industrial_pipes_01_group01_d46c14599dcb",
+      "derived": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2.modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2",
+      "base": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2.modular_industrial_pipes_01_group01_d46c14599dcb_e1af9d92ac7182d2",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_industrial_pipes_01_group02_2e26a787176b.modular_industrial_pipes_01_group02_2e26a787176b",
+      "derived": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2.modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2",
+      "base": "/Game/MaterialsCity/Imported/modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2.modular_industrial_pipes_01_group02_2e26a787176b_73ade933dd9b52f2",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_objects_78644ed69519.modular_urban_apartments_facade_objects_78644ed69519",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0.modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0.modular_urban_apartments_facade_objects_78644ed69519_bde50374b89c35e0",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_objects_f45c2b00a7e0.modular_urban_apartments_facade_objects_f45c2b00a7e0",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa.modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa.modular_urban_apartments_facade_objects_f45c2b00a7e0_e365ac3600a790fa",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_plaster_a6679bf250ba.modular_urban_apartments_facade_plaster_a6679bf250ba",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126.modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126.modular_urban_apartments_facade_plaster_a6679bf250ba_e9c5107fb939f126",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_01_790304f5fa4f.modular_urban_apartments_facade_trim_01_790304f5fa4f",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d.modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d.modular_urban_apartments_facade_trim_01_790304f5fa4f_1a5696cfc4a7001d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_01_a2fa8ddb30a2.modular_urban_apartments_facade_trim_01_a2fa8ddb30a2",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51.modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51.modular_urban_apartments_facade_trim_01_a2fa8ddb30a2_6aa25b9f29fbdd51",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/modular_urban_apartments_facade_trim_02_344b2dce9bad.modular_urban_apartments_facade_trim_02_344b2dce9bad",
+      "derived": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd.modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd",
+      "base": "/Game/MaterialsCity/Imported/modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd.modular_urban_apartments_facade_trim_02_344b2dce9bad_4cca30bddd1a99cd",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/portable_generator_72b57c2bde8c.portable_generator_72b57c2bde8c",
+      "derived": "/Game/MaterialsCity/Imported/portable_generator_72b57c2bde8c_668e427700022ff7.portable_generator_72b57c2bde8c_668e427700022ff7",
+      "base": "/Game/MaterialsCity/Imported/portable_generator_72b57c2bde8c_668e427700022ff7.portable_generator_72b57c2bde8c_668e427700022ff7",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/utility_box_02_7603189f95ca.utility_box_02_7603189f95ca",
+      "derived": "/Game/MaterialsCity/Imported/utility_box_02_7603189f95ca_c25bf4f1f568b457.utility_box_02_7603189f95ca_c25bf4f1f568b457",
+      "base": "/Game/MaterialsCity/Imported/utility_box_02_7603189f95ca_c25bf4f1f568b457.utility_box_02_7603189f95ca_c25bf4f1f568b457",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    },
+    {
+      "source": "/Game/MaterialsV3/Instances/water_manhole_cover_7eb04274d7d5.water_manhole_cover_7eb04274d7d5",
+      "derived": "/Game/MaterialsCity/Imported/water_manhole_cover_7eb04274d7d5_995e8eb3894d574d.water_manhole_cover_7eb04274d7d5_995e8eb3894d574d",
+      "base": "/Game/MaterialsCity/Imported/water_manhole_cover_7eb04274d7d5_995e8eb3894d574d.water_manhole_cover_7eb04274d7d5_995e8eb3894d574d",
+      "opaque": true,
+      "instancing": true,
+      "nanite": true
+    }
+  ],
+  "runtime_render_verified": false
+}

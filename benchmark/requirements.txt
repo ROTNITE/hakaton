@@ -1,0 +1,2 @@
+# Python >= 3.10. Only the standard library is used.
+# No pip install, network access, Node.js or external services are required.

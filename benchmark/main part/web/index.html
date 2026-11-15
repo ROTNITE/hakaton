@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rescue Lab — MetaEvolution</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Rescue Lab — главная"><span class="brand-cross">+</span><span>RESCUE<span class="brand-light"> / LAB</span></span></a>
+  <div class="project-name">METAEVOLUTION <span>Исследование алгоритмов</span></div>
+  <span class="local-tag"><i></i> Локально · без облака</span>
+</header>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="side-title"><span class="eyebrow">СЦЕНАРИЙ / 01</span><h2>Условия миссии</h2><p>Одна карта и одни ресурсы<br>для всех алгоритмов.</p></div>
+  <form id="configForm">
+    <fieldset><legend>Местность</legend>
+      <div class="field-pair"><label>Ширина карты<input name="width" type="number" min="20" max="120" required value="48"></label><label>Высота карты<input name="height" type="number" min="20" max="120" required value="40"></label></div>
+      <div class="field-pair"><label>Пострадавшие<input name="people" type="number" min="1" max="120" required value="24"></label><label>Seed карты<input name="seed" type="number" min="0" max="2147483647" required value="42"></label></div>
+      <label>Непроходимые завалы, %<input name="density" type="number" min="0" max="28" step="1" required value="12"></label>
+    </fieldset>
+    <fieldset><legend>Команда</legend>
+      <div class="field-pair"><label>Дроны<input name="drones" type="number" min="1" max="12" required value="3"></label><label>Роботы<input name="robots" type="number" min="1" max="16" required value="4"></label></div>
+      <label>Радиус обзора, клеток<input name="radius" type="number" min="2" max="10" required value="5"></label>
+      <div class="field-pair"><label>Заряд дрона<input name="drone_energy" type="number" min="40" max="2000" required value="180"></label><label>Заряд робота<input name="robot_energy" type="number" min="40" max="2000" required value="300"></label></div>
+    </fieldset>
+    <fieldset><legend>Эксперимент</legend>
+      <label>Горизонт, модельных секунд<input name="horizon" type="number" min="60" max="1800" required value="360"></label>
+      <div class="field-pair"><label>Популяция<input name="population" type="number" min="12" max="64" required value="24"></label><label>Поколения<input name="generations" type="number" min="2" max="24" required value="8"></label></div>
+      <label id="sharedPolicyLabel">Общая разведка для эвакуации<select name="scout_policy"><option value="coverage">Прирост покрытия</option><option value="nearest">Ближний сектор</option><option value="sweep">Полосовой обход</option><option value="nsga2">NSGA-II</option></select></label>
+    </fieldset>
+    <button type="submit" class="button primary full" id="applyBtn">Применить и сбросить <span>↗</span></button>
+    <p class="form-note">Изменения вступают в силу после сброса. Ретрансляторы в этом тесте не моделируются.</p>
+  </form>
+  <div class="side-footer"><span class="version">2D BENCHMARK · v0.1</span><p>Секунды и энергия — единицы модели. Это эксперимент, а не прогноз реальной спасательной операции.</p></div>
+</aside>
+<main>
+  <div id="notice" class="notice" role="alert" hidden></div>
+  <div class="page-heading"><div><div class="eyebrow">ПАРАЛЛЕЛЬНАЯ РАЗВЕДКА И ЭВАКУАЦИЯ</div><h1>Сначала найти.<br>Успеть спасти.</h1><p>Четыре подхода. Равные условия. Измеримый результат.</p></div><div class="heading-stamp"><span>2D</span><small>ПЛАНИРОВАНИЕ<br>В ДЕЙСТВИИ</small></div></div>
+  <nav class="mode-tabs" aria-label="Этап эксперимента"><button type="button" data-mode="scout">01 <span>Разведка</span></button><button type="button" class="active" data-mode="rescue">02 <span>Эвакуация</span></button></nav>
+  <div class="mode-explainer"><span id="modeIcon" class="small-cross">+</span><p id="modeDescription">Разведка продолжается, пока роботы спасают уже найденных людей. Все алгоритмы эвакуации получают одинаковую информацию от одних и тех же дронов.</p></div>
+  <section class="transport" aria-label="Управление симуляцией">
+    <div class="transport-actions"><button id="playBtn" class="button primary" type="button">▶ Запустить</button><button id="stepBtn" class="button secondary" type="button">+1 секунда</button><button id="resetBtn" class="icon-button" type="button" aria-label="Повторить текущий сценарий" title="Повторить текущий сценарий">↺</button></div>
+    <div class="clock"><span id="clockTime">000</span><small>/ <span id="clockLimit">360</span> с</small><div class="time-track"><i id="timeProgress"></i></div></div>
+    <label class="speed-label">Темп<select id="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="12">12×</option><option value="40">40×</option><option value="200">Макс.</option></select></label>
+    <span id="runStatus" class="status-pill">Готов к запуску</span>
+  </section>
+  <div class="map-options"><div class="legend"><span><i class="dot victim"></i>Человек</span><span><i class="triangle"></i>Дрон</span><span><i class="square"></i>Робот</span><span><i class="base-symbol">+</i>Пункт</span><span><i class="rubble"></i>Завалы</span></div><div class="display-toggles"><label><input id="showPaths" type="checkbox" checked>Маршруты</label><label><input id="showHidden" type="checkbox">Скрытые люди</label></div></div>
+  <div class="observer-note" id="observerNote" hidden>Режим наблюдателя: скрытые люди видны только вам. Планировщики не получают их координаты.</div>
+  <section id="arenas" class="arenas" aria-label="Сравнение алгоритмов"></section>
+  <section class="results-section">
+    <div class="section-top"><div><span class="eyebrow">СРАВНЕНИЕ / 02</span><h2>Все показатели рядом</h2></div><div class="export-actions"><button id="traceBtn" class="text-button" type="button">Поколения NSGA-II ↗</button><button id="csvBtn" class="button secondary compact" type="button">CSV ↓</button><button id="jsonBtn" class="button secondary compact" type="button">JSON ↓</button></div></div>
+    <div id="verdict" class="verdict">Запустите эксперимент, чтобы сравнить результаты.</div>
+    <div class="table-scroll"><table id="resultsTable"><thead></thead><tbody></tbody></table></div>
+    <p class="table-note">Время завершения — остановка работы, в том числе с неполным результатом. «Все» — момент обнаружения / доставки всех людей; прочерк, если это не удалось. CPU планирования измеряется отдельно от времени модели.</p>
+    <details class="methodology"><summary>Как считаются баллы и что именно сравнивается</summary><div><p>Приоритет — число найденных людей в разведке или доставленных до дедлайна в эвакуации. Один дополнительный человек важнее всей прибавки за скорость и энергию вместе.</p><code>S = 100 × (K + 0.49 × T + 0.24 × E) / (N + 0.73)</code><p>K — результат, N — число людей. T — среднее (1 − время результата / горизонт). E = max(0, 1 − энергия / (3 × суммарный заряд команды)). При K = 0 балл равен 0. Нормировка фиксирована и не зависит от соперников.</p><p>Разведка ищет новые участки, не зная людей заранее. NSGA-II оптимизирует покрытие, время полёта и энергию. При эвакуации он оптимизирует число своевременных доставок, задержку и энергию. Декодер назначает задачи роботам, Дейкстра строит наземные пути. Один робот перевозит одного человека за рейс. Подзарядка доступна в пункте.</p><p>Локальный поиск использует тот же лимит попыток оценки, что и NSGA-II: популяция × (поколения + 1). Кэш уменьшает число фактических оценок. Различие реальных затрат видно в CPU. Риск, связь, столкновения и физика разрушений здесь не моделируются.</p></div></details>
+  </section>
+  <section id="traceSection" class="trace-section" hidden>
+    <div class="section-top"><div><span class="eyebrow">ВНУТРИ ПОИСКА</span><h2>Поколения NSGA-II</h2></div><button id="closeTrace" class="icon-button" type="button" aria-label="Скрыть поколения">×</button></div>
+    <p id="traceDescription" class="muted"></p><label class="generation-label">Поколение <strong id="generationValue">0</strong><input id="generationSlider" type="range" min="0" max="8" value="0"></label>
+    <div class="trace-content"><canvas id="frontChart" width="600" height="250" aria-label="Проекция фронта Парето"></canvas><div id="traceNumbers"></div></div>
+    <p class="table-note">Это запись последнего эволюционного поиска с выполнимым планом. Поздние вызовы без доступных задач её не заменяют. Ползунок просматривает выполненные поколения. Фронт показан в проекции двух целей; третья цель — энергия.</p>
+  </section>
+  <section class="batch-section">
+    <div class="section-top"><div><span class="eyebrow">ВОСПРОИЗВОДИМОСТЬ / 03</span><h2>Одна карта — ещё не вывод</h2><p class="muted">Проверьте подходы на серии последовательных seed с текущими настройками.</p></div><span class="series-mark">n ≥ 5</span></div>
+    <div class="batch-controls"><label>Число карт<input id="batchCount" type="number" min="1" max="20" value="5"></label><button id="batchBtn" class="button primary" type="button">Запустить серию ↗</button><button id="cancelBatch" class="button secondary" type="button" hidden>Отменить</button><span id="batchStatus" role="status">Рекомендуем 5–20 карт.</span></div>
+    <div id="batchResults" hidden><div class="section-top"><h3 id="batchTitle">Результаты серии</h3><div class="export-actions"><button id="batchCsvBtn" class="button secondary compact" type="button">CSV ↓</button><button id="batchJsonBtn" class="button secondary compact" type="button">JSON ↓</button></div></div><div class="table-scroll"><table id="batchTable"><thead></thead><tbody></tbody></table></div><p id="pairedNote" class="table-note"></p></div>
+  </section>
+  <footer class="main-footer"><span>METAEVOLUTION RESCUE / RESEARCH BUILD</span><span>Наблюдать → сравнивать → проверять</span></footer>
+</main>
+</div>
+</body>
+</html>

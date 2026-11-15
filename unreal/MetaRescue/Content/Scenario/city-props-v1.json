@@ -1,0 +1,43 @@
+{
+  "format": "metarescue.city-props.v1",
+  "preparation_manifest_sha256": "b89ddd81044575d757672c7a81eb405c9ebc9b77d26b55965f226e4f5eb78c62",
+  "models": [
+    {
+      "id": "covered_car",
+      "asset": "covered_car",
+      "kind": "parked_vehicle",
+      "mesh": "/Game/RescueAssets/CityV2/Props/SM_covered_car_23a08c7dbcd6_opaque.SM_covered_car_23a08c7dbcd6_opaque",
+      "source_object": [
+        "covered_car",
+        "covered_car_wheel_01",
+        "covered_car_wheel_02",
+        "covered_car_wheel_03",
+        "covered_car_wheel_04"
+      ],
+      "source_sha256": "ece6d1abf18848fdb8d1217140fcf3ba4df5ebf901b061ea0fa7f3d7b310ee49",
+      "fbx_sha256": "23a08c7dbcd61ff323cc83086eadce6a12d14aa678fc865ef1190e32f07f2d63",
+      "bounds_m": {
+        "min": [
+          -0.894482,
+          -2.190127,
+          0.0
+        ],
+        "max": [
+          0.894481,
+          2.190127,
+          1.411113
+        ]
+      },
+      "triangles": 12592,
+      "materials": [
+        {
+          "slot": "covered_car",
+          "asset": "/Game/RescueAssets/CityV2/Props/Materials/M_covered_car_90732a3959.M_covered_car_90732a3959",
+          "masked": false
+        }
+      ],
+      "source_url": "https://polyhaven.com/a/covered_car",
+      "license": "CC0-1.0"
+    }
+  ]
+}

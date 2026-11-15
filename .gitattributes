@@ -1,0 +1,7 @@
+* text=auto
+# Imported reference implementations keep their original bytes and hashes.
+benchmarks/** -text
+benchmark/** -text
+controller/vendor/** -text
+*.ttf binary
+*.cmd text eol=crlf
