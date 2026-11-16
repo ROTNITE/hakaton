@@ -4,6 +4,7 @@
 #include "MRCoreValues.h"
 #include "MRWorld.h"
 #include "MRAgent.h"
+#include "Engine/World.h"
 #include "ProceduralMeshComponent.h"
 #include "Misc/Base64.h"
 #include "Misc/FileHelper.h"
@@ -128,6 +129,23 @@ void FMRCoreRuntime::RecordTruthSnapshot(const FString& Phase)
         }
         Damage.Sort([](const Value& A,const Value& B){return Text(A->AsObject(),TEXT("source_object_id"))<Text(B->AsObject(),TEXT("source_object_id"));});
         Snapshot->SetArrayField(TEXT("structure_damage"),Damage);
+        TArray<Value> Supports;
+        FCollisionQueryParams Query(SCENE_QUERY_STAT(MRPrivateRoadSupport),false);
+        for(AMRAgent* Agent:World->Agents)Query.AddIgnoredActor(Agent);
+        // A bounded diagnostic sample also survives reset, proving real
+        // collision restoration rather than just an empty damage counter.
+        for(const auto& Event:World->Environment.Tape)
+        {
+            if(Supports.Num()>=4)break;
+            if(Event.Kind!=EMRDisturbance::RoadDamage||!Event.Rejection.IsEmpty()||Event.bPropagation)continue;
+            FHitResult Hit;
+            const bool Found=World->GetWorld()->LineTraceSingleByChannel(Hit,Event.Source+FVector(0,0,1000),
+                Event.Source-FVector(0,0,2000),ECC_Visibility,Query);
+            Supports.Add(Json(Obj({{TEXT("event_id"),Str(Event.Id)},{TEXT("position"),Point(Event.Source/100.)},
+                {TEXT("height_m"),Found?Num(Hit.ImpactPoint.Z/100.):Null()},
+                {TEXT("component"),Found?Str(GetNameSafe(Hit.GetComponent())):Null()}})));
+        }
+        Snapshot->SetArrayField(TEXT("road_support_probes"),Supports);
     }
     Record(TEXT("truth_snapshot"),Snapshot,false);
 }
