@@ -7,6 +7,7 @@ struct FMRSeenSurface
     FVector PointCm=FVector::ZeroVector,Normal=FVector::UpVector;
     double Quality=0,ObservedAt=-1,ReceivedAt=-1;
     FString Source;
+    uint32 SurfaceComponent=0; // Private renderer identity, never a discovered object catalogue.
     bool Water=false;
 };
 

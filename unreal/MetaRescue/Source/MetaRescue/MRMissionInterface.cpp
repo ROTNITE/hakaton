@@ -271,7 +271,7 @@ private:
             Rows->AddSlot().AutoHeight().Padding(0,5)[Toggle(Entry.Key,Entry.Value)];
         Rows->AddSlot().AutoHeight().Padding(0,12,0,0)[LabelDynamic([this]{return Session->ObserverView?
             TEXT("Физическая истина доступна наблюдателю. Контроллер получает только доставленные сведения."):
-            TEXT("Схема команды: объявленные объёмы, доставленные позы и цели. Разрывы связи не заполняются.");},10,Muted)];
+            TEXT("Неизведанное скрыто. Открытие и изменения города показываются после доставки наблюдений. При потере связи остаётся последнее известное состояние.");},10,Muted)];
         Rows->AddSlot().AutoHeight().Padding(0,8,0,0)[Label(TEXT("Сплошной след — пройдено. Пунктир — текущая команда. До 2048 точек на агента."),10,Muted)];
         Rows->AddSlot().AutoHeight().Padding(0,12,0,0)[Label(TEXT("RMB · поворот\nКолесо · масштаб\nWASD · перемещение\nR · следить за агентом"),10,Muted)];
         return SNew(SBorder).BorderImage(&Panel).Padding(16)[Rows];

@@ -21,6 +21,7 @@
 #include "Misc/Parse.h"
 #include "Serialization/JsonSerializer.h"
 #include "ProceduralMeshComponent.h"
+#include "MRExplorationScene.h"
 #include "UnrealClient.h"
 
 using namespace MRCoreValues;
@@ -90,6 +91,8 @@ bool FMRCoreRuntime::Start(int32 Port)
     Started=true;
     for(AMRAgent* Agent:World->Agents)Agent->AddTickPrerequisiteActor(World);
     PostTickHandle=FWorldDelegates::OnWorldPostActorTick.AddRaw(this,&FMRCoreRuntime::AfterPhysics);
+    ExplorationDisplayTick=FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateLambda([this](float)
+        {RefreshExplorationView();return Started;}));
     FHttpServerModule::Get().StartAllListeners();
     UE_LOG(LogTemp,Display,TEXT("MR_CORE listening on 127.0.0.1:%d; warming physics, external=1s execution=1/60s pacing=%s"),Port,Realtime?TEXT("realtime"):TEXT("accelerated"));
     return true;
@@ -97,6 +100,8 @@ bool FMRCoreRuntime::Start(int32 Port)
 
 void FMRCoreRuntime::Stop()
 {
+    if(ExplorationDisplayTick.IsValid()){FTSTicker::GetCoreTicker().RemoveTicker(ExplorationDisplayTick);ExplorationDisplayTick.Reset();}
+    ExplorationScene.Reset();
     if(OwnerExitTickHandle.IsValid()){FTSTicker::GetCoreTicker().RemoveTicker(OwnerExitTickHandle);OwnerExitTickHandle.Reset();}
     if(LayoutTickHandle.IsValid()){FTSTicker::GetCoreTicker().RemoveTicker(LayoutTickHandle);LayoutTickHandle.Reset();}
     if(LayoutWorker.IsValid())

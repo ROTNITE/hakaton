@@ -19,7 +19,7 @@ public:
     static UMRMissionSession* Get(const UWorld* World);
     bool Enabled=false,ConfigurationReady=false,SetupOpen=true,InspectorOpen=true;
     bool CaptureOverview=false;
-    bool ObserverView=true,ShowTrails=true,ShowRoutes=true,ShowNetwork=false;
+    bool ObserverView=false,ShowTrails=true,ShowRoutes=true,ShowNetwork=false;
     bool ShowHazards=true,ShowCoverage=false,ShowScenarios=false;
     FString Stage=TEXT("setup"),Message,Error,LayoutFile,RunDirectory,SelectedAgent;
     FString ActiveRequest,ControlSession;

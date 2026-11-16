@@ -337,7 +337,7 @@ Object FMRCoreRuntime::Capabilities() const
         Result->SetArrayField(TEXT("extensions"),Extensions);
         Result->SetObjectField(TEXT("exploration_model"),Obj({{TEXT("cell_m"),Num(5)},
             {TEXT("persistence"),Str(TEXT("episode_permanent"))},{TEXT("delivery_required"),Bool(true)},
-            {TEXT("camera_reveals"),Bool(false)},{TEXT("surface_renderer_connected"),Bool(false)},
+            {TEXT("camera_reveals"),Bool(false)},{TEXT("surface_renderer_connected"),Bool(true)},
             {TEXT("surface_sensor_kinds"),Strings({TEXT("aerial"),TEXT("ground"),TEXT("surface_water"),TEXT("infrastructure")})}}));
     }
     return Result;

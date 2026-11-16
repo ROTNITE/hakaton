@@ -3,6 +3,7 @@
 #include "MRMissionSession.h"
 #include "MRCoreValues.h"
 #include "MRCoreJson.h"
+#include "MRCoreRuntime.h"
 #include "MRAgent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -145,7 +146,9 @@ void AMRCameraPawn::SetPreset(int32 Index)
         SetInspectionView(Focus,Distance,Index==1?0:Index==0?150:45,Index==1?-80:-38);
         bOverview=Index==1;
         if(Index==7)for(int32 I=0;I<It->Agents.Num();I++)if(!It->Agents[I]->bAerial)
-        {ObservedAgent=I;bFollowing=true;bShowInspector=true;SetActorLocation(It->Agents[I]->GetActorLocation());Arm->TargetArmLength=1900;break;}
+        {ObservedAgent=I;bFollowing=true;bShowInspector=true;FVector P;
+            if(It->CoreRuntime&&It->CoreRuntime->IsKnowledgeView()){if(It->CoreRuntime->DisplayPosition(It->Agents[I]->AgentKey(),P))SetActorLocation(P);}
+            else SetActorLocation(It->Agents[I]->GetActorLocation());Arm->TargetArmLength=1900;break;}
         return;
     }
     const FVector Locations[]={FVector(-1100,1400,80),FVector(6500,6500,0),FVector(7800,5950,80),FVector(13600,13000,100),FVector(12400,3050,100),FVector(10900,7950,100),FVector(2450,2450,400),FVector(-750,200,80)};
@@ -174,10 +177,8 @@ void AMRCameraPawn::FollowAgent(const FString& Id)
     for(TActorIterator<AMRWorld> It(GetWorld());It;++It)for(int32 I=0;I<It->Agents.Num();I++)if(It->Agents[I]->AgentKey()==Id&&It->Agents[I]->IsSpatial())
     {
         ObservedAgent=I;bFollowing=true;bOverview=false;Arm->TargetArmLength=1900;
-        auto* Session=UMRMissionSession::Get(GetWorld());
-        if(Session&&Session->Enabled&&!Session->ObserverView)
-        {if(auto O=Session->Observation())for(const auto& Value:O->GetArrayField(TEXT("agents")))if(MRCoreValues::Text(Value->AsObject(),TEXT("id"))==Id)
-            {FVector P;if(MRCoreJson::Point(MRCoreValues::Field(Value->AsObject(),TEXT("position")),P))SetActorLocation(P*100.);}}
+        if(It->CoreRuntime&&It->CoreRuntime->IsKnowledgeView())
+        {FVector P;if(It->CoreRuntime->DisplayPosition(Id,P))SetActorLocation(P);}
         else SetActorLocation(It->Agents[I]->GetActorLocation());
         return;
     }
@@ -193,13 +194,13 @@ void AMRCameraPawn::Tick(float Dt)
 {
     Super::Tick(Dt);auto* PC=Cast<APlayerController>(GetController());if(!PC)return;
     if(auto* Session=UMRMissionSession::Get(GetWorld());Session&&Session->Enabled&&Session->SetupOpen)return;
-    auto* DisplaySession=UMRMissionSession::Get(GetWorld());const bool KnowledgeView=DisplaySession&&DisplaySession->Enabled&&!DisplaySession->ObserverView;
+    FMRCoreRuntime* DisplayCore=nullptr;for(TActorIterator<AMRWorld> It(GetWorld());It;++It)if(It->CoreRuntime){DisplayCore=It->CoreRuntime.Get();break;}
+    const bool KnowledgeView=DisplayCore&&DisplayCore->IsKnowledgeView();
     Arm->bDoCollisionTest=bFollowing&&!KnowledgeView;
     if(bFollowing)if(AMRAgent* Agent=GetObservedAgent())
     {
         if(KnowledgeView)
-        {if(auto O=DisplaySession->Observation())for(const auto& Value:O->GetArrayField(TEXT("agents")))if(MRCoreValues::Text(Value->AsObject(),TEXT("id"))==Agent->AgentKey())
-            {FVector P;if(MRCoreJson::Point(MRCoreValues::Field(Value->AsObject(),TEXT("position")),P))SetActorLocation(FMath::VInterpTo(GetActorLocation(),P*100.,Dt,4));}}
+        {FVector P;if(DisplayCore->DisplayPosition(Agent->AgentKey(),P))SetActorLocation(FMath::VInterpTo(GetActorLocation(),P,Dt,4));}
         else SetActorLocation(FMath::VInterpTo(GetActorLocation(),Agent->GetActorLocation(),Dt,4));
     }
     if(PC->IsInputKeyDown(EKeys::RightMouseButton))

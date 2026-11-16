@@ -79,6 +79,7 @@ void FMRCoreRuntime::BeginEpisode(const FPending& R)
     }
     ResetContest();AdvanceContest();World->ContactCount=0;UpdateNetwork();
     for(AMRAgent* A:World->Agents){KnownAgents.Add(A->AgentKey(),AgentSnapshot(A,0));AgentReceived.Add(A->AgentKey(),0);}
+    ResetExplorationScene();
     UGameplayStatics::SetGamePaused(World,true);Snapshot(Id);
     Record(TEXT("reset_request"),R.Request);Record(TEXT("observation"),CachedObservation);
     if(!World->CoreEventProfile.IsEmpty())

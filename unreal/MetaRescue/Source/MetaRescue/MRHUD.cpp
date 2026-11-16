@@ -3,6 +3,7 @@
 #include "MRMissionInterface.h"
 #include "MRMissionOverlay.h"
 #include "MRCoreRuntime.h"
+#include "MRCoreValues.h"
 #include "MRWorld.h"
 #include "MRAgent.h"
 #include "MRCameraPawn.h"
@@ -31,6 +32,21 @@ void AMRHUD::EndPlay(const EEndPlayReason::Type Reason)
 void AMRHUD::DrawHUD()
 {
     Super::DrawHUD();if(!Canvas)return;
+    // The stand-alone command-view fixture uses delivered data too. Its old
+    // truth inspector must not disclose private people, events or offline poses.
+    auto* Product=UMRMissionSession::Get(GetWorld());
+    if(!Product||!Product->Enabled&&!Product->CaptureOverview)
+        for(TActorIterator<AMRWorld> It(GetWorld());It;++It)if(It->CoreRuntime&&It->CoreRuntime->IsKnowledgeView())
+        {
+            const auto O=It->CoreRuntime->ObservationForInterface();if(!O)return;
+            using namespace MRCoreValues;
+            const auto Map=O->GetObjectField(TEXT("metaevolution"));
+            const int32 Opened=Is(Map,TEXT("exploration"),EJson::Object)?Map->GetObjectField(TEXT("exploration"))->GetIntegerField(TEXT("opened_cells")):0;
+            DrawRect(FLinearColor(.018f,.04f,.035f,.9f),24,24,390,80);
+            DrawText(TEXT("META / RESCUE  |  COMMAND VIEW"),FLinearColor(.8f,.95f,.7f),40,36,GEngine->GetMediumFont(),.9f);
+            DrawText(FString::Printf(TEXT("%.1f s  |  %d EXPLORED CELLS  |  DELIVERED DATA"),It->CoreRuntime->Time(),Opened),
+                FLinearColor(.7f,.78f,.76f),40,72,GEngine->GetSmallFont(),.9f);return;
+        }
     if(auto* Session=UMRMissionSession::Get(GetWorld());Session&&Session->Enabled)
     {if(!MissionOverlay)MissionOverlay=MakeShared<FMRMissionOverlay>(this);MissionOverlay->Draw(Session,Canvas);return;}
     if(auto* Session=UMRMissionSession::Get(GetWorld());Session&&Session->CaptureOverview)

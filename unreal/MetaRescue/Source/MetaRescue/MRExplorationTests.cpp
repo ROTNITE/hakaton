@@ -1,5 +1,6 @@
 #include "MRExplorationGrid.h"
 #include "MRExplorationMemory.h"
+#include "MRSceneClip.h"
 #if WITH_DEV_AUTOMATION_TESTS
 #include "Misc/AutomationTest.h"
 
@@ -59,5 +60,31 @@ bool FMRDeliveredSurfaceMemory::RunTest(const FString&)
     Memory.Reset(4,4,500,FVector2D(-1000,0));
     TestFalse(TEXT("reset clears permanent opening"),Memory.Grid.IsOpen(Early.Cell));
     TestNull(TEXT("reset clears remembered changes"),Memory.Last(Early.Cell));return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRRememberedCellGeometry,"MetaRescue.Core.RememberedCellGeometry",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FMRRememberedCellGeometry::RunTest(const FString&)
+{
+    FProcMeshVertex A,B,C;A.Position=FVector(-10,-10,0);B.Position=FVector(20,-10,30);C.Position=FVector(-10,20,60);
+    for(auto* V:{&A,&B,&C}){V->Normal=FVector::UpVector;V->UV0=FVector2D(V->Position.X,V->Position.Y)*.1;}
+    const FBox Cell(FVector(0,0,-100),FVector(5,5,100));FProcMeshSection Result;
+    MRSceneClip::Triangle(A,B,C,Cell,Result);double Area=0;
+    for(const auto& V:Result.ProcVertexBuffer)
+    {
+        TestTrue(TEXT("copied vertices cannot expose neighbouring cells"),Cell.IsInsideOrOn(V.Position));
+        TestTrue(TEXT("observed geometry retains actual height and UV"),FMath::IsNearlyEqual(V.Position.Z,V.Position.X+2*V.Position.Y+30,1.e-7)&&
+            V.UV0.Equals(FVector2D(V.Position.X,V.Position.Y)*.1,1.e-7));
+    }
+    for(int32 I=0;I<Result.ProcIndexBuffer.Num();I+=3)
+    {
+        const auto P=Result.ProcVertexBuffer[Result.ProcIndexBuffer[I]].Position;
+        const auto Q=Result.ProcVertexBuffer[Result.ProcIndexBuffer[I+1]].Position;
+        const auto R=Result.ProcVertexBuffer[Result.ProcIndexBuffer[I+2]].Position;
+        Area+=FMath::Abs(FVector::CrossProduct(Q-P,R-P).Z)*.5;
+    }
+    TestTrue(TEXT("clipped triangles exactly fill the observed XY square"),FMath::IsNearlyEqual(Area,25.,1.e-7));
+    TestFalse(TEXT("remembered meshes never acquire physical collision"),Result.bEnableCollision);
+    FProcMeshSection Outside;MRSceneClip::Triangle(A,B,C,FBox(FVector(100,100,-100),FVector(200,200,100)),Outside);
+    TestEqual(TEXT("unobserved cell receives no geometry"),Outside.ProcIndexBuffer.Num(),0);return true;
 }
 #endif

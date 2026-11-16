@@ -4,15 +4,20 @@
 #include "MRWorld.h"
 #include "MRAgent.h"
 #include "MRUrbanWater.h"
+#include "MRExplorationScene.h"
+#include "MRMissionSession.h"
 #include "Engine/World.h"
 #include "Misc/Guid.h"
+#include "Misc/App.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
 
 using namespace MRCoreValues;
 
 void FMRCoreRuntime::ResetExploration()
 {
     PendingExploration.Empty();ExplorationCursor.Empty();ExplorationView.Reset();
-    ExplorationViewRevision=ExplorationViewStateRevision=-1;
+    ExplorationViewRevision=ExplorationViewStateRevision=ExplorationViewSceneRevision=-1;ExplorationScene.Reset();
     if(!World->bDisasterCity){Exploration.Reset(1,1,500,FVector2D::ZeroVector);return;}
     FVector Low=FVector::ZeroVector,High=FVector::ZeroVector;
     const auto Bounds=World->CityLayout->GetObjectField(TEXT("bounds"));
@@ -60,7 +65,7 @@ void FMRCoreRuntime::GatherExplorationReport(AMRAgent* Agent)
     FCollisionQueryParams SurfaceQuery(SCENE_QUERY_STAT(MRExplorationSurface),false);
     for(const auto& Other:World->Agents)SurfaceQuery.AddIgnoredActor(Other);
     for(const auto& Target:World->Targets)if(Target.Visual)SurfaceQuery.AddIgnoredActor(Target.Visual);
-    FCollisionQueryParams Sight=SurfaceQuery;TArray<Value> Cells;
+    FCollisionQueryParams Sight=SurfaceQuery;TArray<Value> Cells;TArray<FMRSeenSurface> Captured;
     for(int32 I=0;I<Budget;++I)
     {
         const auto Cell=Candidates[(Cursor+I)%Candidates.Num()];const FVector Center=Exploration.Grid.Center(Cell);
@@ -70,17 +75,22 @@ void FMRCoreRuntime::GatherExplorationReport(AMRAgent* Agent)
         const auto Water=World->WaterAtCm(Center);bool Wet=Water.InDomain&&Water.DepthCm>0&&Water.StageCm>Surface.ImpactPoint.Z;
         FVector Point=Wet?FVector(Center.X,Center.Y,Water.StageCm):Surface.ImpactPoint;
         FVector Normal=Wet?FVector::UpVector:Surface.ImpactNormal;
+        UPrimitiveComponent* SurfacePart=Surface.GetComponent();
         FVector Endpoint=Point+FVector(0,0,Wet?5:35);
         if(World->GetWorld()->LineTraceSingleByChannel(Blocker,Pose,Endpoint,ECC_Visibility,Sight))
         {
             if(Exploration.Grid.CellAt(Blocker.ImpactPoint)!=Cell)continue;
             Point=Endpoint=Blocker.ImpactPoint;Normal=Blocker.ImpactNormal;Wet=false;
+            SurfacePart=Blocker.GetComponent();
         }
         if(Exploration.Grid.CellAt(Point)!=Cell)continue;
         const double Quality=SensorQuality(Pose,Endpoint);
         if(Quality<.15||!SensorAccepts(Agent,Cell.Y*Exploration.Grid.GetWidth()+Cell.X,Quality,3))continue;
+        FMRSeenSurface Sample;Sample.Cell=Cell;Sample.PointCm=Point;Sample.Normal=Normal;Sample.Quality=Quality;Sample.Water=Wet;
+        Sample.ObservedAt=Time();Sample.Source=Id;Sample.SurfaceComponent=SurfacePart?SurfacePart->GetUniqueID():0;Captured.Add(Sample);
         Cells.Add(Json(Obj({{TEXT("cell"),Arr({Num(Cell.X),Num(Cell.Y)})},{TEXT("point_m"),MRCoreValues::Point(Point/100)},
-            {TEXT("normal"),MRCoreValues::Point(Normal)},{TEXT("quality"),Num(Quality)},{TEXT("water"),Bool(Wet)}})));
+            {TEXT("normal"),MRCoreValues::Point(Normal)},{TEXT("quality"),Num(Quality)},{TEXT("water"),Bool(Wet)},
+            {TEXT("surface_component"),Num(Sample.SurfaceComponent)}})));
     }
     Cursor+=Budget;if(Cells.IsEmpty())return;
     FReport Packet;Packet.Kind=EPacket::Exploration;Packet.Agent=Id;Packet.Sequence=SensorSamples;
@@ -88,6 +98,8 @@ void FMRCoreRuntime::GatherExplorationReport(AMRAgent* Agent)
     Packet.Data=Obj({{TEXT("message_id"),Str(Packet.MessageId)},{TEXT("source_id"),Str(Id)},
         {TEXT("observed_at"),Num(Time())},{TEXT("sensor_origin_m"),MRCoreValues::Point(Pose/100)},
         {TEXT("footprint_radius_m"),Num(Range/100)},{TEXT("cells"),Arr(Cells)}});
+    if(ExplorationScene)Packet.Scene=ExplorationScene->Capture(Exploration,Captured,Pose,Id,Time(),
+        [this](FVector A,FVector B){return SensorQuality(A,B);});
     Record(TEXT("exploration_observation"),Packet.Data,false);QueueReport(MoveTemp(Packet));
 }
 
@@ -117,6 +129,7 @@ void FMRCoreRuntime::DeliverExplorationReport(const FReport& Packet)
         Sample.ReceivedAt=Time();Sample.Source=Packet.Agent;Samples.Add(MoveTemp(Sample));
     }
     const int32 Updated=Exploration.Apply(Samples);
+    if(ExplorationScene&&Packet.Scene)ExplorationScene->Apply(*Packet.Scene,Exploration);
     Record(TEXT("exploration_received"),Obj({{TEXT("message_id"),Str(Packet.MessageId)},
         {TEXT("source_id"),Str(Packet.Agent)},{TEXT("observed_at"),Field(Packet.Data,TEXT("observed_at"))},
         {TEXT("received_at"),Num(Time())},{TEXT("opened_cells"),Num(Exploration.Grid.OpenCount()-Before)},
@@ -127,7 +140,9 @@ void FMRCoreRuntime::DeliverExplorationReport(const FReport& Packet)
 Object FMRCoreRuntime::ExplorationSnapshot()
 {
     const auto& Grid=Exploration.Grid;
-    if(ExplorationView&&ExplorationViewRevision==Grid.GetRevision()&&ExplorationViewStateRevision==Exploration.GetRevision())return ExplorationView;
+    const int32 SceneRevision=ExplorationScene?ExplorationScene->GetRevision():-1;
+    if(ExplorationView&&ExplorationViewRevision==Grid.GetRevision()&&ExplorationViewStateRevision==Exploration.GetRevision()&&
+        ExplorationViewSceneRevision==SceneRevision)return ExplorationView;
     TArray<Value> Spans;for(const auto& Span:Grid.RowSpans())Spans.Add(Arr({Num(Span.X),Num(Span.Y),Num(Span.Z)}));
     const auto Origin=Grid.GetOriginCm();
     ExplorationView=Obj({{TEXT("format"),Str(TEXT("metarescue.exploration.v1"))},{TEXT("cell_m"),Num(Grid.GetCellCm()/100)},
@@ -135,6 +150,29 @@ Object FMRCoreRuntime::ExplorationSnapshot()
         {TEXT("height"),Num(Grid.GetHeight())},{TEXT("revision"),Num(Grid.GetRevision())},
         {TEXT("state_revision"),Num(Exploration.GetRevision())},{TEXT("opened_cells"),Num(Grid.OpenCount())},
         {TEXT("row_spans"),Arr(Spans)},{TEXT("persistence"),Str(TEXT("episode_permanent"))},
-        {TEXT("source"),Str(TEXT("delivered_sensor_observations"))},{TEXT("surface_renderer_connected"),Bool(false)}});
-    ExplorationViewRevision=Grid.GetRevision();ExplorationViewStateRevision=Exploration.GetRevision();return ExplorationView;
+        {TEXT("source"),Str(TEXT("delivered_sensor_observations"))},{TEXT("surface_renderer_connected"),Bool(ExplorationScene.IsValid())}});
+    if(ExplorationScene)ExplorationView->SetObjectField(TEXT("remembered_scene"),ExplorationScene->Snapshot());
+    ExplorationViewRevision=Grid.GetRevision();ExplorationViewStateRevision=Exploration.GetRevision();ExplorationViewSceneRevision=SceneRevision;return ExplorationView;
+}
+
+void FMRCoreRuntime::ResetExplorationScene()
+{
+    if(!World->bDisasterCity||!FApp::CanEverRender())return;
+    ExplorationScene=MakeShared<FMRExplorationScene>(World);ExplorationScene->Reset(Exploration);
+    for(auto& Agent:World->Agents)ExplorationScene->ApplyActors(ExplorationScene->CaptureActor(Agent,0));
+    RefreshExplorationView();
+}
+bool FMRCoreRuntime::IsKnowledgeView() const
+{
+    const auto* Session=UMRMissionSession::Get(World->GetWorld());
+    if(Session&&Session->Enabled)return !Session->SetupOpen&&!Session->ObserverView;
+    return FParse::Param(FCommandLine::Get(),TEXT("MRKnowledgeView"));
+}
+void FMRCoreRuntime::RefreshExplorationView()
+{if(ExplorationScene)ExplorationScene->View(IsKnowledgeView(),Time());}
+bool FMRCoreRuntime::DisplayPosition(const FString& Agent,FVector& PositionCm) const
+{
+    const auto Known=KnownAgents.FindRef(Agent);FVector P;
+    if(!Known||!MRCoreJson::Point(Field(Known,TEXT("position")),P))return false;
+    PositionCm=P*100;return true;
 }

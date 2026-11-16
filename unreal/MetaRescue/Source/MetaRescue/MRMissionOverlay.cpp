@@ -86,7 +86,9 @@ void FMRMissionOverlay::Draw(UMRMissionSession* Session,UCanvas* Canvas)
     }
     const auto Map=O->GetObjectField(TEXT("metaevolution"))->GetObjectField(TEXT("announced_map"));
     const auto Bounds=Map->GetObjectField(TEXT("bounds"));const FVector Lo=ReadPoint(Field(Bounds,TEXT("min"))),Hi=ReadPoint(Field(Bounds,TEXT("max")));
-    KnowledgeFloor->SetVisibility(!Session->ObserverView);
+    const bool RememberedScene=World->CoreRuntime->HasExplorationScene();
+    Ribbons->SetRenderCustomDepth(RememberedScene&&!Session->ObserverView);Ribbons->SetCustomDepthStencilValue(1);
+    KnowledgeFloor->SetVisibility(!Session->ObserverView&&!RememberedScene);
     if(!Session->ObserverView)
     {KnowledgeFloor->SetWorldLocation(FVector((Lo.X+Hi.X)*.5,(Lo.Y+Hi.Y)*.5,-3));KnowledgeFloor->SetWorldScale3D(FVector((Hi.X-Lo.X)/100.,(Hi.Y-Lo.Y)/100.,1));}
 
@@ -233,13 +235,13 @@ void FMRMissionOverlay::Draw(UMRMissionSession* Session,UCanvas* Canvas)
         Rectangle(FVector(Lo.X,Lo.Y,8),FVector(Hi.X,Hi.Y,8),FLinearColor(.4f,.5f,.4f));
         // Select visible declared volumes by distance to the viewport centre.
         TArray<TPair<double,Object>> Visible;
-        for(const auto& Value:Map->GetArrayField(TEXT("buildings")))
+        if(!RememberedScene)for(const auto& Value:Map->GetArrayField(TEXT("buildings")))
         {const auto B=Value->AsObject()->GetObjectField(TEXT("bounds"));const FVector A=ReadPoint(Field(B,TEXT("min"))),Z=ReadPoint(Field(B,TEXT("max")));FVector2D Screen;
             if(PC->ProjectWorldLocationToScreen((A+Z)*.5,Screen)&&Screen.X>=-100&&Screen.Y>=-100&&Screen.X<=Canvas->ClipX+100&&Screen.Y<=Canvas->ClipY+100)
                 Visible.Add({FVector2D::DistSquared(Screen,FVector2D(Canvas->ClipX*.5,Canvas->ClipY*.5)),B});}
         Visible.Sort([](const auto& A,const auto& B){return A.Key<B.Key;});
         for(const auto& Pair:Visible){if(Lines.Num()>MaximumLines-192)break;Box(ReadPoint(Field(Pair.Value,TEXT("min"))),ReadPoint(Field(Pair.Value,TEXT("max"))),FLinearColor(.38f,.45f,.41f));++BuildingWires;}
-        if(Is(Map,TEXT("road_graph"),EJson::Object))
+        if(!RememberedScene&&Is(Map,TEXT("road_graph"),EJson::Object))
         {
             const auto Roads=Map->GetObjectField(TEXT("road_graph"));TMap<FString,FVector> Nodes;
             for(const auto& Value:Roads->GetArrayField(TEXT("nodes")))Nodes.Add(Text(Value->AsObject(),TEXT("id")),ReadPoint(Field(Value->AsObject(),TEXT("position")))+FVector(0,0,8));

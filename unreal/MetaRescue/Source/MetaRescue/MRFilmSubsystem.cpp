@@ -214,6 +214,7 @@ void UMRFilmSubsystem::ScreenshotProcessed()
     {
         Row->SetNumberField(TEXT("found"),It->FoundCount());Row->SetNumberField(TEXT("delivered"),It->SavedCount());
         Row->SetBoolField(TEXT("core_controlled"),It->bCoreControlled);
+        Row->SetStringField(TEXT("view_basis"),It->CoreRuntime&&It->CoreRuntime->IsKnowledgeView()?TEXT("delivered_knowledge"):TEXT("physical_observer"));
         if(It->bCoreControlled&&It->CoreRuntime)Row->SetNumberField(TEXT("core_time_s"),It->CoreRuntime->Time());
         TArray<TSharedPtr<FJsonValue>> Agents;
         for(const auto& Agent:It->Agents)if(Agent)

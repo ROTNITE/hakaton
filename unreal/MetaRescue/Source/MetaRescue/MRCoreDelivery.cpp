@@ -5,6 +5,7 @@
 #include "MRAgent.h"
 #include "Components/BoxComponent.h"
 #include "Engine/World.h"
+#include "MRExplorationScene.h"
 
 using namespace MRCoreValues;
 
@@ -30,6 +31,7 @@ void FMRCoreRuntime::GatherReports()
     {
         const FString Agent=A->AgentKey();
         FReport Pose;Pose.Agent=Agent;Pose.Data=AgentSnapshot(A,Time());Pose.Sequence=SensorSamples;
+        if(ExplorationScene)Pose.ActorScene=ExplorationScene->CaptureActor(A,Time());
         QueueReport(MoveTemp(Pose));
         if(!A->IsOperational()||!A->CanSense()||DisabledInfrastructure.Contains(A->InfrastructureSite))continue;
         GatherExplorationReport(A);
@@ -67,6 +69,7 @@ void FMRCoreRuntime::GatherReports()
                 {TEXT("observed_at"),Num(Time())},{TEXT("priority"),Num(T.Priority)},{TEXT("evacuation_state"),Str(TEXT("waiting"))},
                 {TEXT("aid_received"),Num(ReceivedKits.FindRef(Index))},{TEXT("aid_required"),Num(3)}});
             TargetSupport(World,T,Report.Data);
+            if(ExplorationScene)Report.ActorScene=ExplorationScene->CaptureTarget(Index,Time());
             QueueReport(MoveTemp(Report));
         }
     }
@@ -101,7 +104,7 @@ void FMRCoreRuntime::DeliverReports()
         if(R.Kind==EPacket::Exploration)DeliverExplorationReport(R);
         else if(R.Kind==EPacket::Hazard)DeliverHazardReport(R);
         else if(R.Kind==EPacket::Pose)
-            UpdateAgentKnowledge(R.Agent,R.Data);
+            UpdateAgentKnowledge(R.Agent,R.Data,R.ActorScene);
         else
         {
             const int32 Target=FindTarget(R.Target);
@@ -113,12 +116,16 @@ void FMRCoreRuntime::DeliverReports()
                    (!Known||R.Data->GetNumberField(TEXT("observed_at"))>Known->GetNumberField(TEXT("observed_at"))+1.e-9))
                 {
                     const bool First=!T.bDiscovered;auto Copy=MRCoreJson::Copy(R.Data);
+                    // A queued earlier position sample must not undo a later
+                    // inspection of this same ownership epoch.
+                    if(!First&&Known&&Text(Known,TEXT("status"))==TEXT("confirmed"))Copy->SetStringField(TEXT("status"),TEXT("confirmed"));
                     if(Known&&Is(Known,TEXT("priority_updated_at"),EJson::Number))
                     {
                         Copy->SetField(TEXT("priority_updated_at"),Field(Known,TEXT("priority_updated_at")));
                         if(Known->GetNumberField(TEXT("priority_updated_at"))>Copy->GetNumberField(TEXT("observed_at")))Copy->SetField(TEXT("priority"),Field(Known,TEXT("priority")));
                     }
                     Copy->SetNumberField(TEXT("received_at"),Time());KnownTargets.Add(R.Target,Copy);
+                    if(ExplorationScene)ExplorationScene->ApplyActors(R.ActorScene);
                     T.bDiscovered=true;if(First)T.DiscoveredAt=Time();const FString Kind=First?TEXT("target_detected"):TEXT("target_state_changed");Record(Kind,Copy);
                     PublishEvent(R.MessageId,Kind,Copy->GetNumberField(TEXT("observed_at")),R.Agent,{R.Target},
                         Obj({{TEXT("message_id"),Str(R.MessageId)}}),TEXT("new"),Copy->GetNumberField(TEXT("confidence")));
@@ -283,7 +290,8 @@ void FMRCoreRuntime::UpdateCommands()
                 QueueAck(C,C.Action==TEXT("handover")&&Finish==TEXT("completed")?0:Latency*FMath::Max(1,Hops.FindRef(C.Agent)));
             }
         }
-        if(!C.FinalStatus.IsEmpty()&&A&&!C.AgentReport)C.AgentReport=AgentSnapshot(A,Time());
+        if(!C.FinalStatus.IsEmpty()&&A&&!C.AgentReport)
+        {C.AgentReport=AgentSnapshot(A,Time());if(ExplorationScene)C.AgentVisual=ExplorationScene->CaptureActor(A,Time());}
         if(C.FinalStatus==TEXT("completed")&&World->Targets.IsValidIndex(C.TargetIndex)&&!C.TargetReport)
         {
             const auto& T=World->Targets[C.TargetIndex];
@@ -297,6 +305,7 @@ void FMRCoreRuntime::UpdateCommands()
                 {TEXT("priority"),Num(T.Priority)},{TEXT("evacuation_state"),Str(T.bRescued?TEXT("evacuated"):Loaded?TEXT("loaded"):TEXT("waiting"))},
                 {TEXT("aid_received"),Num(ReceivedKits.FindRef(C.TargetIndex))},{TEXT("aid_required"),Num(3)}});
             TargetSupport(World,T,C.TargetReport);
+            if(ExplorationScene)C.TargetVisual=ExplorationScene->CaptureTarget(C.TargetIndex,Time());
         }
         if(C.AckDeadline>=0&&Time()+1.e-9>=C.AckDeadline)
         {
@@ -328,7 +337,7 @@ void FMRCoreRuntime::UpdateCommands()
             C.PublicResult->SetField(TEXT("reason_code"),C.Reason.IsEmpty()?Null():Str(C.Reason));C.PublicResult->SetNumberField(TEXT("updated_at"),Time());
             C.PublicDirty=true;
             Record(C.Index>=0?TEXT("command_result"):TEXT("internal_control_result"),C.PublicResult);
-            if(C.AgentReport&&!BaseWitness)UpdateAgentKnowledge(C.Agent,C.AgentReport);
+            if(C.AgentReport&&!BaseWitness)UpdateAgentKnowledge(C.Agent,C.AgentReport,C.AgentVisual);
             if(C.TargetReport&&World->Targets.IsValidIndex(C.TargetIndex)&&World->Targets[C.TargetIndex].ObservationEpoch==C.TargetEpoch)
             {
                 const FString Target=Text(C.TargetReport,TEXT("id"));
@@ -344,6 +353,7 @@ void FMRCoreRuntime::UpdateCommands()
                         if(PriorityAt->AsNumber()>T->GetNumberField(TEXT("observed_at")))T->SetField(TEXT("priority"),Field(Known,TEXT("priority")));
                     }
                     T->SetNumberField(TEXT("received_at"),Time());KnownTargets.Add(Target,T);Record(TEXT("target_state_changed"),T);
+                    if(ExplorationScene)ExplorationScene->ApplyActors(C.TargetVisual);
                     PublishEvent(C.Key+TEXT("-target"),TEXT("target_state_changed"),T->GetNumberField(TEXT("observed_at")),
                         Text(T,TEXT("source_id")),{Target},Obj({{TEXT("command_id"),Str(C.Key)},
                             {TEXT("evacuation_state"),Field(T,TEXT("evacuation_state"))}}));

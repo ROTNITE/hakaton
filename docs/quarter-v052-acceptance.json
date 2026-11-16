@@ -1909,9 +1909,9 @@
     {
       "id": "VIS12",
       "requirement": "Тёмная неизведанная территория; база известна; постоянное открытие только от доставленной разведки; без теней/эффектов/меток неизвестных",
-      "status": "pending",
-      "evidence": [],
-      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+      "status": "partial",
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/native-exploration-02/verification.json", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-exploration-scene-02/verification.json", "D:/MetaRescue-output/automation/20261116T140652826332Z/verification.json"],
+      "scope_note": "Доставленная постоянная сетка5м и отдельные копии видимой геометрии/поз работают в native; два отключения, задержка3,5с, камера, pause/GET/reset/оба архива/freeze проверены. Тёмная маска после тонмаппинга скрывает неизвестное и атмосферную засветку; mode наблюдателя отдельный. Эффекты ещё не подключены к памяти сцены; есть зазоры запоминания покрытия под объектами. Проверка новых событий вне наблюдения, дым/LOS, replay, UI/масштаб/производительность остаются открыты."
     },
     {
       "id": "VIS13",
