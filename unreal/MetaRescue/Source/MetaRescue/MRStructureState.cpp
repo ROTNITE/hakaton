@@ -76,9 +76,9 @@ void AMRWorld::RecordCityStructure(FName Id,int32 FirstGenerated)
             }
         }
         if(!Root->ComponentHasTag(TEXT("WindowFireAnchor")))continue;
-        TArray<USceneComponent*> Children;Root->GetChildrenComponents(true,Children);
+        TArray<USceneComponent*> AnchorParts;Root->GetChildrenComponents(true,AnchorParts);
         FBox Box(ForceInit);int32 Parent=INDEX_NONE;
-        for(auto* Child:Children)if(auto* Mesh=Cast<UStaticMeshComponent>(Child))
+        for(auto* Child:AnchorParts)if(auto* Mesh=Cast<UStaticMeshComponent>(Child))
             if(const auto* Index=PartIndices.Find(Mesh))
             {Box+=Building.Pieces[*Index].Bounds;if(Parent==INDEX_NONE)Parent=*Index;}
         if(!Box.IsValid||Parent==INDEX_NONE)continue;
@@ -100,11 +100,11 @@ void AMRWorld::RecordCityStructure(FName Id,int32 FirstGenerated)
 
 void AMRWorld::RebindCityStructurePart(UStaticMeshComponent* Previous,UInstancedStaticMeshComponent* Batch,FPrimitiveInstanceId Id)
 {
-    const auto* Owner=CityPartOwners.Find(Previous);if(!Owner)return;
-    auto* Building=CityStructures.Find(Owner->Structure);
-    if(Building&&Building->Pieces.IsValidIndex(Owner->Piece))
+    const auto* PartOwner=CityPartOwners.Find(Previous);if(!PartOwner)return;
+    auto* Building=CityStructures.Find(PartOwner->Structure);
+    if(Building&&Building->Pieces.IsValidIndex(PartOwner->Piece))
     {
-        auto& Part=Building->Pieces[Owner->Piece];Part.Component=Batch;Part.Instance=Id;Part.Instanced=true;
+        auto& Part=Building->Pieces[PartOwner->Piece];Part.Component=Batch;Part.Instance=Id;Part.Instanced=true;
     }
     CityPartOwners.Remove(Previous);
 }
