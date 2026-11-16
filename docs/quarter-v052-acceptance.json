@@ -1819,6 +1819,132 @@
         "D:/MetaRescue-output/checks/pz-final-20261113-01/verification.json"
       ],
       "scope_note": "Два направления на трёхseed проверены до23:59. Наш исходныйv8:5400принятых шагов, clean close,0нарушений, воздушная разведка/0спасённых; чужойv9:2/3,0/3,0/3 при time_limit480,0контактов. Отдельный мостv8.1 устранил10053,16/16; оригиналы сохранены. ПЗ34страницы/16изображений/3таблицы в PREX/PDF из одногоисточника; все34просмотрены. Это выполненные испытания с указанными исходами, не весьтурнир/универсальнаяпереносимость/успешнаячужаяэвакуация."
+    },
+    {
+      "id": "VIS01",
+      "requirement": "Полный локальный снимок, включая untracked и содержимое junction-ассетов; независимая копия; Git baseline и контрольные коммиты",
+      "status": "verified",
+      "evidence": [
+        "docs/disaster-visual-baseline.json"
+      ],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS02",
+      "requirement": "Огонь охватывает комнаты, окна и кровлю конкретного здания; копоть, угли, свет и опасный объём",
+      "status": "partial",
+      "evidence": [
+        "docs/disaster-assets.md",
+        "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-scene-02/verification.json"
+      ],
+      "scope_note": "Первый фасадный огонь проверен в native-scene-01/02; копоть/опоры/поэтапное возгорание уточнены после просмотра, повторная приёмка впереди."
+    },
+    {
+      "id": "VIS03",
+      "requirement": "Густой объёмный дым с подъёмом/ветром и непрозрачным ядром; сенсор ослабляется по пути луча",
+      "status": "partial",
+      "evidence": [
+        "D:/MetaRescue-output/automation/20261115T205702853914Z/verification.json",
+        "docs/disaster-visual-runtime.md"
+      ],
+      "scope_note": "Новая объёмная оптика/ветер/жизненный цикл: native Automation 10/10 и два просмотренных эпизода. Плотность увеличена до .006/см; этот новый визуальный срез ещё проверяется."
+    },
+    {
+      "id": "VIS04",
+      "requirement": "Причинные завалы из существующих плит, балок, кладки и деревьев; частичные повреждения здания, локальный Chaos",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS05",
+      "requirement": "Дорожные модели используются систематически; реальные разрывы/просадки/подслой и согласованные коллизии",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS06",
+      "requirement": "Связное затопление улиц/входов порядка 1–3 м с притоком, рельефом, препятствиями и стоком; мутность, мокрый край, нанос, течение",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS07",
+      "requirement": "Грязь, колеи, лужи и брызги согласованы с движением/энергией; low_visibility v3 поддержан",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS08",
+      "requirement": "Логичные переходы/светофоры/стоп-линии/тротуары/понижения бордюров; усиленная сеть ретрансляторов примерно по 60 м",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS09",
+      "requirement": "Все конкурсные события имеют соответствующее фактам представление техники/интерфейса",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS10",
+      "requirement": "Новая лодка, 0–4/по умолчанию 2, реальный спуск, глубина/осадка/плавучесть/течение/груз/энергия",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS11",
+      "requirement": "Промежуточная высадка сохраняет личность и владение грузом; спасение только в медпункте; зависимая коалиция",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS12",
+      "requirement": "Тёмная неизведанная территория; база известна; постоянное открытие только от доставленной разведки; без теней/эффектов/меток неизвестных",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS13",
+      "requirement": "Новая редакция города 2.3/версия физики; старые миры и v1-семантика сохранены; расширения объявлены",
+      "status": "partial",
+      "evidence": [
+        "tests/test_disaster_profile.py",
+        "D:/MetaRescue-output/visual-overhaul-20261115/python-disaster-checkpoint01.log"
+      ],
+      "scope_note": "2.3/v2 поддержаны генератором и native; 270 Python-тестов и события в двух native-эпизодах. Полная совместимость и остальные механики нового профиля ещё открыты."
+    },
+    {
+      "id": "VIS14",
+      "requirement": "Бесплатные открытые ассеты действительно подключены; оригиналы/лицензии/авторы/URL/SHA сохранены",
+      "status": "partial",
+      "evidence": [
+        "docs/disaster-assets.md",
+        "D:/MetaRescue-output/visual-overhaul-20261115/checks/art-import-04/verification.json"
+      ],
+      "scope_note": "Три CC0-источника: 8 текстур/15 uasset, импорт04 и кадры. Новая копоть, грязь/катамаран и конечный cook ещё не приняты."
+    },
+    {
+      "id": "VIS15",
+      "requirement": "Все размеры preflight; нативно 25/75/150 и несколько seed; измерение после прогрева 1600×1000",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+    },
+    {
+      "id": "VIS16",
+      "requirement": "Регрессии и отдельная распакованная Windows-сборка; реальные изображения/видео и инструкция отката",
+      "status": "pending",
+      "evidence": [],
+      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
     }
   ],
   "external_tournament": {

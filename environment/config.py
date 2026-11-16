@@ -60,7 +60,7 @@ class Settings:
             raise ProtocolError('INVALID_REQUEST', 'map_size is outside the v0.5.2 choices')
         for key, choices in (('preset', PRESETS), ('event_profile', tuple(EVENT_DEFAULTS)),
                              ('layout', ('generated_city', 'rescue_quarter')),
-                             ('city_revision', ('1.1', '2.0', '2.1', '2.2')),
+                             ('city_revision', ('1.1', '2.0', '2.1', '2.2', '2.3')),
                              ('resource_profile', ('unlimited', 'contest'))):
             if data[key] not in choices:
                 raise ProtocolError('INVALID_REQUEST', f'Unknown {key}')

@@ -311,6 +311,7 @@ void UMRAssetTools::ConfigureEffect(UNiagaraSystem* System,float Rate,float Life
 {
 #if WITH_EDITOR
     if(!System)return;
+    const bool DetailedFire=System->GetPathName().Contains(TEXT("/Revision5/"))&&System->GetName().Contains(TEXT("BuildingFire"));
     const float Lifetime=FMath::Max(LifetimeMin,LifetimeMax);
     const float Width=Spread+SizeMax+SpeedMax*.58f*Lifetime+15.f*Lifetime;
     const float Height=Spread+SizeMax+SpeedMax*Lifetime+FMath::Max(0.f,float(Gravity.Z))*.5f*Lifetime*Lifetime;
@@ -320,6 +321,13 @@ void UMRAssetTools::ConfigureEffect(UNiagaraSystem* System,float Rate,float Life
     {
         auto* Data=Handle.GetEmitterData();Data->bDeterminism=true;Data->RandomSeed=831;
         Data->bLocalSpace=!System->GetName().Contains(TEXT("WheelSplash"));
+        if(DetailedFire)for(auto* Renderer:Data->GetRenderers())
+            if(auto* Sprite=Cast<UNiagaraSpriteRendererProperties>(Renderer))
+            {
+                Sprite->Alignment=ENiagaraSpriteAlignment::Unaligned;
+                Sprite->FacingMode=ENiagaraSpriteFacingMode::FaceCameraPosition;
+                Sprite->PivotInUVSpace=FVector2D(.5,.92);
+            }
         TArray<UNiagaraScript*> Scripts;Data->GetScripts(Scripts,false);
         for(auto* Script:Scripts)if(Script)
         {
@@ -332,9 +340,13 @@ void UMRAssetTools::ConfigureEffect(UNiagaraSystem* System,float Rate,float Life
                     {TEXT("InitializeParticle.Lifetime Max"),LifetimeMax},{TEXT("InitializeParticle.Uniform Sprite Size Min"),SizeMin},
                     {TEXT("InitializeParticle.Uniform Sprite Size Max"),SizeMax},{TEXT("RandomRangeFloat.Minimum"),SpeedMin},
                     {TEXT("RandomRangeFloat.Maximum"),SpeedMax},{TEXT("ShapeLocation.Sphere Radius"),Spread},
-                    {TEXT("AddVelocity.Cone Angle"),35.f}})
+                    {TEXT("AddVelocity.Cone Angle"),DetailedFire?8.f:35.f}})
                     if(Name.EndsWith(Pair.Key)){Value=Pair.Value;Set=true;break;}
                 if(Set&&V.GetSizeInBytes()==sizeof(float))Script->RapidIterationParameters.SetParameterValue(Value,V);
+                if(DetailedFire&&V.GetSizeInBytes()==sizeof(float)&&
+                    (Name.EndsWith(TEXT("InitializeParticle.Sprite Rotation Angle Min"))||
+                     Name.EndsWith(TEXT("InitializeParticle.Sprite Rotation Angle Max"))))
+                    Script->RapidIterationParameters.SetParameterValue(0.f,V);
                 if(Name.EndsWith(TEXT("GravityForce.Gravity")))Script->RapidIterationParameters.SetParameterValue(FVector3f(Gravity),V);
                 if(Name.EndsWith(TEXT("AddVelocity.Velocity")))Script->RapidIterationParameters.SetParameterValue(FVector3f(15,5,30),V);
             }

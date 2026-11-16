@@ -15,6 +15,7 @@ from environment.streets import build_streets, clip_halfplane
 VERSION = 'rescue-city-2.0'
 DECORATED_VERSION = 'rescue-city-2.1'
 STREET_PROP_VERSION = 'rescue-city-2.2'
+DISASTER_VERSION = 'rescue-city-2.3'
 HOUSE_HALF_M = 4.75
 VEGETATION_REVISION = 3
 CONTENT = Path(__file__).resolve().parents[1] / 'unreal/MetaRescue/Content'
@@ -203,7 +204,7 @@ def _decorated_yards(lots, seed, open_lot, reserve, *, street_props):
 
 
 def build_neighbourhood(settings,size,base,seed,*,person_clearance,revision='2.0',fixed_obstacles=()):
-    decorated=revision in ('2.1','2.2')
+    decorated=revision in ('2.1','2.2','2.3')
     rng=random.Random(seed('fronts'))
     graph,blocks=build_streets(size,seed('roads'),
                               access_obstacles=tuple(Footprint.from_area(area) for area in fixed_obstacles))
@@ -317,7 +318,7 @@ def build_neighbourhood(settings,size,base,seed,*,person_clearance,revision='2.0
 
     detailing={}
     if decorated:
-        detailing,features=_decorated_yards(lots,seed('yard-detail-2.1'),open_lot,reserve,street_props=revision=='2.2')
+        detailing,features=_decorated_yards(lots,seed('yard-detail-2.1'),open_lot,reserve,street_props=revision in ('2.2','2.3'))
     people_rng=random.Random(seed('people'))
     choices=[(a,b,w) for a,b,w,_ in streets if math.dist(a,b)>7]
     clustered=sorted(choices,key=lambda edge:math.dist(edge[0][:2],(size*.52,size*.55)))[:max(18,len(choices)//12)]

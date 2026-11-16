@@ -51,8 +51,10 @@ def hashes(layout):
     world=strict_json(layout.read_bytes(),maximum_bytes=64*1024*1024)
     if world.get('competition'):
         files.extend((content/'RescueAssets/Competition').glob('*.uasset'))
-    if world.get('format') in ('rescue-city-2.1','rescue-city-2.2'):
+    if world.get('format') in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
         files.extend((content/'RescueAssets/CityV2').rglob('*.uasset'))
+    if world.get('format')=='rescue-city-2.3':
+        files.extend((content/'EffectsV3/Revision5').rglob('*.uasset'))
     return {str(p.resolve()):file_sha256(p) for p in files if p.is_file()}
 
 
@@ -110,13 +112,13 @@ def run(args):
             manifest['source_layout']={'path':str(layout),'sha256':hashlib.sha256(private_bytes).hexdigest()}
             layout=output/'world.private.json';layout.write_bytes(private_bytes)
             (output/'world.public.json').write_text(json.dumps(public_map(world),ensure_ascii=False,indent=2),encoding='utf-8')
-        if world.get('format') in ('rescue-city-2.1','rescue-city-2.2'):
+        if world.get('format') in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
             revision=world.get('vegetation_revision',1)
             name=f'city-vegetation-v2-r{revision}.json' if revision>1 else 'city-vegetation-v2.json'
             vegetation=ROOT/'unreal/MetaRescue/Content/Scenario'/name
             if file_sha256(vegetation)!=world['vegetation_manifest_sha256']:
                 raise ValueError('CityV2 vegetation manifest differs from the generated layout')
-            if world['format']=='rescue-city-2.2' and file_sha256(vegetation.with_name('city-props-v1.json'))!=world['city_props_manifest_sha256']:
+            if world['format'] in ('rescue-city-2.2','rescue-city-2.3') and file_sha256(vegetation.with_name('city-props-v1.json'))!=world['city_props_manifest_sha256']:
                 raise ValueError('CityV2 prop manifest differs from the generated layout')
         if args.build:
             with (output/'build.log').open('w',encoding='utf-8') as log:

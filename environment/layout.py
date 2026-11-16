@@ -19,7 +19,7 @@ from environment.competition import attach as attach_competition_annex
 from environment.config import Settings
 from environment.events import generate_tape
 from environment.geometry import Footprint, SpatialIndex, box as _box, overlap as _overlap, segment_clear as _segment_clear
-from environment.neighbourhood import VERSION as IRREGULAR_VERSION,DECORATED_VERSION,STREET_PROP_VERSION,build_neighbourhood
+from environment.neighbourhood import VERSION as IRREGULAR_VERSION,DECORATED_VERSION,STREET_PROP_VERSION,DISASTER_VERSION,build_neighbourhood
 
 VERSION = 'rescue-city-1.1'
 CELL_M = 10.0
@@ -100,11 +100,11 @@ def _base_obstacles():
 def generate(settings: Settings, *, include_events=False) -> dict:
     size = int(settings.map_size * CELL_M)
     base,spawns,infrastructure=_base_plan(settings)
-    city_versions={'2.0':IRREGULAR_VERSION,'2.1':DECORATED_VERSION,'2.2':STREET_PROP_VERSION}
+    city_versions={'2.0':IRREGULAR_VERSION,'2.1':DECORATED_VERSION,'2.2':STREET_PROP_VERSION,'2.3':DISASTER_VERSION}
     if settings.city_revision in city_versions or settings.layout=='rescue_quarter':
         revision=settings.city_revision if settings.city_revision in city_versions else '2.0'
         fixed_obstacles = _base_obstacles()
-        if revision in ('2.1','2.2'):
+        if revision in ('2.1','2.2','2.3'):
             fixed_obstacles.extend([
                 {'id':'van-service-lane','asset':'Van','position':[3.1,25.7,.08],'yaw':90.,
                  'bounds':_box((1.6,22.5,0),(4.6,35.5,2.8))},
@@ -278,7 +278,7 @@ def preflight(data):
         person_cells.setdefault(cell,[]).append(p[:2])
     if 'road_graph' in data:
         roads=data['road_graph'];positions={n['id']:n['position'] for n in roads['nodes']}
-        if data['format'] in (DECORATED_VERSION,STREET_PROP_VERSION):
+        if data['format'] in (DECORATED_VERSION,STREET_PROP_VERSION,DISASTER_VERSION):
             for feature in data['features']:
                 for obstacle in feature['obstacles']:
                     boxes.append(obstacle)

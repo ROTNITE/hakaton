@@ -22,6 +22,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Misc/App.h"
 #include "ProceduralMeshComponent.h"
+#include "NiagaraSystem.h"
 
 namespace
 {
@@ -54,7 +55,23 @@ bool AMRWorld::ReadCityLayout(const FString& File)
     if(!FFileHelper::LoadFileToString(Text,*File)||!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),CityLayout)||!CityLayout)
     {UE_LOG(LogTemp,Error,TEXT("MR_CITY invalid layout file"));return false;}
     const FString Format=CityLayout->GetStringField(TEXT("format"));
-    bCityProps=Format==TEXT("rescue-city-2.2");
+    bDisasterCity=Format==TEXT("rescue-city-2.3");
+    bCityProps=bDisasterCity||Format==TEXT("rescue-city-2.2");
+    if(bDisasterCity&&FApp::CanEverRender())
+    {
+        for(const FString& Name:{TEXT("M_PhysicalSmoke"),TEXT("M_BuildingFire"),TEXT("M_HeavySmoke"),TEXT("M_FireSoot"),TEXT("M_EventMud")})
+        {
+            const FString Path=TEXT("/Game/EffectsV3/Revision5/")+Name+TEXT(".")+Name;
+            if(!LoadObject<UMaterialInterface>(nullptr,*Path))
+            {UE_LOG(LogTemp,Error,TEXT("MR_DISASTER required effect material missing: %s"),*Name);return false;}
+        }
+        for(const FString& Name:{TEXT("NS_BuildingFire"),TEXT("NS_HeavySmoke")})
+        {
+            const FString Path=TEXT("/Game/EffectsV3/Revision5/")+Name+TEXT(".")+Name;
+            if(!LoadObject<UNiagaraSystem>(nullptr,*Path))
+            {UE_LOG(LogTemp,Error,TEXT("MR_DISASTER required effect system missing: %s"),*Name);return false;}
+        }
+    }
     bDecoratedCity=bCityProps||Format==TEXT("rescue-city-2.1");
     bIrregularCity=bDecoratedCity||Format==TEXT("rescue-city-2.0");
     if(!CityLayout->HasTypedField<EJson::Object>(TEXT("settings"))||

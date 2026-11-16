@@ -83,6 +83,7 @@ void FMRDistrictEnvironment::ResetApplied()
     AppliedCells.Empty();
     VisibleCells.Empty();
     AppliedIds.Empty();
+    SmokeCache.Empty();SmokeCacheTime=-1;SmokeCacheRevision=-1;
     Index=Revision=0;
     Time=0;
 }
@@ -147,6 +148,16 @@ void FMRDistrictEnvironment::IndexApplied(int32 I)
         if(E.Kind==EMRDisturbance::Fire)
             for(FIntPoint D:{FIntPoint(1,0),FIntPoint(-1,0),FIntPoint(0,1),FIntPoint(0,-1)})VisibleCells.FindOrAdd(C+D).AddUnique(I);
     }
+    if(bDetailedHazards&&!E.bPropagation&&(E.Kind==EMRDisturbance::Fire||E.Kind==EMRDisturbance::Smoke||
+        E.Kind==EMRDisturbance::Collapse||E.Kind==EMRDisturbance::LowVisibility))
+    {
+        // Include the full future, wind-leaned plume. Both arrival and clearing
+        // remain observable when its visible volume crosses an adjacent street.
+        const auto Bounds=SmokeDescriptor(E,3600).Bounds();
+        const auto Min=Cell(Bounds.Min),Max=Cell(Bounds.Max);
+        for(int32 X=Min.X;X<=Max.X;++X)for(int32 Y=Min.Y;Y<=Max.Y;++Y)
+            VisibleCells.FindOrAdd(FIntPoint(X,Y)).AddUnique(I);
+    }
 }
 const FMRDisturbance* FMRDistrictEnvironment::FindApplied(const FString& Id) const
 {const int32* I=AppliedIds.Find(Id);return I&&Applied.IsValidIndex(*I)?&Applied[*I]:nullptr;}
@@ -188,6 +199,14 @@ bool FMRDistrictEnvironment::Unsafe(const FVector& P,bool IncludeWater) const
 }
 float FMRDistrictEnvironment::Visibility(const FVector& P) const
 {
+    if(bDetailedHazards)
+    {
+        double Density=0;
+        for(const auto& Volume:SmokeVolumes())Density+=Volume.Extinction(P);
+        // Public surface readings express transmission through ten metres;
+        // sensor rays integrate their actual length through the same field.
+        return FMath::Exp(-1000*Density);
+    }
     bool Smoke=false,Fog=false;const auto C=Cell(P);
     if(const auto* Indices=VisibleCells.Find(C))for(int32 I:*Indices)
     {
@@ -198,4 +217,46 @@ float FMRDistrictEnvironment::Visibility(const FVector& P) const
         if(E.Kind==EMRDisturbance::Fire&&Time+1.e-9<VisibilityUntil(E))Smoke=true;
     }
     return (Smoke?MRDistrictSettings::SmokeQuality:1)*(Fog?MRDistrictSettings::FogQuality:1);
+}
+
+FMRSmokeVolume FMRDistrictEnvironment::SmokeDescriptor(const FMRDisturbance& E,double Age) const
+{
+    FMRSmokeVolume V;V.EventId=E.Id;V.Source=E.Source;V.Source.Z=E.SmokeEmissionHeightCm;
+    V.ExtinctionPerCm=.006;
+    V.WindCmPerSecond=WindCmPerSecond;V.Strength=FMath::Clamp(Age/4.,0.,1.);
+    if(E.Kind==EMRDisturbance::Fire)
+    {
+        V.RadiusCm=650;V.RadiusGrowth=.28;V.RiseCmPerSecond=280;V.HeightCm=4200;
+    }
+    else if(E.Kind==EMRDisturbance::Collapse)
+    {
+        V.RadiusCm=1300;V.RadiusGrowth=.1;V.RiseCmPerSecond=100;V.HeightCm=900;
+        V.WindCmPerSecond*=.2;V.ExtinctionPerCm=.0018;
+    }
+    else if(E.Kind==EMRDisturbance::LowVisibility)
+    {
+        V.RadiusCm=1800;V.RadiusGrowth=.1;V.RiseCmPerSecond=100;V.HeightCm=2800;
+        V.WindCmPerSecond=FVector::ZeroVector;V.ExtinctionPerCm=.0004;
+    }
+    const double VisibleEnd=VisibilityUntil(E);
+    if(VisibleEnd>=0)V.Strength*=FMath::Clamp((VisibleEnd-Time)/10.,0.,1.);
+    V.HeightCm=FMath::Max(1.,FMath::Min(V.HeightCm,Age*V.RiseCmPerSecond));
+    return V;
+}
+
+const TArray<FMRSmokeVolume>& FMRDistrictEnvironment::SmokeVolumes() const
+{
+    if(SmokeCacheTime==Time&&SmokeCacheRevision==Revision)return SmokeCache;
+    SmokeCache.Empty();SmokeCacheTime=Time;SmokeCacheRevision=Revision;
+    if(!bDetailedHazards)return SmokeCache;
+    for(const auto& E:Applied)
+    {
+        if(E.bPropagation||Time<=E.Time||
+           (VisibilityUntil(E)>=0&&Time>=VisibilityUntil(E))||
+           (E.Kind!=EMRDisturbance::Fire&&E.Kind!=EMRDisturbance::Smoke&&
+            E.Kind!=EMRDisturbance::Collapse&&E.Kind!=EMRDisturbance::LowVisibility))continue;
+        auto Volume=SmokeDescriptor(E,Time-E.Time);
+        if(Volume.Strength>0&&Volume.IsValid())SmokeCache.Add(Volume);
+    }
+    return SmokeCache;
 }

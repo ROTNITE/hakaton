@@ -15,6 +15,8 @@ from contracts.protocol import ProtocolError
 from environment.config import Settings,EVENT_DEFAULTS
 
 VERSION='metarescue.events-3d.1.0'
+DETAILED_VERSION='metarescue.events-3d.2.0'
+DETAILED_PHYSICS='metarescue.urban-disasters.v1'
 CELL_M=5.
 PERSISTENT={'collapse','fire','flood','mud','road_damage'}
 
@@ -92,8 +94,13 @@ class Placement:
 
 def generate_tape(world):
     settings=Settings.parse(world['settings']);profile=settings.event_profile;horizon=settings.horizon
-    tape={'format':VERSION,'profile':profile,'probability_window_s':settings.event_window_s,'physics_cell_m':CELL_M,
+    detailed=settings.city_revision=='2.3'
+    tape={'format':DETAILED_VERSION if detailed else VERSION,'profile':profile,'probability_window_s':settings.event_window_s,'physics_cell_m':CELL_M,
           'placement_model':'street_sources_and_clipped_five_metre_cells.1','events':[],'late_people':[]}
+    if detailed:
+        weather=random.Random(_seed(DETAILED_VERSION,settings.seed,'wind'))
+        angle=weather.uniform(0,math.tau);speed=weather.uniform(2.,4.)
+        tape.update(physics_profile=DETAILED_PHYSICS,wind_m_s=[round(speed*math.cos(angle),4),round(speed*math.sin(angle),4),0.])
     if 'road_graph' in world:tape['placement_model']='irregular_street_sources_and_clipped_five_metre_cells.2'
     if not any(settings.probabilities.values()):return tape
     placement=Placement(world);used=defaultdict(set)
@@ -164,14 +171,29 @@ def generate_tape(world):
                     tape['events'].append(growth)
                     cells.update(spread);frontier=sorted(spread)
     tape['events'].sort(key=lambda r:(r['time'],r['spread'],r['id']))
+    if detailed:
+        buildings={building['id']:building for building in world['buildings']}
+        for row in tape['events']:
+            if row['rejection']:continue
+            house=buildings.get(row['source_object_id'])
+            row['smoke_emission_height_m']=house['bounds']['max'][2] if row['kind']=='fire' and house else .2
+            if row['kind']=='fire':
+                row['expires_at']=row['time']+180.
+                row['visibility_expires_at']=row['expires_at']+45.
     validate_tape(tape,world)
     return tape
 
 
 def validate_tape(tape,world):
     def invalid(message):raise ProtocolError('INVALID_REQUEST','Private event tape: '+message)
-    if not isinstance(tape,dict) or tape.get('format')!=VERSION:invalid('unsupported version')
     settings=Settings.parse(world['settings'])
+    detailed=settings.city_revision=='2.3'
+    if not isinstance(tape,dict) or tape.get('format')!=(DETAILED_VERSION if detailed else VERSION):invalid('unsupported version')
+    if detailed:
+        wind=tape.get('wind_m_s')
+        if (tape.get('physics_profile')!=DETAILED_PHYSICS or not isinstance(wind,list) or len(wind)!=3 or
+                any(type(v) not in (int,float) or not math.isfinite(v) for v in wind) or
+                wind[2]!=0 or math.hypot(*wind[:2])>15):invalid('invalid detailed physics or wind')
     if tape.get('profile')!=settings.event_profile or tape.get('probability_window_s')!=settings.event_window_s or tape.get('physics_cell_m')!=CELL_M:
         invalid('profile/window/cell mismatch')
     rows=tape.get('events');people=tape.get('late_people')
@@ -198,6 +220,9 @@ def validate_tape(tape,world):
         if rejection is not None:
             if not isinstance(rejection,str) or not rejection:invalid('invalid rejection')
             continue
+        if detailed:
+            height=row.get('smoke_emission_height_m')
+            if type(height) not in (int,float) or not math.isfinite(height) or not 0<=height<=80:invalid('invalid smoke emission height')
         source=row.get('source')
         if not isinstance(source,list) or len(source)!=3 or any(type(v) not in (int,float) or not math.isfinite(v) for v in source):invalid('invalid source')
         if not 0<=source[0]<=placement.size or not 0<=source[1]<=placement.size or placement.protected(*source[:2]):invalid('unsafe source')

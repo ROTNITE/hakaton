@@ -70,6 +70,7 @@ public:
     bool bIrregularCity=false;
     bool bDecoratedCity=false;
     bool bCityProps=false;
+    bool bDisasterCity=false;
     UFUNCTION(CallInEditor, BlueprintCallable, Category="Rescue") void BuildScene();
     UFUNCTION(BlueprintCallable, Category="Rescue") void ReleaseCollapse();
     virtual void BeginPlay() override;
@@ -145,6 +146,11 @@ private:
     void InitializeEnvironment();
     void ApplyDisturbance(const FMRDisturbance& Event);
     void TickHazardVisuals(float Dt);
+    UNiagaraComponent* SpawnDisasterEffect(const FString& Name,const FVector& Position,
+        const FVector& Scale,const FMRDisturbance& Event);
+    void BuildDisasterSmoke(const FMRDisturbance& Event);
+    void BuildDisasterFire(const FMRDisturbance& Event);
+    void TickDisasterSmoke(USceneComponent* Component,const FMRDisturbance& Event);
     void ExportEnvironmentManifest() const;
     UPROPERTY() TArray<TObjectPtr<USceneComponent>> HazardVisuals;
     UPROPERTY() TArray<FBox> StructureFootprints;

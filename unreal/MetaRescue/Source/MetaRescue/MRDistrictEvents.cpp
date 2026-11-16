@@ -3,6 +3,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/DecalComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
@@ -101,6 +102,8 @@ UMaterialInterface* EventSurfaceMaterial(const TCHAR* Name,bool bUseOptionalArt)
 double HazardVisualEnd(const FMRDistrictEnvironment& Environment,const FMRDisturbance& Event,FName Kind)
 {
     const double EffectEnd=Environment.ActiveUntil(Event);
+    if(Kind==TEXT("PhysicalSmoke")||(Environment.bDetailedHazards&&Kind==TEXT("HeavySmoke")))
+        return Environment.VisibilityUntil(Event);
     if(Kind==TEXT("HeavySmoke")||Kind==TEXT("LowVisibility")||Kind==TEXT("CollapseDust")||IsEventVeil(Kind))
     {
         const double VisibilityEnd=Environment.VisibilityUntil(Event);
@@ -244,6 +247,8 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
         }
         return C;
     };
+    if(bDisasterCity&&!E.bPropagation&&(E.Kind==EMRDisturbance::Fire||E.Kind==EMRDisturbance::Smoke||
+        E.Kind==EMRDisturbance::Collapse||E.Kind==EMRDisturbance::LowVisibility))BuildDisasterSmoke(E);
     if(E.Kind==EMRDisturbance::Collapse)
     {
         if(!bCoreControlled)ReleaseCollapse();
@@ -252,6 +257,12 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
         for(const FIntPoint& Cell:E.Cells)
             if(FMath::Abs(Cell.X-Origin.X)+FMath::Abs(Cell.Y-Origin.Y)<=1)
                 BuildHazardSurface(E,Cell,2);
+    }
+    else if(E.Kind==EMRDisturbance::Fire&&bDisasterCity)
+    {
+        // Propagation expands the dangerous perimeter of this same building;
+        // it must not duplicate the roof plume or ignite empty road cells.
+        if(!E.bPropagation)BuildDisasterFire(E);
     }
     else if(E.Kind==EMRDisturbance::Fire)
     {
@@ -321,7 +332,7 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
             Lamp->SetCastShadows(false);Lamp->RegisterComponent();Lamp->ComponentTags={FName(*E.Id),TEXT("FireLight")};HazardVisuals.Add(Lamp);
         }
     }
-    else if(E.Kind==EMRDisturbance::Smoke||E.Kind==EMRDisturbance::LowVisibility)
+    else if(!bDisasterCity&&(E.Kind==EMRDisturbance::Smoke||E.Kind==EMRDisturbance::LowVisibility))
     {
         const bool Smoke=E.Kind==EMRDisturbance::Smoke;
         if(Smoke)VFX(TEXT("HeavySmoke"),E.Source+FVector(0,0,90),FVector(6.3,5.7,4.5));
@@ -500,6 +511,19 @@ void AMRWorld::TickHazardVisuals(float Dt)
             continue;
         }
         const float Age=float(Environment.Time-E->Time);
+        if(Kind==TEXT("PhysicalSmoke")){TickDisasterSmoke(C,*E);continue;}
+        float IgnitionDelay=0;
+        for(int32 Tag=2;Tag<C->ComponentTags.Num();++Tag)
+        {
+            const FString Text=C->ComponentTags[Tag].ToString();
+            if(Text.StartsWith(TEXT("IgnitionDelay_")))IgnitionDelay=FCString::Atof(*Text.RightChop(14));
+        }
+        if(auto* Stain=Cast<UDecalComponent>(C))
+        {
+            if(auto* Material=Cast<UMaterialInstanceDynamic>(Stain->GetDecalMaterial()))
+                Material->SetScalarParameterValue(TEXT("BurnFraction"),FMath::SmoothStep(0.f,30.f,Age-IgnitionDelay));
+            continue;
+        }
         if(Kind==TEXT("flood"))
         {
             FVector P=C->GetComponentLocation();
@@ -519,10 +543,12 @@ void AMRWorld::TickHazardVisuals(float Dt)
         auto* FX=Cast<UNiagaraComponent>(C);
         if(FX||IsEventVeil(Kind))
         {
+            if(bDisasterCity&&FX&&Kind==TEXT("BuildingFire"))
+            {FX->SetPaused(Age<IgnitionDelay);FX->SetVisibility(Age>=IgnitionDelay);}
             const float Duration=End>=0?float(End-E->Time):0.f;
             const float FadeOutSeconds=FMath::Min(4.f,Duration*.25f);
             const float FadeInSeconds=Kind==TEXT("ElectricalIgnition")?.08f:1.5f;
-            const float Fade=FMath::SmoothStep(0.f,FadeInSeconds,Age)*(Duration>0?
+            const float Fade=FMath::SmoothStep(0.f,FadeInSeconds,Age-IgnitionDelay)*(Duration>0?
                 1-FMath::SmoothStep(Duration-FadeOutSeconds,Duration,Age):1.f);
             if(FX)
             {

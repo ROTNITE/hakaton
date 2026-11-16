@@ -53,8 +53,10 @@ def source_hashes(layout):
     world=json.loads(layout.read_bytes())
     if world.get('competition'):
         files.extend((content/'RescueAssets/Competition').glob('*.uasset'))
-    if world.get('format') in ('rescue-city-2.1','rescue-city-2.2'):
+    if world.get('format') in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
         files.extend((content/'RescueAssets/CityV2').rglob('*.uasset'))
+    if world.get('format')=='rescue-city-2.3':
+        files.extend((content/'EffectsV3/Revision5').rglob('*.uasset'))
     def checksum(path):
         with path.open('rb') as stream:
             return hashlib.file_digest(stream,'sha256').hexdigest()

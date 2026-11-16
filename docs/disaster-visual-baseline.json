@@ -1,0 +1,35 @@
+{
+  "format": "metarescue.visual-baseline.v1",
+  "baseline_commit": "534dfe039a71699327ff3cde41cc9bb22cdfe1be",
+  "baseline_tag": "visual-baseline-20261115",
+  "repository": "https://github.com/ROTNITE/hakaton",
+  "source_tree_unchanged": true,
+  "snapshot_file_count": 17575,
+  "snapshot_bytes": 28735369018,
+  "workspace_file_count": 9127,
+  "snapshot_manifest_sha256": "d32fa2adbc9e3555a03b3ea9bd26de1542c0e90ea17c3db4a2e050d2031e857d",
+  "local_snapshot_manifest": "D:\\MetaRescue-output\\visual-overhaul-20261115\\baseline\\manifest.json",
+  "working_directory": "D:\\MetaRescue-output\\visual-overhaul-20261115\\workspace",
+  "public_baseline_adjustments": [
+    "Existing Windows package sanitizer applied: Android File Server disabled and its editor configuration omitted.",
+    "Binary art and supplied reference documents remain in the full local snapshot; licensed Roboto fonts retain their bundled license.",
+    "Git text normalization excludes immutable benchmark/vendor references."
+  ],
+  "public_source_scan": {
+    "files": 527,
+    "passed": true,
+    "findings": [],
+    "licensed_binaries": [
+      {
+        "path": "web/fonts/Roboto-Bold.ttf",
+        "license": "web/fonts/LICENSE.txt",
+        "sha256": "24571503140760240924dcd1238f77e7cd0454c0d8b0793990cefa2fad71471f"
+      },
+      {
+        "path": "web/fonts/Roboto-Regular.ttf",
+        "license": "web/fonts/LICENSE.txt",
+        "sha256": "16466ef65064e6f3885a6d2806b8949ac1ac38b524dd0cf8fc96565eb4cc28e8"
+      }
+    ]
+  }
+}

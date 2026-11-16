@@ -63,13 +63,13 @@ def run(name,extra,seconds,checker=verify):
         layout=Path(extra[extra.index('--city-layout')+1])
         data=json.loads(layout.read_text(encoding='utf-8'))
         assert data.get('format') in (
-            'rescue-city-1.0','rescue-city-1.1','rescue-city-2.0','rescue-city-2.1','rescue-city-2.2'),'not a generated city layout'
-        if data['format'] in ('rescue-city-2.1','rescue-city-2.2'):
+            'rescue-city-1.0','rescue-city-1.1','rescue-city-2.0','rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'),'not a generated city layout'
+        if data['format'] in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
             revision=data.get('vegetation_revision',1)
             catalog_name=f'city-vegetation-v2-r{revision}.json' if revision>1 else 'city-vegetation-v2.json'
             vegetation=ROOT/'unreal/MetaRescue/Content/Scenario'/catalog_name
             assert sha256(vegetation)==data['vegetation_manifest_sha256'],'vegetation catalog changed since layout generation'
-            if data['format']=='rescue-city-2.2':
+            if data['format'] in ('rescue-city-2.2','rescue-city-2.3'):
                 assert sha256(vegetation.with_name('city-props-v1.json'))==data['city_props_manifest_sha256'],'prop catalog changed'
         shutil.copy2(layout,out/'layout.private.json');input_files.append(layout)
     input_hashes={str(p):sha256(p) for p in input_files}

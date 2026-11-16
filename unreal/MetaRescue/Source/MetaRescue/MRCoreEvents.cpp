@@ -58,8 +58,9 @@ bool AMRWorld::ReadCoreEventTape()
     const auto Settings=CityLayout->GetObjectField(TEXT("settings"));
     const FString Profile=Text(Model,TEXT("profile"));
     const bool V052=Profile==TEXT("v052");
+    const bool Detailed=bDisasterCity;
     double Horizon=0,Size=0,Window=0,Cell=0;
-    if(Text(Model,TEXT("format"))!=TEXT("metarescue.events-3d.1.0")||
+    if(Text(Model,TEXT("format"))!=(Detailed?TEXT("metarescue.events-3d.2.0"):TEXT("metarescue.events-3d.1.0"))||
        (!V052&&Profile!=TEXT("v3"))||Profile!=Text(Settings,TEXT("event_profile"))||
        !Number(Model,TEXT("probability_window_s"),Window)||Window!=(V052?80:30)||
        !Number(Model,TEXT("physics_cell_m"),Cell)||Cell!=5||
@@ -67,6 +68,10 @@ bool AMRWorld::ReadCoreEventTape()
        !Number(CityLayout,TEXT("size_m"),Size)||Size<250||Size>1500||
        !Is(Model,TEXT("events"),EJson::Array)||!Is(Model,TEXT("late_people"),EJson::Array))
         return Fail(TEXT("version, profile, geometry or limits are invalid"));
+    FVector Wind=FVector::ZeroVector;
+    if(Detailed&&(Text(Model,TEXT("physics_profile"))!=TEXT("metarescue.urban-disasters.v1")||
+        !MRCoreJson::Point(Field(Model,TEXT("wind_m_s")),Wind)||Wind.Z!=0||Wind.Size()>15))
+        return Fail(TEXT("invalid disaster physics profile or horizontal wind"));
     const auto& Rows=Model->GetArrayField(TEXT("events"));
     const auto& Late=Model->GetArrayField(TEXT("late_people"));
     if(Rows.Num()>100000||Late.Num()>2880)return Fail(TEXT("tape is larger than declared limits"));
@@ -159,6 +164,13 @@ bool AMRWorld::ReadCoreEventTape()
                !OptionalTime(Row,TEXT("visibility_expires_at"),Event.Time,Event.VisibilityExpiresAt))
                 return Fail(TEXT("invalid event source or expiry"));
             Event.Source=Source*100;
+            if(Detailed)
+            {
+                double Height=0;
+                if(!Number(Row,TEXT("smoke_emission_height_m"),Height)||Height<0||Height>80)
+                    return Fail(TEXT("invalid smoke emission height"));
+                Event.SmokeEmissionHeightCm=Height*100;
+            }
             const auto& Cells=Row->GetArrayField(TEXT("cells"));
             if(Cells.Num()>256)return Fail(TEXT("event footprint exceeds limit"));
             for(const auto& Pair:Cells)
@@ -197,6 +209,8 @@ bool AMRWorld::ReadCoreEventTape()
     Environment.Seed=Seed;
     Environment.Horizon=Horizon;
     Environment.Mode=TEXT("core_tape");
+    Environment.bDetailedHazards=Detailed;
+    Environment.WindCmPerSecond=Wind*100;
     Environment.Tape=MoveTemp(Tape);
     return true;
 }
@@ -278,6 +292,7 @@ void FMRCoreRuntime::AdvanceEvents()
             const bool Appearance=Event.Kind==EMRDisturbance::NewTarget;
             ScheduledViews.Add(int32(Event.Kind));
             float Yaw=150;
+            FVector Focus=Event.Source+FVector(0,0,Appearance?65:100);
             if(!Event.SiteId.IsEmpty())
                 for(const auto& Item:World->CityLayout->GetArrayField(TEXT("buildings")))
                 {
@@ -286,11 +301,25 @@ void FMRCoreRuntime::AdvanceEvents()
                     const auto Bounds=Building->GetObjectField(TEXT("bounds"));
                     FVector Low,High;
                     if(MRCoreJson::Point(Field(Bounds,TEXT("min")),Low)&&MRCoreJson::Point(Field(Bounds,TEXT("max")),High))
+                    {
                         Yaw=float(((Low+High)*50-Event.Source).Rotation().Yaw);
+                        if(World->bDisasterCity&&Event.Kind==EMRDisturbance::Fire)Focus=(Low+High)*50;
+                    }
                     break;
                 }
-            EventViews.Add({Event.Time+(Flood?35.:1.),Event.Source+FVector(0,0,Appearance?65:100),
-                FString(MRDisturbanceName(Event.Kind)),Appearance?800.f:2400.f,Yaw});
+            const FString Name=MRDisturbanceName(Event.Kind);
+            const float Distance=Appearance?800.f:World->bDisasterCity?4200.f:2400.f;
+            EventViews.Add({Event.Time+(Flood?35.:1.),Focus,Name,Distance,Yaw});
+            if(World->bDisasterCity&&!Appearance)
+                for(double Delay:{12.,45.})
+                {
+                    if(Event.Time+Delay>=World->Environment.Horizon)continue;
+                    FVector MatureFocus=Focus;
+                    if(Event.Kind==EMRDisturbance::Smoke||Event.Kind==EMRDisturbance::LowVisibility)
+                        MatureFocus+=World->Environment.WindCmPerSecond*FMath::Min(Delay,10.)+FVector(0,0,1400);
+                    EventViews.Add({Event.Time+Delay,MatureFocus,FString::Printf(TEXT("%s-age%d"),*Name,int32(Delay)),
+                        Event.Kind==EMRDisturbance::Fire?6500.f:7000.f,Yaw});
+                }
             EventViews.Sort([](const auto& A,const auto& B){return A.At<B.At;});
         }
     }
@@ -339,6 +368,8 @@ void FMRCoreRuntime::UpdateEventView()
 float FMRCoreRuntime::SensorQuality(const FVector& Start,const FVector& End) const
 {
     if(World->Environment.Applied.IsEmpty())return 1.f;
+    if(World->Environment.bDetailedHazards)
+        return FMRSmokeVolume::Transmittance(World->Environment.SmokeVolumes(),Start,End);
     const int32 Samples=FMath::Clamp(FMath::CeilToInt(FVector::Dist(Start,End)/250.),1,64);
     float Quality=1.f;
     for(int32 I=0;I<=Samples;++I)

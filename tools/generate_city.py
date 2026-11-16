@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--size',type=int,choices=MAP_SIZES)
     parser.add_argument('--seed',type=int)
     parser.add_argument('--preset',choices=PRESETS)
-    parser.add_argument('--city-revision',choices=['1.1','2.0','2.1','2.2'])
+    parser.add_argument('--city-revision',choices=['1.1','2.0','2.1','2.2','2.3'])
     parser.add_argument('--layout-kind',choices=['generated_city','rescue_quarter'])
     parser.add_argument('--scouts',type=int)
     parser.add_argument('--rescuers',type=int)

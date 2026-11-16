@@ -33,7 +33,7 @@ def verify(folder=SAVED,layout=None):
     assert summary['features']==len(data['features'])
     assert summary['nanite_instances']>0,'derived Nanite meshes are not in the real scene'
     assert summary['mesh_instances']>summary['mesh_components'],'city was not instanced'
-    if data['format'] in ('rescue-city-2.1','rescue-city-2.2'):
+    if data['format'] in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
         expected_vegetation=Counter(item['asset_id'] for item in data['features'] if item['kind']=='vegetation')
         expected_props=Counter(item['asset_id'] for item in data['features'] if item['kind']=='parked_vehicle')
         assert summary['vegetation_instances']==expected_vegetation,'wrong live vegetation instance counts'
@@ -99,7 +99,7 @@ def verify(folder=SAVED,layout=None):
             'render_wall_fps':state.get('render_wall_fps'),'memory_mb':state.get('process_memory_mb'),
             'not_verified':['route execution','mission delivery','events and resources',
                             'all interiors and facade variants','maximum fleet performance']}
-    if data['format'] in ('rescue-city-2.1','rescue-city-2.2'):
+    if data['format'] in ('rescue-city-2.1','rescue-city-2.2','rescue-city-2.3'):
         result.update(vegetation_instances=summary['vegetation_instances'],cover_batches=summary['cover_batches'],
                       prop_instances=summary.get('prop_instances',{}),yard_colliders=summary['yard_colliders'])
         if 'van_travel_m' in summary:
