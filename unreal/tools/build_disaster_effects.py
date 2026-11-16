@@ -229,7 +229,7 @@ def build_mud(textures):
                       texture=textures[name], sampler_type=sampler)
         connect(uv, '', sample, 'UVs')
         if name == 'MudColor':
-            adjusted = custom(value, 'return Color * Tint * lerp(1, .48, saturate(Wetness));',
+            adjusted = custom(value, 'return Color * Tint.rgb * lerp(1, .48, saturate(Wetness));',
                 unreal.CustomMaterialOutputType.CMOT_FLOAT3,
                 [('Color', sample, output), ('Tint', tint, ''), ('Wetness', wetness, '')], -200, 0)
             property_input(adjusted, '', value, prop)
