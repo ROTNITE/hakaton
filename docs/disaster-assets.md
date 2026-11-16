@@ -7,9 +7,9 @@
 
 | Источник | Лицензия | Использование и фактическая проверка |
 | --- | --- | --- |
-| [Kenney Particle Pack 1.1](https://kenney.nl/assets/particle-pack) | CC0 1.0, License.txt из ZIP | smoke_01 / smoke_07 импортированы; первый используется в Niagara. Два первых нативных эпизода записаны; окончательная плотность/сочетание со стенами ещё проверяются |
-| [JangaFX Fire_01](https://jangafx.com/software/embergen/download/free-vdb-animations) | CC0 1.0, LICENSE.txt из RAR | VDB запечён Blender 4.5.15 в 64 кадра, два ракурса. Светящийся демонстрационный источник удалён пространственной маской. Атласы реально использованы в окнах/на кровле в native-scene-01/02; окончательная правка опор/копоти пока не принята |
-| [ambientCG Ground026](https://ambientcg.com/view?id=Ground026) | [CC0](https://docs.ambientcg.com/license/) | Карты цвета, нормалей DX, шероховатости и высоты сохранены; материал грязи с первыми тремя картами создан. Его новое размещение и физическая приёмка впереди |
+| [Kenney Particle Pack 1.1](https://kenney.nl/assets/particle-pack) | CC0 1.0, License.txt из ZIP | smoke_01 / smoke_07 импортированы, используются в Niagara и текстурировании объёма. Native-scene-04: ориентир за плотным ядром дыма потерял читаемые детали |
+| [JangaFX Fire_01](https://jangafx.com/software/embergen/download/free-vdb-animations) | CC0 1.0, LICENSE.txt из RAR | VDB запечён Blender 4.5.15 в64 кадра/два ракурса; демонстрационный источник удалён маской. Native-scene-04:33 реальных проёма; native-collapse-01: удалённые окна прекращают гореть |
+| [ambientCG Ground026](https://ambientcg.com/view?id=Ground026) | [CC0](https://docs.ambientcg.com/license/) | PBR цвет/NormalDX/roughness используются в native-road-03 на грунте провала; tint и wetness добавлены в импорт08. Собственная приёмка грязи/колей/ресурсов впереди |
 | [Kenney Watercraft Kit](https://kenney.nl/assets/watercraft-kit) | CC0 1.0, License.txt из ZIP | Получен и просмотрен как запасной набор. Модели в игру не импортированы |
 | Rescue Water Catamaran, Meshy, предоставлен пользователем 16 ноября | Пользовательский исходник; публичное распространение не заявляется | Оригинал сохранён. Подготовлено 139999 треугольников вместо1297611, PBR2K; выбраны игровые габариты4,6×1,99×1,79м. Native import01 проверил масштаб/оси и четыреLOD139999/56000/14000/4900. Плавучесть и полный рейс ещё не приняты |
 
@@ -40,7 +40,7 @@ SHA-256 исходных архивов:
    `build_water_catamaran.py` в `/Game/RescueAssets/WatercraftV1`. Оболочка
    не имеет искусственной сплошной коллизии между корпусами; физика отдельно.
 
-Импорт07 эффектов:15 uasset, без shader errors, старые редакции/исходники
+Импорт08 эффектов:15 uasset, без shader errors, старые редакции/исходники
 сохранены. В native-scene-04 реальные окна дают33 точки огня. Из фиксированной
 камеры, стоящей внутри зрелого дыма, исходное здание теряет читаемые детали;
 пара до/после сохранена вместе с камерой и планом. Это отдельный удерживаемый

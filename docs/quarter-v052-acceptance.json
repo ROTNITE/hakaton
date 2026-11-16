@@ -1854,15 +1854,15 @@
       "id": "VIS04",
       "requirement": "Причинные завалы из существующих плит, балок, кладки и деревьев; частичные повреждения здания, локальный Chaos",
       "status": "partial",
-      "evidence": ["D:/MetaRescue-output/automation/20261116T010529035110Z/verification.json"],
-      "scope_note": "Проверена идентичность частей здания при compaction/remove/reset; фактический обвал/завалы ещё проходят реализацию и нативную проверку."
+      "evidence": ["D:/MetaRescue-output/automation/20261116T015916578219Z/verification.json", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-collapse-01/verification.json"],
+      "scope_note": "Частичный обвал выбранного дома:41 удалённая часть,12 физических тел/36 фрагментов, падение до7,57м, огонь/дым согласованы; тот же процесс восстановил геометрию и удалил новые тела. Сочетания, проезд/объезд и масштаб ещё впереди."
     },
     {
       "id": "VIS05",
       "requirement": "Дорожные модели используются систематически; реальные разрывы/просадки/подслой и согласованные коллизии",
-      "status": "pending",
-      "evidence": [],
-      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+      "status": "partial",
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/native-road-03/verification.json"],
+      "scope_note": "34 секции дорожной модели; настоящий вырез/грунт/кромка/подслой. Измеренная коллизия+0,004→−2,378657→+0,004м после reset, оба архива/freeze/12 PNG. Проезд/объезд, сочетания и остальные масштабы не приняты."
     },
     {
       "id": "VIS06",
