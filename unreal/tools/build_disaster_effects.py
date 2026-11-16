@@ -150,8 +150,12 @@ def build_billow(textures):
     return value
 
 
-def build_volume():
+def build_volume(textures):
     value = material('M_PhysicalSmoke', translucent=True)
+    # When the eye is inside a plume, its back surface lies behind most opaque
+    # landmarks. Hardware depth testing would discard the entire integration.
+    # The shader clips against the actual opaque scene depth instead.
+    value.set_editor_property('disable_depth_test', True)
     inputs = [
         ('Source', vector(value, 'SmokeSource', (0, 0, 0)), 'RGB'),
         ('Wind', vector(value, 'SmokeWind', (0, 0, 0), 140), 'RGB'),
@@ -168,8 +172,24 @@ def build_volume():
     code = (Path(__file__).resolve().parent / 'shaders/disaster_smoke.hlsl').read_text(encoding='utf-8')
     opacity = custom(value, code, unreal.CustomMaterialOutputType.CMOT_FLOAT1, inputs, -350, 0)
     property_input(opacity, '', value, unreal.MaterialProperty.MP_OPACITY)
-    property_input(vector(value, 'SmokeAlbedo', (.045, .048, .05), 1550), 'RGB', value,
-                   unreal.MaterialProperty.MP_BASE_COLOR)
+    shade = vector(value, 'SmokeAlbedo', (.045, .048, .05), 1550)
+    cloud = texture_object(value, textures['SmokeWisps'], 'SmokeWisps', 1680)
+    clock = node(value, unreal.MaterialExpressionTime, -1100, 1810)
+    color = custom(value, '''
+float3 Ray = normalize(Surface - Camera);
+float3 Middle = Source + float3(Wind.xy * Shape.x / (2 * max(Rise, 1)), Shape.x * .5);
+float3 P = Camera + Ray * max(0, dot(Middle - Camera, Ray));
+float2 A = (P.xz - float2(Wind.x, Rise) * Clock) / 900;
+float2 B = (P.yz - float2(Wind.y, Rise * .7) * Clock) / 650;
+float Billow = Texture2DSampleLevel(Cloud, CloudSampler, A, 0).a;
+float Wisp = Texture2DSampleLevel(Cloud, CloudSampler, B + .37, 0).a;
+return Albedo * lerp(.48, 1.45, saturate(Billow * .65 + Wisp * .35));
+''', unreal.CustomMaterialOutputType.CMOT_FLOAT3,
+        [*[(name, source, pin) for name, source, pin in inputs if name in ('Source','Wind','Shape','Rise','Surface','Camera')],
+         ('Cloud', cloud, ''), ('Clock', clock, ''), ('Albedo', shade, 'RGB')], -350, 400)
+    # Only scattering colour varies; the optical density remains the exact
+    # field integrated by sensors, without renderer-only visibility holes.
+    property_input(color, '', value, unreal.MaterialProperty.MP_BASE_COLOR)
     save(value)
     return value
 
@@ -236,7 +256,7 @@ def main():
         textures[name] = texture
     fire = build_fire(textures)
     smoke = build_billow(textures)
-    materials = [fire, smoke, build_volume(), build_mud(textures), build_soot(textures)]
+    materials = [fire, smoke, build_volume(textures), build_mud(textures), build_soot(textures)]
     systems = {}
     for name, mat, spec in (
         ('BuildingFire', fire, (7, 1.2, 1.8, 180, 285, 5, 20, (0, 0, 10), 16)),

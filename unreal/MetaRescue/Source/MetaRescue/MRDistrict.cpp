@@ -190,8 +190,13 @@ void AMRWorld::Apartment(const FVector& P,int32 Floors,int32 Variant,int32 Damag
             {
                 const TCHAR* Style=MRApartmentWindowStyle(Damage,Variant,Level,Side,Bay);
                 const float OffsetZ=Window==1?0:Window==2?30:40;
-                DistrictAssembly("GlazingKit",At+Turn.RotateVector(FVector(0,-4,OffsetZ)),Turn,FVector::OneVector,
+                auto* Glazing=DistrictAssembly("GlazingKit",At+Turn.RotateVector(FVector(0,-4,OffsetZ)),Turn,FVector::OneVector,
                     false,false,FString::Printf(TEXT("window_0%d_%s"),Window,Style));
+                if(bDisasterCity&&Glazing)
+                {
+                    Glazing->ComponentTags.Add(TEXT("WindowFireAnchor"));
+                    Glazing->ComponentTags.Add(FName(*FString::Printf(TEXT("WindowFireDelay_%.1f"),Level*7.f+Bay*1.5f)));
+                }
                 // Sill and a dark reveal keep a readable thickness from either side.
                 Shape("Cube",At+Turn.RotateVector(FVector(0,1,45)),FVector(180,35,8),"MI_Concrete",Turn);
             }
@@ -210,7 +215,8 @@ void AMRWorld::Apartment(const FVector& P,int32 Floors,int32 Variant,int32 Damag
     }
     if(Damage<2)
     {
-        Shape("Cube",P+FVector(0,0,Floors*300+12),FVector(945,945,24),"MI_Dark");
+        auto* Roof=Shape("Cube",P+FVector(0,0,Floors*300+12),FVector(945,945,24),"MI_Dark");
+        if(bDisasterCity)Roof->ComponentTags.Add(TEXT("RoofFireAnchor"));
         for(int32 Side:{-1,1})
         {
             Shape("Cube",P+FVector(Side*460,0,Floors*300+34),FVector(18,925,44),"MI_Concrete");

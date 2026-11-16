@@ -163,6 +163,7 @@ bool AMRWorld::ReadCityLayout(const FString& File)
 
 void AMRWorld::BuildCity()
 {
+    CityStructures.Empty();CityPartOwners.Empty();
     if(!MRCityAssetsReady())
     {UE_LOG(LogTemp,Error,TEXT("MR_CITY prepare_city_assets.py must succeed before city launch"));return;}
     bBuildingCity=true;
@@ -236,6 +237,7 @@ void AMRWorld::BuildCity()
         const FQuat Turn(FVector::UpVector,FMath::DegreesToRadians(J->GetNumberField(TEXT("yaw"))));
         for(int32 I=Begin;I<Generated.Num();I++)if(auto* C=Generated[I].Get())if(C->GetAttachParent()==GetRootComponent())
         {C->SetRelativeLocation(P+Turn.RotateVector(C->GetRelativeLocation()-P));C->SetRelativeRotation(Turn*C->GetRelativeRotation().Quaternion());}
+        RecordCityStructure(FName(*J->GetStringField(TEXT("id"))),Begin);
         if(bCityProps)
         {
             const auto& Frontage=J->GetArrayField(TEXT("street_source"));

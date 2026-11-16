@@ -3,6 +3,7 @@
 #include "GameFramework/Actor.h"
 #include "MRAssetAssembly.h"
 #include "MREnvironment.h"
+#include "MRStructureState.h"
 #include "MRWorld.generated.h"
 
 class AMRAgent;
@@ -138,6 +139,11 @@ private:
     void PrepareCityAssetViews();
     void PrepareCityBuildingViews();
     void BuildCity();
+    void RecordCityStructure(FName Id,int32 FirstGenerated);
+    void RebindCityStructurePart(UStaticMeshComponent* Previous,UInstancedStaticMeshComponent* Batch,FPrimitiveInstanceId Id);
+    void ResetCityStructures();
+    TMap<FName,FMRStructureState> CityStructures;
+    TMap<TWeakObjectPtr<UStaticMeshComponent>,FMRStructureOwner> CityPartOwners;
     bool bBuildingCity=false;
     int32 CityVegetationRevision=1;
     double CityBuildWallSeconds=0;

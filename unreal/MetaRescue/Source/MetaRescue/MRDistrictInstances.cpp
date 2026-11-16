@@ -17,7 +17,7 @@ void AMRWorld::OptimizeDistrictInstances()
     if(bCityLayout){for(USceneComponent* C:Generated)if(auto* Mesh=Cast<UStaticMeshComponent>(C))Components.Add(Mesh);}
     else GetComponents(Components);
     TMap<FString,TArray<UStaticMeshComponent*>> Groups;
-    TMap<FString,UHierarchicalInstancedStaticMeshComponent*> Existing;
+    TMap<FString,UInstancedStaticMeshComponent*> Existing;
     auto KeyFor=[](UStaticMeshComponent* C)
     {
         FString Key=C->GetStaticMesh()->GetPathName()+FString::Printf(TEXT("|%d|%d|%d"),int32(C->GetCollisionEnabled()),C->IsVisible(),C->bHiddenInGame);
@@ -25,6 +25,7 @@ void AMRWorld::OptimizeDistrictInstances()
         Key+=FString::Printf(TEXT("|%d|%d|%d"),int32(C->GetCollisionResponseToChannel(ECC_Visibility)),
             int32(C->CastShadow),int32(C->bAffectDistanceFieldLighting));
         if(C->ComponentHasTag(TEXT("CityVisualHorizon")))Key+=TEXT("|horizon");
+        if(C->ComponentHasTag(TEXT("CityStructurePart")))Key+=TEXT("|structure");
         return Key;
     };
     for(auto* C:Components)
@@ -32,9 +33,8 @@ void AMRWorld::OptimizeDistrictInstances()
         if(C->Mobility!=EComponentMobility::Static||!C->GetStaticMesh())continue;
         if(C->ComponentHasTag(TEXT("CollapseSupport")))
         {if(!bBuildingCity&&!C->IsRegistered())C->RegisterComponent();continue;}
-        if(auto* Batch=Cast<UHierarchicalInstancedStaticMeshComponent>(C))
+        if(auto* Batch=Cast<UInstancedStaticMeshComponent>(C))
         {if(bCityLayout)Existing.Add(KeyFor(C),Batch);continue;}
-        if(C->IsA<UInstancedStaticMeshComponent>())continue;
         // Non-Nanite HISM has no Lumen surface-cache coverage. Keep enclosing
         // room surfaces and window frames as individual static meshes so their
         // indirect daylight and reflections are represented throughout town.
@@ -52,7 +52,11 @@ void AMRWorld::OptimizeDistrictInstances()
         auto* Source=Group[0];auto* Batch=Existing.FindRef(Pair.Key);
         if(!Batch)
         {
-        Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(this);
+        // UE5.8 explicitly excludes HISM from its persistent-ID interface.
+        // Structural ISMs retain GPU/Nanite instancing and stable ownership
+        // when one damaged house loses a part; vegetation keeps HISM trees.
+        Batch=bDisasterCity&&Source->ComponentHasTag(TEXT("CityStructurePart"))?
+            NewObject<UInstancedStaticMeshComponent>(this):NewObject<UHierarchicalInstancedStaticMeshComponent>(this);
         AddInstanceComponent(Batch);Batch->SetupAttachment(GetRootComponent());Batch->SetMobility(EComponentMobility::Static);
         Batch->SetStaticMesh(Source->GetStaticMesh());
         for(int32 I=0;I<Source->GetNumMaterials();I++)Batch->SetMaterial(I,Source->GetMaterial(I));
@@ -63,16 +67,19 @@ void AMRWorld::OptimizeDistrictInstances()
         Batch->SetAffectDistanceFieldLighting(Source->bAffectDistanceFieldLighting);
         Generated.Add(Batch);
         }
-        Batch->bAutoRebuildTreeOnInstanceChanges=false;
+        auto* Tree=Cast<UHierarchicalInstancedStaticMeshComponent>(Batch);
+        if(Tree)Tree->bAutoRebuildTreeOnInstanceChanges=false;
         for(auto* C:Group)
         {
-            Batch->AddInstance(C->GetComponentTransform(),true);
+            if(bDisasterCity&&C->ComponentHasTag(TEXT("CityStructurePart")))
+                RebindCityStructurePart(C,Batch,Batch->AddInstanceById(C->GetComponentTransform(),true));
+            else Batch->AddInstance(C->GetComponentTransform(),true);
             for(FName Tag:C->ComponentTags)Batch->ComponentTags.AddUnique(Tag);
             Generated.Remove(C);RemoveInstanceComponent(C);C->DestroyComponent();Instances++;
         }
         if(!bBuildingCity)
         {
-            Batch->bAutoRebuildTreeOnInstanceChanges=true;Batch->BuildTreeIfOutdated(false,true);
+            if(Tree){Tree->bAutoRebuildTreeOnInstanceChanges=true;Tree->BuildTreeIfOutdated(false,true);}
             if(!Batch->IsRegistered())Batch->RegisterComponent();
         }
         Batch->ComponentTags.Add(TEXT("V3InstancedGeometry"));

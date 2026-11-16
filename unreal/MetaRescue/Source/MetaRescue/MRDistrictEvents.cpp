@@ -543,7 +543,7 @@ void AMRWorld::TickHazardVisuals(float Dt)
         auto* FX=Cast<UNiagaraComponent>(C);
         if(FX||IsEventVeil(Kind))
         {
-            if(bDisasterCity&&FX&&Kind==TEXT("BuildingFire"))
+            if(bDisasterCity&&FX&&(Kind==TEXT("BuildingFire")||Kind==TEXT("Sparks")))
             {FX->SetPaused(Age<IgnitionDelay);FX->SetVisibility(Age>=IgnitionDelay);}
             const float Duration=End>=0?float(End-E->Time):0.f;
             const float FadeOutSeconds=FMath::Min(4.f,Duration*.25f);

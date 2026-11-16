@@ -170,6 +170,12 @@ bool AMRWorld::ReadCoreEventTape()
                 if(!Number(Row,TEXT("smoke_emission_height_m"),Height)||Height<0||Height>80)
                     return Fail(TEXT("invalid smoke emission height"));
                 Event.SmokeEmissionHeightCm=Height*100;
+                if(Event.Kind==EMRDisturbance::Fire||Event.Kind==EMRDisturbance::Collapse)
+                {
+                    const auto* Building=CityStructures.Find(FName(*Event.SiteId));
+                    if(!Building||!Building->Bounds.IsValid)return Fail(TEXT("event has no actual source structure"));
+                    if(Event.Kind==EMRDisturbance::Fire)Event.SmokeEmissionHeightCm=Building->Bounds.Max.Z;
+                }
             }
             const auto& Cells=Row->GetArrayField(TEXT("cells"));
             if(Cells.Num()>256)return Fail(TEXT("event footprint exceeds limit"));
@@ -218,6 +224,7 @@ bool AMRWorld::ReadCoreEventTape()
 void AMRWorld::ResetCoreEventEffects()
 {
     if(CoreEventProfile.IsEmpty())return;
+    ResetCityStructures();
     TSet<USceneComponent*> RuntimeComponents;
     for(USceneComponent* Component:CoreEventComponents)if(Component)RuntimeComponents.Add(Component);
     Generated.RemoveAll([&](const auto& Component){return RuntimeComponents.Contains(Component.Get());});
@@ -284,6 +291,7 @@ void FMRCoreRuntime::AdvanceEvents()
                 {TEXT("target_id"),Event.TargetId>=0?Num(Event.TargetId):Null()},
                 {TEXT("expires_at"),Model.ActiveUntil(Event)>=0?Num(Model.ActiveUntil(Event)):Null()},
                 {TEXT("visibility_expires_at"),Model.VisibilityUntil(Event)>=0?Num(Model.VisibilityUntil(Event)):Null()},
+                {TEXT("smoke_emission_height_m"),Num(Event.SmokeEmissionHeightCm/100.)},
                 {TEXT("reason"),Event.Rejection.IsEmpty()?Null():Str(Event.Rejection)},
                 {TEXT("released_bodies"),Num(Bodies)}}),false);
         if(CaptureEventFrames&&Event.Rejection.IsEmpty()&&!Event.bPropagation&&!ScheduledViews.Contains(int32(Event.Kind)))
