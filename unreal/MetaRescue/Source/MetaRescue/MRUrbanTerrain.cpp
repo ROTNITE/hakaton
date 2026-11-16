@@ -62,9 +62,9 @@ void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,
     Mesh->bUseComplexAsSimpleCollision=true;Mesh->bUseAsyncCooking=false;
     Mesh->SetCollisionProfileName(TEXT("BlockAll"));Mesh->SetCollisionResponseToChannel(ECC_Camera,ECR_Ignore);
     Mesh->SetMaterial(0,Material);
-    auto* Soil=UMaterialInstanceDynamic::Create(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")),Mesh);
-    Soil->SetVectorParameterValue(TEXT("MudTint"),FLinearColor(.42f,.32f,.22f));
-    Mesh->SetMaterial(1,Soil);Mesh->SetMaterial(2,Material);
+    auto* BankMaterial=UMaterialInstanceDynamic::Create(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")),Mesh);
+    BankMaterial->SetVectorParameterValue(TEXT("MudTint"),FLinearColor(.42f,.32f,.22f));
+    Mesh->SetMaterial(1,BankMaterial);Mesh->SetMaterial(2,Material);
     Mesh->SetMaterial(3,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/MI_Concrete.MI_Concrete")));
     Mesh->ComponentTags={Soil?TEXT("UrbanPhysicalTerrain"):TEXT("UrbanRoadSurface")};Mesh->RegisterComponent();
     Patch.Mesh=Mesh;
