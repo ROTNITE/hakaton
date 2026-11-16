@@ -253,7 +253,6 @@ int32 AMRWorld::ApplyCoreDisturbance(const FMRDisturbance& Event)
     const int32 FirstGenerated=Generated.Num();
     const int32 FirstVisual=HazardVisuals.Num();
     const int32 FirstPiece=PhysicsPieces.Num();
-    if(bDisasterCity&&Event.Kind==EMRDisturbance::RoadDamage)DamageUrbanRoad(Event);
     if(Event.Kind==EMRDisturbance::Collapse)
     {
         if(bDisasterCity)CollapseCityStructure(Event);

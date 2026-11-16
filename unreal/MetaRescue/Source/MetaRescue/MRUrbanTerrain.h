@@ -9,6 +9,7 @@ struct FMRDisturbance;
 struct FMRRoadCavity
 {
     FString Id;
+    FString RoadId;
     FVector Center=FVector::ZeroVector,Along=FVector::ForwardVector;
     double AlongCm=500,AcrossCm=600,DepthCm=200,Phase=0;
     double DropCm(FVector P) const;
@@ -23,10 +24,11 @@ public:
     explicit FMRUrbanTerrain(AMRWorld* InWorld):World(InWorld){}
     void Build();
     void RoadPatch(FVector Start,FVector End,double Width,double Offset,UMaterialInterface* Material);
-    void Damage(const FMRDisturbance& Event);
+    bool Damage(const FMRDisturbance& Event);
     void Reset();
     double DropCm(FVector Position) const;
 private:
+    friend class AMRWorld;
     struct FPatch
     {
         TWeakObjectPtr<UProceduralMeshComponent> Mesh;
@@ -34,6 +36,9 @@ private:
         TArray<int32> Triangles;
         FBox Bounds=FBox(ForceInit);
         double Offset=0;
+        FVector GridOrigin=FVector::ZeroVector,GridX=FVector::ZeroVector,GridY=FVector::ZeroVector;
+        int32 InitialNX=0,InitialNY=0;
+        bool Refined=false;
         bool Soil=false,Collision=false;
     };
     struct FOverlay
@@ -53,6 +58,7 @@ private:
     TMap<FIntPoint,TArray<FBox>> Foundations;
     void AddFoundation(FBox Bounds);
     void Update(FPatch& Patch);
+    void Tessellate(FPatch& Patch,int32 NX,int32 NY);
     void Update(FOverlay& Overlay);
     void CutOverlays(const FMRRoadCavity& Cavity);
     void Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil);

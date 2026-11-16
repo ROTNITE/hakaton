@@ -207,6 +207,12 @@ void AMRWorld::RecordEnvironmentEvent(const FMRDisturbance& E)
 
 void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
 {
+    if(bDisasterCity&&E.Kind==EMRDisturbance::RoadDamage)
+    {
+        // The real cavity and grounded source fragments replace the legacy
+        // vertex-displaced fracture overlay in this physical revision.
+        DamageUrbanRoad(E);return;
+    }
     if(VisualProbe==TEXT("events")&&!E.bPropagation&&!InspectedEventKinds.Contains(int32(E.Kind)))
     {
         InspectedEventKinds.Add(int32(E.Kind));

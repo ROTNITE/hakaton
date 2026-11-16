@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
 #include "Materials/MaterialInterface.h"
+#include "Engine/StaticMesh.h"
 #include "ProceduralMeshComponent.h"
 #include "Misc/Crc.h"
 
@@ -54,19 +55,29 @@ void FMRUrbanTerrain::AddFoundation(FBox Bounds)
 void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil)
 {
     FPatch Patch;Patch.Offset=Offset;Patch.Soil=Soil;Patch.Collision=true;
+    Patch.GridOrigin=Origin;Patch.GridX=X;Patch.GridY=Y;Patch.InitialNX=NX;Patch.InitialNY=NY;
     auto* Mesh=NewObject<UProceduralMeshComponent>(World);World->AddInstanceComponent(Mesh);Mesh->SetupAttachment(World->GetRootComponent());
     Mesh->SetMobility(EComponentMobility::Static);Mesh->SetWorldLocation(Origin);
     Mesh->bUseComplexAsSimpleCollision=true;Mesh->bUseAsyncCooking=false;
     Mesh->SetCollisionProfileName(TEXT("BlockAll"));Mesh->SetCollisionResponseToChannel(ECC_Camera,ECR_Ignore);
     Mesh->SetMaterial(0,Material);
-    Mesh->SetMaterial(1,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MaterialsCity/City_Soil.City_Soil")));
+    Mesh->SetMaterial(1,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")));
     Mesh->ComponentTags={Soil?TEXT("UrbanPhysicalTerrain"):TEXT("UrbanRoadSurface")};Mesh->RegisterComponent();
     Patch.Mesh=Mesh;
+    Tessellate(Patch,NX,NY);
+    Patches.Add(MoveTemp(Patch));Update(Patches.Last());World->Generated.Add(Mesh);
+}
+
+void FMRUrbanTerrain::Tessellate(FPatch& Patch,int32 NX,int32 NY)
+{
+    Patch.XY.Empty();Patch.Triangles.Empty();Patch.Bounds=FBox(ForceInit);
     for(int32 J=0;J<=NY;++J)for(int32 I=0;I<=NX;++I)
-    {const FVector P=Origin+X*(double(I)/NX)+Y*(double(J)/NY);Patch.XY.Add(P);Patch.Bounds+=P;}
+    {
+        const FVector P=Patch.GridOrigin+Patch.GridX*(double(I)/NX)+Patch.GridY*(double(J)/NY);
+        Patch.XY.Add(P);Patch.Bounds+=P;
+    }
     for(int32 J=0;J<NY;++J)for(int32 I=0;I<NX;++I)
     {const int32 A=J*(NX+1)+I;Patch.Triangles.Append({A,A+NX+1,A+1,A+1,A+NX+1,A+NX+2});}
-    Patches.Add(MoveTemp(Patch));Update(Patches.Last());World->Generated.Add(Mesh);
 }
 
 void FMRUrbanTerrain::Update(FPatch& Patch)
@@ -162,9 +173,9 @@ void FMRUrbanTerrain::RoadPatch(FVector Start,FVector End,double Width,double Of
     Grid(Start-Across*Width*.5,Delta,Across*Width,FMath::CeilToInt(Length/200),FMath::CeilToInt(Width/100),Offset,Material,false);
 }
 
-void FMRUrbanTerrain::Damage(const FMRDisturbance& Event)
+bool FMRUrbanTerrain::Damage(const FMRDisturbance& Event)
 {
-    if(Cavities.ContainsByPredicate([&](const auto& C){return C.Id==Event.Id;}))return;
+    if(Cavities.ContainsByPredicate([&](const auto& C){return C.Id==Event.Id;}))return false;
     FMRRoadCavity Cavity;Cavity.Id=Event.Id;Cavity.Center=Event.Source;Cavity.Center.Z=0;
     const auto Graph=World->CityLayout->GetObjectField(TEXT("road_graph"));TMap<FString,FVector> Nodes;
     for(const auto& Entry:Graph->GetArrayField(TEXT("nodes")))
@@ -174,12 +185,24 @@ void FMRUrbanTerrain::Damage(const FMRDisturbance& Event)
     {
         const auto Edge=Entry->AsObject();const FVector A=Nodes.FindChecked(Edge->GetStringField(TEXT("from"))),B=Nodes.FindChecked(Edge->GetStringField(TEXT("to")));
         const double Distance=FVector::DistSquared2D(Cavity.Center,FMath::ClosestPointOnSegment(Cavity.Center,A,B));
-        if(Distance<Best){Best=Distance;Cavity.Along=(B-A).GetSafeNormal2D();Cavity.AcrossCm=Edge->GetNumberField(TEXT("width_m"))*65+100;}
+        if(Distance<Best)
+        {
+            Best=Distance;Cavity.Along=(B-A).GetSafeNormal2D();Cavity.AcrossCm=Edge->GetNumberField(TEXT("width_m"))*65+100;
+            Cavity.RoadId=TEXT("road-")+Edge->GetStringField(TEXT("from"))+TEXT("-")+Edge->GetStringField(TEXT("to"));
+        }
     }
     FRandomStream Rng(FCrc::StrCrc32(*Event.Id)^uint32(World->Seed));
     Cavity.AlongCm=Rng.FRandRange(400,650);Cavity.DepthCm=Rng.FRandRange(180,240);Cavity.Phase=Rng.FRandRange(0,2*PI);
     Cavities.Add(Cavity);
-    for(auto& Patch:Patches)if(Patch.Bounds.IntersectXY(Cavity.Bounds()))Update(Patch);
+    for(auto& Patch:Patches)if(Patch.Bounds.IntersectXY(Cavity.Bounds()))
+    {
+        // Refine only the few patches touched by damage. A half-metre rim
+        // has visible fractured edges without tessellating a 1.5km city so
+        // densely before anything has happened.
+        if(!Patch.Refined)
+        {Tessellate(Patch,FMath::CeilToInt(Patch.GridX.Size()/50),FMath::CeilToInt(Patch.GridY.Size()/50));Patch.Refined=true;}
+        Update(Patch);
+    }
     CutOverlays(Cavity);
     for(auto& Pair:World->CityStructures)if(Pair.Value.IsRoad)
         for(auto& Part:Pair.Value.Pieces)if(!Part.Removed)
@@ -189,13 +212,18 @@ void FMRUrbanTerrain::Damage(const FMRDisturbance& Event)
         }
     UE_LOG(LogTemp,Display,TEXT("MR_ROAD_CAVITY %s source=%s depth_cm=%.2f radius_along_cm=%.2f radius_across_cm=%.2f"),
         *Event.Id,*Event.Source.ToString(),DropCm(Event.Source),Cavity.AlongCm,Cavity.AcrossCm);
+    return true;
 }
 
 void FMRUrbanTerrain::Reset()
 {
     if(Cavities.IsEmpty())return;
     TArray<FBox> Changed;for(const auto& Cavity:Cavities)Changed.Add(Cavity.Bounds());Cavities.Empty();
-    for(auto& Patch:Patches)if(Changed.ContainsByPredicate([&](const FBox& Box){return Box.IntersectXY(Patch.Bounds);}))Update(Patch);
+    for(auto& Patch:Patches)if(Changed.ContainsByPredicate([&](const FBox& Box){return Box.IntersectXY(Patch.Bounds);}))
+    {
+        if(Patch.Refined){Tessellate(Patch,Patch.InitialNX,Patch.InitialNY);Patch.Refined=false;}
+        Update(Patch);
+    }
     for(auto& Overlay:Overlays)Update(Overlay);Overlays.Empty();
 }
 
@@ -207,6 +235,40 @@ void AMRWorld::UrbanRoadPatch(FVector Start,FVector End,double Width,double Offs
     if(UrbanTerrain)UrbanTerrain->RoadPatch(Start,End,Width,Offset,MRSceneMaterial(LoadObject<UMaterialInterface>(nullptr,*Path)));
 }
 void AMRWorld::DamageUrbanRoad(const FMRDisturbance& Event)
-{if(UrbanTerrain)UrbanTerrain->Damage(Event);}
+{
+    if(!UrbanTerrain||!UrbanTerrain->Damage(Event))return;
+    const auto Cavity=UrbanTerrain->Cavities.Last();const int32 First=Generated.Num();
+    FRandomStream Rng(FCrc::StrCrc32(*Event.Id)^uint32(Seed));
+    auto* Asphalt=MRSceneMaterial(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_QuarterAsphalt.M_QuarterAsphalt")));
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(MRRoadRimDeposit),false);
+    for(AMRAgent* Agent:Agents)Query.AddIgnoredActor(Agent);
+    for(UProceduralMeshComponent* Piece:PhysicsPieces)Query.AddIgnoredComponent(Piece);
+    const FVector Across(-Cavity.Along.Y,Cavity.Along.X,0);
+    int32 Placed=0;
+    for(int32 I=0;I<32;++I)
+    {
+        const double Angle=I*2*PI/32+Rng.FRandRange(-.04,.04);
+        const FVector Spot=Cavity.Center+Cavity.Along*(FMath::Cos(Angle)*Cavity.AlongCm*1.3)+Across*(FMath::Sin(Angle)*Cavity.AcrossCm*1.3);
+        FHitResult Support;
+        if(!GetWorld()->LineTraceSingleByChannel(Support,Spot+FVector(0,0,180),Spot-FVector(0,0,600),ECC_Visibility,Query)||
+            Support.ImpactNormal.Z<.9||UrbanTerrain->DropCm(Spot)>5)continue;
+        if(Placed<4)
+        {
+            auto* Piece=Chunk(Rng,Support.ImpactPoint+FVector(0,0,45),FVector(Rng.FRandRange(40,90),Rng.FRandRange(35,70),Rng.FRandRange(8,16)),true);
+            Piece->SetMaterial(0,Asphalt);Piece->ComponentTags={FName(*Event.Id),TEXT("StructuralDebris"),FName(*Cavity.RoadId)};
+        }
+        else
+        {
+            auto* Root=GroundedAssembly(TEXT("SceneryKit"),Support.ImpactPoint,FRotator(0,Rng.FRandRange(-180,180),0),
+                FVector(Rng.FRandRange(.35,.75)),FString::Printf(TEXT("fragment_%d"),I%4));
+            if(Root&&I%3)for(USceneComponent* Child:Root->GetAttachChildren())
+                if(auto* Mesh=Cast<UStaticMeshComponent>(Child))
+                    for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot)Mesh->SetMaterial(Slot,Asphalt);
+        }
+        ++Placed;
+    }
+    BatchDisasterDebris(First,Event);
+    UE_LOG(LogTemp,Display,TEXT("MR_ROAD_DEBRIS event=%s source=%s grounded_fragments=%d"),*Event.Id,*Cavity.RoadId,Placed);
+}
 void AMRWorld::ResetUrbanTerrain()
 {if(UrbanTerrain)UrbanTerrain->Reset();}
