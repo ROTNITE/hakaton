@@ -145,7 +145,7 @@ void AMRWorld::BuildDisasterFire(const FMRDisturbance& Event)
     {
         FHitResult Ground;
         FCollisionQueryParams SupportQuery(SCENE_QUERY_STAT(MRFireSupport),false);
-        for(auto* Agent:Agents)SupportQuery.AddIgnoredActor(Agent);
+        for(AMRAgent* Agent:Agents)SupportQuery.AddIgnoredActor(Agent);
         if(GetWorld()->LineTraceSingleByChannel(Ground,Event.Source+FVector(0,0,180),Event.Source-FVector(0,0,300),ECC_Visibility,SupportQuery))
             SpawnDisasterEffect(TEXT("BuildingFire"),Ground.ImpactPoint+FVector(0,0,8),FVector(1.3),Event);
     }
