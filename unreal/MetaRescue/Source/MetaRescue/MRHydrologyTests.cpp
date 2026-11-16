@@ -53,10 +53,18 @@ bool FMRWaterBarriers::RunTest(const FString&)
 bool FMRWaterBoundary::RunTest(const FString&)
 {
     FMRHydrology Grid;TArray<double> Bed={0,0,3.4},Water={0,0,0};TBitArray<> Solid(false,3);
-    Grid.Configure(3,1,5,Bed,Solid,Water);Grid.SetBoundaryStage(0,2.8);Grid.SetDrain(1,.1);
-    TestTrue(TEXT("flood supplied from an explicit boundary"),Grid.Advance(20));
+    Grid.Configure(3,1,5,Bed,Solid,Water);Grid.SetDrain(1,.1);
+    // A rising flood, not an instantaneous 2.8m dam break. The latter has
+    // momentum and can run up onto a bank above its eventual static stage.
+    // Never make the bank impermeable merely because it belongs to the base.
+    bool Healthy=true;
+    for(int32 I=1;I<=140;++I)
+    {Grid.SetBoundaryStage(0,I*.02);Healthy=Grid.Advance(.5)&&Healthy;}
+    TestTrue(TEXT("rising flood supplied from an explicit boundary"),Healthy);
     TestTrue(TEXT("inflow is accounted for"),Grid.AddedM3()>0);
     TestTrue(TEXT("outflow and drains are accounted for"),Grid.RemovedM3()>0);
+    AddInfo(FString::Printf(TEXT("boundary stages %.9f %.9f %.9f; raised depth %.12f; balance error %.12f"),
+        Grid.StageM(0),Grid.StageM(1),Grid.StageM(2),Grid.DepthM(2),Grid.BalanceErrorM3()));
     TestTrue(TEXT("raised base stays dry from geometry, without a protected-area exception"),Grid.DepthM(2)==0);
     TestTrue(TEXT("open-system water balance closes"),FMath::Abs(Grid.BalanceErrorM3())<1.e-7);
     const double Before=Grid.VolumeM3();Grid.SetBed(1,-1);
