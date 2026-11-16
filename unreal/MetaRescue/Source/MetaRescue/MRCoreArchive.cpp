@@ -102,10 +102,32 @@ void FMRCoreRuntime::RecordTruthSnapshot(const FString& Phase)
             {TEXT("priority"),Num(T.Priority)},{TEXT("aid_received"),Num(ReceivedKits.FindRef(Index))}})));
     }
     for(UProceduralMeshComponent* P:World->PhysicsPieces)if(P)
-        Pieces.Add(Json(Obj({{TEXT("id"),Str(P->GetName())},{TEXT("position"),Point(P->GetComponentLocation()/100.)},
+    {
+        auto Piece=Obj({{TEXT("id"),Str(P->GetName())},{TEXT("position"),Point(P->GetComponentLocation()/100.)},
             {TEXT("rotation_degrees"),Point(FVector(P->GetComponentRotation().Roll,P->GetComponentRotation().Pitch,P->GetComponentRotation().Yaw))},
-            {TEXT("velocity_m_s"),Point(P->GetPhysicsLinearVelocity()/100.)},{TEXT("simulating"),Bool(P->IsSimulatingPhysics())}})));
-    Record(TEXT("truth_snapshot"),Obj({{TEXT("format"),Str(TEXT("metarescue.truth-snapshot.v1"))},{TEXT("phase"),Str(Phase)},
+            {TEXT("velocity_m_s"),Point(P->GetPhysicsLinearVelocity()/100.)},{TEXT("simulating"),Bool(P->IsSimulatingPhysics())}});
+        if(World->bDisasterCity&&P->ComponentHasTag(TEXT("StructuralDebris"))&&P->ComponentTags.Num()>=3)
+        {
+            Piece->SetStringField(TEXT("source_object_id"),P->ComponentTags[2].ToString());
+            Piece->SetStringField(TEXT("event_id"),P->ComponentTags[0].ToString());
+            Piece->SetNumberField(TEXT("mass_kg"),P->GetMass());
+        }
+        Pieces.Add(Json(Piece));
+    }
+    auto Snapshot=Obj({{TEXT("format"),Str(TEXT("metarescue.truth-snapshot.v1"))},{TEXT("phase"),Str(Phase)},
         {TEXT("agents"),Arr(Agents)},{TEXT("targets"),Arr(Targets)},{TEXT("physics_pieces"),Arr(Pieces)},
-        {TEXT("environment_revision"),Num(World->Environment.Revision)},{TEXT("applied_events"),Num(World->Environment.Applied.Num())}}),false);
+        {TEXT("environment_revision"),Num(World->Environment.Revision)},{TEXT("applied_events"),Num(World->Environment.Applied.Num())}});
+    if(World->bDisasterCity)
+    {
+        TArray<Value> Damage;
+        for(const auto& Pair:World->CityStructures)
+        {
+            int32 Removed=0;for(const auto& Part:Pair.Value.Pieces)Removed+=Part.Removed;
+            if(Removed)Damage.Add(Json(Obj({{TEXT("source_object_id"),Str(Pair.Key.ToString())},
+                {TEXT("removed_parts"),Num(Removed)},{TEXT("remaining_top_m"),Num(Pair.Value.RemainingTopCm()/100.)}})));
+        }
+        Damage.Sort([](const Value& A,const Value& B){return Text(A->AsObject(),TEXT("source_object_id"))<Text(B->AsObject(),TEXT("source_object_id"));});
+        Snapshot->SetArrayField(TEXT("structure_damage"),Damage);
+    }
+    Record(TEXT("truth_snapshot"),Snapshot,false);
 }
