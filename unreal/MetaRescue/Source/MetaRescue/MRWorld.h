@@ -17,6 +17,7 @@ class FMRCoreRuntime;
 class FMRUrbanTerrain;
 class FMRUrbanWater;
 class FMRWatercraftHydro;
+class UBoxComponent;
 struct FMRWaterSample;
 
 USTRUCT(BlueprintType)
@@ -46,6 +47,10 @@ struct FMRTarget
     bool bAvailabilityReported = false;
     int32 ObservationEpoch = 0;
     TObjectPtr<AActor> Visual = nullptr;
+    TObjectPtr<UBoxComponent> FloatBody = nullptr;
+    double VisualAnchorOffsetCm=0,FloatDisplacedM3=0;
+    FString ShoreStation;
+    TWeakObjectPtr<AMRAgent> SupportCarrier;
     TArray<FVector> Path;
 };
 
@@ -113,6 +118,9 @@ public:
     float WaterDepth(const FVector& Position) const;
     FMRWaterSample WaterAtCm(FVector Position) const;
     float MovementCost(const FVector& Position) const;
+    TSharedPtr<FJsonObject> ShoreStation() const;
+    double ShoreHoistHeightCm() const;
+    TOptional<double> ElevatedSupportHeightCm(const FVector& Position) const;
     float SensorRange(const FVector& Position) const;
     int32 PendingReports() const;
     bool bRelayOnline = true;
@@ -246,6 +254,8 @@ private:
     void Checkpoint();
     void SpawnAgents();
     void SpawnTargets();
+    USceneComponent* MakeCasualtyRoot(AActor* Visual,FMRTarget& Target);
+    void TickFloatingCasualties(float Dt);
     void SenseAndDispatch(float Dt);
     bool ReadScenario();
     UFUNCTION() void OnRubbleHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,

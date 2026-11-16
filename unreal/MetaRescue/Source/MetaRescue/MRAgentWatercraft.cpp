@@ -29,10 +29,13 @@ bool AMRAgent::InitializeWatercraft(AMRWorld* InWorld,int32 InId,const FString& 
     // Setting the parent's mass alone also adds the children's default masses.
     // Distribute dry mass at the hulls/deck, with the chosen dry CG at body origin.
     const double HullCG=Profile->BodyAboveKeelM-.16,DeckCG=Profile->DeckAboveKeelM-.04;
-    const double CargoCG=Profile->DeckAboveKeelM+.35;
+    const bool Cradle=Mission->CityLayout->GetObjectField(TEXT("watercraft"))->HasField(TEXT("load_fixture"));
+    const double CradleMass=Cradle?8.:0.,Raise=Cradle?.12:0.,AnchorX=Cradle?.6:0.;
+    const double CargoCG=Profile->DeckAboveKeelM+Raise+.35,CradleCG=Profile->DeckAboveKeelM+Raise-.02;
+    WatercraftBedLocal=FVector(AnchorX*100,0,(Profile->DeckAboveKeelM+Raise-Profile->BodyAboveKeelM)*100);
     const double DeckMass=(Profile->DryMassKg*Profile->BodyAboveKeelM-.01*Profile->BodyAboveKeelM-
-        .01*CargoCG-(Profile->DryMassKg-.02)*HullCG)/(DeckCG-HullCG);
-    const double HullMass=(Profile->DryMassKg-.02-DeckMass)*.5;
+        .01*CargoCG-CradleMass*CradleCG-(Profile->DryMassKg-.02-CradleMass)*HullCG)/(DeckCG-HullCG);
+    const double HullMass=(Profile->DryMassKg-.02-CradleMass-DeckMass)*.5;
     if(DeckMass<=0||HullMass<=0)return false;
     auto Hull=[&](FVector Position,FVector Half,double MassKg)
     {
@@ -46,7 +49,24 @@ bool AMRAgent::InitializeWatercraft(AMRWorld* InWorld,int32 InId,const FString& 
     };
     for(double Side:{-1.,1.})Hull(FVector(0,Side*60,-16),FVector(210,34,29),HullMass);
     Hull(FVector(0,0,(Profile->DeckAboveKeelM-Profile->BodyAboveKeelM)*100-4),FVector(175,85,4),DeckMass);
-    WatercraftCargoMass=Hull(FVector(0,0,(CargoCG-Profile->BodyAboveKeelM)*100),FVector(1),.01);
+    if(Cradle)
+    {
+        // Hollow loading rails bridge the model's bow opening. They have
+        // matching collision and stand on short bolted feet on the real deck.
+        const double Top=WatercraftBedLocal.Z;
+        for(double Side:{-1.,1.})
+        {
+            Hull(FVector(60,Side*40,Top-2),FVector(117.5,4,2),3);
+            Part(TEXT("Cube"),FVector(60,Side*40,Top-2),FVector(235,8,4),TEXT("MI_Metal"));
+            for(double X:{-20.,140.})Part(TEXT("Cube"),FVector(X,Side*40,Top-8),FVector(8,8,8),TEXT("MI_Metal"));
+        }
+        for(double X:{-20.,60.,140.})
+        {
+            Hull(FVector(X,0,Top-2),FVector(3,48,2),2./3);
+            Part(TEXT("Cube"),FVector(X,0,Top-2),FVector(6,96,4),TEXT("MI_Metal"));
+        }
+    }
+    WatercraftCargoMass=Hull(FVector(AnchorX*100,0,(CargoCG-Profile->BodyAboveKeelM)*100),FVector(1),.01);
     auto* Mesh=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/RescueAssets/WatercraftV1/SM_RescueWaterCatamaran.SM_RescueWaterCatamaran"));
     if(!Mesh)return false;
     auto* Visual=NewObject<UStaticMeshComponent>(this);AddInstanceComponent(Visual);Visual->SetupAttachment(Body);
@@ -54,6 +74,15 @@ bool AMRAgent::InitializeWatercraft(AMRWorld* InWorld,int32 InId,const FString& 
     Visual->SetRelativeLocation(FVector(0,0,-100*Profile->BodyAboveKeelM));Visual->RegisterComponent();Parts.Add(Visual);
     BatteryCapacityWh=Energy=Profile->BatteryWh;MaxSpeed=Profile->MaximumSpeedMPerSecond*100;
     if(!SetWatercraftPayloadKg(0))return false;
+    const double DeckLocal=(Profile->DeckAboveKeelM-Profile->BodyAboveKeelM)*100;
+    Part(TEXT("Cylinder"),FVector(60,70,DeckLocal+125),FVector(10,10,250),TEXT("MI_Metal"));
+    Part(TEXT("Cube"),FVector(60,70,DeckLocal+8),FVector(65,65,16),TEXT("MI_Orange"));
+    WatercraftBoom=Part(TEXT("Cylinder"),FVector(60,70,DeckLocal+250),FVector(10,10,100),TEXT("MI_Metal"));
+    WatercraftCable=Part(TEXT("Cylinder"),FVector(60,70,DeckLocal+200),FVector(2,2,100),TEXT("MI_Dark"));
+    WatercraftTrolley=Part(TEXT("Cube"),FVector::ZeroVector,FVector(45,35,20),TEXT("MI_Orange"));
+    for(int32 I=0;I<4;++I)
+    {auto* Sling=Part(TEXT("Cylinder"),FVector::ZeroVector,FVector(1,1,100),TEXT("MI_Dark"));Sling->SetVisibility(false);WatercraftSlings.Add(Sling);}
+    WatercraftBoom->SetVisibility(false);WatercraftCable->SetVisibility(false);WatercraftTrolley->SetVisibility(false);
     MakeWatercraftMooring();State=TEXT("moored");
     UE_LOG(LogTemp,Display,TEXT("MR_WATERCRAFT id=%s mass_kg=%.3f draft_m=%.4f deck_m=%.4f"),
         *PublicId,Body->GetMass(),Profile->EquilibriumDraftM(Profile->DryMassKg).Get(0),Profile->DeckAboveKeelM);
@@ -66,11 +95,23 @@ bool AMRAgent::SetWatercraftPayloadKg(double MassKg)
        MassKg<0||MassKg>WatercraftProfile->PayloadLimitKg)return false;
     // Use the child's own instance: GetBodyInstance() resolves to the welded parent.
     WatercraftCargoMass->BodyInstance.SetMassOverride(.01+MassKg,true);
+    const FVector Half=bCarrying&&State!=TEXT("unloading")&&MassKg>1?FVector(105,55,35):FVector(1);
+    if(WatercraftCargoMass->GetUnscaledBoxExtent()!=Half)
+    {
+        WatercraftCargoMass->UnWeldFromParent();WatercraftCargoMass->SetBoxExtent(Half,false);WatercraftCargoMass->WeldTo(Body);
+    }
+    WatercraftCargoMass->BodyInstance.COMNudge=FVector::ZeroVector;
     Body->BodyInstance.UpdateMassProperties();
     const double Expected=WatercraftProfile->DryMassKg+MassKg;
     if(FMath::Abs(Body->GetMass()-Expected)>.05)
     {UE_LOG(LogTemp,Error,TEXT("MR_WATERCRAFT_MASS id=%s expected=%.3f actual=%.3f"),*PublicId,Expected,Body->GetMass());return false;}
     return true;
+}
+
+void AMRAgent::MoveWatercraftPayloadTo(const FVector& WorldCG)
+{
+    WatercraftCargoMass->BodyInstance.COMNudge=WatercraftCargoMass->GetComponentTransform().InverseTransformPosition(WorldCG);
+    Body->BodyInstance.UpdateMassProperties();
 }
 
 void AMRAgent::MakeWatercraftMooring()
@@ -96,6 +137,8 @@ void AMRAgent::ReleaseWatercraftMooring()
 void AMRAgent::ResetWatercraft()
 {
     SetWatercraftPayloadKg(0);
+    ServiceShoreStation.Empty();WatercraftBoom->SetVisibility(false);WatercraftCable->SetVisibility(false);WatercraftTrolley->SetVisibility(false);
+    for(auto& Sling:WatercraftSlings)Sling->SetVisibility(false);
     WatercraftHoldPosition=GetActorLocation();WatercraftDisplacedM3=WatercraftLeftJetN=WatercraftRightJetN=0;
     MakeWatercraftMooring();State=TEXT("moored");
 }
@@ -138,12 +181,12 @@ void AMRAgent::DriveWatercraft(float Dt)
             if(RouteFinished())Arrived();
         }
         if(Path.IsValidIndex(PathIndex))
-        {Delta=Path[PathIndex]-P;Delta.Z=0;Desired=Delta.GetSafeNormal()*FMath::Min(double(MaxSpeed),Delta.Size()*1.2);}
+        {Delta=Path[PathIndex]-P;Delta.Z=0;Desired=Delta.GetSafeNormal()*FMath::Min(double(MaxSpeed*SpeedFactor),Delta.Size()*.45);}
     }
     else if(!bWatercraftMoored)
     {
         FVector Error=WatercraftHoldPosition-P;Error.Z=0;
-        if(Error.Size2D()>25)Desired=Error.GetClampedToMaxSize2D(100);
+        if(Error.Size2D()>25)Desired=(Error*.4).GetClampedToMaxSize2D(100);
     }
     IntendedVelocity=Desired;
     WatercraftLeftJetN=WatercraftRightJetN=0;
@@ -153,14 +196,16 @@ void AMRAgent::DriveWatercraft(float Dt)
     if(Desired.Size2D()>5&&WatercraftDisplacedM3*1000>Mass*.6)
     {
         const double Ahead=FMath::Clamp(Velocity.Size2D()*.8+150,150.,800.);
-        const FVector End=P+Desired.GetSafeNormal2D()*Ahead;
+        const FVector Goal=Path.IsValidIndex(PathIndex)?Path[PathIndex]:WatercraftHoldPosition;
+        const FVector End=P+Desired.GetSafeNormal2D()*FMath::Min(Ahead,FVector::Dist2D(P,Goal));
         const double Draft=Hull.EquilibriumDraftM(Mass).Get(.5)*100;
         FHitResult Hit;FCollisionQueryParams Query(SCENE_QUERY_STAT(MRWatercraftSafety),false,this);
         const bool Obstacle=GetWorld()->SweepSingleByChannel(Hit,P+FVector(0,0,40),End+FVector(0,0,40),GetActorQuat(),
             ECC_Visibility,FCollisionShape::MakeBox(FVector(235,105,80)),Query)&&Hit.ImpactNormal.Z<.7;
-        if(!MediumPointAllowed(End)||Mission->WaterAtCm(End).DepthCm<Draft+8||Obstacle)
-        {Desired=FVector::ZeroVector;StopReason=Obstacle?TEXT("obstacle_on_route"):TEXT("shallow_water_on_route");
-         StopObstacle=Obstacle?GetNameSafe(Hit.GetComponent()):TEXT("measured_depth");WatercraftHoldPosition=P;}
+        const bool Restricted=Mission->RestrictionOnRoute(P,End,Kind(),255,80,SensedBlocker);
+        if(!MediumPointAllowed(End)||Mission->WaterAtCm(End).DepthCm<Draft+8||Obstacle||Restricted)
+        {Desired=FVector::ZeroVector;StopReason=Restricted?TEXT("restricted_volume_on_route"):Obstacle?TEXT("obstacle_on_route"):TEXT("shallow_water_on_route");
+         StopObstacle=Restricted?TEXT("restricted_volume"):Obstacle?GetNameSafe(Hit.GetComponent()):TEXT("measured_depth");WatercraftHoldPosition=P;}
     }
     FVector Heading=Desired;
     if(Heading.Size2D()<10&&WatercraftCurrentCmPerSecond.Size2D()>20)Heading=-WatercraftCurrentCmPerSecond;

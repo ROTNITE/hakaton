@@ -65,8 +65,15 @@ def attach_elevation(world):
                for i,x in enumerate((-76.,-68.,-84.,-92.)[:count])]
         world['watercraft']={'format':'metarescue.rescue-watercraft.v1',
             'hydrostatics_profile':'watercraft-hydrostatics-r1.json','slipways':slips,
+            'load_fixture':{'format':'metarescue.stretcher-cradle.v1','anchor_x_m':.6,'deck_raise_m':.12,'mass_kg':8.},
             'spawns':[{'id':f'watercraft-{i}','position':[slip['x_m'],69.,keel+.45],
-                       'yaw':-90.,'pitch':pitch,'slipway_id':slip['id']} for i,slip in enumerate(slips)]}
+                       'yaw':-90.,'pitch':pitch,'slipway_id':slip['id']} for i,slip in enumerate(slips)],
+            'shore_station':{'id':'rescue-pier-west','deck_z_m':3.47,'hoist_height_m':6.47,'width_m':6.,
+                'platforms':[{'kind':'box','min':[-79.,7.,3.15],'max':[0.,13.,3.47]},
+                             {'kind':'box','min':[-79.,7.,3.15],'max':[-73.,27.,3.47]}],
+                'ground_route':[[10.,10.,3.47],[-76.,10.,3.47],[-76.,22.5,3.47]],
+                'ground_pickup':[-76.,22.5,3.47],'patient_position':[-76.,26.,3.47],
+                'boat_position_xy':[-76.,30.5],'boat_yaw_degrees':-90.,'patient_capacity':1}}
     if 'competition' in world:
         for row in world['competition']['units']:
             if row['kind'] in ('infrastructure', 'digital', 'operator'):

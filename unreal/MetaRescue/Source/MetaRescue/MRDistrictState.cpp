@@ -9,21 +9,25 @@
 float AMRWorld::WaterDepth(const FVector& P) const
 {
     if(!bRescueQuarter)return 0;
-    if(UrbanWater)return UrbanWater->Sample(P).DepthCm;
+    if(UrbanWater)
+    {
+        const auto Water=UrbanWater->Sample(P);const auto Support=ElevatedSupportHeightCm(P);
+        return Support.IsSet()?FMath::Max(0.,Water.StageCm-Support.GetValue()):Water.DepthCm;
+    }
     if(!bCityLayout&&FMath::Abs(P.X-12850)<900&&FMath::Abs(P.Y-13000)<1050)return 60;
     const FIntPoint Tile(FMath::FloorToInt(P.X/50),FMath::FloorToInt(P.Y/50));
     const float* Ground=FloodGroundHeights.Find(Tile);
     return Ground&&Environment.Depth(P)>0?FMath::Max(0.f,Environment.Depth(P)+4-*Ground):0.f;
 }
 float AMRWorld::MovementCost(const FVector& P) const
-{return bRescueQuarter?(bCityLayout?CityGroundCost(P):1.f)*FMath::Max(Environment.Cost(P,false),WaterDepth(P)>4?2.f:1.f):1.f;}
+{return bRescueQuarter?(bCityLayout&&!ElevatedSupportHeightCm(P).IsSet()?CityGroundCost(P):1.f)*FMath::Max(Environment.Cost(P,false),WaterDepth(P)>4?2.f:1.f):1.f;}
 float AMRWorld::GroundSpeedFactor(const FVector& P) const
 { return 1.f/MovementCost(P); }
 bool AMRWorld::IsUnsafeGround(const FVector& P) const
 {
     return bRescueQuarter&&(WaterDepth(P)>MRDistrictSettings::UnsafeWaterCm||Environment.Unsafe(P,false)||
         (!bCityLayout&&P.X>6800&&P.X<8800&&P.Y>14075&&P.Y<14925)||
-        (bCityLayout&&(P.X<0||P.Y<0||P.X>GridSize*1000||P.Y>GridSize*1000)));
+        (bCityLayout&&((P.X<0&&!ElevatedSupportHeightCm(P).IsSet())||P.Y<0||P.X>GridSize*1000||P.Y>GridSize*1000)));
 }
 bool AMRWorld::HasRadio(const FVector& P) const
 {

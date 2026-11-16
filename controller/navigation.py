@@ -215,6 +215,8 @@ class NavigationMap:
         self.cost_index = self._spatial_index(box for box, _, _ in self.surfaces)
         self.visibility_index = self._spatial_index(surface.bounds for surface in self.visibility_surfaces)
         self.street_nodes={};self.street_edges=[];self.street_links={};self.street_index={}
+        self.shore=announced_map.get('watercraft',{}).get('shore_station')
+        self.elevated_platforms=[Box.parse(row) for row in self.shore['platforms']] if self.shore else []
         if 'road_graph' in announced_map:
             graph=announced_map['road_graph']
             self.street_nodes={n['id']:(*n['position'][:2],self.ground_z(*n['position'][:2])) for n in graph['nodes']}
@@ -225,6 +227,16 @@ class NavigationMap:
                 width=edge['width_m'];self.street_edges.append((u,v,width))
                 self.street_links[u].append((v,width));self.street_links[v].append((u,width))
                 envelopes.append(Box(tuple(min(x,y) for x,y in zip(a,b)),tuple(max(x,y) for x,y in zip(a,b))))
+            if self.shore:
+                route=self.shore['ground_route'];anchor=tuple(route[0][:2])
+                previous=next((key for key,p in self.street_nodes.items() if p[:2]==anchor),None)
+                if previous is None:raise ValueError('Pier access is not connected to an announced street node')
+                for i,p in enumerate(route[1:],1):
+                    key=f'{self.shore["id"]}:{i}';self.street_nodes[key]=(*p[:2],self.ground_z(*p[:2]));self.street_links[key]=[]
+                    a,b=self.street_nodes[previous],self.street_nodes[key];width=self.shore['width_m']
+                    self.street_edges.append((previous,key,width));self.street_links[previous].append((key,width));self.street_links[key].append((previous,width))
+                    envelopes.append(Box(tuple(min(x,y) for x,y in zip(a,b)),tuple(max(x,y) for x,y in zip(a,b))))
+                    previous=key
             self.street_index=self._spatial_index(envelopes)
 
     def _bins(self, low, high):
@@ -262,6 +274,16 @@ class NavigationMap:
     def _ground_clear(self, a, b, radius, height, *, precise_arrival=False):
         if not self.clear(a, b, radius, height):
             return False
+        # The elevated pier has real open edges. A short connector may not cut
+        # diagonally across the water between its two perpendicular decks.
+        if self.elevated_platforms and min(a[0],b[0])<radius:
+            steps=max(1,math.ceil(math.dist(a[:2],b[:2])))
+            for i in range(steps+1):
+                x,y=(a[d]+(b[d]-a[d])*i/steps for d in range(2))
+                for angle in range(0,360,45):
+                    qx=x+radius*math.cos(math.radians(angle));qy=y+radius*math.sin(math.radians(angle))
+                    if qx<0 and not any(p.minimum[0]<=qx<=p.maximum[0] and p.minimum[1]<=qy<=p.maximum[1] for p in self.elevated_platforms):
+                        return False
         dx, dy = b[0] - a[0], b[1] - a[1]
         length_sq = dx * dx + dy * dy
         for (x, y), peer_radius in self.parked_ground_peers:
@@ -320,6 +342,9 @@ class NavigationMap:
         data=self.announced.get('navigation',{})
         if data.get('kind') not in ('road_surface_graph.v1','street_surface_graph.v2'):
             raise RouteFailure('ground_surface_graph_not_announced')
+        for platform in getattr(self,'elevated_platforms',()):
+            if platform.minimum[0]<=x<=platform.maximum[0] and platform.minimum[1]<=y<=platform.maximum[1]:
+                return platform.maximum[2]+data['ground_clearance_m']
         base=self.announced['base']
         at_base=base['min'][0]<=x<=base['max'][0] and base['min'][1]<=y<=base['max'][1]
         return self.terrain.height(x,y)+data['ground_clearance_m']+data['base_surface_z_m' if at_base else 'road_surface_z_m']

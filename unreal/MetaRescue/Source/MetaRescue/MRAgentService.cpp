@@ -1,6 +1,7 @@
 #include "MRAgent.h"
 #include "MRWorld.h"
 #include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
 
 void AMRAgent::ForgetCompletedCoreCommand(const FString& Id)
@@ -20,7 +21,8 @@ void AMRAgent::ResetForEpisode(const FTransform& Pose,bool UnlimitedEnergy)
     SetActorTransform(Pose,false,nullptr,ETeleportType::TeleportPhysics);
     if(Body->IsSimulatingPhysics())
     {
-        if(Category.IsEmpty()){Body->SetMassOverrideInKg(NAME_None,bAerial?12.f:240.f);Body->SetCenterOfMass(FVector::ZeroVector);}
+        if(Category.IsEmpty())
+        {if(bAerial){Body->SetMassOverrideInKg(NAME_None,12.f);Body->SetCenterOfMass(FVector::ZeroVector);}else SetGroundPayloadKg(0);}
         Body->SetPhysicsLinearVelocity(FVector::ZeroVector);Body->SetPhysicsAngularVelocityInRadians(FVector::ZeroVector);
     }
     Previous=Pose.GetLocation();Dock=Pose.GetLocation();FlightAltitude=Dock.Z;
@@ -32,10 +34,19 @@ void AMRAgent::ResetForEpisode(const FTransform& Pose,bool UnlimitedEnergy)
 
 bool AMRAgent::BeginPickup(int32 Index,const FString& Id)
 {
+    if(bRescueWatercraft)return BeginWatercraftPickup(Index,Id);
     if(!Mission||!CanCarry()||bCarrying||IsCharging()||State==TEXT("loading")||State==TEXT("unloading")||
        !Mission->Targets.IsValidIndex(Index)||!IsOperational())return false;
     auto& T=Mission->Targets[Index];
     if(T.bAssigned||T.bRescued||FVector::Dist2D(GetActorLocation(),T.Position)>370||Body->GetPhysicsLinearVelocity().Size()>30)return false;
+    if(T.FloatBody)
+    {
+        if(T.ShoreStation.IsEmpty()&&Mission->WaterDepth(T.Position)>35)return false;
+        if(auto* Source=T.SupportCarrier.Get())
+        {if(Source->IsOperational())return false;if(Source->bRescueWatercraft)Source->SetWatercraftPayloadKg(0);}
+        T.Visual->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);T.SupportCarrier.Reset();
+        T.FloatBody->SetSimulatePhysics(false);T.Visual->SetActorEnableCollision(false);T.FloatDisplacedM3=0;++T.ObservationEpoch;
+    }
     TargetIndex=Index;T.bAssigned=true;CommandId=Id;Path.Empty();PathIndex=0;bExternalHold=true;
     State=TEXT("loading");ServiceRemaining=8;ServiceElapsed=0;
     ServiceHeading=(GetActorLocation()-T.Position).Rotation().Yaw;
@@ -45,6 +56,7 @@ bool AMRAgent::BeginPickup(int32 Index,const FString& Id)
 
 bool AMRAgent::BeginHandover(const FString& Id)
 {
+    if(bRescueWatercraft)return false;
     if(!Mission||!CanCarry()||!bCarrying||!Mission->Targets.IsValidIndex(TargetIndex)||
        State==TEXT("unloading")||IsCharging()||!IsOperational()||FVector::Dist2D(GetActorLocation(),Mission->Base)>500||
        Body->GetPhysicsLinearVelocity().Size()>30)return false;
@@ -100,18 +112,33 @@ void AMRAgent::EndCharge()
 
 int32 AMRAgent::StopAndRelease(const FString& Reason)
 {
+    const bool InterruptedService=State==TEXT("loading")||State==TEXT("unloading");
     bExternalHold=true;Path.Empty();PathIndex=0;State=Energy>0?TEXT("faulted"):TEXT("power_lost");
     StopReason=FailureReason=Reason;IntendedVelocity=FVector::ZeroVector;
     if(bAerial)FlightAltitude=GetActorLocation().Z;
     if(!Mission->Targets.IsValidIndex(TargetIndex))return INDEX_NONE;
     auto& Target=Mission->Targets[TargetIndex];
-    if(Target.Visual)
+    const bool KeepAfloat=bRescueWatercraft&&bCarrying&&!InterruptedService;
+    if(Target.Visual&&!KeepAfloat)
     {
         Target.Visual->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
         Target.Position=Target.Visual->GetActorLocation();
     }
+    if(KeepAfloat)Target.SupportCarrier=this;
+    else
+    {
+        Target.SupportCarrier.Reset();
+        if(Target.FloatBody)
+        {Target.Visual->SetActorEnableCollision(true);Target.FloatBody->SetSimulatePhysics(true);Target.FloatBody->SetPhysicsLinearVelocity(Body->GetPhysicsLinearVelocity());}
+    }
     Target.bAssigned=false;Target.bDiscovered=false;Target.DiscoveredAt=-1;++Target.ObservationEpoch;
     const int32 Released=TargetIndex;TargetIndex=INDEX_NONE;bCarrying=false;
-    Body->SetMassOverrideInKg(NAME_None,240.f);Body->SetCenterOfMass(FVector::ZeroVector);
+    if(bRescueWatercraft)
+    {
+        WatercraftBoom->SetVisibility(false);WatercraftCable->SetVisibility(false);WatercraftTrolley->SetVisibility(false);
+        for(auto& Sling:WatercraftSlings)Sling->SetVisibility(false);
+        if(!KeepAfloat)SetWatercraftPayloadKg(0);
+    }
+    else SetGroundPayloadKg(0);
     return Released;
 }

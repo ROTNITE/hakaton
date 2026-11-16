@@ -62,7 +62,19 @@ void FMRCoreRuntime::BeginEpisode(const FPending& R)
     for(auto& T:World->Targets)
     {
         T.bDiscovered=false;T.bAssigned=false;T.bRescued=false;T.DiscoveredAt=-1;T.ObservedAt=-1;T.Observer=-1;T.bAvailabilityReported=false;T.ObservationEpoch=0;
-        if(T.Visual){T.Visual->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);T.Visual->SetActorTransform(InitialTargetPoses.FindChecked(T.Id));T.Position=T.Visual->GetActorLocation();T.Visual->SetActorHiddenInGame(T.AvailableAt>0);}
+        T.ShoreStation.Empty();T.SupportCarrier.Reset();T.FloatDisplacedM3=0;
+        if(T.Visual)
+        {
+            T.Visual->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+            if(T.FloatBody)T.FloatBody->SetSimulatePhysics(false);
+            T.Visual->SetActorTransform(InitialTargetPoses.FindChecked(T.Id),false,nullptr,ETeleportType::TeleportPhysics);
+            T.Position=T.Visual->GetActorLocation();T.Visual->SetActorHiddenInGame(T.AvailableAt>0);
+            if(T.FloatBody)
+            {
+                T.Visual->SetActorEnableCollision(true);T.FloatBody->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);T.FloatBody->SetSimulatePhysics(true);
+                T.FloatBody->SetPhysicsLinearVelocity(FVector::ZeroVector);T.FloatBody->SetPhysicsAngularVelocityInRadians(FVector::ZeroVector);
+            }
+        }
     }
     ResetContest();AdvanceContest();World->ContactCount=0;UpdateNetwork();
     for(AMRAgent* A:World->Agents){KnownAgents.Add(A->AgentKey(),AgentSnapshot(A,0));AgentReceived.Add(A->AgentKey(),0);}
@@ -151,6 +163,11 @@ FString FMRCoreRuntime::ValidateCommand(const Object& C) const
         if(Action==TEXT("pickup")&&Text(KnownTargets.FindChecked(Id),TEXT("status"))!=TEXT("confirmed"))return TEXT("target_not_confirmed");
     }
     else if(Action==TEXT("handover")){if(Text(P,TEXT("station_id"))!=TEXT("rescue-base"))return TEXT("unknown_station");}
+    else if(Action==TEXT("disembark"))
+    {
+        const auto Station=World->ShoreStation();const auto* Actor=FindAgent(Agent);
+        if(!Station||!Actor||!Actor->bRescueWatercraft||Text(P,TEXT("station_id"))!=Text(Station,TEXT("id")))return TEXT("unknown_shore_station");
+    }
     else if(Action==TEXT("charge"))
     {
         const auto* Station=ChargingStations.Find(Text(P,TEXT("station_id")));

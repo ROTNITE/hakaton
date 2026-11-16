@@ -209,8 +209,9 @@ FVector AMRAgent::SafeVelocity(const FVector& Requested,float Dt)
         FCollisionQueryParams Params(SCENE_QUERY_STAT(MRLocalSafety),false,this);
         for(AMRAgent* Other:Mission->Agents)if(Other)Params.AddIgnoredActor(Other);
         TArray<FHitResult> Hits;
-        const FVector Half=bAerial?FVector(115,115,22):FVector(125,70,45);
-        const FVector SweepOrigin=P+(bAerial?FVector::ZeroVector:FVector(0,0,15));
+        const bool TallPayload=GroundPayloadCollision&&bCarrying;
+        const FVector Half=bAerial?FVector(115,115,22):FVector(125,70,TallPayload?65:45);
+        const FVector SweepOrigin=P+(bAerial?FVector::ZeroVector:FVector(0,0,TallPayload?25:15));
         GetWorld()->SweepMultiByChannel(Hits,SweepOrigin,SweepOrigin+Direction*LookAhead,GetActorQuat(),ECC_Visibility,
             FCollisionShape::MakeBox(Half),Params);
         for(const auto& Hit:Hits)

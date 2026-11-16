@@ -46,7 +46,12 @@ Object FMRCoreRuntime::AgentSnapshot(AMRAgent* A,double ObservedAt) const
             Add(TEXT("hold"));
             if(!Service&&!Charging){Add(TEXT("move"));Add(TEXT("follow_route"));}
         }
-        if(A->CanCarry()&&!Service&&!Charging){if(A->bCarrying)Add(TEXT("handover"));else Add(TEXT("pickup"));}
+        if(A->CanCarry()&&!Service&&!Charging)
+        {
+            if(!A->bCarrying)Add(TEXT("pickup"));
+            else if(A->bRescueWatercraft){if(World->ShoreStation())Add(TEXT("disembark"));}
+            else Add(TEXT("handover"));
+        }
         if(Kits&&*Kits>0&&!A->bCarrying&&!Service&&!Charging)Add(TEXT("deliver"));
         if(Credits&&*Credits>0)Add(TEXT("compute"));
         if(A->Kind()==TEXT("operator"))Add(TEXT("issue_directive"));
@@ -130,6 +135,10 @@ Object FMRCoreRuntime::AgentSnapshot(AMRAgent* A,double ObservedAt) const
             {TEXT("current_m_s"),Point(A->WatercraftCurrentCmPerSecond/100)},
             {TEXT("left_jet_n"),Num(A->WatercraftLeftJetN)},{TEXT("right_jet_n"),Num(A->WatercraftRightJetN)},
             {TEXT("payload_limit_kg"),Num(Hull.PayloadLimitKg)},{TEXT("deck_above_keel_m"),Num(Hull.DeckAboveKeelM)}}));
+        Data->GetObjectField(TEXT("physical"))->GetObjectField(TEXT("watercraft"))->SetNumberField(
+            TEXT("supported_payload_kg"),FMath::Max(0.,A->Body->GetMass()-Hull.DryMassKg));
+        Data->GetObjectField(TEXT("physical"))->GetObjectField(TEXT("watercraft"))->SetField(
+            TEXT("cargo_anchor_local_m"),Point(A->WatercraftCargoAnchorCm()/100));
     }
     if(!World->CoreEventProfile.IsEmpty()&&A->Category.IsEmpty())
     {
@@ -180,6 +189,8 @@ Object FMRCoreRuntime::Capabilities() const
         {TEXT("precise_stop"),Json(Obj({{TEXT("type"),Str(TEXT("boolean"))}}))}}),Strings({TEXT("waypoints")}));
     Add(TEXT("pickup"),Strings({TEXT("carry")}),Obj({{TEXT("target_id"),Id}}),Strings({TEXT("target_id")}));
     Add(TEXT("handover"),Strings({TEXT("carry")}),Obj({{TEXT("station_id"),Id}}),Strings({TEXT("station_id")}));
+    if(HasWatercraft&&World->ShoreStation())
+        Add(TEXT("disembark"),Strings({TEXT("carry")}),Obj({{TEXT("station_id"),Id}}),Strings({TEXT("station_id")}));
     Add(TEXT("deliver"),Strings({TEXT("deliver")}),Obj({{TEXT("target_id"),Id},{TEXT("resource_id"),Id},
         {TEXT("amount"),Json(Obj({{TEXT("type"),Str(TEXT("integer"))},{TEXT("minimum"),Num(1)},{TEXT("maximum"),Num(3)}}))}}),
         Strings({TEXT("target_id"),TEXT("resource_id"),TEXT("amount")}));
@@ -314,6 +325,7 @@ Object FMRCoreRuntime::Capabilities() const
     if(HasWatercraft)
     {
         auto Extensions=Result->GetArrayField(TEXT("extensions"));Extensions.Add(Str(TEXT("metarescue.rescue-watercraft.v1")));
+        if(World->ShoreStation())Extensions.Add(Str(TEXT("metarescue.shore-transfer.v1")));
         Result->SetArrayField(TEXT("extensions"),Extensions);
         Result->SetObjectField(TEXT("watercraft_model"),Obj({{TEXT("profile"),Str(TEXT("watercraft-hydrostatics-r1.json"))},
             {TEXT("buoyancy"),Str(TEXT("eight_section_archimedes"))},{TEXT("propulsion"),Str(TEXT("two_energy_limited_jets"))},

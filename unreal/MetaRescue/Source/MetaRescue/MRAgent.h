@@ -38,11 +38,12 @@ public:
     TSharedPtr<FMRWatercraftHydro> WatercraftProfile;
     double WatercraftDisplacedM3=0,WatercraftLeftJetN=0,WatercraftRightJetN=0;
     FVector WatercraftCurrentCmPerSecond=FVector::ZeroVector;
+    FVector WatercraftCargoAnchorCm() const {return WatercraftBedLocal;}
     FBox MediumLimits=FBox(ForceInit);
     FString Kind() const {return Category.IsEmpty()?(bAerial?TEXT("aerial"):TEXT("ground")):Category;}
     bool IsSpatial() const {return Category!=TEXT("digital")&&Category!=TEXT("operator");}
     bool CanMove() const {return Category.IsEmpty()||MediumLimits.IsValid;}
-    bool CanCarry() const {return Category.IsEmpty()&&!bAerial;}
+    bool CanCarry() const {return bRescueWatercraft||(Category.IsEmpty()&&!bAerial);}
     bool CanSense() const {return IsSpatial();}
     bool MediumPointAllowed(const FVector& Position) const;
     int32 TargetIndex = -1;
@@ -79,6 +80,7 @@ public:
     void ResetForEpisode(const FTransform& Pose,bool UnlimitedEnergy);
     bool BeginPickup(int32 Index,const FString& Id);
     bool BeginHandover(const FString& Id);
+    bool BeginDisembark(const FString& Station,const FString& Id);
     void AccountPoweredTime(double Dt);
     bool ChargeDocked(const FVector& Position,double RadiusCm) const;
     bool BeginCharge(const FString& Id);
@@ -101,8 +103,20 @@ private:
     UPROPERTY() TObjectPtr<UNiagaraComponent> SurfaceSpray;
     UPROPERTY() TObjectPtr<UPhysicsConstraintComponent> WatercraftMooring;
     UPROPERTY() TObjectPtr<UBoxComponent> WatercraftCargoMass;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> WatercraftBoom;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> WatercraftCable;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> WatercraftTrolley;
+    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> WatercraftSlings;
+    UPROPERTY() TObjectPtr<UBoxComponent> GroundPayloadCollision;
+    FString ServiceShoreStation;
     FVector WatercraftHoldPosition=FVector::ZeroVector;
+    FVector WatercraftBedLocal=FVector::ZeroVector;
     bool SetWatercraftPayloadKg(double MassKg);
+    void MoveWatercraftPayloadTo(const FVector& WorldCG);
+    bool BeginWatercraftPickup(int32 Index,const FString& Id);
+    void TickWatercraftService(float Dt);
+    void InitializeGroundPayload();
+    void SetGroundPayloadKg(double MassKg);
     void MakeWatercraftMooring();
     void ReleaseWatercraftMooring();
     void ResetWatercraft();

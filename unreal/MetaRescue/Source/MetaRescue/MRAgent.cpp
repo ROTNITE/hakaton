@@ -69,7 +69,7 @@ void AMRAgent::Initialize(AMRWorld* InWorld, int32 InId, bool Aerial, const TArr
     Body->SetEnableGravity(!Aerial);
     if(Mission->bRescueQuarter)
     {
-        InitializeDistrictVisual();Body->SetSimulatePhysics(true);SetWaypoints(InitialPath);return;
+        InitializeDistrictVisual();Body->SetSimulatePhysics(true);InitializeGroundPayload();SetWaypoints(InitialPath);return;
     }
     if(Aerial)
     {
@@ -201,7 +201,7 @@ void AMRAgent::Tick(float Dt)
     Super::Tick(Dt);
     if(!Mission||!Body->IsSimulatingPhysics())return;
     AccountExecutedMovement();
-    if(bRescueWatercraft){DriveWatercraft(Dt);return;}
+    if(bRescueWatercraft){TickWatercraftService(Dt);DriveWatercraft(Dt);return;}
     if(MediumLimits.IsValid){DriveCompetitionMedium(Dt);return;}
     const FVector Current=GetActorLocation();
     if(Mission->bRescueQuarter)AnimateMechanisms(Dt);
@@ -215,13 +215,13 @@ void AMRAgent::Tick(float Dt)
             if(T.Visual)
             {
                 const float Alpha=FMath::SmoothStep(0.f,State=="loading"?8.f:6.f,ServiceElapsed);
-                const FVector Bed=GetActorTransform().TransformPosition(FVector(0,0,15));
+                const FVector Bed=GetActorTransform().TransformPosition(FVector(0,0,15+T.VisualAnchorOffsetCm));
                 if(State=="loading")
                 {
                     T.Visual->SetActorLocation(FMath::Lerp(PickupStart,Bed,Alpha));
                     T.Visual->SetActorRotation(FQuat::Slerp(PickupRotation,GetActorQuat(),Alpha));
                 }
-                else T.Visual->SetActorRelativeLocation(FMath::Lerp(FVector(0,0,15),FVector(-285,0,-42),Alpha));
+                else T.Visual->SetActorRelativeLocation(FMath::Lerp(FVector(0,0,15+T.VisualAnchorOffsetCm),FVector(-285,0,-42+T.VisualAnchorOffsetCm),Alpha));
             }
         }
         if(ServiceRemaining<=0&&TargetIndex>=0)
@@ -229,10 +229,11 @@ void AMRAgent::Tick(float Dt)
             auto& T=Mission->Targets[TargetIndex];
             if(State=="loading")
             {
-                if(T.Visual){T.Visual->AttachToActor(this,FAttachmentTransformRules::KeepWorldTransform);T.Visual->SetActorRelativeLocation(FVector(0,0,Mission->bRescueQuarter?15:87));T.Visual->SetActorRelativeRotation(FRotator::ZeroRotator);}
+                if(T.Visual){T.Visual->AttachToActor(this,FAttachmentTransformRules::KeepWorldTransform);T.Visual->SetActorRelativeLocation(FVector(0,0,(Mission->bRescueQuarter?15:87)+T.VisualAnchorOffsetCm));T.Visual->SetActorRelativeRotation(FRotator::ZeroRotator);}
+                T.SupportCarrier=this;T.ShoreStation.Empty();
                 State="inbound";
                 bCarrying=true;
-                if(Mission->bRescueQuarter){Body->SetMassOverrideInKg(NAME_None,320.f);Body->SetCenterOfMass(FVector(0,0,16));}
+                if(Mission->bRescueQuarter)SetGroundPayloadKg(T.FloatBody?98.:80.);
                 if(Mission->bCoreControlled)
                 {State=TEXT("loaded");bExternalHold=true;Mission->AppendEvent(TEXT("person_loaded"),T.Id);}
                 else
@@ -261,11 +262,12 @@ void AMRAgent::Tick(float Dt)
             else
             {
                 T.bRescued=true;
+                T.SupportCarrier.Reset();
                 if(T.Visual)
                 {if(Mission->bCoreControlled){T.Visual->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);T.Position=T.Visual->GetActorLocation();}T.Visual->SetActorHiddenInGame(true);}
                 bCarrying=false;
                 Mission->AppendEvent(TEXT("person_delivered"),T.Id);TargetIndex=-1;State="idle";
-                if(Mission->bRescueQuarter){Body->SetMassOverrideInKg(NAME_None,240.f);Body->SetCenterOfMass(FVector::ZeroVector);}
+                if(Mission->bRescueQuarter)SetGroundPayloadKg(0);
             }
         }
     }

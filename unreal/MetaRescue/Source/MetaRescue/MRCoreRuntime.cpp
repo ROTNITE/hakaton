@@ -310,7 +310,7 @@ void FMRCoreRuntime::AfterPhysics(UWorld* InWorld,ELevelTick TickType,float Dt)
     AdvanceServices();
     for(auto& T:World->Targets)
     {
-        if(T.bAssigned&&T.Visual)T.Position=T.Visual->GetActorLocation();
+        if((T.bAssigned||T.FloatBody)&&T.Visual)T.Position=T.Visual->GetActorLocation();
         if(!T.bAvailabilityReported&&Time()+1.e-9>=T.AvailableAt)
         {T.bAvailabilityReported=true;if(T.Visual)T.Visual->SetActorHiddenInGame(false);Record(TEXT("target_became_observable"),Obj({{TEXT("target_id"),Str(FString::Printf(TEXT("person-%d"),T.Id))}}),false);}
     }

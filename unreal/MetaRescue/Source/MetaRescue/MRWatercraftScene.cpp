@@ -12,6 +12,28 @@
 
 using namespace MRCoreValues;
 
+TSharedPtr<FJsonObject> AMRWorld::ShoreStation() const
+{
+    if(!bDisasterCity||!CityLayout||!Is(CityLayout,TEXT("watercraft"),EJson::Object))return nullptr;
+    const auto Data=CityLayout->GetObjectField(TEXT("watercraft"));
+    return Is(Data,TEXT("shore_station"),EJson::Object)?Data->GetObjectField(TEXT("shore_station")):nullptr;
+}
+
+TOptional<double> AMRWorld::ElevatedSupportHeightCm(const FVector& P) const
+{
+    const auto Station=ShoreStation();if(!Station)return {};
+    for(const auto& Value:Station->GetArrayField(TEXT("platforms")))
+    {
+        FVector Low,High;MRCoreJson::Point(Field(Value->AsObject(),TEXT("min")),Low);MRCoreJson::Point(Field(Value->AsObject(),TEXT("max")),High);
+        Low*=100;High*=100;
+        if(P.X>=Low.X&&P.X<=High.X&&P.Y>=Low.Y&&P.Y<=High.Y&&P.Z>=High.Z-30)return High.Z;
+    }
+    return {};
+}
+
+double AMRWorld::ShoreHoistHeightCm() const
+{const auto Station=ShoreStation();return Station?Station->GetNumberField(TEXT("hoist_height_m"))*100:0.;}
+
 bool AMRWorld::ValidateWatercraftLayout()
 {
     WatercraftPhysicsProfile.Reset();
@@ -23,6 +45,43 @@ bool AMRWorld::ValidateWatercraftLayout()
        !Is(Data,TEXT("spawns"),EJson::Array)||!Is(Data,TEXT("slipways"),EJson::Array))return false;
     const auto& Spawns=Data->GetArrayField(TEXT("spawns"));const auto& Slips=Data->GetArrayField(TEXT("slipways"));
     if(Spawns.IsEmpty()||Spawns.Num()>4||Slips.Num()!=Spawns.Num())return false;
+    if(Data->HasField(TEXT("load_fixture")))
+    {
+        if(!Is(Data,TEXT("load_fixture"),EJson::Object))return false;
+        const auto Fixture=Data->GetObjectField(TEXT("load_fixture"));
+        if(Text(Fixture,TEXT("format"))!=TEXT("metarescue.stretcher-cradle.v1"))return false;
+        for(const auto& Pair:TMap<FString,double>{{TEXT("anchor_x_m"),.6},{TEXT("deck_raise_m"),.12},{TEXT("mass_kg"),8.}})
+            if(!Is(Fixture,Pair.Key,EJson::Number)||Fixture->GetNumberField(Pair.Key)!=Pair.Value)return false;
+    }
+    if(Data->HasField(TEXT("shore_station")))
+    {
+        if(!Is(Data,TEXT("shore_station"),EJson::Object))return false;
+        const auto Station=Data->GetObjectField(TEXT("shore_station"));
+        if(Text(Station,TEXT("id"))!=TEXT("rescue-pier-west")||
+           !Is(Station,TEXT("deck_z_m"),EJson::Number)||Station->GetNumberField(TEXT("deck_z_m"))!=3.47||
+           !Is(Station,TEXT("hoist_height_m"),EJson::Number)||Station->GetNumberField(TEXT("hoist_height_m"))!=6.47||
+           !Is(Station,TEXT("width_m"),EJson::Number)||Station->GetNumberField(TEXT("width_m"))!=6||
+           !Is(Station,TEXT("platforms"),EJson::Array)||Station->GetArrayField(TEXT("platforms")).Num()!=2||
+           !Is(Station,TEXT("boat_position_xy"),EJson::Array)||!Is(Station,TEXT("boat_yaw_degrees"),EJson::Number)||
+           !Is(Station,TEXT("patient_capacity"),EJson::Number)||
+           !Is(Station,TEXT("ground_route"),EJson::Array)||Station->GetArrayField(TEXT("ground_route")).Num()!=3)return false;
+        const FVector ExpectedLow[]={FVector(-79,7,3.15),FVector(-79,7,3.15)};
+        const FVector ExpectedHigh[]={FVector(0,13,3.47),FVector(-73,27,3.47)};
+        for(int32 I=0;I<2;++I)
+        {
+            const auto Row=Station->GetArrayField(TEXT("platforms"))[I];FVector Low,High;
+            if(Row->Type!=EJson::Object||!MRCoreJson::Point(Field(Row->AsObject(),TEXT("min")),Low)||
+               !MRCoreJson::Point(Field(Row->AsObject(),TEXT("max")),High)||Low!=ExpectedLow[I]||High!=ExpectedHigh[I])return false;
+        }
+        FVector Patient=FVector::ZeroVector,Ground=FVector::ZeroVector;const auto& BoatXY=Station->GetArrayField(TEXT("boat_position_xy"));
+        if(!MRCoreJson::Point(Field(Station,TEXT("patient_position")),Patient)||Patient!=FVector(-76,26,3.47)||
+           !MRCoreJson::Point(Field(Station,TEXT("ground_pickup")),Ground)||Ground!=FVector(-76,22.5,3.47)||
+           BoatXY.Num()!=2||BoatXY[0]->Type!=EJson::Number||BoatXY[1]->Type!=EJson::Number||
+           BoatXY[0]->AsNumber()!= -76||BoatXY[1]->AsNumber()!=30.5||
+           Station->GetNumberField(TEXT("boat_yaw_degrees"))!= -90||Station->GetNumberField(TEXT("patient_capacity"))!=1)return false;
+        const FVector Route[]={FVector(10,10,3.47),FVector(-76,10,3.47),Ground};
+        for(int32 I=0;I<3;++I){FVector P;if(!MRCoreJson::Point(Station->GetArrayField(TEXT("ground_route"))[I],P)||P!=Route[I])return false;}
+    }
     TSet<FString> Ids;TArray<FVector> Positions;
     for(int32 I=0;I<Spawns.Num();++I)
     {
@@ -82,6 +141,45 @@ void AMRWorld::BuildWatercraftSlips()
         for(double Side:{-1.,1.})
             Shape(TEXT("Cylinder"),FVector(X+Side*140,7100,165),FVector(15,15,330),TEXT("MI_Metal"));
     }
+    const auto Station=ShoreStation();if(!Station)return;
+    for(const auto& Value:Station->GetArrayField(TEXT("platforms")))
+    {
+        FVector Low,High;MRCoreJson::Point(Field(Value->AsObject(),TEXT("min")),Low);MRCoreJson::Point(Field(Value->AsObject(),TEXT("max")),High);
+        Low*=100;High*=100;auto* Deck=Shape(TEXT("Cube"),(Low+High)*.5,High-Low,TEXT("MI_Concrete"));
+        Deck->ComponentTags.Add(TEXT("RescuePier"));
+    }
+    auto Pile=[&](double X,double Y)
+    {
+        const double Ground=InitialGroundHeightCm(FVector(X,Y,0));
+        if(Ground<315)Shape(TEXT("Cylinder"),FVector(X,Y,(Ground+315)*.5),FVector(36,36,315-Ground),TEXT("MI_Concrete"));
+    };
+    for(double X=-7600;X< -300;X+=600)
+    {
+        for(double Y:{750.,1250.})Pile(X,Y);
+        Shape(TEXT("Cube"),FVector(X,1000,310),FVector(35,590,30),TEXT("MI_Metal"));
+    }
+    for(double Y=1600;Y<=2600;Y+=500)for(double X:{-7850.,-7350.})Pile(X,Y);
+    auto Rail=[&](FVector A,FVector B)
+    {
+        const FVector D=B-A;const double L=D.Size2D();
+        for(double Z:{402.,457.})Shape(TEXT("Cube"),(A+B)*.5+FVector(0,0,Z),FVector(L,6,6),TEXT("MI_Metal"),D.Rotation());
+        const int32 Count=FMath::CeilToInt(L/240);
+        for(int32 I=0;I<=Count;++I)Shape(TEXT("Cube"),FMath::Lerp(A,B,double(I)/Count)+FVector(0,0,402),FVector(8,8,110),TEXT("MI_Metal"));
+    };
+    Rail(FVector(-7900,720,0),FVector(0,720,0));Rail(FVector(-7300,1280,0),FVector(0,1280,0));
+    Rail(FVector(-7880,1280,0),FVector(-7880,2700,0));Rail(FVector(-7320,1280,0),FVector(-7320,2700,0));
+    for(double X:{-7850.,-7350.})Shape(TEXT("Cylinder"),FVector(X,2670,382),FVector(20,20,70),TEXT("MI_Metal"));
+    // A shore-supported gantry can lift to the dry deck even at low water.
+    // Its columns stand on the piles; the over-water beam is cantilevered.
+    for(double X:{-7840.,-7360.})
+    {
+        Shape(TEXT("Cube"),FVector(X,2550,497),FVector(18,18,300),TEXT("MI_Metal"));
+        const FVector A(X,2550,417),B(X,2850,632),D=B-A;
+        Shape(TEXT("Cube"),(A+B)*.5,FVector(D.Size(),14,14),TEXT("MI_Metal"),D.Rotation());
+    }
+    Shape(TEXT("Cube"),FVector(-7600,2550,647),FVector(520,22,26),TEXT("MI_Metal"));
+    Shape(TEXT("Cube"),FVector(-7600,2825,647),FVector(18,650,22),TEXT("MI_Metal"));
+    DistrictLabel(TEXT("WATER RESCUE / TRANSFER"),FVector(-7580,2550,620),30);
 }
 
 void AMRWorld::SpawnWatercraft()

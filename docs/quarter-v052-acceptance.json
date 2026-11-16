@@ -1896,15 +1896,15 @@
       "id": "VIS10",
       "requirement": "Новая лодка, 0–4/по умолчанию 2, реальный спуск, глубина/осадка/плавучесть/течение/груз/энергия",
       "status": "partial",
-      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/catamaran-import-01/verification.json", "tests/test_watercraft_config.py", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-boat-02/verification.json"],
-      "scope_note": "Модель/4LOD,0–4 лодки (default2 только2.3), реальный спуск/плавучесть/водомёты/3000Wh и reset пустой лодки проверены. Native-boat-02:130с,475кг,осадка14см,40,89Wh,12PNG,оба архива/freeze. Груз, течение в городе, UI, отказ/потеря связи и полный рейс остаются открыты."
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/catamaran-import-01/verification.json", "tests/test_watercraft_config.py", "tests/test_watercraft_shore.py", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-boat-02/verification.json", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-transfer-04/verification.json"],
+      "scope_note": "Модель/4LOD,0–4 лодки, спуск/плавучесть/тяга/энергия и физическая береговая цепочка в удерживаемом спокойном бассейне проверены. Native-transfer-04:220с,масса475→573/240→338кг,медприёмка179с,399+6 реальных лучей коллизии/reset,18PNG,архивы/freeze. Автоматическая коалиция, течение в городе, UI, отказ/потеря связи, детали мачты/стрелы и визуал всех передач остаются открыты."
     },
     {
       "id": "VIS11",
       "requirement": "Промежуточная высадка сохраняет личность и владение грузом; спасение только в медпункте; зависимая коалиция",
-      "status": "pending",
-      "evidence": [],
-      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+      "status": "partial",
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/native-transfer-04/verification.json", "tests/test_watercraft_shore.py"],
+      "scope_note": "Объявленная пристань/disembark сохраняют ID и владение; обычный ACK, waiting на берегу, rescue только после медприёмки. Полная физическая цепочка с явными проверяющими командами прошла220с,179с до зачёта,reset/оба архива/freeze. Автоматическая зависимая коалиция NSGA-II/Global/Local и коммуникационные отказы ещё не приняты."
     },
     {
       "id": "VIS12",
