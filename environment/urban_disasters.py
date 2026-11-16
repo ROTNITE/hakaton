@@ -1,0 +1,79 @@
+"""Initial geometry for city 2.3; never imported by a controller."""
+from __future__ import annotations
+
+import math
+
+from contracts.urban_terrain import FORMAT, Terrain
+
+
+def attach_elevation(world):
+    if world['format'] != 'rescue-city-2.3':
+        return
+    terrain = {'format': FORMAT, 'base': {'min': world['base']['min'][:2], 'max': world['base']['max'][:2]},
+               'base_elevation_m': 3.4, 'grade_width_m': 45., 'pads': [],
+               'ramp': {'min': [world['base']['max'][0], 4.], 'max': [world['base']['max'][0]+45., 16.]},
+               'depressions': [{'min': [-99., 24.], 'max': [-63., 62.], 'elevation_m': -7.2}]}
+    raw = Terrain(terrain)
+    for building in world['buildings']:
+        x, y, _ = building['position']
+        height = raw.raw_height(x, y)
+        if height > 0:
+            terrain['pads'].append({'min': building['bounds']['min'][:2], 'max': building['bounds']['max'][:2],
+                                    'elevation_m': height})
+    heights = Terrain(terrain)
+
+    def bounds_up(bounds, height):
+        bounds['min'][2] += height
+        bounds['max'][2] += height
+
+    def place(row):
+        position = row.get('position')
+        if position is None:
+            return
+        height = heights.height(*position[:2])
+        # Copies are deliberate: charging-pad positions can alias a spawn.
+        row['position'] = [*position[:2], position[2]+height]
+        if 'bounds' in row:
+            bounds_up(row['bounds'], height)
+        for bounds in row.get('obstacles', ()):
+            bounds_up(bounds, height)
+        if 'exit' in row:
+            row['exit'] = [[x, y, z+heights.height(x, y)] for x, y, z in row['exit']]
+
+    for key in ('buildings', 'features', 'facilities', 'fixed_obstacles', 'infrastructure', 'spawns', 'people', 'background', 'parcels'):
+        for row in world.get(key, ()):
+            place(row)
+    for node in world['road_graph']['nodes']:
+        x, y, z = node['position']
+        node['position'] = [x, y, z+heights.height(x, y)]
+    for surface in world['surfaces']:
+        bounds = surface['bounds']
+        x, y = [(a+b)/2 for a, b in zip(bounds['min'][:2], bounds['max'][:2])]
+        bounds_up(bounds, heights.height(x, y))
+    bounds_up(world['base'], terrain['base_elevation_m'])
+    world['base_position'][2] += terrain['base_elevation_m']
+    world['base_layout_revision'] = 4
+    world['terrain'] = terrain
+    world['hydrology'] = hydrology_blueprint(world)
+    world['bounds']['min'][0] = min(world['bounds']['min'][0], -101.)
+    if 'competition' in world:
+        for row in world['competition']['units']:
+            if row['kind'] in ('infrastructure', 'digital', 'operator'):
+                place(row)
+        for zone in world['competition']['zones']:
+            if zone['type'] == 'land':
+                zone['geometry']['max'][2] = 6.
+
+
+def hydrology_blueprint(world):
+    """The existing basin is a river-fed retention source for this profile.
+
+    The explicitly modelled boundary supplies water; it is not a finite-volume
+    claim about the visible basin alone. Every supplied/removed m3 is logged.
+    """
+    origin = [-105., 0.]
+    return {'format': 'metarescue.hydrology.v1', 'cell_m': 5., 'origin_m': origin,
+            'width': math.ceil((world['size_m']-origin[0])/5), 'height': math.ceil(world['size_m']/5),
+            'basin': {'min': [-99., 24., -7.2], 'max': [-63., 62., .05]},
+            'boundary': 'river_fed_retention_basin', 'initial_stage_m': .05,
+            'storm_stage_m': 2.8, 'rise_seconds': 70., 'drain_capacity_m3_s': .025}

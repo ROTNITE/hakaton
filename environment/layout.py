@@ -18,6 +18,7 @@ from contracts.protocol import ProtocolError
 from environment.competition import attach as attach_competition_annex
 from environment.config import Settings
 from environment.events import generate_tape
+from environment.urban_disasters import attach_elevation
 from environment.geometry import Footprint, SpatialIndex, box as _box, overlap as _overlap, segment_clear as _segment_clear
 from environment.neighbourhood import VERSION as IRREGULAR_VERSION,DECORATED_VERSION,STREET_PROP_VERSION,DISASTER_VERSION,build_neighbourhood
 
@@ -122,6 +123,7 @@ def generate(settings: Settings, *, include_events=False) -> dict:
               'bounds':_box((0,0,-12),(size,size,90)),'base':base,'base_position':[20,22,0],
               'spawns':spawns,'infrastructure':infrastructure,'fixed_obstacles':fixed_obstacles,**parts}
         if settings.competition:attach_competition_annex(data)
+        if revision=='2.3':attach_elevation(data)
         data['preflight']=preflight(data)
         if include_events:data['event_model']=generate_tape(data)
         return data
@@ -323,7 +325,7 @@ def preflight(data):
 def public_map(data):
     """Announced static map: no hidden people, future disturbances or RNG state."""
     fields=('format','base_layout_revision','cell_m','size_m','bounds','base','base_position','road_axes_m','road_width_m',
-            'road_graph','buildings','features','facilities','fixed_obstacles','surfaces','infrastructure')
+            'road_graph','buildings','features','facilities','fixed_obstacles','surfaces','infrastructure','terrain','hydrology')
     result={key:data[key] for key in fields if key in data}
     if 'competition' in data:result['declared_zones']=data['competition']['zones']
     return result

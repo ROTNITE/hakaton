@@ -1,7 +1,7 @@
 """A* over announced/observed geometry only. Coordinates and costs use metres.
 
-The current city ground is one flat layer. Layered terrain must supply its
-own surface graph; this module does not invent unseen slopes or tunnels.
+Ground navigation follows announced streets and the initial terrain blueprint.
+Runtime changes enter only through delivered observations.
 Flight uses full 3D clearance, with a cruise route before bounded voxel A*.
 """
 from __future__ import annotations
@@ -11,6 +11,7 @@ import heapq
 import itertools
 import math
 import time
+from contracts.urban_terrain import Terrain
 
 
 class RouteFailure(ValueError):
@@ -175,6 +176,7 @@ class NavigationMap:
             raise ValueError('step_m must be finite and positive')
         self.bounds = Box.parse(announced_map['bounds'])
         self.announced=announced_map
+        self.terrain=Terrain(announced_map.get('terrain'))
         self.step = float(step_m)
         self.parked_ground_peers = tuple(parked_ground_peers)
         self.obstacles = []
@@ -320,7 +322,7 @@ class NavigationMap:
             raise RouteFailure('ground_surface_graph_not_announced')
         base=self.announced['base']
         at_base=base['min'][0]<=x<=base['max'][0] and base['min'][1]<=y<=base['max'][1]
-        return data['ground_clearance_m']+data['base_surface_z_m' if at_base else 'road_surface_z_m']
+        return self.terrain.height(x,y)+data['ground_clearance_m']+data['base_surface_z_m' if at_base else 'road_surface_z_m']
 
     def road_route(self,start,goal,*,radius_m=1.45,half_height_m=1.1,precise_stop=False):
         """Use actual declared streets/base instead of crossing raised curbs.

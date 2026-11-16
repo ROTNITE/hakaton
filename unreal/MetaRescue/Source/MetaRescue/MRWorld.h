@@ -148,6 +148,7 @@ private:
     void UrbanRoadPatch(FVector Start,FVector End,double Width,double Offset,const FString& Material);
     void DamageUrbanRoad(const FMRDisturbance& Event);
     void ResetUrbanTerrain();
+    double InitialGroundHeightCm(FVector Position) const;
     TSharedPtr<FMRUrbanTerrain> UrbanTerrain;
     bool CollapseCityStructure(const FMRDisturbance& Event);
     void RefreshCitySmokeHeights();

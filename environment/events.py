@@ -12,6 +12,7 @@ import math
 import random
 
 from contracts.protocol import ProtocolError
+from contracts.urban_terrain import Terrain
 from environment.config import Settings,EVENT_DEFAULTS
 
 VERSION='metarescue.events-3d.1.0'
@@ -104,6 +105,7 @@ def generate_tape(world):
     if 'road_graph' in world:tape['placement_model']='irregular_street_sources_and_clipped_five_metre_cells.2'
     if not any(settings.probabilities.values()):return tape
     placement=Placement(world);used=defaultdict(set)
+    terrain=Terrain(world.get('terrain'))
     windows=range(1,max(2,int(horizon//80))) if profile=='v052' else range(1,math.ceil(horizon/30))
     next_person=max((p['id'] for p in world['people']),default=0)+1
     for window in windows:
@@ -117,6 +119,7 @@ def generate_tape(world):
             if not 0<at<horizon:continue
             eid='event-'+hashlib.sha256(f'{VERSION}:{settings.seed}:{profile}:{requested}:{window}'.encode()).hexdigest()[:20]
             source,source_id=placement.source(kind,rng,used[kind])
+            if source is not None:source[2]+=terrain.height(*source[:2])
             row={'id':eid,'kind':kind,'time':at,'source':source,'source_object_id':source_id,
                  'parent_id':None,'spread':False,'cells':[],'expires_at':None,'visibility_expires_at':None,'rejection':None}
             if source is None:row['rejection']='no_eligible_source';tape['events'].append(row);continue
@@ -126,7 +129,8 @@ def generate_tape(world):
                     else:
                         x,y=rng.choice(placement.ground)
                         point=[x+3.1,y,.06] if rng.random()<.5 else [x,y+3.1,.06]
-                    if placement.person_clear(point):break
+                    if placement.person_clear(point):
+                        point[2]+=terrain.height(*point[:2]);break
                 else:row['rejection']='no_safe_late_person_space';tape['events'].append(row);continue
                 row.update(source=point,target_id=next_person)
                 tape['late_people'].append({'id':next_person,'position':point,'priority':rng.choices((1,2,3),(.6,.3,.1))[0],
@@ -167,6 +171,7 @@ def generate_tape(world):
                     ordered=[list(c) for c in sorted(spread)]
                     growth={**deepcopy(row),'id':eid+'-spread-'+str(step),'parent_id':eid,'spread':True,
                             'time':spread_at,'cells':ordered,'source':[(ordered[0][i]+.5)*CELL_M for i in (0,1)]+[.05]}
+                    growth['source'][2]+=terrain.height(*growth['source'][:2])
                     if kind=='fire':growth['visibility_expires_at']=spread_at+70
                     tape['events'].append(growth)
                     cells.update(spread);frontier=sorted(spread)
@@ -176,7 +181,7 @@ def generate_tape(world):
         for row in tape['events']:
             if row['rejection']:continue
             house=buildings.get(row['source_object_id'])
-            row['smoke_emission_height_m']=house['bounds']['max'][2] if row['kind']=='fire' and house else .2
+            row['smoke_emission_height_m']=house['bounds']['max'][2] if row['kind']=='fire' and house else .2+terrain.height(*row['source'][:2])
             if row['kind']=='fire':
                 row['expires_at']=row['time']+180.
                 row['visibility_expires_at']=row['expires_at']+45.

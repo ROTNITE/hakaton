@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "MRGradedTerrain.h"
 
 class AMRWorld;
 class UProceduralMeshComponent;
@@ -24,9 +25,11 @@ public:
     explicit FMRUrbanTerrain(AMRWorld* InWorld):World(InWorld){}
     void Build();
     void RoadPatch(FVector Start,FVector End,double Width,double Offset,UMaterialInterface* Material);
+    void BaseApron(FBox Bounds,UMaterialInterface* Material);
     bool Damage(const FMRDisturbance& Event);
     void Reset();
     double DropCm(FVector Position) const;
+    double InitialHeight(FVector Position) const {return Topography.Height(Position);}
 private:
     friend class AMRWorld;
     struct FPatch
@@ -35,7 +38,7 @@ private:
         TArray<FVector> XY;
         TArray<int32> Triangles;
         FBox Bounds=FBox(ForceInit);
-        double Offset=0;
+        double Offset=0,EdgeFeatherCm=0;
         FVector GridOrigin=FVector::ZeroVector,GridX=FVector::ZeroVector,GridY=FVector::ZeroVector;
         int32 InitialNX=0,InitialNY=0;
         bool Refined=false;
@@ -52,6 +55,7 @@ private:
         bool Collision=false;
     };
     AMRWorld* World;
+    FMRGradedTerrain Topography;
     TArray<FPatch> Patches;
     TArray<FOverlay> Overlays;
     TArray<FMRRoadCavity> Cavities;
@@ -61,5 +65,5 @@ private:
     void Tessellate(FPatch& Patch,int32 NX,int32 NY);
     void Update(FOverlay& Overlay);
     void CutOverlays(const FMRRoadCavity& Cavity);
-    void Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil);
+    void Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil,double EdgeFeatherCm=0);
 };

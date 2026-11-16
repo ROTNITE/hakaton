@@ -1,5 +1,7 @@
 #include "MRWorld.h"
 #include "MRBuildingWindows.h"
+#include "MRGradedTerrain.h"
+#include "MRUrbanTerrain.h"
 #include "MRCityAssets.h"
 #include "MRCoreJson.h"
 #include "MRCoreValues.h"
@@ -56,6 +58,12 @@ bool AMRWorld::ReadCityLayout(const FString& File)
     {UE_LOG(LogTemp,Error,TEXT("MR_CITY invalid layout file"));return false;}
     const FString Format=CityLayout->GetStringField(TEXT("format"));
     bDisasterCity=Format==TEXT("rescue-city-2.3");
+    FMRGradedTerrain TerrainCheck;
+    if(bDisasterCity)
+    {
+        if(!TerrainCheck.Read(CityLayout->HasTypedField<EJson::Object>(TEXT("terrain"))?CityLayout->GetObjectField(TEXT("terrain")):nullptr))
+        {UE_LOG(LogTemp,Error,TEXT("MR_CITY invalid terrain blueprint"));return false;}
+    }
     bCityProps=bDisasterCity||Format==TEXT("rescue-city-2.2");
     if(bDisasterCity&&FApp::CanEverRender())
     {
@@ -95,7 +103,8 @@ bool AMRWorld::ReadCityLayout(const FString& File)
             if(Value->Type!=EJson::Object)return false;
             const auto Node=Value->AsObject();const FString Id=MRCoreValues::Text(Node,TEXT("id"));FVector P;
             if(Id.IsEmpty()||Names.Contains(Id)||!MRCoreJson::Point(Field(Node,TEXT("position")),P)||
-               P.X<0||P.Y<0||P.X>GridSize*10||P.Y>GridSize*10||P.Z!=0)return false;
+               P.X<0||P.Y<0||P.X>GridSize*10||P.Y>GridSize*10||
+               (bDisasterCity?FMath::Abs(P.Z-TerrainCheck.Height(P*100)/100.)>1.e-6:P.Z!=0))return false;
             Names.Add(Id);
         }
         for(const auto& Value:Edges)
@@ -153,6 +162,7 @@ bool AMRWorld::ReadCityLayout(const FString& File)
         auto Input=Entry->AsObject();auto Person=MakeShared<FJsonObject>();const FVector P=CityPoint(Input->GetArrayField(TEXT("position")));
         Person->SetNumberField(TEXT("id"),Input->GetIntegerField(TEXT("id")));
         Person->SetNumberField(TEXT("x"),P.X/1000);Person->SetNumberField(TEXT("y"),P.Y/1000);
+        if(bDisasterCity)Person->SetNumberField(TEXT("z_m"),P.Z/100);
         Person->SetNumberField(TEXT("priority"),Input->GetNumberField(TEXT("priority"))/3.);
         Person->SetNumberField(TEXT("available_at"),Input->GetNumberField(TEXT("available_at")));
         Person->SetArrayField(TEXT("path"),{});People.Add(CityValue(Person));
@@ -242,13 +252,17 @@ void AMRWorld::BuildCity()
         if(bCityProps)
         {
             const auto& Frontage=J->GetArrayField(TEXT("street_source"));
-            const FVector DoorWalk(Frontage[0]->AsNumber()*100,Frontage[1]->AsNumber()*100,0);
+            FVector DoorWalk(Frontage[0]->AsNumber()*100,Frontage[1]->AsNumber()*100,0);
+            if(bDisasterCity)DoorWalk.Z=InitialGroundHeightCm(DoorWalk);
             const FVector Direction=(DoorWalk-P).GetSafeNormal2D();
             const FVector Threshold=P+Direction*446;
             const double Length=FVector::Dist2D(Threshold,DoorWalk);
             if(Length>5&&Length<1600)
-                Shape("Cube",(Threshold+DoorWalk)*.5+FVector(0,0,.7),FVector(Length,186,.4),
-                      "M_QuarterPaving",Direction.Rotation(),false);
+            {
+                if(bDisasterCity)UrbanRoadPatch(Threshold,DoorWalk,186,.7,TEXT("M_QuarterPaving"));
+                else Shape("Cube",(Threshold+DoorWalk)*.5+FVector(0,0,.7),FVector(Length,186,.4),
+                           "M_QuarterPaving",Direction.Rotation(),false);
+            }
         }
         if(++Count%32==0)OptimizeDistrictInstances();
     }
@@ -306,7 +320,8 @@ void AMRWorld::BuildCity()
         if(Use==TEXT("courtyard"))DistrictAssembly("SceneryKit",P+FVector(bIrregularCity?-200:-500,0,0),FRotator::ZeroRotator,FVector::OneVector,!bIrregularCity,false,"courtyard_bench");
         else if(Use==TEXT("service"))DistrictAssembly("SceneryKit",P,FRotator::ZeroRotator,FVector::OneVector,!bIrregularCity,false,"service_bins");
     }
-    Shape("Cube",FVector(BaseBox.GetCenter().X,BaseBox.GetCenter().Y,bIrregularCity?-3:1),FVector(BaseBox.GetSize().X,BaseBox.GetSize().Y,20),"M_QuarterAsphalt");
+    if(bDisasterCity)UrbanTerrain->BaseApron(BaseBox,MRSceneMaterial(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_QuarterAsphalt.M_QuarterAsphalt"))));
+    else Shape("Cube",FVector(BaseBox.GetCenter().X,BaseBox.GetCenter().Y,bIrregularCity?-3:1),FVector(BaseBox.GetSize().X,BaseBox.GetSize().Y,20),"M_QuarterAsphalt");
     const bool DeclaredBase=CityLayout->HasTypedField<EJson::Number>(TEXT("base_layout_revision"))&&
         CityLayout->GetIntegerField(TEXT("base_layout_revision"))>=3;
     if(!DeclaredBase)DistrictMesh("Medical",Base+FVector(0,0,13));
@@ -348,12 +363,12 @@ void AMRWorld::BuildCity()
     if(bDecoratedCity)
     {
         for(double X=1200;X<BaseBox.Max.X-200;X+=360)
-            Shape("Cube",FVector(X,1000,8),FVector(130,9,1),"MI_Paint",FRotator::ZeroRotator,false);
+            Shape("Cube",FVector(X,1000,8+(bDisasterCity?InitialGroundHeightCm(FVector(X,1000,0)):0)),FVector(130,9,1),"MI_Paint",FRotator::ZeroRotator,false);
         ApplyCityDaylight();
     }
     for(const auto& Entry:CityLayout->GetArrayField(TEXT("spawns")))
     {
-        auto J=Entry->AsObject();FVector P=CityPoint(J->GetArrayField(TEXT("position")));P.Z=13;
+        auto J=Entry->AsObject();FVector P=CityPoint(J->GetArrayField(TEXT("position")));P.Z=13+(bDisasterCity?InitialGroundHeightCm(P):0);
         if(J->GetStringField(TEXT("kind"))==TEXT("ground"))
         {
             // A field-deployed rover can start on a real road. Only docked
@@ -369,7 +384,7 @@ void AMRWorld::BuildCity()
     }
     for(const auto& Entry:CityLayout->GetArrayField(TEXT("infrastructure")))
     {
-        auto J=Entry->AsObject();FVector P=CityPoint(J->GetArrayField(TEXT("position")));P.Z=13;
+        auto J=Entry->AsObject();FVector P=CityPoint(J->GetArrayField(TEXT("position")));P.Z=13+(bDisasterCity?InitialGroundHeightCm(P):0);
         const FString Kind=J->GetStringField(TEXT("kind"));
         if(Kind==TEXT("relay"))DistrictMesh("Relay",P);
         else if(Kind==TEXT("sensor_node")&&!DeclaredBase)DistrictMesh("Sensor",P);
@@ -454,11 +469,42 @@ void AMRWorld::BuildCityYards()
         const int32 Material=Kind==TEXT("park")?1:Kind==TEXT("service")?2:Kind==TEXT("garden")?3:0;
         const FIntVector Key(FMath::FloorToInt(First[0]->AsNumber()/200),FMath::FloorToInt(First[1]->AsNumber()/200),Material);
         auto& Batch=Batches.FindOrAdd(Key);
+        if(bDisasterCity)
+        {
+            TArray<FVector> Polygon;bool Graded=false;
+            for(const auto& Value:Outline)
+            {
+                const auto& Point=Value->AsArray();const FVector P(Point[0]->AsNumber()*100,Point[1]->AsNumber()*100,0);
+                Polygon.Add(P);Graded|=InitialGroundHeightCm(P)>0;
+            }
+            // Only lots on the small base mound need extra tessellation. A
+            // giant flat polygon must not bridge the earth below it in midair.
+            auto Triangle=[&](auto&& Self,FVector A,FVector B,FVector C,int32 Depth)->void
+            {
+                if(Graded&&Depth<8&&FMath::Max3(FVector::DistSquared(A,B),FVector::DistSquared(B,C),FVector::DistSquared(C,A))>40000)
+                {
+                    const FVector AB=(A+B)*.5,BC=(B+C)*.5,CA=(C+A)*.5;
+                    Self(Self,A,AB,CA,Depth+1);Self(Self,AB,B,BC,Depth+1);
+                    Self(Self,CA,BC,C,Depth+1);Self(Self,AB,BC,CA,Depth+1);return;
+                }
+                const int32 FirstVertex=Batch.Vertices.Num();
+                for(FVector P:{A,B,C})
+                {
+                    P.Z=InitialGroundHeightCm(P)+.4;Batch.Vertices.Add(P);
+                    const double DX=InitialGroundHeightCm(P+FVector(50,0,0))-InitialGroundHeightCm(P-FVector(50,0,0));
+                    const double DY=InitialGroundHeightCm(P+FVector(0,50,0))-InitialGroundHeightCm(P-FVector(0,50,0));
+                    Batch.Normals.Add(FVector(-DX/100,-DY/100,1).GetSafeNormal());Batch.UV.Add(FVector2D(P.X,P.Y)/100);
+                }
+                Batch.Triangles.Append({FirstVertex,FirstVertex+2,FirstVertex+1});
+            };
+            for(int32 I=1;I+1<Polygon.Num();++I)Triangle(Triangle,Polygon[0],Polygon[I],Polygon[I+1],0);
+            ++Count;continue;
+        }
         const int32 Start=Batch.Vertices.Num();
         for(const auto& Value:Outline)
         {
             const auto& Point=Value->AsArray();
-            const FVector Vertex(Point[0]->AsNumber()*100,Point[1]->AsNumber()*100,.40);
+            FVector Vertex(Point[0]->AsNumber()*100,Point[1]->AsNumber()*100,.40);
             Batch.Vertices.Add(Vertex);
             Batch.Normals.Add(FVector::UpVector);
             Batch.UV.Add(FVector2D(Vertex.X,Vertex.Y)/100);
@@ -762,8 +808,8 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
         const FVector Along=Delta/Length,Normal(-Along.Y,Along.X,0);
         const FRotator Turn(0,Along.Rotation().Yaw,0);
         const FVector Middle=(Start+End)*.5;
-        // All strips share the flat physical terrain. Render-layer seams do
-        // not create overlapping support colliders at angled intersections.
+        // New-profile strips use the same graded support as the soil. Legacy
+        // render layers retain their original flat terrain.
         if(bDisasterCity)UrbanRoadPatch(Start,End,Width,.4,TEXT("M_QuarterAsphalt"));
         else Shape("Cube",Middle+FVector(0,0,1.2),FVector(Length,Width,1),"M_QuarterAsphalt",Turn,false);
         if(Footway&&Length>500)for(double Side:{-1.,1.})
@@ -777,7 +823,8 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
         }
         if(Avenue)for(double At=460;At<Length-350;At+=440)
         {
-            const FVector Dash=Start+Along*At;
+            FVector Dash=Start+Along*At;
+            if(bDisasterCity)Dash.Z=InitialGroundHeightCm(Dash);
             if(!BaseBox.IsInsideXY(Dash))Shape("Cube",Dash+FVector(0,0,2),FVector(150,9,1),"MI_Paint",Turn,false);
         }
     };
@@ -847,7 +894,14 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
                 TArray<FBox> Placed;
                 for(int32 I=0;I<Tiles;++I)
                 {
-                    const FVector Center=Start+Direction*(Begin+(I+.5)*Tile);
+                    FVector Center=Start+Direction*(Begin+(I+.5)*Tile);
+                    Center.Z=InitialGroundHeightCm(Center);
+                    // The source module is rigid. Do not bridge a grade or
+                    // retaining edge with an apparently floating flat slab.
+                    bool Level=true;
+                    for(double X:{-Tile*.5,0.,Tile*.5})for(double Y:{-Width*.77,0.,Width*.77})
+                        if(FMath::Abs(InitialGroundHeightCm(Center+Direction*X+Normal*Y)-Center.Z)>4)Level=false;
+                    if(!Level)continue;
                     const FVector Extent=Direction.GetAbs()*(Tile*.5)+Normal.GetAbs()*(540*Width/700)+FVector(1,1,20);
                     const FBox Envelope(Center-Extent,Center+Extent);
                     if(!Fits(Envelope))continue;
@@ -908,7 +962,8 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
                 const FVector Right(-Direction.Y,Direction.X,0);
                 for(const double Side:{1.,-1.})
                 {
-                    const FVector P=Center+Direction*780+Right*(Side*Offset);
+                    FVector P=Center+Direction*780+Right*(Side*Offset);
+                    if(bDisasterCity)P.Z=InitialGroundHeightCm(P);
                     if(P.X<100||P.Y<100||P.X>Size-100||P.Y>Size-100)continue;
                     const FBox Envelope(P-FVector(65,65,0),P+FVector(65,65,355));
                     if(!Fits(Envelope)||Streets.ContainsByPredicate([&](const FStreet& Street)

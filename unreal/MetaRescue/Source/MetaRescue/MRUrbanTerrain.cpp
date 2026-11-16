@@ -53,9 +53,9 @@ void FMRUrbanTerrain::AddFoundation(FBox Bounds)
             Foundations.FindOrAdd(FIntPoint(X,Y)).Add(Bounds);
 }
 
-void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil)
+void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,double Offset,UMaterialInterface* Material,bool Soil,double EdgeFeatherCm)
 {
-    FPatch Patch;Patch.Offset=Offset;Patch.Soil=Soil;Patch.Collision=true;
+    FPatch Patch;Patch.Offset=Offset;Patch.Soil=Soil;Patch.Collision=true;Patch.EdgeFeatherCm=EdgeFeatherCm;
     Patch.GridOrigin=Origin;Patch.GridX=X;Patch.GridY=Y;Patch.InitialNX=NX;Patch.InitialNY=NY;
     auto* Mesh=NewObject<UProceduralMeshComponent>(World);World->AddInstanceComponent(Mesh);Mesh->SetupAttachment(World->GetRootComponent());
     Mesh->SetMobility(EComponentMobility::Static);Mesh->SetWorldLocation(Origin);
@@ -90,13 +90,25 @@ void FMRUrbanTerrain::Update(FPatch& Patch)
     TArray<FVector> Vertices,Normals;TArray<FVector2D> UV;TArray<int32> Intact,Broken;
     const FVector Origin=Mesh->GetComponentLocation();Vertices.Reserve(Patch.XY.Num());Normals.Reserve(Patch.XY.Num());
     TArray<double> Drops;Drops.Reserve(Patch.XY.Num());
+    auto Height=[&](FVector Q)
+    {
+        double Layer=Patch.Offset;
+        if(Patch.EdgeFeatherCm>0)
+        {
+            const double Edge=FMath::Min(FMath::Min(Q.X-Patch.Bounds.Min.X,Patch.Bounds.Max.X-Q.X),
+                FMath::Min(Q.Y-Patch.Bounds.Min.Y,Patch.Bounds.Max.Y-Q.Y));
+            Layer*=FMath::Clamp(Edge/Patch.EdgeFeatherCm,0.,1.);
+        }
+        return InitialHeight(Q)+Layer-(Patch.Soil?DropCm(Q):0);
+    };
     for(const auto& XY:Patch.XY)
     {
         const double Drop=DropCm(XY);Drops.Add(Drop);
-        Vertices.Add(XY-Origin+FVector(0,0,Patch.Offset-(Patch.Soil?Drop:0)));
-        const double DX=DropCm(XY+FVector(50,0,0))-DropCm(XY-FVector(50,0,0));
-        const double DY=DropCm(XY+FVector(0,50,0))-DropCm(XY-FVector(0,50,0));
-        Normals.Add(Patch.Soil?FVector(DX/100,DY/100,1).GetSafeNormal():FVector::UpVector);
+        const FVector P(XY.X,XY.Y,Height(XY));
+        Vertices.Add(P-Origin);
+        const double DX=Height(XY+FVector(50,0,0))-Height(XY-FVector(50,0,0));
+        const double DY=Height(XY+FVector(0,50,0))-Height(XY-FVector(0,50,0));
+        Normals.Add(FVector(-DX/100,-DY/100,1).GetSafeNormal());
         UV.Add(FVector2D(XY.X/500.,XY.Y/500.));
     }
     TMap<FIntPoint,uint8> Edges;
@@ -104,6 +116,12 @@ void FMRUrbanTerrain::Update(FPatch& Patch)
     {
         const int32 A=Patch.Triangles[I],B=Patch.Triangles[I+1],C=Patch.Triangles[I+2];
         const double Drop=FMath::Max3(Drops[A],Drops[B],Drops[C]);
+        if(!Patch.Soil)
+        {
+            const double Span=FMath::Max3(FVector::Dist2D(Patch.XY[A],Patch.XY[B]),FVector::Dist2D(Patch.XY[A],Patch.XY[C]),FVector::Dist2D(Patch.XY[B],Patch.XY[C]));
+            const double Rise=FMath::Max3(Vertices[A].Z,Vertices[B].Z,Vertices[C].Z)-FMath::Min3(Vertices[A].Z,Vertices[B].Z,Vertices[C].Z);
+            if(Rise>.3*Span)continue; // no asphalt painted vertically up a retaining edge
+        }
         if(!Patch.Soil&&Drop>0)
         {
             const uint8 State=Drop>20?2:1;
@@ -182,6 +200,9 @@ void FMRUrbanTerrain::CutOverlays(const FMRRoadCavity& Cavity)
 
 void FMRUrbanTerrain::Build()
 {
+    const auto Profile=World->CityLayout->HasTypedField<EJson::Object>(TEXT("terrain"))?World->CityLayout->GetObjectField(TEXT("terrain")):nullptr;
+    if(!Topography.Read(Profile))
+    {UE_LOG(LogTemp,Error,TEXT("MR_TERRAIN invalid initial height blueprint"));return;}
     for(const auto& Entry:World->CityLayout->GetArrayField(TEXT("buildings")))
     {
         const auto Bounds=Entry->AsObject()->GetObjectField(TEXT("bounds"));FVector Min,Max;
@@ -207,10 +228,19 @@ void FMRUrbanTerrain::RoadPatch(FVector Start,FVector End,double Width,double Of
     Grid(Start-Across*Width*.5,Delta,Across*Width,FMath::CeilToInt(Length/200),FMath::CeilToInt(Width/100),Offset,Material,false);
 }
 
+void FMRUrbanTerrain::BaseApron(FBox Bounds,UMaterialInterface* Material)
+{
+    const FVector Size=Bounds.GetSize();
+    // A real two-metre asphalt transition replaces the old seven-centimetre
+    // vertical slab edge. The collision triangles and visible edge agree.
+    Grid(FVector(Bounds.Min.X,Bounds.Min.Y,0),FVector(Size.X,0,0),FVector(0,Size.Y,0),
+        FMath::CeilToInt(Size.X/100),FMath::CeilToInt(Size.Y/100),7,Material,false,200);
+}
+
 bool FMRUrbanTerrain::Damage(const FMRDisturbance& Event)
 {
     if(Cavities.ContainsByPredicate([&](const auto& C){return C.Id==Event.Id;}))return false;
-    FMRRoadCavity Cavity;Cavity.Id=Event.Id;Cavity.Center=Event.Source;Cavity.Center.Z=0;
+    FMRRoadCavity Cavity;Cavity.Id=Event.Id;Cavity.Center=Event.Source;Cavity.Center.Z=InitialHeight(Event.Source);
     const auto Graph=World->CityLayout->GetObjectField(TEXT("road_graph"));TMap<FString,FVector> Nodes;
     for(const auto& Entry:Graph->GetArrayField(TEXT("nodes")))
     {const auto Node=Entry->AsObject();FVector P;MRCoreJson::Point(Node->TryGetField(TEXT("position")),P);Nodes.Add(Node->GetStringField(TEXT("id")),P*100);}
@@ -306,3 +336,5 @@ void AMRWorld::DamageUrbanRoad(const FMRDisturbance& Event)
 }
 void AMRWorld::ResetUrbanTerrain()
 {if(UrbanTerrain)UrbanTerrain->Reset();}
+double AMRWorld::InitialGroundHeightCm(FVector Position) const
+{return UrbanTerrain?UrbanTerrain->InitialHeight(Position):0;}

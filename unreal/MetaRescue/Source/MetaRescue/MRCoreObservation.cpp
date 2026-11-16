@@ -446,7 +446,7 @@ void FMRCoreRuntime::Snapshot(const FString& RequestId)
     {
         auto Map=Obj();for(const FString& Key:{TEXT("format"),TEXT("base_layout_revision"),TEXT("cell_m"),TEXT("size_m"),TEXT("bounds"),TEXT("base"),TEXT("base_position"),
             TEXT("road_axes_m"),TEXT("road_width_m"),TEXT("road_graph"),TEXT("buildings"),TEXT("features"),TEXT("facilities"),
-            TEXT("fixed_obstacles"),TEXT("surfaces"),TEXT("infrastructure")})
+            TEXT("fixed_obstacles"),TEXT("surfaces"),TEXT("infrastructure"),TEXT("terrain"),TEXT("hydrology")})
             if(const auto Value=Field(World->CityLayout,Key))Map->SetField(Key,Value);
         const bool Irregular=World->bIrregularCity;
         Map->SetObjectField(TEXT("navigation"),Obj({{TEXT("kind"),Str(Irregular?TEXT("street_surface_graph.v2"):TEXT("road_surface_graph.v1"))},
