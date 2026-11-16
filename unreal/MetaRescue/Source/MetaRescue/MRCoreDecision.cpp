@@ -49,6 +49,7 @@ void FMRCoreRuntime::BeginEpisode(const FPending& R)
     ResetServices();
     ResetResources();
     World->ResetCoreEventEffects();
+    ResetExploration();
     for(const auto& Body:InitialBodies)if(auto* Piece=Body.Key.Get())
     {
         Piece->SetSimulatePhysics(Body.Value.Simulating);

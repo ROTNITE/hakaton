@@ -44,7 +44,7 @@ public:
     bool IsSpatial() const {return Category!=TEXT("digital")&&Category!=TEXT("operator");}
     bool CanMove() const {return Category.IsEmpty()||MediumLimits.IsValid;}
     bool CanCarry() const {return bRescueWatercraft||(Category.IsEmpty()&&!bAerial);}
-    bool CanSense() const {return IsSpatial();}
+    bool CanSense() const;
     bool MediumPointAllowed(const FVector& Position) const;
     int32 TargetIndex = -1;
     FString State = "idle";

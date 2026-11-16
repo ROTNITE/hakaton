@@ -32,6 +32,7 @@ void FMRCoreRuntime::GatherReports()
         FReport Pose;Pose.Agent=Agent;Pose.Data=AgentSnapshot(A,Time());Pose.Sequence=SensorSamples;
         QueueReport(MoveTemp(Pose));
         if(!A->IsOperational()||!A->CanSense()||DisabledInfrastructure.Contains(A->InfrastructureSite))continue;
+        GatherExplorationReport(A);
         GatherHazardReport(A);
         for(int32 Index=0;Index<World->Targets.Num();Index++)
         {
@@ -97,7 +98,8 @@ void FMRCoreRuntime::DeliverReports()
             if(R.Kind==EPacket::Pose||R.Attempts>=3){RemoveReport(I);continue;}
             R.Due=Time()+.5+Latency*(*H);++I;continue;
         }
-        if(R.Kind==EPacket::Hazard)DeliverHazardReport(R);
+        if(R.Kind==EPacket::Exploration)DeliverExplorationReport(R);
+        else if(R.Kind==EPacket::Hazard)DeliverHazardReport(R);
         else if(R.Kind==EPacket::Pose)
             UpdateAgentKnowledge(R.Agent,R.Data);
         else

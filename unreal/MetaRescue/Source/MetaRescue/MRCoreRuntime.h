@@ -6,6 +6,7 @@
 #include "HAL/PlatformProcess.h"
 #include "MRCoreStore.h"
 #include "MRCoreClock.h"
+#include "MRExplorationMemory.h"
 
 class AMRWorld;
 class AMRAgent;
@@ -41,7 +42,7 @@ private:
         FString FinalStatus,Reason;
         int32 Revision=0,Sequence=0,DeliveryAttempts=0,AckAttempts=0,MessageAttempts=0;
     };
-    enum class EPacket : uint8 { Pose,Target,Hazard,Command,Ack,Message };
+    enum class EPacket : uint8 { Pose,Target,Hazard,Command,Ack,Message,Exploration };
     struct FReport
     {
         FString Agent,Target,MessageId;
@@ -133,6 +134,11 @@ private:
     TMap<FString,TSharedPtr<FJsonObject>> KnownZones,StepEvents;
     TArray<TSharedPtr<FJsonValue>> DeclaredZones;
     TMap<FString,double> SurfaceObservedAt;
+    FMRExplorationMemory Exploration;
+    TMap<FString,TSet<int32>> PendingExploration;
+    TMap<FString,int64> ExplorationCursor;
+    TSharedPtr<FJsonObject> ExplorationView;
+    int32 ExplorationViewRevision=-1,ExplorationViewStateRevision=-1;
     struct FEventView {double At;FVector Focus;FString Name;float Distance,Yaw;};
     bool CaptureEventFrames=false;
     bool CaptureOverview=false;
@@ -265,6 +271,11 @@ private:
     void AdvanceEvents();
     void UpdateEventView();
     void GatherHazardReport(AMRAgent* Agent);
+    void ResetExploration();
+    void GatherExplorationReport(AMRAgent* Agent);
+    void TrackExplorationPacket(const FReport& Packet,bool Add);
+    void DeliverExplorationReport(const FReport& Packet);
+    TSharedPtr<FJsonObject> ExplorationSnapshot();
     void DeliverHazardReport(const FReport& Report);
     float SensorQuality(const FVector& Start,const FVector& End) const;
     bool SensorAccepts(AMRAgent* Agent,int32 Target,double Quality,int32 Channel) const;

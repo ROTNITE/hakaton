@@ -128,12 +128,14 @@ void FMRCoreRuntime::QueueReport(FReport Packet)
         {TEXT("target_id"),Packet.Target.IsEmpty()?Null():Str(Packet.Target)},{TEXT("deadline"),Num(Packet.Deadline)},
         {TEXT("initial_delivery"),Route?Num(Packet.Due):Null()},{TEXT("kind"),Num(uint8(Packet.Kind))}}),false);
     ++ReportCounts.FindOrAdd(Packet.Agent);
+    TrackExplorationPacket(Packet,true);
     Reports.Add(MoveTemp(Packet));
 }
 
 void FMRCoreRuntime::RemoveReport(int32 Index)
 {
     const FString Agent=Reports[Index].Agent;
+    TrackExplorationPacket(Reports[Index],false);
     if(--ReportCounts.FindChecked(Agent)==0)ReportCounts.Remove(Agent);
     Reports.RemoveAt(Index);
 }

@@ -7,6 +7,18 @@
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "Dom/JsonObject.h"
 
+bool AMRAgent::CanSense() const
+{
+    if(!IsSpatial())return false;
+    if(!Mission||!Mission->bDisasterCity||Category!=TEXT("infrastructure"))return true;
+    if(Mission->CityLayout)for(const auto& Entry:Mission->CityLayout->GetArrayField(TEXT("infrastructure")))
+    {
+        const auto Node=Entry->AsObject();
+        if(Node->GetStringField(TEXT("id"))==InfrastructureSite)return Node->GetStringField(TEXT("kind"))==TEXT("sensor_node");
+    }
+    return false;
+}
+
 void AMRAgent::InitializeCompetition(AMRWorld* InWorld,int32 InId,const FString& Mobility,const FString& Site,const FBox& Limits)
 {
     Mission=InWorld;AgentId=InId;Category=Mobility;InfrastructureSite=Site;MediumLimits=Limits;
