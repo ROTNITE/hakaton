@@ -216,6 +216,8 @@ def build_mud(textures):
     position = node(value, unreal.MaterialExpressionWorldPosition, -1100, 0)
     uv = custom(value, 'return Position.xy / 350;', unreal.CustomMaterialOutputType.CMOT_FLOAT2,
                 [('Position', position, '')], -850, 0)
+    tint = vector(value, 'MudTint', (1, 1, 1), 760)
+    wetness = scalar(value, 'Wetness', 0, 900)
     for index, (name, prop, output) in enumerate((
         ('MudColor', unreal.MaterialProperty.MP_BASE_COLOR, 'RGB'),
         ('MudNormal', unreal.MaterialProperty.MP_NORMAL, 'RGB'),
@@ -226,7 +228,18 @@ def build_mud(textures):
         sample = node(value, unreal.MaterialExpressionTextureSample, -550, index * 230,
                       texture=textures[name], sampler_type=sampler)
         connect(uv, '', sample, 'UVs')
-        property_input(sample, output, value, prop)
+        if name == 'MudColor':
+            adjusted = custom(value, 'return Color * Tint * lerp(1, .48, saturate(Wetness));',
+                unreal.CustomMaterialOutputType.CMOT_FLOAT3,
+                [('Color', sample, output), ('Tint', tint, ''), ('Wetness', wetness, '')], -200, 0)
+            property_input(adjusted, '', value, prop)
+        elif name == 'MudRoughness':
+            adjusted = custom(value, 'return lerp(Roughness, .12, saturate(Wetness));',
+                unreal.CustomMaterialOutputType.CMOT_FLOAT1,
+                [('Roughness', sample, output), ('Wetness', wetness, '')], -200, 450)
+            property_input(adjusted, '', value, prop)
+        else:
+            property_input(sample, output, value, prop)
     save(value)
     return value
 

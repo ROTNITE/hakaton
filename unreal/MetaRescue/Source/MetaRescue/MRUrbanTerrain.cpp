@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
 #include "Materials/MaterialInterface.h"
+#include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/StaticMesh.h"
 #include "ProceduralMeshComponent.h"
 #include "Misc/Crc.h"
@@ -61,7 +62,10 @@ void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,
     Mesh->bUseComplexAsSimpleCollision=true;Mesh->bUseAsyncCooking=false;
     Mesh->SetCollisionProfileName(TEXT("BlockAll"));Mesh->SetCollisionResponseToChannel(ECC_Camera,ECR_Ignore);
     Mesh->SetMaterial(0,Material);
-    Mesh->SetMaterial(1,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")));
+    auto* Soil=UMaterialInstanceDynamic::Create(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")),Mesh);
+    Soil->SetVectorParameterValue(TEXT("MudTint"),FLinearColor(.42f,.32f,.22f));
+    Mesh->SetMaterial(1,Soil);Mesh->SetMaterial(2,Material);
+    Mesh->SetMaterial(3,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/MI_Concrete.MI_Concrete")));
     Mesh->ComponentTags={Soil?TEXT("UrbanPhysicalTerrain"):TEXT("UrbanRoadSurface")};Mesh->RegisterComponent();
     Patch.Mesh=Mesh;
     Tessellate(Patch,NX,NY);
@@ -95,16 +99,46 @@ void FMRUrbanTerrain::Update(FPatch& Patch)
         Normals.Add(Patch.Soil?FVector(DX/100,DY/100,1).GetSafeNormal():FVector::UpVector);
         UV.Add(FVector2D(XY.X/500.,XY.Y/500.));
     }
+    TMap<FIntPoint,uint8> Edges;
     for(int32 I=0;I<Patch.Triangles.Num();I+=3)
     {
         const int32 A=Patch.Triangles[I],B=Patch.Triangles[I+1],C=Patch.Triangles[I+2];
         const double Drop=FMath::Max3(Drops[A],Drops[B],Drops[C]);
-        if(!Patch.Soil&&Drop>5)continue;
+        if(!Patch.Soil&&Drop>0)
+        {
+            const uint8 State=Drop>20?2:1;
+            for(const auto& Pair:{FIntPoint(A,B),FIntPoint(B,C),FIntPoint(C,A)})
+                Edges.FindOrAdd(FIntPoint(FMath::Min(Pair.X,Pair.Y),FMath::Max(Pair.X,Pair.Y)))|=State;
+            if(State==2)continue;
+        }
         (Patch.Soil&&Drop>.2?Broken:Intact).Append({A,B,C});
     }
     Mesh->ClearAllMeshSections();
     Mesh->CreateMeshSection_LinearColor(0,Vertices,Intact,Normals,UV,{}, {},Patch.Collision);
     if(!Broken.IsEmpty())Mesh->CreateMeshSection_LinearColor(1,Vertices,Broken,Normals,UV,{}, {},Patch.Collision);
+    if(!Patch.Soil)
+    {
+        // Expose the asphalt course and its aggregate base along the broken
+        // boundary. These are actual vertical faces with collision, not a
+        // floating shader displacement across the whole event perimeter.
+        for(int32 Layer=0;Layer<2;++Layer)
+        {
+            TArray<FVector> Faces,FaceNormals;TArray<FVector2D> Tex;TArray<int32> Indices;
+            const double Top=Layer==0?0:20,Bottom=Layer==0?20:45;
+            for(const auto& Edge:Edges)if(Edge.Value==3)
+            {
+                const FVector A=Vertices[Edge.Key.X]-FVector(0,0,Top),B=Vertices[Edge.Key.Y]-FVector(0,0,Top);
+                const FVector Down(0,0,Top-Bottom);const int32 I=Faces.Num();
+                const FVector Normal=FVector(B.Y-A.Y,A.X-B.X,0).GetSafeNormal();
+                Faces.Append({A,B,A+Down,B+Down});FaceNormals.Append({Normal,Normal,Normal,Normal});
+                Tex.Append({FVector2D(0,0),FVector2D((B-A).Size()/100,0),FVector2D(0,.25),FVector2D((B-A).Size()/100,.25)});
+                // Both sides are visible when a thin asphalt edge overhangs
+                // the failed subgrade; material normals remain well defined.
+                Indices.Append({I,I+2,I+1,I+1,I+2,I+3,I+1,I+2,I,I+3,I+2,I+1});
+            }
+            if(!Faces.IsEmpty())Mesh->CreateMeshSection_LinearColor(2+Layer,Faces,Indices,FaceNormals,Tex,{}, {},Patch.Collision);
+        }
+    }
 }
 
 void FMRUrbanTerrain::Update(FOverlay& Overlay)
@@ -260,7 +294,7 @@ void AMRWorld::DamageUrbanRoad(const FMRDisturbance& Event)
         else
         {
             auto* Root=GroundedAssembly(TEXT("SceneryKit"),Support.ImpactPoint,FRotator(0,Rng.FRandRange(-180,180),0),
-                FVector(Rng.FRandRange(.35,.75)),FString::Printf(TEXT("fragment_%d"),I%4));
+                FVector(Rng.FRandRange(.9,1.7)),FString::Printf(TEXT("fragment_%d"),I%4));
             if(Root&&I%3)for(USceneComponent* Child:Root->GetAttachChildren())
                 if(auto* Mesh=Cast<UStaticMeshComponent>(Child))
                     for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot)Mesh->SetMaterial(Slot,Asphalt);

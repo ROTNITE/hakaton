@@ -207,12 +207,6 @@ void AMRWorld::RecordEnvironmentEvent(const FMRDisturbance& E)
 
 void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
 {
-    if(bDisasterCity&&E.Kind==EMRDisturbance::RoadDamage)
-    {
-        // The real cavity and grounded source fragments replace the legacy
-        // vertex-displaced fracture overlay in this physical revision.
-        DamageUrbanRoad(E);return;
-    }
     if(VisualProbe==TEXT("events")&&!E.bPropagation&&!InspectedEventKinds.Contains(int32(E.Kind)))
     {
         InspectedEventKinds.Add(int32(E.Kind));
@@ -225,6 +219,12 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
             EventInspections.Add(View);
         }
         EventInspections.Sort([](const auto& A,const auto& B){return A.Time<B.Time;});
+    }
+    if(bDisasterCity&&E.Kind==EMRDisturbance::RoadDamage)
+    {
+        // The real cavity and grounded source fragments replace the legacy
+        // vertex-displaced fracture overlay in this physical revision.
+        DamageUrbanRoad(E);return;
     }
     auto VFX=[&](const FString& Name,FVector P,FVector Scale,FName EffectRole=NAME_None)
     {
@@ -239,7 +239,16 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
         if(!System)
             System=LoadObject<UNiagaraSystem>(nullptr,*FString::Printf(TEXT("/Game/EffectsV3/Revision2/NS_%s.NS_%s"),*Name,*Name));
         if(!System){UE_LOG(LogTemp,Error,TEXT("MR missing v3 effect %s"),*Name);return (UNiagaraComponent*)nullptr;}
-        auto* C=UNiagaraFunctionLibrary::SpawnSystemAtLocation(this,System,P,FRotator::ZeroRotator,Scale,false);
+        UNiagaraComponent* C=nullptr;
+        if(bDisasterCity)
+        {
+            if(!FApp::CanEverRender())return C;
+            C=NewObject<UNiagaraComponent>(this);AddInstanceComponent(C);C->SetupAttachment(GetRootComponent());
+            C->SetMobility(EComponentMobility::Movable);C->SetAsset(System);C->SetRelativeLocation(P);C->SetRelativeScale3D(Scale);
+            C->SetAutoActivate(false);C->SetRandomSeedOffset(FCrc::StrCrc32(*E.Id)^GetTypeHash(P));
+            C->RegisterComponent();C->Activate(true);
+        }
+        else C=UNiagaraFunctionLibrary::SpawnSystemAtLocation(this,System,P,FRotator::ZeroRotator,Scale,false);
         if(C)
         {
             C->ComponentTags={FName(*E.Id),EffectRole.IsNone()?FName(*Name):EffectRole};
@@ -260,7 +269,7 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
         if(!bCoreControlled)ReleaseCollapse();
         DustEffect=VFX(TEXT("CollapseDust"),E.Source+FVector(0,0,120),FVector(5.2,5.2,3.6));
         const FIntPoint Origin=FMRDistrictEnvironment::Cell(E.Source);
-        for(const FIntPoint& Cell:E.Cells)
+        if(!bDisasterCity)for(const FIntPoint& Cell:E.Cells)
             if(FMath::Abs(Cell.X-Origin.X)+FMath::Abs(Cell.Y-Origin.Y)<=1)
                 BuildHazardSurface(E,Cell,2);
     }
@@ -483,7 +492,15 @@ void AMRWorld::BuildHazardSurface(const FMRDisturbance& E,FIntPoint Cell,int32 L
         C->SetMobility(EComponentMobility::Movable);C->SetRelativeLocation(Origin);
         C->SetCollisionEnabled(ECollisionEnabled::NoCollision);C->SetCastShadow(false);
         C->RegisterComponent();C->CreateMeshSection_LinearColor(0,Vertices,Triangles,Normals,Tex,Colors,{},false);
-        C->SetMaterial(0,EventSurfaceMaterial(Material,FApp::CanEverRender()));
+        auto* SurfaceMaterial=EventSurfaceMaterial(Material,FApp::CanEverRender());
+        if(bDisasterCity&&Layer==1)
+        {
+            auto* Mud=UMaterialInstanceDynamic::Create(LoadObject<UMaterialInterface>(nullptr,
+                TEXT("/Game/EffectsV3/Revision5/M_EventMud.M_EventMud")),C);
+            Mud->SetVectorParameterValue(TEXT("MudTint"),FLinearColor(.42f,.32f,.22f));
+            Mud->SetScalarParameterValue(TEXT("Wetness"),.6f);SurfaceMaterial=Mud;
+        }
+        C->SetMaterial(0,SurfaceMaterial);
         const TCHAR* RoleName=Floating?TEXT("flood"):Layer==2?TEXT("fractured_surface"):MRDisturbanceName(E.Kind);
         C->ComponentTags={FName(*E.Id),FName(RoleName)};
         // A fixed wet rim follows the ground, rather than rising with the water.
