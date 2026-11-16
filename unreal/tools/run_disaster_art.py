@@ -23,7 +23,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inputs', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True, help='new evidence directory')
-    parser.add_argument('--kind', choices=('disasters', 'watercraft'), default='disasters')
+    parser.add_argument('--kind', choices=('disasters', 'watercraft', 'urban-water'), default='disasters')
     args = parser.parse_args()
     inputs = args.inputs.resolve(strict=True)
     output = args.output.resolve()
@@ -31,6 +31,7 @@ def main():
         parser.error('Evidence must be outside Content')
     preparation = json.loads(inputs.read_bytes())
     watercraft = args.kind == 'watercraft'
+    urban_water = args.kind == 'urban-water'
     expected_format = 'metarescue.water-catamaran.r1' if watercraft else 'metarescue.disaster-effects.sources.v1'
     if preparation.get('format') != expected_format:
         parser.error('Unsupported art preparation')
@@ -56,12 +57,15 @@ def main():
     # Both operations preserve every prior competition vehicle. The user's
     # catamaran has its own namespace and never replaces a legacy BlueBoat.
     paths.extend((ROOT / 'unreal/MetaRescue/Content/RescueAssets/Competition').rglob('*.uasset'))
+    if urban_water:
+        paths.extend(path for path in (ROOT/'unreal/MetaRescue/Content/EffectsV3/Revision5').rglob('*.uasset')
+                     if path.name!='M_UrbanFlood.uasset')
     def frozen():
         return {str(path): sha256(path) for path in paths}
     before = frozen()
     (output / 'inputs.json').write_text(json.dumps(before, indent=2) + '\n', encoding='utf-8')
     report = output / 'import.json'
-    script = 'build_water_catamaran.py' if watercraft else 'build_disaster_effects.py'
+    script = 'build_water_catamaran.py' if watercraft else 'build_urban_water.py' if urban_water else 'build_disaster_effects.py'
     command = [str(executable), str(ROOT / 'unreal/MetaRescue/MetaRescue.uproject'), '/Engine/Maps/Entry',
                '-run=pythonscript', '-script=' + str(ROOT / 'unreal/tools' / script),
                '-unattended', '-nop4', '-nosplash', '-NoSound', '-stdout', '-FullStdOutLogOutput',
@@ -71,7 +75,7 @@ def main():
         if existing_unreal():
             raise RuntimeError('Another Unreal is running; disaster art import did not start')
         try:
-            prefix = 'MR_WATERCRAFT_ART_' if watercraft else 'MR_DISASTER_ART_'
+            prefix = 'MR_WATERCRAFT_ART_' if watercraft else 'MR_URBAN_WATER_ART_' if urban_water else 'MR_DISASTER_ART_'
             environment = {**os.environ, prefix + 'INPUTS': str(inputs), prefix + 'REPORT': str(report)}
             with (output / 'stdout.log').open('w', encoding='utf-8') as log:
                 result = subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, env=environment,

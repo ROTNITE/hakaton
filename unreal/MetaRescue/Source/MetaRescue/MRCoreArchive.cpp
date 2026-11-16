@@ -3,6 +3,7 @@
 #include "MRCoreJson.h"
 #include "MRCoreValues.h"
 #include "MRWorld.h"
+#include "MRUrbanWater.h"
 #include "MRAgent.h"
 #include "Engine/World.h"
 #include "ProceduralMeshComponent.h"
@@ -146,6 +147,7 @@ void FMRCoreRuntime::RecordTruthSnapshot(const FString& Phase)
                 {TEXT("component"),Found?Str(GetNameSafe(Hit.GetComponent())):Null()}})));
         }
         Snapshot->SetArrayField(TEXT("road_support_probes"),Supports);
+        if(World->UrbanWater)Snapshot->SetObjectField(TEXT("hydrology"),World->UrbanWater->PrivateSnapshot());
     }
     Record(TEXT("truth_snapshot"),Snapshot,false);
 }

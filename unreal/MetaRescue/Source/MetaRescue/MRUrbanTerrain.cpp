@@ -1,5 +1,6 @@
 #include "MRUrbanTerrain.h"
 #include "MRWorld.h"
+#include "MRUrbanWater.h"
 #include "MRAgent.h"
 #include "MRCoreJson.h"
 #include "Components/StaticMeshComponent.h"
@@ -69,12 +70,17 @@ void FMRUrbanTerrain::Grid(FVector Origin,FVector X,FVector Y,int32 NX,int32 NY,
     Mesh->ComponentTags={Soil?TEXT("UrbanPhysicalTerrain"):TEXT("UrbanRoadSurface")};Mesh->RegisterComponent();
     Patch.Mesh=Mesh;
     Tessellate(Patch,NX,NY);
-    Patches.Add(MoveTemp(Patch));Update(Patches.Last());World->Generated.Add(Mesh);
+    const int32 Id=Patches.Add(MoveTemp(Patch));const auto& Bounds=Patches[Id].Bounds;
+    for(int32 XBin=FMath::FloorToInt(Bounds.Min.X/3200);XBin<=FMath::FloorToInt(Bounds.Max.X/3200);++XBin)
+        for(int32 YBin=FMath::FloorToInt(Bounds.Min.Y/3200);YBin<=FMath::FloorToInt(Bounds.Max.Y/3200);++YBin)
+            PatchBins.FindOrAdd(FIntPoint(XBin,YBin)).Add(Id);
+    Update(Patches[Id]);World->Generated.Add(Mesh);
 }
 
 void FMRUrbanTerrain::Tessellate(FPatch& Patch,int32 NX,int32 NY)
 {
     Patch.XY.Empty();Patch.Triangles.Empty();Patch.Bounds=FBox(ForceInit);
+    Patch.NX=NX;Patch.NY=NY;
     for(int32 J=0;J<=NY;++J)for(int32 I=0;I<=NX;++I)
     {
         const FVector P=Patch.GridOrigin+Patch.GridX*(double(I)/NX)+Patch.GridY*(double(J)/NY);
@@ -84,23 +90,54 @@ void FMRUrbanTerrain::Tessellate(FPatch& Patch,int32 NX,int32 NY)
     {const int32 A=J*(NX+1)+I;Patch.Triangles.Append({A,A+NX+1,A+1,A+1,A+NX+1,A+NX+2});}
 }
 
+double FMRUrbanTerrain::HeightAt(const FPatch& Patch,FVector P) const
+{
+    double Layer=Patch.Offset;
+    if(Patch.EdgeFeatherCm>0)
+    {
+        const double Edge=FMath::Min(FMath::Min(P.X-Patch.Bounds.Min.X,Patch.Bounds.Max.X-P.X),
+            FMath::Min(P.Y-Patch.Bounds.Min.Y,Patch.Bounds.Max.Y-P.Y));
+        Layer*=FMath::Clamp(Edge/Patch.EdgeFeatherCm,0.,1.);
+    }
+    return InitialHeight(P)+Layer-(Patch.Soil?DropCm(P):0);
+}
+
+double FMRUrbanTerrain::GroundHeight(FVector P) const
+{
+    double Highest=-MAX_dbl;
+    const auto* Nearby=PatchBins.Find(FIntPoint(FMath::FloorToInt(P.X/3200),FMath::FloorToInt(P.Y/3200)));
+    if(!Nearby)return InitialHeight(P)-DropCm(P);
+    for(int32 Id:*Nearby)
+    {
+        const auto& Patch=Patches[Id];const FVector Delta=P-Patch.GridOrigin;
+        const double U=(Delta.X*Patch.GridX.X+Delta.Y*Patch.GridX.Y)/Patch.GridX.SizeSquared2D();
+        const double V=(Delta.X*Patch.GridY.X+Delta.Y*Patch.GridY.Y)/Patch.GridY.SizeSquared2D();
+        if(U< -1.e-8||V< -1.e-8||U>1+1.e-8||V>1+1.e-8)continue;
+        const double GX=FMath::Clamp(U,0.,1.)*Patch.NX,GY=FMath::Clamp(V,0.,1.)*Patch.NY;
+        const int32 X=FMath::Min(Patch.NX-1,FMath::FloorToInt(GX)),Y=FMath::Min(Patch.NY-1,FMath::FloorToInt(GY));
+        const double FX=GX-X,FY=GY-Y;const int32 A=Y*(Patch.NX+1)+X;
+        int32 Indices[3];double Weights[3];
+        if(FX+FY<=1)
+        {Indices[0]=A;Indices[1]=A+1;Indices[2]=A+Patch.NX+1;Weights[0]=1-FX-FY;Weights[1]=FX;Weights[2]=FY;}
+        else
+        {Indices[0]=A+Patch.NX+2;Indices[1]=A+1;Indices[2]=A+Patch.NX+1;Weights[0]=FX+FY-1;Weights[1]=1-FY;Weights[2]=1-FX;}
+        if(!Patch.Soil&&FMath::Max3(DropCm(Patch.XY[Indices[0]]),DropCm(Patch.XY[Indices[1]]),DropCm(Patch.XY[Indices[2]]))>20)continue;
+        const FVector Q0=Patch.XY[Indices[0]],Q1=Patch.XY[Indices[1]],Q2=Patch.XY[Indices[2]];
+        const double H0=HeightAt(Patch,Q0),H1=HeightAt(Patch,Q1),H2=HeightAt(Patch,Q2);
+        const double Span=FMath::Max3(FVector::Dist2D(Q0,Q1),FVector::Dist2D(Q0,Q2),FVector::Dist2D(Q1,Q2));
+        if(!Patch.Soil&&FMath::Max3(H0,H1,H2)-FMath::Min3(H0,H1,H2)>.3*Span)continue;
+        Highest=FMath::Max(Highest,H0*Weights[0]+H1*Weights[1]+H2*Weights[2]);
+    }
+    return Highest== -MAX_dbl?InitialHeight(P)-DropCm(P):Highest;
+}
+
 void FMRUrbanTerrain::Update(FPatch& Patch)
 {
     auto* Mesh=Patch.Mesh.Get();if(!Mesh)return;
     TArray<FVector> Vertices,Normals;TArray<FVector2D> UV;TArray<int32> Intact,Broken;
     const FVector Origin=Mesh->GetComponentLocation();Vertices.Reserve(Patch.XY.Num());Normals.Reserve(Patch.XY.Num());
     TArray<double> Drops;Drops.Reserve(Patch.XY.Num());
-    auto Height=[&](FVector Q)
-    {
-        double Layer=Patch.Offset;
-        if(Patch.EdgeFeatherCm>0)
-        {
-            const double Edge=FMath::Min(FMath::Min(Q.X-Patch.Bounds.Min.X,Patch.Bounds.Max.X-Q.X),
-                FMath::Min(Q.Y-Patch.Bounds.Min.Y,Patch.Bounds.Max.Y-Q.Y));
-            Layer*=FMath::Clamp(Edge/Patch.EdgeFeatherCm,0.,1.);
-        }
-        return InitialHeight(Q)+Layer-(Patch.Soil?DropCm(Q):0);
-    };
+    auto Height=[&](FVector Q){return HeightAt(Patch,Q);};
     for(const auto& XY:Patch.XY)
     {
         const double Drop=DropCm(XY);Drops.Add(Drop);
@@ -214,7 +251,8 @@ void FMRUrbanTerrain::Build()
     AddFoundation(FBox(Min*100,Max*100));
     const double Size=World->GridSize*1000.;
     auto* Material=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/RescueAssets/CityV2/SurfacesR4/M_Verge.M_Verge"));
-    for(double X=-6400;X<Size+6400;X+=6400)for(double Y=-6400;Y<Size+6400;Y+=6400)
+    const double West=Topography.IsEnabled()?-12800.:-6400.;
+    for(double X=West;X<Size+6400;X+=6400)for(double Y=-6400;Y<Size+6400;Y+=6400)
     {
         const double W=FMath::Min(6400.,Size+6400-X),H=FMath::Min(6400.,Size+6400-Y);
         Grid(FVector(X,Y,0),FVector(W,0,0),FVector(0,H,0),FMath::CeilToInt(W/200),FMath::CeilToInt(H/200),0,Material,true);
@@ -302,6 +340,7 @@ void AMRWorld::DamageUrbanRoad(const FMRDisturbance& Event)
 {
     if(!UrbanTerrain||!UrbanTerrain->Damage(Event))return;
     const auto Cavity=UrbanTerrain->Cavities.Last();const int32 First=Generated.Num();
+    if(UrbanWater)UrbanWater->TerrainChanged(Cavity.Bounds());
     FRandomStream Rng(FCrc::StrCrc32(*Event.Id)^uint32(Seed));
     auto* Asphalt=MRSceneMaterial(LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_QuarterAsphalt.M_QuarterAsphalt")));
     FCollisionQueryParams Query(SCENE_QUERY_STAT(MRRoadRimDeposit),false);

@@ -12,7 +12,7 @@ public:
         const TBitArray<>& InSolid,const TArray<double>& InDepth)
     {
         Healthy=false;
-        if(InWidth<1||InHeight<1||InWidth>320||InHeight>320||int64(InWidth)*InHeight>100000||
+        if(InWidth<1||InHeight<1||InWidth>384||InHeight>384||int64(InWidth)*InHeight>100000||
            !FMath::IsFinite(InCellM)||InCellM<.5||InCellM>20||InBed.Num()!=InWidth*InHeight||
            InSolid.Num()!=InBed.Num()||InDepth.Num()!=InBed.Num())return false;
         for(int32 I=0;I<InBed.Num();++I)

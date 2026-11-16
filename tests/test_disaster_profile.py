@@ -72,6 +72,22 @@ class DisasterProfileTests(unittest.TestCase):
         old = generate(Settings.parse({'city_revision': '2.2'}))
         with self.assertRaises(ProtocolError): validate_tape(tape, old)
 
+    def test_floods_drive_the_declared_boundary_instead_of_spawning_water_in_dry_streets(self):
+        world=self.world();tape=generate_tape(world)
+        floods=[row for row in tape['events'] if row['kind']=='flood']
+        self.assertTrue(floods)
+        for row in floods:
+            self.assertEqual(row['source'],[-91.5,43.,.05])
+            self.assertEqual(row['cells'],[])
+            self.assertEqual(row['hydraulic_forcing'],'connected_flow' if row['spread'] else 'stage_rise')
+        for mutation in ('source','cells','boundary','forcing'):
+            bad=deepcopy(tape);row=next(r for r in bad['events'] if r['kind']=='flood')
+            if mutation=='source':row['source'][0]=120.
+            elif mutation=='cells':row['cells']=[[40,40]]
+            elif mutation=='boundary':row['hydraulic_boundary_id']='unknown-pipe'
+            else:row['hydraulic_forcing']='instant_patch'
+            with self.subTest(mutation=mutation),self.assertRaises(ProtocolError):validate_tape(bad,world)
+
 
 if __name__ == '__main__':
     unittest.main()

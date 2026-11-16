@@ -397,12 +397,13 @@ void AMRWorld::ApplyDisturbance(const FMRDisturbance& E)
             }
         }
     }
-    if(E.Kind==EMRDisturbance::Flood)
+    const bool HydraulicFlood=E.Kind==EMRDisturbance::Flood&&UrbanWater.IsValid();
+    if(E.Kind==EMRDisturbance::Flood&&!HydraulicFlood)
     {
         GroundedAssembly(TEXT("Manhole"),E.Source,FRotator::ZeroRotator,FVector::OneVector,TEXT(""));
         LeakEffect=VFX(TEXT("PipeLeak"),E.Source+FVector(0,0,35),FVector(1.2,1.2,1.05));
     }
-    if(E.Kind==EMRDisturbance::Flood||E.Kind==EMRDisturbance::Mud||E.Kind==EMRDisturbance::RoadDamage)
+    if((E.Kind==EMRDisturbance::Flood&&!HydraulicFlood)||E.Kind==EMRDisturbance::Mud||E.Kind==EMRDisturbance::RoadDamage)
         for(const auto Cell:E.Cells)
         {
             const FVector P=FMRDistrictEnvironment::Center(Cell);

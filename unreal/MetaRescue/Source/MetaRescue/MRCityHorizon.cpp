@@ -20,9 +20,10 @@ void AMRWorld::BuildCityHorizon()
     Ground->ComponentTags={TEXT("CityVisualHorizon"),TEXT("NoMissionCollision")};
     TArray<FVector> Vertices,Normals;TArray<FVector2D> UV;TArray<int32> Triangles;
     FBox Basin(ForceInit);
-    if(CityLayout->HasTypedField<EJson::Object>(TEXT("competition")))
+    const bool Hydraulic=bDisasterCity&&CityLayout->HasTypedField<EJson::Object>(TEXT("hydrology"));
+    if(Hydraulic||CityLayout->HasTypedField<EJson::Object>(TEXT("competition")))
     {
-        const auto Bounds=CityLayout->GetObjectField(TEXT("competition"))->GetObjectField(TEXT("basin"));
+        const auto Bounds=CityLayout->GetObjectField(Hydraulic?TEXT("hydrology"):TEXT("competition"))->GetObjectField(TEXT("basin"));
         const auto& Low=Bounds->GetArrayField(TEXT("min"));const auto& High=Bounds->GetArrayField(TEXT("max"));
         Basin=FBox(FVector(Low[0]->AsNumber()*100-40,Low[1]->AsNumber()*100-40,-1000),
                    FVector(High[0]->AsNumber()*100+40,High[1]->AsNumber()*100+40,100));

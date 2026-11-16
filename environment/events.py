@@ -179,9 +179,16 @@ def generate_tape(world):
     if detailed:
         buildings={building['id']:building for building in world['buildings']}
         for row in tape['events']:
+            if row['kind']=='flood' and 'hydrology' in world:
+                basin=world['hydrology']['basin']
+                row.update(source=[basin['min'][0]+7.5,(basin['min'][1]+basin['max'][1])/2,
+                                   world['hydrology']['initial_stage_m']],
+                           source_object_id='retention-basin-west',hydraulic_boundary_id='retention-basin-west',
+                           hydraulic_forcing='connected_flow' if row['spread'] else 'stage_rise',cells=[],rejection=None)
             if row['rejection']:continue
             house=buildings.get(row['source_object_id'])
             row['smoke_emission_height_m']=house['bounds']['max'][2] if row['kind']=='fire' and house else .2+terrain.height(*row['source'][:2])
+            if row['kind']=='flood' and 'hydrology' in world:row['smoke_emission_height_m']=.2
             if row['kind']=='fire':
                 row['expires_at']=row['time']+180.
                 row['visibility_expires_at']=row['expires_at']+45.
@@ -230,12 +237,21 @@ def validate_tape(tape,world):
             if type(height) not in (int,float) or not math.isfinite(height) or not 0<=height<=80:invalid('invalid smoke emission height')
         source=row.get('source')
         if not isinstance(source,list) or len(source)!=3 or any(type(v) not in (int,float) or not math.isfinite(v) for v in source):invalid('invalid source')
-        if not 0<=source[0]<=placement.size or not 0<=source[1]<=placement.size or placement.protected(*source[:2]):invalid('unsafe source')
+        hydraulic=detailed and kind=='flood' and 'hydrology' in world
+        if hydraulic:
+            basin=world['hydrology']['basin']
+            expected=[basin['min'][0]+7.5,(basin['min'][1]+basin['max'][1])/2,world['hydrology']['initial_stage_m']]
+            if source!=expected or row.get('source_object_id')!='retention-basin-west' or \
+                    row.get('hydraulic_boundary_id')!='retention-basin-west' or \
+                    row.get('hydraulic_forcing')!=('connected_flow' if row['spread'] else 'stage_rise'):
+                invalid('invalid hydraulic forcing boundary')
+        elif not 0<=source[0]<=placement.size or not 0<=source[1]<=placement.size or placement.protected(*source[:2]):invalid('unsafe source')
         cells=row.get('cells')
         if not isinstance(cells,list) or len(cells)>256:invalid('invalid cells')
         for cell in cells:
             if not isinstance(cell,list) or len(cell)!=2 or any(type(v) is not int for v in cell) or not placement.cell_eligible(cell,kind):invalid('unsafe cell')
         if len({tuple(c) for c in cells})!=len(cells):invalid('duplicate cells')
+        if hydraulic and cells:invalid('hydraulic water cannot be teleported into event cells')
         if kind=='new_target':
             target_id=row.get('target_id')
             if type(target_id) is not int:invalid('invalid target reference')
@@ -243,7 +259,7 @@ def validate_tape(tape,world):
             if person is not None and type(person.get('available_at')) not in (int,float):invalid('invalid availability time')
             if person is None or person.get('position')!=source or person.get('available_at')!=at or not placement.person_clear(source) or person.get('appearance_event_id')!=eid:invalid('invalid late target')
             placement.add_person(source);appeared.add(person['id'])
-        elif not cells:invalid('empty active surface')
+        elif not cells and not hydraulic:invalid('empty active surface')
         for key in ('expires_at','visibility_expires_at'):
             value=row.get(key)
             if value is not None and (type(value) not in (int,float) or not math.isfinite(value) or value<=at):invalid('invalid expiry')

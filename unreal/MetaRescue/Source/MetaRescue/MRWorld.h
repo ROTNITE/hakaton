@@ -15,6 +15,8 @@ class FJsonObject;
 class UNiagaraComponent;
 class FMRCoreRuntime;
 class FMRUrbanTerrain;
+class FMRUrbanWater;
+struct FMRWaterSample;
 
 USTRUCT(BlueprintType)
 struct FMRSurfaceState
@@ -108,6 +110,7 @@ public:
     bool IsUnsafeGround(const FVector& Position) const;
     bool HasRadio(const FVector& Position) const;
     float WaterDepth(const FVector& Position) const;
+    FMRWaterSample WaterAtCm(FVector Position) const;
     float MovementCost(const FVector& Position) const;
     float SensorRange(const FVector& Position) const;
     int32 PendingReports() const;
@@ -124,6 +127,7 @@ public:
 private:
     friend class FMRCoreRuntime;
     friend class FMRUrbanTerrain;
+    friend class FMRUrbanWater;
     bool ReadCoreEventTape();
     void ResetCoreEventEffects();
     int32 ApplyCoreDisturbance(const FMRDisturbance& Event);
@@ -150,6 +154,10 @@ private:
     void ResetUrbanTerrain();
     double InitialGroundHeightCm(FVector Position) const;
     TSharedPtr<FMRUrbanTerrain> UrbanTerrain;
+    TSharedPtr<FMRUrbanWater> UrbanWater;
+    bool BuildUrbanWater();
+    bool TickUrbanWater(double ModelSeconds);
+    void ResetUrbanWater();
     bool CollapseCityStructure(const FMRDisturbance& Event);
     void RefreshCitySmokeHeights();
     void BatchDisasterDebris(int32 FirstGenerated,const FMRDisturbance& Event);

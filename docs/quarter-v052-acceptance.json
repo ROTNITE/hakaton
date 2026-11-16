@@ -1868,8 +1868,8 @@
       "id": "VIS06",
       "requirement": "Связное затопление улиц/входов порядка 1–3 м с притоком, рельефом, препятствиями и стоком; мутность, мокрый край, нанос, течение",
       "status": "partial",
-      "evidence": ["tests/test_urban_terrain.py", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-base-02/verification.json"],
-      "scope_note": "Физически поднятая база3,4м/откос45м, рельеф/проезд/возврат/reset проверены. Связное затопление, течение и визуал воды ещё не приняты."
+      "evidence": ["tests/test_urban_terrain.py", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-base-02/verification.json", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-water-02/verification.json"],
+      "scope_note": "База3,4м/откос45м, проезд/reset; связная вода400с:1813 мокрых клеток/максимум1,97м к400с, сухая база, буферы/лучи/баланс/reset/freeze. Рябь, мокрый край, сочетания, транспорт и масштаб ещё открыты."
     },
     {
       "id": "VIS07",

@@ -60,9 +60,12 @@ bool AMRWorld::ValidateCompetitionLayout() const
 
 void AMRWorld::BuildCompetitionAnnex()
 {
-    if(!Is(CityLayout,TEXT("competition"),EJson::Object))return;
-    const auto Annex=CityLayout->GetObjectField(TEXT("competition"));
-    const auto Basin=Box(Annex->GetObjectField(TEXT("basin"))),Tunnel=Box(Annex->GetObjectField(TEXT("tunnel")));
+    const bool Hydraulic=bDisasterCity&&Is(CityLayout,TEXT("hydrology"),EJson::Object);
+    const bool Competition=Is(CityLayout,TEXT("competition"),EJson::Object);
+    if(!Competition&&!Hydraulic)return;
+    const auto Annex=Competition?CityLayout->GetObjectField(TEXT("competition")):Object();
+    const auto Basin=Box((Hydraulic?CityLayout->GetObjectField(TEXT("hydrology")):Annex)->GetObjectField(TEXT("basin")));
+    const auto Tunnel=Competition?Box(Annex->GetObjectField(TEXT("tunnel"))):FBox(ForceInit);
     auto Enclose=[&](const FBox& Limits,bool Roof)
     {
         const FVector C=Limits.GetCenter(),Size=Limits.GetSize();
@@ -74,12 +77,12 @@ void AMRWorld::BuildCompetitionAnnex()
         }
         if(Roof)Shape(TEXT("Cube"),FVector(C.X,C.Y,Limits.Max.Z+16),FVector(Size.X+64,Size.Y+64,32),TEXT("MI_Concrete"));
     };
-    Enclose(Basin,false);Enclose(Tunnel,true);
+    Enclose(Basin,false);if(Competition)Enclose(Tunnel,true);
     const FVector Center=Basin.GetCenter(),Size=Basin.GetSize();
-    Shape(TEXT("Plane"),FVector(Center.X,Center.Y,Basin.Max.Z),FVector(Size.X,Size.Y,100),
+    if(!Hydraulic)Shape(TEXT("Plane"),FVector(Center.X,Center.Y,Basin.Max.Z),FVector(Size.X,Size.Y,100),
         TEXT("M_QuarterWater"),FRotator::ZeroRotator,false);
     Shape(TEXT("Cube"),FVector(Basin.Max.X+175,Center.Y,5),FVector(350,260,20),TEXT("MI_Concrete"));
-    for(double X=Tunnel.Min.X+250;X<Tunnel.Max.X-125;X+=420)
+    for(double X=Tunnel.Min.X+250;Competition&&X<Tunnel.Max.X-125;X+=420)
     {
         Shape(TEXT("Cube"),FVector(X,Tunnel.GetCenter().Y,Tunnel.Max.Z-10),FVector(100,20,8),
             TEXT("MI_WhiteGlow"),FRotator::ZeroRotator,false);

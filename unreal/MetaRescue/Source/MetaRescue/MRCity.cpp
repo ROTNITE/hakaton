@@ -2,6 +2,7 @@
 #include "MRBuildingWindows.h"
 #include "MRGradedTerrain.h"
 #include "MRUrbanTerrain.h"
+#include "MRUrbanWater.h"
 #include "MRCityAssets.h"
 #include "MRCoreJson.h"
 #include "MRCoreValues.h"
@@ -88,6 +89,13 @@ bool AMRWorld::ReadCityLayout(const FString& File)
        !CityLayout->GetObjectField(TEXT("preflight"))->GetBoolField(TEXT("passed")))return false;
     auto Settings=CityLayout->GetObjectField(TEXT("settings"));GridSize=Settings->GetIntegerField(TEXT("map_size"));
     if(GridSize<25||GridSize>150)return false;
+    if(bDisasterCity&&CityLayout->HasField(TEXT("hydrology"))&&
+       (!TerrainCheck.IsEnabled()||!CityLayout->HasTypedField<EJson::Object>(TEXT("hydrology"))||
+        !FMRUrbanWater::Validate(CityLayout->GetObjectField(TEXT("hydrology")),GridSize)))
+    {UE_LOG(LogTemp,Error,TEXT("MR_CITY invalid hydraulic blueprint"));return false;}
+    if(bDisasterCity&&FApp::CanEverRender()&&CityLayout->HasField(TEXT("hydrology"))&&
+       !LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/EffectsV3/Revision5/M_UrbanFlood.M_UrbanFlood")))
+    {UE_LOG(LogTemp,Error,TEXT("MR_CITY required urban flood material is missing"));return false;}
     if(bIrregularCity)
     {
         using namespace MRCoreValues;
@@ -448,6 +456,8 @@ void AMRWorld::BuildCity()
         }
     }
     UE_LOG(LogTemp,Display,TEXT("MR_CITY_HORIZON_READBACK components=%d colliders=%d"),HorizonComponents,HorizonColliders);
+    if(!BuildUrbanWater())
+    {UE_LOG(LogTemp,Error,TEXT("MR_CITY hydraulic construction failed"));FPlatformMisc::RequestExitWithStatus(false,1);return;}
     CityBuildWallSeconds=FPlatformTime::Seconds()-BuildStarted;
     UE_LOG(LogTemp,Display,TEXT("MR_CITY_BUILD_WALL seconds=%.3f"),CityBuildWallSeconds);
     UE_LOG(LogTemp,Display,TEXT("MR_CITY_BUILT size_m=%.0f buildings=%d background_total=%d components=%d bodies=%d"),

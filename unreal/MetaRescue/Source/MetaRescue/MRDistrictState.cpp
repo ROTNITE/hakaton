@@ -1,4 +1,5 @@
 #include "MRWorld.h"
+#include "MRUrbanWater.h"
 #include "MRAgent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/PointLightComponent.h"
@@ -8,6 +9,7 @@
 float AMRWorld::WaterDepth(const FVector& P) const
 {
     if(!bRescueQuarter)return 0;
+    if(UrbanWater)return UrbanWater->Sample(P).DepthCm;
     if(!bCityLayout&&FMath::Abs(P.X-12850)<900&&FMath::Abs(P.Y-13000)<1050)return 60;
     const FIntPoint Tile(FMath::FloorToInt(P.X/50),FMath::FloorToInt(P.Y/50));
     const float* Ground=FloodGroundHeights.Find(Tile);
@@ -38,6 +40,7 @@ void AMRWorld::TickDistrict(float Dt)
 {
     const float Time=GetWorld()->GetTimeSeconds();
     for(const auto& E:Environment.Advance(Time)){RecordEnvironmentEvent(E);if(E.Rejection.IsEmpty())ApplyDisturbance(E);}
+    if(!TickUrbanWater(Environment.Time))UE_LOG(LogTemp,Error,TEXT("MR_HYDROLOGY failed in demonstration"));
     TickHazardVisuals(Dt);
     bFloodActive=false;bDustActive=false;
     for(const auto& E:Environment.Applied)

@@ -76,4 +76,5 @@ def hydrology_blueprint(world):
             'width': math.ceil((world['size_m']-origin[0])/5), 'height': math.ceil(world['size_m']/5),
             'basin': {'min': [-99., 24., -7.2], 'max': [-63., 62., .05]},
             'boundary': 'river_fed_retention_basin', 'initial_stage_m': .05,
+            'outlet_edges': ['east', 'north', 'south'], 'tailwater_stage_m': 0.,
             'storm_stage_m': 2.8, 'rise_seconds': 70., 'drain_capacity_m3_s': .025}

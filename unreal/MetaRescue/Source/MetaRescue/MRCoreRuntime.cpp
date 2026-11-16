@@ -30,6 +30,8 @@ FMRCoreRuntime::~FMRCoreRuntime(){Stop();}
 bool FMRCoreRuntime::Start(int32 Port)
 {
     if(Port<1024||Port>65535||Started)return false;
+    if(World->bDisasterCity&&World->CityLayout->HasField(TEXT("hydrology"))&&!World->UrbanWater)
+    {UE_LOG(LogTemp,Error,TEXT("MR_CORE refusing an incomplete hydraulic world"));return false;}
     if(auto* Session=UMRMissionSession::Get(World->GetWorld()))
     {
         if(!Session->CoreReset)Session->CoreReset=MakeShared<FMRCoreResetState>();

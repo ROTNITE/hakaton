@@ -57,6 +57,8 @@ def source_hashes(layout):
         files.extend((content/'RescueAssets/CityV2').rglob('*.uasset'))
     if world.get('format')=='rescue-city-2.3':
         files.extend((content/'EffectsV3/Revision5').rglob('*.uasset'))
+        files.append(content/'Materials/M_QuarterWater.uasset')
+        files.extend((content/'RescueAssets/WatercraftV1').rglob('*.uasset'))
     def checksum(path):
         with path.open('rb') as stream:
             return hashlib.file_digest(stream,'sha256').hexdigest()

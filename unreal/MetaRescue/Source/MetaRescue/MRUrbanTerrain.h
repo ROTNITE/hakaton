@@ -30,6 +30,7 @@ public:
     void Reset();
     double DropCm(FVector Position) const;
     double InitialHeight(FVector Position) const {return Topography.Height(Position);}
+    double GroundHeight(FVector Position) const;
 private:
     friend class AMRWorld;
     struct FPatch
@@ -40,7 +41,7 @@ private:
         FBox Bounds=FBox(ForceInit);
         double Offset=0,EdgeFeatherCm=0;
         FVector GridOrigin=FVector::ZeroVector,GridX=FVector::ZeroVector,GridY=FVector::ZeroVector;
-        int32 InitialNX=0,InitialNY=0;
+        int32 InitialNX=0,InitialNY=0,NX=0,NY=0;
         bool Refined=false;
         bool Soil=false,Collision=false;
     };
@@ -57,10 +58,12 @@ private:
     AMRWorld* World;
     FMRGradedTerrain Topography;
     TArray<FPatch> Patches;
+    TMap<FIntPoint,TArray<int32>> PatchBins;
     TArray<FOverlay> Overlays;
     TArray<FMRRoadCavity> Cavities;
     TMap<FIntPoint,TArray<FBox>> Foundations;
     void AddFoundation(FBox Bounds);
+    double HeightAt(const FPatch& Patch,FVector Position) const;
     void Update(FPatch& Patch);
     void Tessellate(FPatch& Patch,int32 NX,int32 NY);
     void Update(FOverlay& Overlay);

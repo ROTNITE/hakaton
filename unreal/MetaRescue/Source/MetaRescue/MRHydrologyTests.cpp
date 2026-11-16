@@ -9,6 +9,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRWaterBarriers,"MetaRescue.Environment.WaterB
     EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRWaterBoundary,"MetaRescue.Environment.WaterBoundaryAndDrain",
     EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRWaterOpenOutlet,"MetaRescue.Environment.WaterOpenOutlet",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
 
 bool FMRWaterConservation::RunTest(const FString&)
 {
@@ -70,6 +72,27 @@ bool FMRWaterBoundary::RunTest(const FString&)
     const double Before=Grid.VolumeM3();Grid.SetBed(1,-1);
     TestEqual(TEXT("road subsidence changes storage elevation without deleting water"),Grid.VolumeM3(),Before);
     TestFalse(TEXT("nonfinite boundary rejected"),Grid.SetBoundaryStage(0,std::numeric_limits<double>::quiet_NaN()));
+    return true;
+}
+
+bool FMRWaterOpenOutlet::RunTest(const FString&)
+{
+    FMRHydrology Grid;TArray<double> Bed,Water;TBitArray<> Solid(false,90);
+    Bed.Init(0,90);Water.Init(0,90);
+    for(int32 Y=0;Y<3;++Y)for(int32 X=0;X<3;++X){Bed[Y*30+X]=-7.2;Water[Y*30+X]=7.25;}
+    if(!TestTrue(TEXT("basin and receiving street"),Grid.Configure(30,3,5,Bed,Solid,Water)))return false;
+    bool Healthy=true;
+    for(int32 Step=1;Step<=1500;++Step)
+    {
+        for(int32 Y=0;Y<3;++Y)
+        {Grid.SetBoundaryStage(Grid.Index(0,Y),.05+2.75*FMath::Min(1.,Step*.1/70));Grid.SetBoundaryStage(Grid.Index(29,Y),0);}
+        Healthy=Grid.Advance(.1)&&Healthy;
+    }
+    TestTrue(TEXT("rising reservoir and open receiving boundary remain healthy"),Healthy);
+    TestTrue(TEXT("a wet front reaches the receiving street"),Grid.DepthM(Grid.Index(15,1))>.1);
+    TestTrue(TEXT("water really leaves the domain and is accounted for"),Grid.RemovedM3()>1);
+    TestTrue(TEXT("open boundaries conserve the complete supplied/removed ledger"),FMath::Abs(Grid.BalanceErrorM3())<1.e-6);
+    for(int32 Y=0;Y<3;++Y)TestEqual(TEXT("receiving tailwater is enforced"),Grid.DepthM(Grid.Index(29,Y)),0.);
     return true;
 }
 #endif
