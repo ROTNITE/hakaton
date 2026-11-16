@@ -1896,8 +1896,8 @@
       "id": "VIS10",
       "requirement": "Новая лодка, 0–4/по умолчанию 2, реальный спуск, глубина/осадка/плавучесть/течение/груз/энергия",
       "status": "partial",
-      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/catamaran-import-01/verification.json"],
-      "scope_note": "Пользовательская модель подготовлена и импортирована, проверены масштаб/оси/4LOD. Количество, спуск, плавучесть/груз/энергия и полный рейс ещё не приняты."
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/catamaran-import-01/verification.json", "tests/test_watercraft_config.py", "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-boat-02/verification.json"],
+      "scope_note": "Модель/4LOD,0–4 лодки (default2 только2.3), реальный спуск/плавучесть/водомёты/3000Wh и reset пустой лодки проверены. Native-boat-02:130с,475кг,осадка14см,40,89Wh,12PNG,оба архива/freeze. Груз, течение в городе, UI, отказ/потеря связи и полный рейс остаются открыты."
     },
     {
       "id": "VIS11",

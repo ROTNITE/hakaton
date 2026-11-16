@@ -73,6 +73,7 @@ void AMRAgent::InitializeCompetition(AMRWorld* InWorld,int32 InId,const FString&
 bool AMRAgent::MediumPointAllowed(const FVector& Position) const
 {
     if(!MediumLimits.IsValid)return false;
+    if(bRescueWatercraft)return MediumLimits.IsInsideOrOn(Position);
     const FVector Half=Body->GetScaledBoxExtent();
     if(Category==TEXT("surface_water")&&FMath::Abs(Position.Z-Dock.Z)>12)return false;
     if(Category==TEXT("underground")&&FMath::Abs(Position.Z-(MediumLimits.Min.Z+Half.Z))>60)return false;

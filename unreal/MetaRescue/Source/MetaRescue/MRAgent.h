@@ -8,6 +8,8 @@ class UStaticMeshComponent;
 class UPrimitiveComponent;
 class UNiagaraComponent;
 class AMRWorld;
+class FMRWatercraftHydro;
+class UPhysicsConstraintComponent;
 
 UCLASS()
 class METARESCUE_API AMRAgent : public AActor
@@ -17,6 +19,7 @@ public:
     AMRAgent();
     void Initialize(AMRWorld* InWorld, int32 InId, bool Aerial, const TArray<FVector>& InitialPath);
     void InitializeCompetition(AMRWorld* InWorld,int32 InId,const FString& Kind,const FString& Site,const FBox& Limits);
+    bool InitializeWatercraft(AMRWorld* InWorld,int32 InId,const FString& Id,const TSharedPtr<FMRWatercraftHydro>& Profile);
     virtual void Tick(float Dt) override;
     // Flush real movement through the same sampling instant as a pose read.
     // Calling twice without intervening physics is deliberately a no-op.
@@ -31,6 +34,10 @@ public:
     int32 AgentId = 0;
     FString PublicId;
     FString Category,InfrastructureSite;
+    bool bRescueWatercraft=false,bWatercraftMoored=false;
+    TSharedPtr<FMRWatercraftHydro> WatercraftProfile;
+    double WatercraftDisplacedM3=0,WatercraftLeftJetN=0,WatercraftRightJetN=0;
+    FVector WatercraftCurrentCmPerSecond=FVector::ZeroVector;
     FBox MediumLimits=FBox(ForceInit);
     FString Kind() const {return Category.IsEmpty()?(bAerial?TEXT("aerial"):TEXT("ground")):Category;}
     bool IsSpatial() const {return Category!=TEXT("digital")&&Category!=TEXT("operator");}
@@ -64,7 +71,7 @@ public:
     int32 AgentContacts=0;
     bool bCarrying=false;
     void ResetTestPose(FVector Position,FRotator Rotation);
-    float SafetyRadius() const { return bAerial?165.f:145.f+80.f*RampDeployment; }
+    float SafetyRadius() const { return bRescueWatercraft?255.f:bAerial?165.f:145.f+80.f*RampDeployment; }
     FString AgentKey() const { return PublicId.IsEmpty()?FString::Printf(TEXT("%s_%d"),bAerial?TEXT("aerial"):TEXT("ground"),AgentId):PublicId; }
     bool AcceptRoute(const FString& Id,const TArray<FVector>& PointsCm,bool PreciseStop=false);
     bool Hold(const FString& Id);
@@ -92,6 +99,14 @@ private:
     // Only a digest is retained. The Core server owns exact-body HTTP replay.
     TMap<FString,FString> AcceptedCommands;
     UPROPERTY() TObjectPtr<UNiagaraComponent> SurfaceSpray;
+    UPROPERTY() TObjectPtr<UPhysicsConstraintComponent> WatercraftMooring;
+    UPROPERTY() TObjectPtr<UBoxComponent> WatercraftCargoMass;
+    FVector WatercraftHoldPosition=FVector::ZeroVector;
+    bool SetWatercraftPayloadKg(double MassKg);
+    void MakeWatercraftMooring();
+    void ReleaseWatercraftMooring();
+    void ResetWatercraft();
+    void DriveWatercraft(float Dt);
     TArray<FVector> Path;
     int32 PathIndex = 0;
     float ServiceRemaining = 0;

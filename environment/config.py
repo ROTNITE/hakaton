@@ -23,6 +23,7 @@ class Settings:
     preset: str = 'urban'
     scouts: int = 3
     rescuers: int = 4
+    boats: int = 0
     people: int = 16
     horizon: float = 480.0
     layout: str = 'generated_city'
@@ -50,10 +51,12 @@ class Settings:
             raise ProtocolError('INVALID_REQUEST', 'Unknown setting', {'fields': sorted(unknown)})
         data = asdict(cls())
         data.update(value)
+        if 'boats' not in value and data['city_revision']=='2.3':
+            data['boats']=2
         if type(data['competition']) is not bool:
             raise ProtocolError('INVALID_REQUEST', 'competition must be a boolean')
         for key, low, high in (('seed', 0, 999999999), ('scouts', 1, 48),
-                               ('rescuers', 1, 40), ('people', 3, 600)):
+                               ('rescuers', 1, 40), ('boats', 0, 4), ('people', 3, 600)):
             if type(data[key]) is not int or not low <= data[key] <= high:
                 raise ProtocolError('INVALID_REQUEST', f'{key}: integer {low}..{high}')
         if type(data['map_size']) is not int or data['map_size'] not in MAP_SIZES:

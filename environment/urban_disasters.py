@@ -56,6 +56,17 @@ def attach_elevation(world):
     world['terrain'] = terrain
     world['hydrology'] = hydrology_blueprint(world)
     world['bounds']['min'][0] = min(world['bounds']['min'][0], -101.)
+    count=world['settings'].get('boats',0)
+    if count:
+        pitch=-math.degrees(math.atan2(1.9,18.))
+        keel=1.5-(73.-69.)*1.9/18.
+        slips=[{'id':f'boat-slip-{i}','x_m':x,'upper_y_m':73.,'lower_y_m':55.,
+                'upper_z_m':1.5,'lower_z_m':-.4,'width_m':3.}
+               for i,x in enumerate((-76.,-68.,-84.,-92.)[:count])]
+        world['watercraft']={'format':'metarescue.rescue-watercraft.v1',
+            'hydrostatics_profile':'watercraft-hydrostatics-r1.json','slipways':slips,
+            'spawns':[{'id':f'watercraft-{i}','position':[slip['x_m'],69.,keel+.45],
+                       'yaw':-90.,'pitch':pitch,'slipway_id':slip['id']} for i,slip in enumerate(slips)]}
     if 'competition' in world:
         for row in world['competition']['units']:
             if row['kind'] in ('infrastructure', 'digital', 'operator'):

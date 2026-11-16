@@ -27,6 +27,7 @@ void AMRAgent::ResetForEpisode(const FTransform& Pose,bool UnlimitedEnergy)
     State=bAerial?TEXT("landed"):TEXT("idle");Energy=BatteryCapacityWh;
     ConsumedWh=MotionWh=StandbyWh=SensorWh=ServiceWh=ChargedWh=0;DistanceTravelled=0;
     GroundContacts=0;AgentContacts=0;bUnlimitedEnergy=UnlimitedEnergy;WaitingSince=-1;
+    if(bRescueWatercraft)ResetWatercraft();
 }
 
 bool AMRAgent::BeginPickup(int32 Index,const FString& Id)

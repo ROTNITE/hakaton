@@ -3,6 +3,7 @@
 #include "MRCoreValues.h"
 #include "MRAgent.h"
 #include "MRWorld.h"
+#include "MRWatercraftHydro.h"
 
 using namespace MRCoreValues;
 
@@ -67,6 +68,7 @@ void FMRCoreRuntime::ResetResources()
     for(AMRAgent* Agent:World->Agents)
     {
         if(World->bCityLayout)Agent->BatteryCapacityWh=Agent->bAerial?AerialBatteryWh:GroundBatteryWh;
+        if(Agent->bRescueWatercraft)Agent->BatteryCapacityWh=Agent->WatercraftProfile->BatteryWh;
         Agent->EnergyReserveWh=Unlimited?0:ReserveFraction*Agent->BatteryCapacityWh;
         Agent->Energy=Agent->BatteryCapacityWh*(Unlimited?1:InitialBatteryFraction);
     }

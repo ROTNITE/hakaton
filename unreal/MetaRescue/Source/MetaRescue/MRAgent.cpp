@@ -189,6 +189,7 @@ void AMRAgent::AccountExecutedMovement()
     const FVector Current=GetActorLocation();
     const float Travel=FVector::Dist(Current,Previous);Previous=Current;
     DistanceTravelled+=Travel;
+    if(bRescueWatercraft)return; // Its actual jet electrical work is metered instead.
     const float SurfaceCost=MediumLimits.IsValid?(Category==TEXT("underground")?1.2f:1.3f):
         Mission->bRescueQuarter&&!bAerial?Mission->QuerySurfaceMeters(Current/100.f).MovementCost:1.f;
     const double Wh=Travel/1000.f*(bAerial?.69f:bCarrying?1.18f:.82f)*SurfaceCost;
@@ -200,6 +201,7 @@ void AMRAgent::Tick(float Dt)
     Super::Tick(Dt);
     if(!Mission||!Body->IsSimulatingPhysics())return;
     AccountExecutedMovement();
+    if(bRescueWatercraft){DriveWatercraft(Dt);return;}
     if(MediumLimits.IsValid){DriveCompetitionMedium(Dt);return;}
     const FVector Current=GetActorLocation();
     if(Mission->bRescueQuarter)AnimateMechanisms(Dt);

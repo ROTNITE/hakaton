@@ -156,7 +156,7 @@ bool AMRWorld::ReadCityLayout(const FString& File)
                 if(!CityYardMaterial(Material)){UE_LOG(LogTemp,Error,TEXT("MR_CITY missing yard material %s"),*Material);return false;}
         }
     }
-    if(!ValidateCompetitionLayout())return false;
+    if(!ValidateCompetitionLayout()||!ValidateWatercraftLayout())return false;
     Seed=Settings->GetIntegerField(TEXT("seed"));Base=CityPoint(CityLayout->GetArrayField(TEXT("base_position")));
     Scenario=MakeShared<FJsonObject>();Scenario->SetNumberField(TEXT("width"),GridSize);Scenario->SetNumberField(TEXT("seed"),Seed);
     Scenario->SetNumberField(TEXT("scouts"),Settings->GetIntegerField(TEXT("scouts")));
@@ -200,6 +200,7 @@ void AMRWorld::BuildCity()
     }
     if(bDecoratedCity)BuildCityYards();
     BuildCompetitionAnnex();
+    BuildWatercraftSlips();
     TArray<float> Axes;
     if(bIrregularCity)BuildIrregularStreets(BaseBox);
     else for(const auto& V:CityLayout->GetArrayField(TEXT("road_axes_m")))Axes.Add(V->AsNumber()*100);

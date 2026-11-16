@@ -317,6 +317,7 @@ void AMRWorld::SpawnAgents()
         if(Aerial&&External)A->State=TEXT("landed");Agents.Add(A);
     }
     if(bCityLayout)SpawnCompetitionUnits();
+    if(bCityLayout)SpawnWatercraft();
 }
 
 void AMRWorld::BeginPlay()

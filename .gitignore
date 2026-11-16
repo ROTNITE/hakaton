@@ -63,3 +63,6 @@ __pycache__/
 *.settings.json
 /manifest.json
 /output/
+
+# Generated hydrostatic envelope of the user-supplied boat, kept in local releases.
+/unreal/MetaRescue/Content/Scenario/watercraft-hydrostatics-r1.json

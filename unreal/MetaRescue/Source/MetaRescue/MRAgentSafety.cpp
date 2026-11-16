@@ -127,6 +127,7 @@ bool AMRAgent::AcceptRoute(const FString& Id,const TArray<FVector>& Points,bool 
     if(const auto* Prior=AcceptedCommands.Find(Id))return *Prior==Signature;
     if(Mission&&Mission->bCoreControlled&&(!IsOperational()||IsCharging()||State==TEXT("loading")||State==TEXT("unloading")))return false;
     AcceptedCommands.Add(Id,Signature);
+    if(bRescueWatercraft)ReleaseWatercraftMooring();
     CommandId=Id;bExternalHold=false;SetWaypoints(Points);
     bPreciseFinalStop=PreciseStop;
     if(!bAerial&&TargetIndex<0)State=TEXT("external_route");
@@ -139,6 +140,7 @@ bool AMRAgent::Hold(const FString& Id)
     if(IsCharging())EndCharge();
     AcceptedCommands.Add(Id,TEXT("hold"));
     CommandId=Id;bExternalHold=true;IntendedVelocity=FVector::ZeroVector;
+    if(bRescueWatercraft)WatercraftHoldPosition=GetActorLocation();
     if(bAerial)FlightAltitude=GetActorLocation().Z;
     return true;
 }

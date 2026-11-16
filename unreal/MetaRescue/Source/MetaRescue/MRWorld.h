@@ -16,6 +16,7 @@ class UNiagaraComponent;
 class FMRCoreRuntime;
 class FMRUrbanTerrain;
 class FMRUrbanWater;
+class FMRWatercraftHydro;
 struct FMRWaterSample;
 
 USTRUCT(BlueprintType)
@@ -137,6 +138,10 @@ private:
     bool ValidateCompetitionLayout() const;
     void BuildCompetitionAnnex();
     void SpawnCompetitionUnits();
+    bool ValidateWatercraftLayout();
+    void BuildWatercraftSlips();
+    void SpawnWatercraft();
+    TSharedPtr<FMRWatercraftHydro> WatercraftPhysicsProfile;
     void BuildIrregularStreets(const FBox& BaseBox);
     void BuildCityYards();
     void BuildCityHorizon();

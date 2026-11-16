@@ -325,7 +325,7 @@ def preflight(data):
 def public_map(data):
     """Announced static map: no hidden people, future disturbances or RNG state."""
     fields=('format','base_layout_revision','cell_m','size_m','bounds','base','base_position','road_axes_m','road_width_m',
-            'road_graph','buildings','features','facilities','fixed_obstacles','surfaces','infrastructure','terrain','hydrology')
+            'road_graph','buildings','features','facilities','fixed_obstacles','surfaces','infrastructure','terrain','hydrology','watercraft')
     result={key:data[key] for key in fields if key in data}
     if 'competition' in data:result['declared_zones']=data['competition']['zones']
     return result
