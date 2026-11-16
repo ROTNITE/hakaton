@@ -120,12 +120,14 @@ void AMRWorld::BuildDisasterFire(const FMRDisturbance& Event)
     {
         if(!Building->Pieces.IsValidIndex(Anchor.OwnerPiece)||Building->Pieces[Anchor.OwnerPiece].Removed)continue;
         const FName DelayTag(*FString::Printf(TEXT("IgnitionDelay_%.2f"),Anchor.Delay));
+        const FName PartTag(*FString::Printf(TEXT("SourcePiece_%d"),Anchor.OwnerPiece));
+        const FName StructureTag(*(FString(TEXT("SourceStructure_"))+Event.SiteId));
         if(auto* Flame=SpawnDisasterEffect(TEXT("BuildingFire"),Anchor.Position,Anchor.Scale,Event))
-            Flame->ComponentTags.Add(DelayTag);
+            Flame->ComponentTags.Append({DelayTag,PartTag,StructureTag});
         ++Sources;
         if(Sources%5==0)
             if(auto* Embers=SpawnDisasterEffect(TEXT("Sparks"),Anchor.Position+FVector(0,0,45),FVector(.9),Event))
-                Embers->ComponentTags.Add(DelayTag);
+                Embers->ComponentTags.Append({DelayTag,PartTag,StructureTag});
         if(SootMaterial&&!Anchor.Roof)
         {
             auto* Stain=NewObject<UDecalComponent>(this);AddInstanceComponent(Stain);
@@ -135,7 +137,7 @@ void AMRWorld::BuildDisasterFire(const FMRDisturbance& Event)
             Stain->DecalSize=FVector(60,175,240);
             auto* Dynamic=UMaterialInstanceDynamic::Create(SootMaterial,Stain);
             Dynamic->SetScalarParameterValue(TEXT("BurnFraction"),0);Stain->SetDecalMaterial(Dynamic);
-            Stain->ComponentTags={FName(*Event.Id),TEXT("Scorch"),DelayTag};
+            Stain->ComponentTags={FName(*Event.Id),TEXT("Scorch"),DelayTag,PartTag,StructureTag};
             Stain->RegisterComponent();HazardVisuals.Add(Stain);
         }
     }

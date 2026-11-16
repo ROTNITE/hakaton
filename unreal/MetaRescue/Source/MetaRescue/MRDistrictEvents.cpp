@@ -495,7 +495,8 @@ void AMRWorld::TickHazardVisuals(float Dt)
     for(int32 Index=HazardVisuals.Num()-1;Index>=0;--Index)
     {
         USceneComponent* C=HazardVisuals[Index];
-        if(!C||C->ComponentTags.Num()<2)continue;
+        if(!C){HazardVisuals.RemoveAtSwap(Index,1,EAllowShrinking::No);continue;}
+        if(C->ComponentTags.Num()<2)continue;
         const FName Kind=C->ComponentTags[1];
         const auto* E=Environment.FindApplied(C->ComponentTags[0].ToString());
         if(!E)continue;
@@ -541,6 +542,8 @@ void AMRWorld::TickHazardVisuals(float Dt)
         }
         if(auto* Light=Cast<UPointLightComponent>(C))Light->SetIntensity(22000*(.85+.12*FMath::Sin(Age*11)+.08*FMath::Sin(Age*17)));
         auto* FX=Cast<UNiagaraComponent>(C);
+        if(bDisasterCity&&FX&&Kind==TEXT("HeavySmoke")&&E->Kind==EMRDisturbance::Fire)
+        {FVector Position=C->GetComponentLocation();Position.Z=E->SmokeEmissionHeightCm+120;C->SetWorldLocation(Position);}
         if(FX||IsEventVeil(Kind))
         {
             if(bDisasterCity&&FX&&(Kind==TEXT("BuildingFire")||Kind==TEXT("Sparks")))

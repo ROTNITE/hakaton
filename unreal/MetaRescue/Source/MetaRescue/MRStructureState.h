@@ -33,6 +33,8 @@ struct FMRStructureState
     FBox Bounds=FBox(ForceInit);
     TArray<FMRStructurePiece> Pieces;
     TArray<FMRFireAnchor> FireAnchors;
+    double RemainingTopCm() const;
+    TArray<int32> UpperStoreyPieces() const;
 };
 
 struct FMRStructureOwner

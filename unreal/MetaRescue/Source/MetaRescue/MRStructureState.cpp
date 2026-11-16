@@ -5,6 +5,33 @@
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 
+double FMRStructureState::RemainingTopCm() const
+{
+    double Top=Bounds.IsValid?Bounds.Min.Z:0;
+    for(const auto& Part:Pieces)if(!Part.Removed)Top=FMath::Max(Top,Part.Bounds.Max.Z);
+    return Top;
+}
+
+TArray<int32> FMRStructureState::UpperStoreyPieces() const
+{
+    TArray<int32> Result;
+    if(!Bounds.IsValid)return Result;
+    // Apartment() authors 300cm storeys. Collapse the unsupported upper
+    // storey, retaining the slab on the supported storey beneath it. A later
+    // event can remove the next storey; no untouched upper floor floats above
+    // a removed lower wall. Ruin assemblies occupy a single remaining storey.
+    const double Base=FMath::RoundToDouble(Bounds.Min.Z/300.)*300.;
+    const double Top=RemainingTopCm();if(Top-Base<120)return Result;
+    const double Cut=Base+FMath::Max(0.,FMath::CeilToDouble((Top-Base-100)/300.)-1)*300.;
+    for(int32 I=0;I<Pieces.Num();++I)
+    {
+        const auto& Part=Pieces[I];
+        if(!Part.Removed&&Part.Bounds.Min.Z>=Cut-35&&Part.Bounds.GetCenter().Z>=Cut+30&&Part.Bounds.Max.Z>=Cut+45)
+            Result.Add(I);
+    }
+    return Result;
+}
+
 bool FMRStructurePiece::Remove()
 {
     auto* Mesh=Component.Get();

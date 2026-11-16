@@ -1835,26 +1835,27 @@
       "status": "partial",
       "evidence": [
         "docs/disaster-assets.md",
-        "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-scene-02/verification.json"
+        "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-scene-04/verification.json"
       ],
-      "scope_note": "Первый фасадный огонь проверен в native-scene-01/02; копоть/опоры/поэтапное возгорание уточнены после просмотра, повторная приёмка впереди."
+      "scope_note": "Native-scene-04: парные кадры12/45с, 33 реальных проёма выбранного здания; копоть/угли, первоначально отсутствующая крыша не горит. Динамическое разрушение и полная матрица впереди."
     },
     {
       "id": "VIS03",
       "requirement": "Густой объёмный дым с подъёмом/ветром и непрозрачным ядром; сенсор ослабляется по пути луча",
       "status": "partial",
       "evidence": [
-        "D:/MetaRescue-output/automation/20261115T205702853914Z/verification.json",
+        "D:/MetaRescue-output/automation/20261116T010529035110Z/verification.json",
+        "D:/MetaRescue-output/visual-overhaul-20261115/checks/native-scene-04/optics-fixture.json",
         "docs/disaster-visual-runtime.md"
       ],
-      "scope_note": "Новая объёмная оптика/ветер/жизненный цикл: native Automation 10/10 и два просмотренных эпизода. Плотность увеличена до .006/см; этот новый визуальный срез ещё проверяется."
+      "scope_note": "Native Automation21/21, оптика/ветер/срок/reset. Исправлена камера внутри объёма; native-scene-04 даёт фиксированные пары до/после, детали ориентира за ядром дыма не читаются. Остальная матрица/масштаб/headless-сверка впереди."
     },
     {
       "id": "VIS04",
       "requirement": "Причинные завалы из существующих плит, балок, кладки и деревьев; частичные повреждения здания, локальный Chaos",
-      "status": "pending",
-      "evidence": [],
-      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+      "status": "partial",
+      "evidence": ["D:/MetaRescue-output/automation/20261116T010529035110Z/verification.json"],
+      "scope_note": "Проверена идентичность частей здания при compaction/remove/reset; фактический обвал/завалы ещё проходят реализацию и нативную проверку."
     },
     {
       "id": "VIS05",
@@ -1894,9 +1895,9 @@
     {
       "id": "VIS10",
       "requirement": "Новая лодка, 0–4/по умолчанию 2, реальный спуск, глубина/осадка/плавучесть/течение/груз/энергия",
-      "status": "pending",
-      "evidence": [],
-      "scope_note": "Новый визуальный этап; полная приёмка описана в docs/disaster-visual-runtime.md."
+      "status": "partial",
+      "evidence": ["D:/MetaRescue-output/visual-overhaul-20261115/checks/catamaran-import-01/verification.json"],
+      "scope_note": "Пользовательская модель подготовлена и импортирована, проверены масштаб/оси/4LOD. Количество, спуск, плавучесть/груз/энергия и полный рейс ещё не приняты."
     },
     {
       "id": "VIS11",
@@ -1928,9 +1929,9 @@
       "status": "partial",
       "evidence": [
         "docs/disaster-assets.md",
-        "D:/MetaRescue-output/visual-overhaul-20261115/checks/art-import-04/verification.json"
+        "D:/MetaRescue-output/visual-overhaul-20261115/checks/art-import-07/verification.json"
       ],
-      "scope_note": "Три CC0-источника: 8 текстур/15 uasset, импорт04 и кадры. Новая копоть, грязь/катамаран и конечный cook ещё не приняты."
+      "scope_note": "Три CC0-источника: 8 текстур/15 uasset, импорт07 и native-scene-04; пользовательский катамаран импортирован отдельно. Грязь, физика катамарана и конечный cook ещё не приняты."
     },
     {
       "id": "VIS15",

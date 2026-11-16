@@ -7,6 +7,27 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRStructureOwnership,"MetaRescue.Environment.StructureOwnership",
     EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMRStoreyFailure,"MetaRescue.Environment.StoreyFailure",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+
+bool FMRStoreyFailure::RunTest(const FString&)
+{
+    FMRStructureState Building;Building.Bounds=FBox(FVector(-450,-450,0),FVector(450,450,924));
+    auto Add=[&](double Bottom,double Top)
+    {FMRStructurePiece Piece;Piece.Bounds=FBox(FVector(-450,-450,Bottom),FVector(450,450,Top));Building.Pieces.Add(Piece);};
+    Add(0,16);Add(16,294);Add(300,316);Add(316,594);Add(600,616);Add(616,894);Add(900,924);
+    auto Failure=Building.UpperStoreyPieces();
+    TestTrue(TEXT("the unsupported upper wall and roof fail"),Failure.Contains(5)&&Failure.Contains(6));
+    TestFalse(TEXT("the supported slab below the failure remains"),Failure.Contains(4));
+    TestFalse(TEXT("the lower storey remains supported"),Failure.Contains(3));
+    TestFalse(TEXT("the foundation is never replaced with airborne rubble"),Failure.Contains(0));
+    for(int32 Index:Failure)Building.Pieces[Index].Removed=true;
+    TestEqual(TEXT("smoke emission follows the remaining geometry"),Building.RemainingTopCm(),616.);
+    Failure=Building.UpperStoreyPieces();
+    TestTrue(TEXT("a subsequent event can remove the next storey"),Failure.Contains(3));
+    TestFalse(TEXT("the already missing roof cannot fall twice"),Failure.Contains(6));
+    return true;
+}
 bool FMRStructureOwnership::RunTest(const FString&)
 {
     auto* Cube=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube"));

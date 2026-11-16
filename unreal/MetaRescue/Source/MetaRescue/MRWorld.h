@@ -142,6 +142,9 @@ private:
     void RecordCityStructure(FName Id,int32 FirstGenerated);
     void RebindCityStructurePart(UStaticMeshComponent* Previous,UInstancedStaticMeshComponent* Batch,FPrimitiveInstanceId Id);
     void ResetCityStructures();
+    bool CollapseCityStructure(const FMRDisturbance& Event);
+    void RefreshCitySmokeHeights();
+    void BatchDisasterDebris(int32 FirstGenerated,const FMRDisturbance& Event);
     TMap<FName,FMRStructureState> CityStructures;
     TMap<TWeakObjectPtr<UStaticMeshComponent>,FMRStructureOwner> CityPartOwners;
     bool bBuildingCity=false;

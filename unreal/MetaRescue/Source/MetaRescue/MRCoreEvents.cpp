@@ -254,6 +254,9 @@ int32 AMRWorld::ApplyCoreDisturbance(const FMRDisturbance& Event)
     const int32 FirstPiece=PhysicsPieces.Num();
     if(Event.Kind==EMRDisturbance::Collapse)
     {
+        if(bDisasterCity)CollapseCityStructure(Event);
+        else
+        {
         // Bound each collapse to a few local convex bodies, released near the
         // facade source. Persistent hazard cells describe the unstable area.
         FRandomStream Rng(FCrc::StrCrc32(*Event.Id)^uint32(Seed));
@@ -263,13 +266,17 @@ int32 AMRWorld::ApplyCoreDisturbance(const FMRDisturbance& Event)
             auto* Piece=Chunk(Rng,P,I==0?FVector(190,100,30):FVector(70,52,38),true);
             Piece->ComponentTags.Add(FName(*Event.Id));
         }
+        }
     }
     if(Event.Kind==EMRDisturbance::NewTarget)
     {
         const int32 Index=Targets.IndexOfByPredicate([&](const auto& T){return T.Id==Event.TargetId;});
         if(Index!=INDEX_NONE)EventTargetIndices.Add(Event.Id,Index);
     }
-    ApplyDisturbance(Event);
+    RefreshCitySmokeHeights();
+    FMRDisturbance VisualEvent=Event;
+    if(const auto* Applied=Environment.FindApplied(Event.Id))VisualEvent.SmokeEmissionHeightCm=Applied->SmokeEmissionHeightCm;
+    ApplyDisturbance(VisualEvent);
     for(int32 I=FirstGenerated;I<Generated.Num();++I)CoreEventComponents.Add(Generated[I]);
     for(int32 I=FirstVisual;I<HazardVisuals.Num();++I)CoreEventComponents.AddUnique(HazardVisuals[I]);
     return PhysicsPieces.Num()-FirstPiece;
