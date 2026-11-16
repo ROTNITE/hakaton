@@ -14,6 +14,7 @@ class UPrimitiveComponent;
 class FJsonObject;
 class UNiagaraComponent;
 class FMRCoreRuntime;
+class FMRUrbanTerrain;
 
 USTRUCT(BlueprintType)
 struct FMRSurfaceState
@@ -122,6 +123,7 @@ public:
     void RecordEnvironmentEvent(const FMRDisturbance& Event);
 private:
     friend class FMRCoreRuntime;
+    friend class FMRUrbanTerrain;
     bool ReadCoreEventTape();
     void ResetCoreEventEffects();
     int32 ApplyCoreDisturbance(const FMRDisturbance& Event);
@@ -142,6 +144,11 @@ private:
     void RecordCityStructure(FName Id,int32 FirstGenerated);
     void RebindCityStructurePart(UStaticMeshComponent* Previous,UInstancedStaticMeshComponent* Batch,FPrimitiveInstanceId Id);
     void ResetCityStructures();
+    void BuildUrbanTerrain();
+    void UrbanRoadPatch(FVector Start,FVector End,double Width,double Offset,const FString& Material);
+    void DamageUrbanRoad(const FMRDisturbance& Event);
+    void ResetUrbanTerrain();
+    TSharedPtr<FMRUrbanTerrain> UrbanTerrain;
     bool CollapseCityStructure(const FMRDisturbance& Event);
     void RefreshCitySmokeHeights();
     void BatchDisasterDebris(int32 FirstGenerated,const FMRDisturbance& Event);

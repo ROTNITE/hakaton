@@ -30,6 +30,7 @@ struct FMRFireAnchor
 struct FMRStructureState
 {
     FName Id;
+    bool IsRoad=false;
     FBox Bounds=FBox(ForceInit);
     TArray<FMRStructurePiece> Pieces;
     TArray<FMRFireAnchor> FireAnchors;

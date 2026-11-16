@@ -173,7 +173,8 @@ void AMRWorld::BuildCity()
     const float RoadWidth=bIrregularCity?0:CityLayout->GetNumberField(TEXT("road_width_m"))*100;
     // The union and support height stay the same. Bounded tiles avoid one
     // enormous, thin, non-uniform Nanite primitive spanning the whole city.
-    for(float X=-6000;X<Size+6000;X+=4000)for(float Y=-6000;Y<Size+6000;Y+=4000)
+    if(bDisasterCity)BuildUrbanTerrain();
+    else for(float X=-6000;X<Size+6000;X+=4000)for(float Y=-6000;Y<Size+6000;Y+=4000)
     {
         const float W=FMath::Min(4000.f,Size+6000-X),H=FMath::Min(4000.f,Size+6000-Y);
         auto* Ground=Shape("Cube",FVector(X+W/2,Y+H/2,-22),FVector(W,H,44),"City_Soil");
@@ -763,11 +764,16 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
         const FVector Middle=(Start+End)*.5;
         // All strips share the flat physical terrain. Render-layer seams do
         // not create overlapping support colliders at angled intersections.
-        Shape("Cube",Middle+FVector(0,0,1.2),FVector(Length,Width,1),"M_QuarterAsphalt",Turn,false);
+        if(bDisasterCity)UrbanRoadPatch(Start,End,Width,.4,TEXT("M_QuarterAsphalt"));
+        else Shape("Cube",Middle+FVector(0,0,1.2),FVector(Length,Width,1),"M_QuarterAsphalt",Turn,false);
         if(Footway&&Length>500)for(double Side:{-1.,1.})
         {
             const FVector Shoulder=Middle+Normal*Side*(Width/2+75);
-            if(!BaseBox.IsInsideXY(Shoulder))Shape("Cube",Shoulder+FVector(0,0,.8),FVector(Length-250,140,1),"M_QuarterPaving",Turn,false);
+            if(!BaseBox.IsInsideXY(Shoulder))
+            {
+                if(bDisasterCity)UrbanRoadPatch(Shoulder-Along*(Length-250)*.5,Shoulder+Along*(Length-250)*.5,140,.8,TEXT("M_QuarterPaving"));
+                else Shape("Cube",Shoulder+FVector(0,0,.8),FVector(Length-250,140,1),"M_QuarterPaving",Turn,false);
+            }
         }
         if(Avenue)for(double At=460;At<Length-350;At+=440)
         {
@@ -818,6 +824,7 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
     int32 RoadModules=0,PoweredSignals=0,DarkSignals=0;
     for(const auto& Row:Graph->GetArrayField(TEXT("edges")))
     {
+        const int32 FirstRoadPart=Generated.Num();
         const auto Edge=Row->AsObject();const FString A=Edge->GetStringField(TEXT("from")),B=Edge->GetStringField(TEXT("to"));
         const double Width=Edge->GetNumberField(TEXT("width_m"))*100;
         const FString Kind=Edge->GetStringField(TEXT("street_class"));
@@ -831,7 +838,28 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
             Streets.Add({Start,End,Width});
             Approaches.FindOrAdd(A).Add(Direction);
             Approaches.FindOrAdd(B).Add(-Direction);
-            if(RoadModules<3&&Kind==TEXT("street")&&Width<=850&&FVector::DistSquared2D(Start,End)>=FMath::Square(2700.))
+            if(bDisasterCity&&Kind==TEXT("street")&&Width<=850)
+            {
+                const double Length=FVector::Dist2D(Start,End),Tile=999.8;
+                const double Inset=FMath::Max(450.,Width*.5+100);
+                const int32 Tiles=FMath::Max(0,FMath::FloorToInt((Length-2*Inset)/Tile));
+                const double Begin=(Length-Tiles*Tile)*.5;
+                TArray<FBox> Placed;
+                for(int32 I=0;I<Tiles;++I)
+                {
+                    const FVector Center=Start+Direction*(Begin+(I+.5)*Tile);
+                    const FVector Extent=Direction.GetAbs()*(Tile*.5)+Normal.GetAbs()*(540*Width/700)+FVector(1,1,20);
+                    const FBox Envelope(Center-Extent,Center+Extent);
+                    if(!Fits(Envelope))continue;
+                    if(auto* Module=DistrictAssembly(TEXT("ModularRoadSectionV1"),Center+FVector(0,0,1.2),
+                        Direction.Rotation(),FVector(1,Width/700,1),false))
+                    {Decorate(Module,TEXT("CityRoadModule"));Placed.Add(Envelope);++RoadModules;}
+                }
+                // Adjacent sections share a seam; do not reject the next
+                // section because its curb touches this section's envelope.
+                StreetPropExclusions.Append(Placed);
+            }
+            else if(!bDisasterCity&&RoadModules<3&&Kind==TEXT("street")&&Width<=850&&FVector::DistSquared2D(Start,End)>=FMath::Square(2700.))
             {
                 // Source road section is 9.998 m long with 7 m between its curbs.
                 // Keep the road support and graph unchanged and replace only the render layer.
@@ -842,13 +870,21 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
                     Direction.Rotation(),FVector(1,Width/700,1),false))
                 {
                     Decorate(Module,TEXT("CityRoadModule"));StreetPropExclusions.Add(Envelope);
-                    Pave(Start,Middle-Direction*HalfLength,Width,false,true);
-                    Pave(Middle+Direction*HalfLength,End,Width,false,true);
+                    if(!bDisasterCity)
+                    {
+                        Pave(Start,Middle-Direction*HalfLength,Width,false,true);
+                        Pave(Middle+Direction*HalfLength,End,Width,false,true);
+                    }
                     ++RoadModules;bReplaced=true;
                 }
             }
         }
-        if(!bReplaced)Pave(Start,End,Width,Avenue,Kind!=TEXT("access"));
+        if(!bReplaced||bDisasterCity)Pave(Start,End,Width,Avenue,Kind!=TEXT("access"));
+        if(bDisasterCity)
+        {
+            const FName RoadId(*(TEXT("road-")+A+TEXT("-")+B));
+            RecordCityStructure(RoadId,FirstRoadPart);CityStructures.FindChecked(RoadId).IsRoad=true;
+        }
         for(const FString& Id:{A,B})JunctionWidths.FindOrAdd(Id)=FMath::Max(JunctionWidths.FindRef(Id),Width);
     }
     if(bShowProps)
@@ -896,7 +932,11 @@ void AMRWorld::BuildIrregularStreets(const FBox& BaseBox)
         UE_LOG(LogTemp,Display,TEXT("MR_CITY_STREET_PROPS road_modules=%d powered=%d off=%d collision=none"),RoadModules,PoweredSignals,DarkSignals);
     }
     for(const auto& Junction:JunctionWidths)if(!BaseBox.IsInsideXY(Positions.FindChecked(Junction.Key)))
-        Shape("Cylinder",Positions.FindChecked(Junction.Key)+FVector(0,0,1.65),FVector(Junction.Value,Junction.Value,1),"M_QuarterAsphalt",FRotator::ZeroRotator,false);
+    {
+        if(bDisasterCity)UrbanRoadPatch(Positions.FindChecked(Junction.Key)-FVector(Junction.Value*.5,0,0),
+            Positions.FindChecked(Junction.Key)+FVector(Junction.Value*.5,0,0),Junction.Value,1.65,TEXT("M_QuarterAsphalt"));
+        else Shape("Cylinder",Positions.FindChecked(Junction.Key)+FVector(0,0,1.65),FVector(Junction.Value,Junction.Value,1),"M_QuarterAsphalt",FRotator::ZeroRotator,false);
+    }
     for(const auto& Row:Graph->GetArrayField(TEXT("entrances")))
     {
         const auto Gate=Row->AsObject();const auto& Direction=Gate->GetArrayField(TEXT("outward"));

@@ -15,7 +15,7 @@ double FMRStructureState::RemainingTopCm() const
 TArray<int32> FMRStructureState::UpperStoreyPieces() const
 {
     TArray<int32> Result;
-    if(!Bounds.IsValid)return Result;
+    if(IsRoad||!Bounds.IsValid)return Result;
     // Apartment() authors 300cm storeys. Collapse the unsupported upper
     // storey, retaining the slab on the supported storey beneath it. A later
     // event can remove the next storey; no untouched upper floor floats above

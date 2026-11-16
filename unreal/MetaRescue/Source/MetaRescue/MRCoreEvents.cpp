@@ -225,6 +225,7 @@ void AMRWorld::ResetCoreEventEffects()
 {
     if(CoreEventProfile.IsEmpty())return;
     ResetCityStructures();
+    ResetUrbanTerrain();
     TSet<USceneComponent*> RuntimeComponents;
     for(USceneComponent* Component:CoreEventComponents)if(Component)RuntimeComponents.Add(Component);
     Generated.RemoveAll([&](const auto& Component){return RuntimeComponents.Contains(Component.Get());});
@@ -252,6 +253,7 @@ int32 AMRWorld::ApplyCoreDisturbance(const FMRDisturbance& Event)
     const int32 FirstGenerated=Generated.Num();
     const int32 FirstVisual=HazardVisuals.Num();
     const int32 FirstPiece=PhysicsPieces.Num();
+    if(bDisasterCity&&Event.Kind==EMRDisturbance::RoadDamage)DamageUrbanRoad(Event);
     if(Event.Kind==EMRDisturbance::Collapse)
     {
         if(bDisasterCity)CollapseCityStructure(Event);
@@ -289,9 +291,22 @@ void FMRCoreRuntime::AdvanceEvents()
     const double Previous=Model.Time;
     for(const auto& Event:Model.Advance(Time()))
     {
+        const bool ProbeRoad=World->bDisasterCity&&Event.Kind==EMRDisturbance::RoadDamage&&Event.Rejection.IsEmpty();
+        const auto SupportAtSource=[&]()
+        {
+            FCollisionQueryParams Query(SCENE_QUERY_STAT(MRPhysicalRoadSupport),false);
+            for(AMRAgent* Agent:World->Agents)Query.AddIgnoredActor(Agent);
+            FHitResult Hit;
+            const bool Found=World->GetWorld()->LineTraceSingleByChannel(Hit,Event.Source+FVector(0,0,1000),
+                Event.Source-FVector(0,0,2000),ECC_Visibility,Query);
+            return Obj({{TEXT("found"),Bool(Found)},
+                {TEXT("height_m"),Found?Num(Hit.ImpactPoint.Z/100.):Null()},
+                {TEXT("component"),Found?Str(GetNameSafe(Hit.GetComponent())):Null()},
+                {TEXT("normal"),Found?Point(Hit.ImpactNormal):Null()}});
+        };
+        const auto Before=ProbeRoad?SupportAtSource():Object();
         const int32 Bodies=Event.Rejection.IsEmpty()?World->ApplyCoreDisturbance(Event):0;
-        Record(Event.Rejection.IsEmpty()?TEXT("environment_event_applied"):TEXT("environment_attempt_rejected"),
-            Obj({{TEXT("event_id"),Str(Event.Id)},{TEXT("kind"),Str(MRDisturbanceName(Event.Kind))},
+        auto EventRecord=Obj({{TEXT("event_id"),Str(Event.Id)},{TEXT("kind"),Str(MRDisturbanceName(Event.Kind))},
                 {TEXT("scheduled_at"),Num(Event.Time)},{TEXT("source_m"),Point(Event.Source/100.)},
                 {TEXT("source_object_id"),Event.SiteId.IsEmpty()?Null():Str(Event.SiteId)},
                 {TEXT("parent_id"),Event.ParentId.IsEmpty()?Null():Str(Event.ParentId)},{TEXT("cells"),Arr(CellsJson(Event))},
@@ -300,7 +315,10 @@ void FMRCoreRuntime::AdvanceEvents()
                 {TEXT("visibility_expires_at"),Model.VisibilityUntil(Event)>=0?Num(Model.VisibilityUntil(Event)):Null()},
                 {TEXT("smoke_emission_height_m"),Num(Event.SmokeEmissionHeightCm/100.)},
                 {TEXT("reason"),Event.Rejection.IsEmpty()?Null():Str(Event.Rejection)},
-                {TEXT("released_bodies"),Num(Bodies)}}),false);
+                {TEXT("released_bodies"),Num(Bodies)}});
+        if(ProbeRoad)
+        {EventRecord->SetObjectField(TEXT("support_before"),Before);EventRecord->SetObjectField(TEXT("support_after"),SupportAtSource());}
+        Record(Event.Rejection.IsEmpty()?TEXT("environment_event_applied"):TEXT("environment_attempt_rejected"),EventRecord,false);
         if(CaptureEventFrames&&Event.Rejection.IsEmpty()&&!Event.bPropagation&&!ScheduledViews.Contains(int32(Event.Kind)))
         {
             const bool Flood=Event.Kind==EMRDisturbance::Flood;
